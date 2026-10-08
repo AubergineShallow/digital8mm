@@ -1,0 +1,10 @@
+{
+ "tub 2.5 rd20 pitch ss/ss": 0.005412714326433118,
+ "tub 2.5 rd20 pitch free-left free-top": 0.012972875189878866,
+ "tub 2.5 rd20 yaw ss/ss": 0.0024822360807317152,
+ "tub 2.5 rd28 pitch ss/ss": 0.0009681453696591609,
+ "tub 2.5 rd28 yaw ss/ss": 0.00017983370429600534,
+ "tub+hood 5.0 rd28 pitch ss/ss": 0.0001268437147945609,
+ "tub+hood 3.15 rd28 pitch ss/ss": 0.00048736905225402823,
+ "tub+hood 3.15 rd28 pitch free/free": 0.001500883210464698
+}

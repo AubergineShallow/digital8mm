@@ -1,0 +1,493 @@
+{
+  "source_hashes": [
+    {
+      "name": "layout.py",
+      "match": true,
+      "actual": "62868fb4ebd7eba26fee680ab92d01b3f6abe94ec25e2a609cd51f33adea8eb9",
+      "expected": "62868fb4ebd7eba26fee680ab92d01b3f6abe94ec25e2a609cd51f33adea8eb9"
+    },
+    {
+      "name": "d2_common.py",
+      "match": true,
+      "actual": "766d082b0f83d061fd070a9ca3676050c59a95091779de5530025b6b5ae97eb8",
+      "expected": "766d082b0f83d061fd070a9ca3676050c59a95091779de5530025b6b5ae97eb8"
+    },
+    {
+      "name": "cots.py",
+      "match": true,
+      "actual": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+      "expected": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75"
+    },
+    {
+      "name": "checks.py",
+      "match": true,
+      "actual": "c68f5e9e06e4f1451d58489aa6dffe2b9d59052226813fedc04970c7aa472438",
+      "expected": "c68f5e9e06e4f1451d58489aa6dffe2b9d59052226813fedc04970c7aa472438"
+    },
+    {
+      "name": "build_d2.py",
+      "match": true,
+      "actual": "bf53157701063b1e4ced91c8677e70a8032b09760938b18776f0df7dbef12116",
+      "expected": "bf53157701063b1e4ced91c8677e70a8032b09760938b18776f0df7dbef12116"
+    },
+    {
+      "name": "make_coupons.py",
+      "match": true,
+      "actual": "d26fe2fc4482141358aeecaa6ff756307b3b9900185dd99e704923f6b3698c90",
+      "expected": "d26fe2fc4482141358aeecaa6ff756307b3b9900185dd99e704923f6b3698c90"
+    },
+    {
+      "name": "make_tables.py",
+      "match": true,
+      "actual": "229e2140e69570d843d389a4715a8318a5b35a3cf7afbd8f11e1d98abf0e4980",
+      "expected": "229e2140e69570d843d389a4715a8318a5b35a3cf7afbd8f11e1d98abf0e4980"
+    },
+    {
+      "name": "SPEC.md",
+      "match": true,
+      "actual": "56f7ae16d4d85013c0fb51ddfb617faa40bdde9c4a050bb041392086c9811559",
+      "expected": "56f7ae16d4d85013c0fb51ddfb617faa40bdde9c4a050bb041392086c9811559"
+    },
+    {
+      "name": "FASTENER-POLICY.md",
+      "match": true,
+      "actual": "d8a2a03c6df72eb43c25d2944440ac65a200ed5d3f6b2a3ebec5203d4c03c06a",
+      "expected": "d8a2a03c6df72eb43c25d2944440ac65a200ed5d3f6b2a3ebec5203d4c03c06a"
+    },
+    {
+      "name": "printed_grip.py",
+      "match": true,
+      "actual": "0a8aeb69d41903e1c07c99e5d396c02b11cc3f56b5c470a5662c195db05f48bd",
+      "expected": "0a8aeb69d41903e1c07c99e5d396c02b11cc3f56b5c470a5662c195db05f48bd"
+    },
+    {
+      "name": "printed_hood.py",
+      "match": true,
+      "actual": "5caad618387b3f7686ed3d31907851b672c6435438f0dcefd57ab830a22b34fb",
+      "expected": "5caad618387b3f7686ed3d31907851b672c6435438f0dcefd57ab830a22b34fb"
+    },
+    {
+      "name": "printed_panel.py",
+      "match": true,
+      "actual": "9e467102b672b66ef4bc7fbeeec5204b0e0098d5c42efcb0fb780039a54b82ba",
+      "expected": "9e467102b672b66ef4bc7fbeeec5204b0e0098d5c42efcb0fb780039a54b82ba"
+    },
+    {
+      "name": "printed_small.py",
+      "match": true,
+      "actual": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+      "expected": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f"
+    },
+    {
+      "name": "printed_tub.py",
+      "match": true,
+      "actual": "18a8f7382b7aff4d8784b9cf1d832d45dbcfc78760074d66df8b194ea72277d5",
+      "expected": "18a8f7382b7aff4d8784b9cf1d832d45dbcfc78760074d66df8b194ea72277d5"
+    }
+  ],
+  "source_hashes_all_match": true,
+  "recorded_output_hashes": [
+    {
+      "name": "step/gs8-d2-assembly.step",
+      "match": true
+    },
+    {
+      "name": "renders/hero.png",
+      "match": true
+    },
+    {
+      "name": "renders/exploded.png",
+      "match": true
+    },
+    {
+      "name": "renders/xray.png",
+      "match": true
+    },
+    {
+      "name": "renders/section-lens-axis.png",
+      "match": true
+    },
+    {
+      "name": "renders/section-evf-axis.png",
+      "match": true
+    },
+    {
+      "name": "renders/print-poses.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-01.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-02.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-03.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-04.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-05.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-06.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-07.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-08.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-09.png",
+      "match": true
+    },
+    {
+      "name": "renders/step-10.png",
+      "match": true
+    },
+    {
+      "name": "checks.json",
+      "match": true
+    },
+    {
+      "name": "print-manifest.json",
+      "match": true
+    },
+    {
+      "name": "parts-manifest.json",
+      "match": true
+    },
+    {
+      "name": "coupons-manifest.json",
+      "match": true
+    },
+    {
+      "name": "stl/tub.stl",
+      "match": true
+    },
+    {
+      "name": "stl/hood.stl",
+      "match": true
+    },
+    {
+      "name": "stl/panel.stl",
+      "match": true
+    },
+    {
+      "name": "stl/base_grip.stl",
+      "match": true
+    },
+    {
+      "name": "stl/skirt_l.stl",
+      "match": true
+    },
+    {
+      "name": "stl/skirt_r.stl",
+      "match": true
+    },
+    {
+      "name": "stl/cap.stl",
+      "match": true
+    },
+    {
+      "name": "stl/plunger.stl",
+      "match": true
+    },
+    {
+      "name": "stl/knob_exp.stl",
+      "match": true
+    },
+    {
+      "name": "stl/knob_fps.stl",
+      "match": true
+    },
+    {
+      "name": "stl/eyecup.stl",
+      "match": true
+    },
+    {
+      "name": "stl/stick_sleeve.stl",
+      "match": true
+    }
+  ],
+  "recorded_output_hashes_all_match": true,
+  "meshes": [
+    {
+      "part": "base_grip",
+      "vertices": 2699,
+      "faces": 5442,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 90156.22,
+      "volume_difference_pct": 0.0163,
+      "minimum_print_z": 4.8665507184513825e-15,
+      "dimensions_mm": [
+        116.5,
+        70.4,
+        110.0
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "cap",
+      "vertices": 486,
+      "faces": 968,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 6619.67,
+      "volume_difference_pct": 0.0322,
+      "minimum_print_z": 0.030812328681349754,
+      "dimensions_mm": [
+        48.0,
+        30.0,
+        9.5
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "eyecup",
+      "vertices": 2774,
+      "faces": 5548,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 4384.54,
+      "volume_difference_pct": 0.4961,
+      "minimum_print_z": -2.1788764250561506e-15,
+      "dimensions_mm": [
+        45.498,
+        45.512,
+        16.3
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "hood",
+      "vertices": 6343,
+      "faces": 12786,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 67238.01,
+      "volume_difference_pct": 0.0398,
+      "minimum_print_z": 2.829924540688998e-14,
+      "dimensions_mm": [
+        178.7,
+        67.35,
+        99.7
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "knob_exp",
+      "vertices": 1448,
+      "faces": 2896,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 4791.53,
+      "volume_difference_pct": 0.0307,
+      "minimum_print_z": -1.4193188996054068e-15,
+      "dimensions_mm": [
+        27.997,
+        27.997,
+        9.0
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "knob_fps",
+      "vertices": 868,
+      "faces": 1736,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 1252.85,
+      "volume_difference_pct": 0.004,
+      "minimum_print_z": -9.757817434787172e-16,
+      "dimensions_mm": [
+        19.991,
+        19.991,
+        7.0
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "panel",
+      "vertices": 6646,
+      "faces": 13296,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 51014.32,
+      "volume_difference_pct": 0.0024,
+      "minimum_print_z": 1.0000000116860974e-07,
+      "dimensions_mm": [
+        150.28,
+        94.4,
+        65.4
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "plunger",
+      "vertices": 630,
+      "faces": 1256,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 287.47,
+      "volume_difference_pct": 0.0095,
+      "minimum_print_z": 0.0,
+      "dimensions_mm": [
+        7.8,
+        13.6,
+        4.0
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "skirt_l",
+      "vertices": 39,
+      "faces": 74,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 3266.3,
+      "volume_difference_pct": 0.0001,
+      "minimum_print_z": 7.105427357601002e-15,
+      "dimensions_mm": [
+        116.5,
+        16.0,
+        3.8
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "skirt_r",
+      "vertices": 39,
+      "faces": 74,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 3266.3,
+      "volume_difference_pct": 0.0001,
+      "minimum_print_z": 7.105427357601002e-15,
+      "dimensions_mm": [
+        116.5,
+        16.0,
+        3.8
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "stick_sleeve",
+      "vertices": 396,
+      "faces": 788,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 1103.78,
+      "volume_difference_pct": 0.0109,
+      "minimum_print_z": -8.839015782958709e-17,
+      "dimensions_mm": [
+        13.0,
+        22.9,
+        16.0
+      ],
+      "manifest_hash_match": true
+    },
+    {
+      "part": "tub",
+      "vertices": 4485,
+      "faces": 9058,
+      "watertight": true,
+      "winding_consistent": true,
+      "signed_volume_mm3": 105242.2,
+      "volume_difference_pct": 0.0007,
+      "minimum_print_z": -1.1102230246251565e-16,
+      "dimensions_mm": [
+        151.3,
+        100.95,
+        70.0
+      ],
+      "manifest_hash_match": true
+    }
+  ],
+  "coupons": [
+    {
+      "part": "board_edge_plate",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "clearance_comb",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "encoder_cradle_hook",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "hood_hook",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "hood_ledge",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "keyhole_slot",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "knob_bore_ladder_enc",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "knob_bore_ladder_sw",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "pi_hook",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "pt_boss_bottom",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "pt_boss_post",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    },
+    {
+      "part": "tongue",
+      "watertight": true,
+      "winding_consistent": true,
+      "positive_volume": true
+    }
+  ],
+  "note": "Independent check of existing exported STL files; no source rebuild or physical/slicer validation."
+}

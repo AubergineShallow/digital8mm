@@ -1,0 +1,52 @@
+{
+ "XF": 10.600000000000001,
+ "lcb_bbox": [
+  -2.7,
+  19.7,
+  -28.5,
+  32.2,
+  33.0,
+  93.2
+ ],
+ "lcb_vol_mm3": 24166.0,
+ "lcb_mass_g_shell": 22.0,
+ "lcb_com": [
+  6.04,
+  0.29,
+  60.32
+ ],
+ "sleeve": [
+  11.3,
+  19.7
+ ],
+ "turret_vol_mm3_approx": 15341.0,
+ "overlaps": {
+  "lcb": {
+   "hood": 15687.149
+  },
+  "s1_boss(tub)": {},
+  "s2_boss(panel)": {},
+  "s3_boss(panel)": {},
+  "kowa_corrected": {},
+  "lcb_vs_kowa_corrected": 0.0
+ },
+ "dist": {
+  "lcb_kowa": 0.15,
+  "lcb_adapter": 3.75,
+  "lcb_camera": 0.75,
+  "s1_camera": 4.75,
+  "s2_camera": 3.75,
+  "s3_camera": 3.75,
+  "s1_hood": 2.69,
+  "s3_tub": 0.15,
+  "s2_tub": 0.15
+ },
+ "camera_in_sweep_overlap": {
+  "s1_boss(tub)": 0.0
+ },
+ "panel_on_sweep_overlap": {
+  "s2_boss(panel)": {},
+  "s3_boss(panel)": {}
+ },
+ "hood_drop_vs_s1": 0.0
+}

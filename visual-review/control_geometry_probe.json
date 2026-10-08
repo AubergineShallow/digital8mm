@@ -1,0 +1,62 @@
+{
+  "runtime": "2.6.1",
+  "fps_shaft_bore_overlap_mm3": 8.991649869450534,
+  "fps_matched_orientation_overlap_mm3": 0.0,
+  "exposure_press_probe": [
+    {
+      "travel_mm": 0,
+      "panel_overlap_mm3": 0.0,
+      "bushing_overlap_mm3": 0.0
+    },
+    {
+      "travel_mm": 0.1,
+      "panel_overlap_mm3": 0.0,
+      "bushing_overlap_mm3": 0.0
+    },
+    {
+      "travel_mm": 0.19,
+      "panel_overlap_mm3": 0.0,
+      "bushing_overlap_mm3": 0.0
+    },
+    {
+      "travel_mm": 0.2,
+      "panel_overlap_mm3": 0.0,
+      "bushing_overlap_mm3": 0.0
+    },
+    {
+      "travel_mm": 0.21,
+      "panel_overlap_mm3": 3.7957204151533652,
+      "bushing_overlap_mm3": 0.0
+    },
+    {
+      "travel_mm": 0.24,
+      "panel_overlap_mm3": 15.229691391157939,
+      "bushing_overlap_mm3": 0.0
+    },
+    {
+      "travel_mm": 0.25,
+      "panel_overlap_mm3": 19.05663923729023,
+      "bushing_overlap_mm3": 0.0
+    },
+    {
+      "travel_mm": 0.26,
+      "panel_overlap_mm3": 22.891409649127624,
+      "bushing_overlap_mm3": 0.13955344744659973
+    },
+    {
+      "travel_mm": 0.3,
+      "panel_overlap_mm3": 38.3088426172662,
+      "bushing_overlap_mm3": 0.697767237233098
+    },
+    {
+      "travel_mm": 0.5,
+      "panel_overlap_mm3": 117.28900552730174,
+      "bushing_overlap_mm3": 3.4888361861656834
+    },
+    {
+      "travel_mm": 1.0,
+      "panel_overlap_mm3": 328.81374789045867,
+      "bushing_overlap_mm3": 10.466508558497061
+    }
+  ]
+}

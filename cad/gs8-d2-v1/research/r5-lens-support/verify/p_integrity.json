@@ -1,0 +1,361 @@
+{
+ "bb": {
+  "tub": [
+   -154.0,
+   -2.7,
+   -35.0,
+   35.0,
+   -3.65,
+   97.3
+  ],
+  "hood": [
+   -170.2,
+   1.0,
+   -32.35,
+   35.0,
+   0.3,
+   100.0
+  ],
+  "panel": [
+   -152.67,
+   -4.03,
+   -30.4,
+   35.0,
+   2.6,
+   97.0
+  ],
+  "lens_collar": [
+   -2.7,
+   8.6,
+   -35.0,
+   33.0,
+   30.0,
+   95.5
+  ]
+ },
+ "A_j7_float": {
+  "baseline_bad": [],
+  "baseline_min": {
+   "body@0.0": {
+    "min_overall": 0.4,
+    "min_lateral": 0.8,
+    "min_axial": 0.4
+   },
+   "bfar@0.0": {
+    "min_overall": 0.5,
+    "min_lateral": 0.75,
+    "min_axial": 0.5
+   },
+   "body@1.25": {
+    "min_overall": 0.8,
+    "min_lateral": 0.8,
+    "min_axial": 1.65
+   },
+   "bfar@1.25": {
+    "min_overall": 0.5,
+    "min_lateral": 0.75,
+    "min_axial": 0.5
+   },
+   "body@3.0": {
+    "min_overall": 0.5,
+    "min_lateral": 0.8,
+    "min_axial": 0.5
+   },
+   "bfar@3.0": {
+    "min_overall": 0.5,
+    "min_lateral": 0.75,
+    "min_axial": 0.5
+   },
+   "adapter@None": {
+    "min_overall": 0.825,
+    "min_lateral": 0.825,
+    "min_axial": 3.325
+   }
+  },
+  "lateral_0.3": [
+   [
+    "body",
+    0.0,
+    "fail",
+    "lateral gap 0.300 to hood < 0.50; overall gap 0.300 to hood < 0.40"
+   ],
+   [
+    "body",
+    1.25,
+    "fail",
+    "lateral gap 0.300 to hood < 0.50; overall gap 0.300 to hood < 0.40"
+   ],
+   [
+    "body",
+    3.0,
+    "fail",
+    "lateral gap 0.300 to hood < 0.50; overall gap 0.300 to hood < 0.40"
+   ]
+  ],
+  "diagonal_0.354": [
+   [
+    "bfar",
+    0.0,
+    "fail",
+    "overall gap 0.354 to probe < 0.40"
+   ],
+   [
+    "bfar",
+    1.25,
+    "fail",
+    "overall gap 0.354 to probe < 0.40"
+   ],
+   [
+    "bfar",
+    3.0,
+    "fail",
+    "overall gap 0.354 to probe < 0.40"
+   ]
+  ],
+  "axial_lip_0.2": [
+   [
+    "bfar",
+    0.0,
+    "fail",
+    "axial gap 0.200 to tub < 0.40; overall gap 0.200 to tub < 0.40"
+   ],
+   [
+    "bfar",
+    1.25,
+    "fail",
+    "axial gap 0.200 to tub < 0.40; overall gap 0.200 to tub < 0.40"
+   ],
+   [
+    "bfar",
+    3.0,
+    "fail",
+    "axial gap 0.200 to tub < 0.40; overall gap 0.200 to tub < 0.40"
+   ]
+  ],
+  "stub_masks_hood_fault": [
+   [
+    "body",
+    0.0,
+    "stub",
+    "lateral gap 0.300 to hood < 0.50; overall gap 0.300 to hood < 0.40"
+   ],
+   [
+    "body",
+    1.25,
+    "stub",
+    "lateral gap 0.300 to hood < 0.50; overall gap 0.300 to hood < 0.40"
+   ],
+   [
+    "body",
+    3.0,
+    "stub",
+    "lateral gap 0.300 to hood < 0.50; overall gap 0.300 to hood < 0.40"
+   ]
+  ],
+  "lens_hits_hood": [
+   [
+    "lens",
+    null,
+    "fail",
+    "lens overlaps ['hood']"
+   ]
+  ]
+ },
+ "B_lens_support": {
+  "baseline_kowa_nonpass": [
+   [
+    "status",
+    "kowa_lm6hc",
+    "info",
+    "kowa_lm6hc support band is 'drawing', not measured: G-LENS"
+   ]
+  ],
+  "bore_+0.3_diametral": [
+   [
+    "bore_measured",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: bore_measured"
+   ],
+   [
+    "status",
+    "kowa_lm6hc",
+    "info",
+    "kowa_lm6hc support band is 'drawing', not measured: G-LENS"
+   ]
+  ],
+  "collar_+0.3x": [
+   [
+    "lens_seated",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: lens_seated"
+   ],
+   [
+    "seat_measured",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: seat_measured"
+   ],
+   [
+    "status",
+    "kowa_lm6hc",
+    "info",
+    "kowa_lm6hc support band is 'drawing', not measured: G-LENS"
+   ]
+  ],
+  "collar_-0.3x": [
+   [
+    "lens_seated",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: lens_seated"
+   ],
+   [
+    "seat_measured",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: seat_measured"
+   ],
+   [
+    "status",
+    "kowa_lm6hc",
+    "info",
+    "kowa_lm6hc support band is 'drawing', not measured: G-LENS"
+   ]
+  ],
+  "thumb_ko_bump": [
+   [
+    "lens_seated",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: lens_seated"
+   ],
+   [
+    "thumb_keepouts",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: thumb_keepouts"
+   ],
+   [
+    "status",
+    "kowa_lm6hc",
+    "info",
+    "kowa_lm6hc support band is 'drawing', not measured: G-LENS"
+   ]
+  ],
+  "band_made_moving": [
+   [
+    "band_fixed",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: band_fixed"
+   ],
+   [
+    "band_length",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: band_length"
+   ],
+   [
+    "bore_measured",
+    "kowa_lm6hc",
+    "fail",
+    "kowa_lm6hc: bore_measured"
+   ],
+   [
+    "status",
+    "kowa_lm6hc",
+    "info",
+    "kowa_lm6hc support band is 'drawing', not measured: G-LENS"
+   ]
+  ]
+ },
+ "C_lens_clamp": {
+  "heavy_1500g": [
+   [
+    "clamp",
+    "_t_heavy",
+    "fail",
+    "M_sep 0.170 N m < 1.5 x static 0.352 N m"
+   ]
+  ],
+  "pinch_20N": [
+   [
+    "clamp",
+    "kowa_lm6hc",
+    "fail",
+    "M_sep 0.028 N m < 1.5 x static 0.057 N m"
+   ]
+  ]
+ },
+ "D_inserts": {
+  "baseline": [
+   [
+    "s_c1",
+    null,
+    "pass",
+    ""
+   ],
+   [
+    "s_c2",
+    null,
+    "pass",
+    ""
+   ],
+   [
+    "s_c3",
+    null,
+    "pass",
+    ""
+   ],
+   [
+    "s_c4",
+    null,
+    "pass",
+    ""
+   ]
+  ],
+  "bore_4.4": [
+   [
+    "s_c1",
+    null,
+    "fail",
+    "bore dia 4.4 (need 4.0 +-0.1)"
+   ]
+  ],
+  "wall_1.2": [
+   [
+    "s_c1",
+    null,
+    "fail",
+    "wall 1.200 round the insert at [-5.8, 11.0, 90.5] toward [0.0, 1.0, 0.0] < 1.6"
+   ]
+  ],
+  "tip_bottoms": [
+   [
+    "s_c1",
+    null,
+    "fail",
+    "tip (or tip + 0.2) in material: the screw bottoms"
+   ]
+  ],
+  "bore_shallow_3.7": [
+   [
+    "s_c1",
+    null,
+    "fail",
+    "bore depth 3.700 from the face (need >= 4.20), 3.700 locally (need >= insert + flush 4.10); wall 0.000 round the insert at [-6.6, 11.0, 90.5] toward ["
+   ]
+  ],
+  "collar_hole_r1.45": [
+   [
+    "s_c1",
+    null,
+    "fail",
+    "clearance hole in lens_collar r 1.45 < 1.70"
+   ]
+  ]
+ },
+ "seconds": 55
+}

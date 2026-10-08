@@ -1,0 +1,351 @@
+{
+ "label": "COMPUTED by the basic voxel LBM + steady advection-diffusion model (proxy geometry, ESTIMATED fan curve and loads); SoC temperature = ESTIMATE (fin-inlet air + P_soc x R_sink(Q_fin)); buoyancy = hand ESTIMATE",
+ "existing_source": "out/metrics-2.0-pass1-10k.json (af-run)",
+ "rows": {
+  "existing": {
+   "fan_Q_cm3s": 345.8765710762514,
+   "fan_dp_Pa": 19.947650788174982,
+   "fan_dp_curve_Pa": 19.85128836566293,
+   "fan_lambda": 2.6345282524177325,
+   "Q_through_in_cm3s": 7.516372536570466,
+   "Q_through_out_cm3s": 7.577407103950493,
+   "Q_fin_inlet_cm3s": 338.2472616870775,
+   "Q_fin_exit_face_cm3s": -29.304853039523163,
+   "vents_cm3s_out_positive": {
+    "inlet_roof": -7.288786352634257,
+    "out_band": -0.22748131810746322,
+    "out_corner": 2.905888227160412,
+    "out_wall": 4.67151887679008,
+    "x1203": -0.00010486582874577052
+   },
+   "status": "converged",
+   "steps": 10000,
+   "through_fraction": 0.02173137230192275,
+   "mass_balance_rel": 0.008120215846549227,
+   "recirculation_R_source": 0.9725877985084014,
+   "recirculation_tag_fin_exit": 0.7968125733355977,
+   "mean_age_s": {
+    "fan_intake": 71.06302444858444,
+    "probe__evf_board": 79.31035387512405,
+    "probe__camera": 71.46588779740465,
+    "probe__x1203_ic": 83.87026341853841,
+    "probe__usb_stick": 78.81982108631894
+   },
+   "intake_air_by_vent": {
+    "inlet_roof": 0.8687626426341919,
+    "out_band": 0.12261397013959431,
+    "out_corner": 0.00016128091559412924,
+    "out_wall": 0.0055182210539637235,
+    "x1203": 0.002939025908466479
+   },
+   "thermal": {
+    "S2__adiabatic": {
+     "fan intake air (flux mean)": 1120.9597358730825,
+     "fin exit air": 1098.1615115997126,
+     "EVF board air": 1714.4508519624405,
+     "X1203 air": 1791.1587764969024,
+     "camera air": 1135.8458219120344,
+     "USB stick air": 1535.8801535338944,
+     "Pi board air": 1369.2296751721342,
+     "T_fin_inlet_air_C": 1120.300269190257,
+     "T_soc_est_C": {
+      "nominal": 1139.745292267541,
+      "low": 1138.1332922675408,
+      "high": 1145.3872922675407
+     },
+     "R_sink_K_per_W": {
+      "nominal": 4.8250677611126,
+      "low": 4.4250677611126,
+      "high": 6.2250677611126
+     },
+     "energy_balance_rel": 1.8622568845078153e-08,
+     "res": 8.465021286123172e-07,
+     "G_W11_pass_SoC_lt_80_nominal": false,
+     "G_W11_pass_SoC_lt_80_high": false,
+     "X1203_air_lt_70": false
+    },
+    "S2__wall_loss": {
+     "fan intake air (flux mean)": 189.84383895732253,
+     "fin exit air": 201.54598391740453,
+     "EVF board air": 401.8167715753516,
+     "X1203 air": 409.2660145050776,
+     "camera air": 202.50906053196672,
+     "USB stick air": 528.3436072384882,
+     "Pi board air": 409.044027348683,
+     "T_fin_inlet_air_C": 191.67640429558386,
+     "T_soc_est_C": {
+      "nominal": 211.12142737286766,
+      "low": 209.50942737286763,
+      "high": 216.76342737286765
+     },
+     "R_sink_K_per_W": {
+      "nominal": 4.8250677611126,
+      "low": 4.4250677611126,
+      "high": 6.2250677611126
+     },
+     "energy_balance_rel": -6.633313230372351e-08,
+     "res": 5.98371997959496e-07,
+     "G_W11_pass_SoC_lt_80_nominal": false,
+     "G_W11_pass_SoC_lt_80_high": false,
+     "X1203_air_lt_70": false
+    },
+    "S3__adiabatic": {
+     "fan intake air (flux mean)": 1997.095959422448,
+     "fin exit air": 1960.7094560887267,
+     "EVF board air": 2671.6881366184057,
+     "X1203 air": 3162.6481586717223,
+     "camera air": 2022.2878852071567,
+     "USB stick air": 2717.739094749527,
+     "Pi board air": 2366.484604146578,
+     "T_fin_inlet_air_C": 1995.0731334125614,
+     "T_soc_est_C": {
+      "nominal": 2042.7448028923538,
+      "low": 2038.7928028923538,
+      "high": 2056.576802892354
+     },
+     "R_sink_K_per_W": {
+      "nominal": 4.8250677611126,
+      "low": 4.4250677611126,
+      "high": 6.2250677611126
+     },
+     "energy_balance_rel": 8.699603762853163e-10,
+     "res": 7.323990339837495e-07,
+     "G_W11_pass_SoC_lt_80_nominal": false,
+     "G_W11_pass_SoC_lt_80_high": false,
+     "X1203_air_lt_70": false
+    },
+    "S3__wall_loss": {
+     "fan intake air (flux mean)": 330.2373245947356,
+     "fin exit air": 355.8531916433128,
+     "EVF board air": 508.6060528424691,
+     "X1203 air": 695.0843345948257,
+     "camera air": 350.99547740245845,
+     "USB stick air": 920.5995019865635,
+     "Pi board air": 653.681889316933,
+     "T_fin_inlet_air_C": 332.79161320293457,
+     "T_soc_est_C": {
+      "nominal": 380.4632826827271,
+      "low": 376.5112826827271,
+      "high": 394.2952826827271
+     },
+     "R_sink_K_per_W": {
+      "nominal": 4.8250677611126,
+      "low": 4.4250677611126,
+      "high": 6.2250677611126
+     },
+     "energy_balance_rel": 3.62261237259961e-08,
+     "res": 9.66151192146651e-07,
+     "G_W11_pass_SoC_lt_80_nominal": false,
+     "G_W11_pass_SoC_lt_80_high": false,
+     "X1203_air_lt_70": false
+    }
+   }
+  },
+  "V1": null,
+  "V2": null,
+  "V3": null
+ },
+ "buoyancy": {
+  "H_m": 0.067,
+  "basis": "dp_stack = rho g H dT / T_abs (ESTIMATE, not simulated; the LBM has no buoyancy)",
+  "dp_stack_Pa_by_dT": {
+   "5": 0.012423411182582882,
+   "10": 0.024846822365165763,
+   "20": 0.049693644730331527,
+   "40": 0.09938728946066305
+  },
+  "forced": {
+   "existing": {
+    "vent_dp_from_loss_law_Pa": {
+     "inlet_roof": 0.0032356958773682803,
+     "out_band": 0.0005113434030568724,
+     "out_corner": 0.020923678318506885,
+     "out_wall": 0.006674066386657581,
+     "x1203": 2.711790134976881e-07
+    },
+    "max_vent_dp_Pa": 0.020923678318506885
+   }
+  }
+ },
+ "edits": {
+  "V1": {
+   "V1": {
+    "footprint_cells_xy": 196,
+    "k_intake": [
+     19,
+     19
+    ],
+    "k_roof_vent": [
+     50,
+     51
+    ],
+    "duct_air_cells": 5880,
+    "wall_cells": 1722,
+    "duct_box_mm": [
+     [
+      -72.0,
+      -44.0
+     ],
+     [
+      -24.0,
+      4.0
+     ],
+     [
+      36.0,
+      96.0
+     ]
+    ],
+    "leak_cells_duct_to_body": 0
+   },
+   "walls_total_cells": 1722
+  },
+  "V2": {
+   "V1": {
+    "footprint_cells_xy": 196,
+    "k_intake": [
+     19,
+     19
+    ],
+    "k_roof_vent": [
+     50,
+     51
+    ],
+    "duct_air_cells": 5880,
+    "wall_cells": 1722,
+    "duct_box_mm": [
+     [
+      -72.0,
+      -44.0
+     ],
+     [
+      -24.0,
+      4.0
+     ],
+     [
+      36.0,
+      96.0
+     ]
+    ],
+    "leak_cells_duct_to_body": 0
+   },
+   "V2": {
+    "compartment_ijk": [
+     [
+      57,
+      74
+     ],
+     [
+      10,
+      33
+     ],
+     [
+      14,
+      20
+     ]
+    ],
+    "compartment_box_mm": [
+     [
+      -42.0,
+      -6.0
+     ],
+     [
+      -32.0,
+      16.0
+     ],
+     [
+      24.0,
+      38.0
+     ]
+    ],
+    "compartment_air_cells": 2905,
+    "wall_cells": 688,
+    "leak_cells_compartment_to_body": 0,
+    "vents_reached_from_fins": {
+     "inlet_roof": false,
+     "out_band": true,
+     "out_corner": true,
+     "out_wall": true,
+     "x1203": false
+    }
+   },
+   "walls_total_cells": 2396
+  },
+  "V3": {
+   "V1": {
+    "footprint_cells_xy": 196,
+    "k_intake": [
+     19,
+     19
+    ],
+    "k_roof_vent": [
+     50,
+     51
+    ],
+    "duct_air_cells": 5880,
+    "wall_cells": 1722,
+    "duct_box_mm": [
+     [
+      -72.0,
+      -44.0
+     ],
+     [
+      -24.0,
+      4.0
+     ],
+     [
+      36.0,
+      96.0
+     ]
+    ],
+    "leak_cells_duct_to_body": 0
+   },
+   "V2": {
+    "compartment_ijk": [
+     [
+      57,
+      74
+     ],
+     [
+      10,
+      33
+     ],
+     [
+      14,
+      20
+     ]
+    ],
+    "compartment_box_mm": [
+     [
+      -42.0,
+      -6.0
+     ],
+     [
+      -32.0,
+      16.0
+     ],
+     [
+      24.0,
+      38.0
+     ]
+    ],
+    "compartment_air_cells": 2905,
+    "wall_cells": 688,
+    "leak_cells_compartment_to_body": 0,
+    "vents_reached_from_fins": {
+     "inlet_roof": false,
+     "out_band": true,
+     "out_corner": true,
+     "out_wall": true,
+     "x1203": false
+    }
+   },
+   "V3": {
+    "lid_k": 17,
+    "lid_z_mm": 31.0,
+    "wall_cells": 336
+   },
+   "walls_total_cells": 2732
+  }
+ },
+ "made": "2026-10-05 14:15:27"
+}

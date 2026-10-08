@@ -1,0 +1,380 @@
+{
+ "date": "2026-10-06",
+ "script": "logic_planted.py",
+ "probes": [
+  {
+   "id": "P1",
+   "fault": "140 g lens with no support band / no collar under J7-R (camera floats, nothing holds it)",
+   "expected": "fail",
+   "observed": [
+    "pass"
+   ],
+   "caught": false,
+   "note": "rule only fires above support_mass_g 150 g"
+  },
+  {
+   "id": "P2",
+   "fault": "default-lens collar solid absent from rows (lens_support only)",
+   "expected": "fail",
+   "observed": {
+    "statuses": [
+     "info",
+     "pass"
+    ],
+    "measured_items_missing": [
+     "bore_measured",
+     "lens_seated",
+     "seat_measured"
+    ]
+   },
+   "caught": false,
+   "note": "measured items silently skipped; J7 critical-feature probes on lens_collar would still FAIL in a build"
+  },
+  {
+   "id": "P3",
+   "fault": "support.status set to 'measured' with no evidence record",
+   "expected": "still WARN or bound to a G-LENS record",
+   "observed": [
+    "pass"
+   ],
+   "caught": false,
+   "note": "the WARN is cleared by a string in layout.py, not by a G-LENS evidence record"
+  },
+  {
+   "id": "P4",
+   "fault": "control: synthetic unit with 0.5 axial / 0.8 lateral gaps",
+   "expected": "pass",
+   "observed": [
+    "pass",
+    "pass",
+    "pass"
+   ],
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P5",
+   "fault": "camera body touching the tub (0 gap, 0 overlap)",
+   "expected": "fail",
+   "observed": [
+    [
+     "body",
+     "fail"
+    ],
+    [
+     "bfar",
+     "pass"
+    ],
+    [
+     "adapter",
+     "pass"
+    ]
+   ],
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P6",
+   "fault": "axial gap 0.39 (rule 0.40)",
+   "expected": "fail",
+   "observed": [
+    [
+     "body",
+     "fail"
+    ],
+    [
+     "bfar",
+     "pass"
+    ],
+    [
+     "adapter",
+     "pass"
+    ]
+   ],
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P7",
+   "fault": "clash only at an intermediate screw-out s = 2.0 (fin level with the BFAR there)",
+   "expected": "fail",
+   "observed": {
+    "default_s": [],
+    "with_s2": [
+     [
+      "bfar",
+      2.0,
+      "fail"
+     ]
+    ]
+   },
+   "caught": false,
+   "note": "j7_float samples s 0 / 1.25 / 3.0 only"
+  },
+  {
+   "id": "P8",
+   "fault": "body touches tub (real) while an unrelated obstacle (hood) is a stub",
+   "expected": "fail (stub only if the offender is a stub)",
+   "observed": [
+    [
+     "body",
+     "stub"
+    ],
+    [
+     "bfar",
+     "pass"
+    ],
+    [
+     "adapter",
+     "pass"
+    ]
+   ],
+   "caught": false,
+   "note": "stub blocks cad_release_candidate anyway (stubs list), so masking only hides which part is at fault"
+  },
+  {
+   "id": "P9",
+   "fault": "nothing within 6 mm of the hanging unit (float unmeasured)",
+   "expected": "fail",
+   "observed": [
+    "fail",
+    "fail",
+    "fail"
+   ],
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P10",
+   "fault": "no 'lens' row in rows (lens-overlap and lens-vs-camera rows)",
+   "expected": "fail or explicit not-run",
+   "observed": [
+    "adapter",
+    "bfar",
+    "body"
+   ],
+   "caught": false,
+   "note": "lens rows are skipped without a row; the category still passes"
+  },
+  {
+   "id": "P11",
+   "fault": "lens barrel touching the hood plate (0 gap): a second, unintended support path",
+   "expected": "fail",
+   "observed": [
+    "pass"
+   ],
+   "caught": false,
+   "note": "lens row is overlap-only (<= 0.05 mm3); no minimum gap to chassis parts"
+  },
+  {
+   "id": "P12",
+   "fault": "lens barrel overlapping the hood",
+   "expected": "fail",
+   "observed": [
+    "fail"
+   ],
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P13",
+   "fault": "anchor polygon with the LR foot only in compression (bolted-only polygon misses the axis)",
+   "expected": "fail or WARN",
+   "observed": {
+    "status": "pass",
+    "margin": 16.012,
+    "bolted_only": -8.804
+   },
+   "caught": false,
+   "note": "bolted_only_margin is reported, never gated (G5)"
+  },
+  {
+   "id": "P14",
+   "fault": "every per-lens clamp row WARN; only the anchor-polygon row passes",
+   "expected": "not a plain pass",
+   "observed": "pass",
+   "caught": false,
+   "note": "one pass row anywhere satisfies \">= 1 pass\""
+  },
+  {
+   "id": "P15",
+   "fault": "lens_clamp with info rows only",
+   "expected": "fail",
+   "observed": "fail",
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P16",
+   "fault": "j7_float empty",
+   "expected": "fail",
+   "observed": "fail",
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P17",
+   "fault": "unknown row status 'n/a'",
+   "expected": "fail",
+   "observed": "fail",
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P18",
+   "fault": "inserts with no part solids",
+   "expected": "fail",
+   "observed": [
+    "fail"
+   ],
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P19",
+   "fault": "control: G-COL-1 record on current coupon hashes",
+   "expected": "pass",
+   "observed": "pass",
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P20",
+   "fault": "collar coupon re-cut (hash change) after a G-COL-1 pass",
+   "expected": "stale",
+   "observed": "stale",
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P21",
+   "fault": "coupon gate missing from coupons-manifest (cmap empty); record names only SPEC.md",
+   "expected": "rejected",
+   "observed": {
+    "required": [],
+    "outcome": "pass"
+   },
+   "caught": false,
+   "note": "evaluate_item: required [] = \"any current artifact\""
+  },
+  {
+   "id": "P22",
+   "fault": "G-CAM-2 binding (assembled sag test) includes collar/tub/hood/panel STLs + gate doc",
+   "expected": "bound",
+   "observed": {
+    "n": 13,
+    "doc": [
+     "cad/gs8-d2-v1/MEASURED-PARTS.md"
+    ],
+    "has": [
+     "stl/hood.stl",
+     "stl/lens_collar.stl",
+     "stl/panel.stl",
+     "stl/tub.stl"
+    ],
+    "modifiers": false
+   },
+   "caught": true,
+   "note": "modifier meshes (insert-boss perimeters) are not bound to assembly items"
+  },
+  {
+   "id": "P23",
+   "fault": "G-CAM-1 binding",
+   "expected": "gate doc",
+   "observed": [
+    "cad/gs8-d2-v1/MEASURED-PARTS.md"
+   ],
+   "caught": true,
+   "note": "measured-part gate: bound to its acceptance doc only (correct: it measures purchased parts)"
+  },
+  {
+   "id": "P24",
+   "fault": "G-LENS binding",
+   "expected": "gate doc",
+   "observed": [
+    "cad/gs8-d2-v1/MEASURED-PARTS.md"
+   ],
+   "caught": true,
+   "note": "measured-part gate: bound to its acceptance doc only (correct: it measures purchased parts)"
+  },
+  {
+   "id": "P25",
+   "fault": "malformed records: list artifacts / upper-case hex / list item / bad verdict / bad date",
+   "expected": "all rejected",
+   "observed": [
+    true,
+    true,
+    true,
+    true,
+    false
+   ],
+   "caught": true,
+   "note": "date is not validated (free text) -- last entry"
+  },
+  {
+   "id": "P26",
+   "fault": "live coupon_validation items with no coupon STL bound (would accept any artifact)",
+   "expected": "none",
+   "observed": {
+    "items": [
+     "G-CAP-1",
+     "G-COL-1",
+     "G-COMB-1",
+     "G-EVF-2",
+     "G-J4-1",
+     "G-KEEP-1",
+     "G-KNOB-1",
+     "G-PANEL-1",
+     "G-PT-1",
+     "G-SNAP-2"
+    ],
+    "unbound": []
+   },
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P27",
+   "fault": "state of G-CAM-1 (MP-CAM) / G-LENS / G-COL-1 / G-CAM-2",
+   "expected": "measured/measured/coupon/assembly",
+   "observed": {
+    "G-COL-1": "coupon_validation",
+    "G-CAM-1": "measured_fit",
+    "G-LENS": "measured_fit",
+    "G-CAM-2": "assembly_operation"
+   },
+   "caught": true,
+   "note": ""
+  },
+  {
+   "id": "P28",
+   "fault": "'MP-CAM' as a gate id",
+   "expected": "registered or aliased",
+   "observed": false,
+   "caught": false,
+   "note": "hardware_gates() only harvests G-*; a record with item \"MP-CAM\" would be unmatched (keeps state open)"
+  },
+  {
+   "id": "P29",
+   "fault": "two CRITICAL_FEATURES entries share an id (r5 re-uses tub_front_wall_seat, layout.py 1049 vs 1589)",
+   "expected": "fail (duplicate id)",
+   "observed": [
+    [
+     -3.95,
+     11.0,
+     86.0
+    ]
+   ],
+   "caught": false,
+   "note": "registry() de-duplicates last-wins silently: the r4 plain-wall probe is dropped without a row"
+  },
+  {
+   "id": "P30",
+   "fault": "mass_com category: CoM far outside any balance rule",
+   "expected": "fail",
+   "observed": "status = 'pass' if total_g > 0",
+   "caught": false,
+   "note": "mass_com counts as one of the 27 passing categories with no rule"
+  }
+ ]
+}

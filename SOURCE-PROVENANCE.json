@@ -1,0 +1,9 @@
+{
+  "fork": "r5-cloud-polish-20261007",
+  "baseline_checkpoint": "789f40731f0c3cebf691f3920e8d244057219048",
+  "source_checkpoint": "cf818a53eb74f87838e1cc37d9598a119db45752",
+  "source_capture_utc": "2026-10-06T14:04:49Z to 2026-10-06T14:05:13Z",
+  "supplement_capture_utc": "2026-10-06T14:11:53Z",
+  "reviewable_diff": "SOURCE-CHANGES.patch",
+  "note": "Independent private fork, not a merge of later desktop changes. Package provenance and the reviewable diff are generated delivery artifacts outside the source commit. Archive member hashes are in PACKAGE-MANIFEST.json."
+}

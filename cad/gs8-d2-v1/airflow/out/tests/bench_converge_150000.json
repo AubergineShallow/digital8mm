@@ -1,0 +1,90 @@
+{
+ "cells": 151680,
+ "status": "deadline",
+ "steps": 16276,
+ "wall_s": 960.2086288928986,
+ "s_per_step": 0.05899536918732481,
+ "phys_time_s": 0.3460325064961383,
+ "info": {
+  "dx_m": 0.002,
+  "dt_s": 2.12602916254693e-05,
+  "tau0": 0.5002551234995056,
+  "nu_lat": 8.504116650187576e-05,
+  "nu_lat_true": 8.50411665018772e-05,
+  "re_factor": 1.0000000000000169,
+  "cs_smag": 0.16,
+  "u_scale_mps": 94.07208683835972,
+  "p_scale_Pa": 9999.999999999998,
+  "shape": [
+   79,
+   48,
+   40
+  ],
+  "fluid_cells": 128784,
+  "u_lat_at_u_ref": 0.013071519013745479,
+  "drho_at_dp_max": 0.030000000000000006
+ },
+ "last": {
+  "step": 16000,
+  "res_u": 0.06991050467085566,
+  "umax_lat": 0.010709669440984726,
+  "umax_mps": 1.0074809536624425,
+  "umean_max_mps": 1.007865567963562,
+  "nut_max_lat": 0.000448723032604903,
+  "rho_min": 0.9995408654212952,
+  "rho_max": 1.0011245012283325,
+  "Q_vent__IN": -4.132910801320873e-07,
+  "Q_vent__OUT": 5.363902413261157e-07,
+  "Q_fan_intake": 0.000508472286175162,
+  "Q_fan_outlet": 0.0005084759043531592,
+  "fan_Q": 0.000508472286175162,
+  "fan_dp": 2.0822217890562755,
+  "fan_lambda": 1.049739164102919,
+  "fan_force_mean_Npm3": 477.9215305461547,
+  "fan_dp_curve": 1.6321989640269834,
+  "wall_s": 941.9110548496246
+ },
+ "notes": [
+  "u_ref 1.23 m/s = 2 x Qmax/A_outlet (A_outlet 836 mm2)",
+  "vent IN: K 8 + a_lin 0 Pa/(m/s) over 1.00 cells, 209 cells",
+  "vent OUT: K 8 + a_lin 0 Pa/(m/s) over 1.00 cells, 209 cells",
+  "fins axis [1.0, 0.0, 0.0] K_per_cell 0.4286, lin_per_cell 0, beta_t 4.0",
+  "fan: 1045 cells, speed 1.0, curve 'curve_100'",
+  "{\"dx_m\": 0.002, \"dt_s\": 2.1e-05, \"tau0\": 0.500255, \"nu_lat\": 8.5e-05, \"nu_lat_true\": 8.5e-05, \"re_factor\": 1.0, \"cs_smag\": 0.16, \"u_scale_mps\": 94.072087, \"p_scale_Pa\": 10000.0, \"shape\": [79, 48, 40], \"fluid_cells\": 128784, \"u_lat_at_u_ref\": 0.013072, \"drho_at_dp_max\": 0.03}"
+ ],
+ "thermal_problem": {
+  "active_cells": 118296,
+  "ambient_cells": 10488,
+  "disconnected_fluid_cells": 0,
+  "projection": {
+   "cg_iters": 560,
+   "cg_rel_res": 9.933931166903158e-11,
+   "div_before_rel": 0.1012927820497725,
+   "div_after_rel": 2.1204044968607233e-11
+  },
+  "Q_out_m3s": 2.7579824002568655e-06,
+  "Q_in_m3s": 2.757982401344105e-06,
+  "setup_s": 10.82733678817749,
+  "notes": []
+ },
+ "thermal_bicgstab": {
+  "iters": 1046,
+  "res": 5.992637916184149e-07,
+  "converged": true,
+  "heat_in_W": 5.0,
+  "enthalpy_out_W": 5.00000006990572,
+  "balance_rel": 1.3981144064700857e-08,
+  "wall_s": 46.9547016620636,
+  "T_max_C": 743.9020074080355
+ },
+ "thermal_pseudo": {
+  "iters": 27600,
+  "res": 0.49553836537869567,
+  "converged": false,
+  "heat_in_W": 5.0,
+  "enthalpy_out_W": 2.522372114760993,
+  "balance_rel": -0.4955255770478014,
+  "wall_s": 601.2692546844482,
+  "T_max_C": 482.1896400842112
+ }
+}

@@ -1,0 +1,101 @@
+{
+  "scope": "Curated cloud handoff, D2 integration/presentation and visual-review guides",
+  "checked": [
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "cad/gs8-d2-v1/CLOUD-POLISH-NOTES.md",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "cad/gs8-d2-v1/CLOUD-REPRODUCIBILITY.md",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "software/gs8-camera-evf/D2-INTEGRATION.md",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "software/gs8-camera-evf/D2-PRESENTATION.md",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "validation/README.md",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "visual-review/README.md",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "validation/README.md",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "SOURCE-PROVENANCE.json",
+      "exists": true
+    },
+    {
+      "from": "CLOUD-START-HERE.md",
+      "to": "SOURCE-CHANGES.patch",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-INTEGRATION.md",
+      "to": "../../cad/gs8-d2-v1/HANDOFF.md",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-INTEGRATION.md",
+      "to": "../../electronics/gs8-d2-v1/WIRING.md",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-INTEGRATION.md",
+      "to": "D2-PRESENTATION.md",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-INTEGRATION.md",
+      "to": "D2-PRESENTATION.md",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-PRESENTATION.md",
+      "to": "../../cad/gs8-d2-v1/HANDOFF.md",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-PRESENTATION.md",
+      "to": "../../electronics/gs8-d2-v1/WIRING.md",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-PRESENTATION.md",
+      "to": "../../electronics/gs8-evf-v1/EVF-SELECTION.md",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-PRESENTATION.md",
+      "to": "gs8_camera_evf/evf.py",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-PRESENTATION.md",
+      "to": "gs8_camera_evf/d2_runtime.py",
+      "exists": true
+    },
+    {
+      "from": "software/gs8-camera-evf/D2-PRESENTATION.md",
+      "to": "D2-INTEGRATION.md",
+      "exists": true
+    }
+  ],
+  "missing": []
+}

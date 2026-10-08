@@ -1,0 +1,2083 @@
+{
+ "summary": {
+  "built_at": "2026-10-06 16:32:38 +0800",
+  "cad_release_candidate": true,
+  "stubs": [],
+  "sources": 17,
+  "source_mismatch": [],
+  "unhashed_py": [
+   "_thin_spot_rib_l.py",
+   "run_locked.py",
+   "sweep_tub.py",
+   "test_collar.py",
+   "test_common.py",
+   "test_grip_small.py",
+   "test_hood_panel.py",
+   "test_keeper.py",
+   "test_r3_regressions.py",
+   "test_tub.py"
+  ],
+  "outputs": 101,
+  "output_mismatch": [],
+  "gate_docs": 4,
+  "gate_doc_mismatch": [],
+  "meshes": 57,
+  "mesh_fail": [],
+  "unlinked_meshes": [],
+  "changed_vs_r4": [
+   "stl/coupons/hood_ledge_ret.stl",
+   "stl/hood.stl",
+   "stl/panel.stl",
+   "stl/tub.stl"
+  ],
+  "new_vs_r4": [
+   "stl/coupons/collar_hood_plate.stl",
+   "stl/coupons/collar_part.stl",
+   "stl/coupons/collar_tub_front.stl",
+   "stl/lens_collar.stl",
+   "stl/modifiers/tub__mod_s_c1.stl",
+   "stl/modifiers/tub__mod_s_c2.stl",
+   "stl/modifiers/tub__mod_s_c3.stl"
+  ],
+  "fujinon_checks_hash_in_receipt": true,
+  "summary": [
+   {
+    "check": "contract",
+    "n": 12,
+    "passed": 12,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "cots_containment",
+    "n": 20,
+    "passed": 20,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "interference",
+    "n": 62,
+    "passed": 62,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "mate_overlap",
+    "n": 40,
+    "passed": 40,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "clearance",
+    "n": 13,
+    "passed": 13,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "keepouts",
+    "n": 97,
+    "passed": 97,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "cable_routes",
+    "n": 10,
+    "passed": 8,
+    "failed": 0,
+    "stub": 0,
+    "info": 2,
+    "status": "pass"
+   },
+   {
+    "check": "bed_fit",
+    "n": 12,
+    "passed": 12,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "stl_mesh",
+    "n": 12,
+    "passed": 12,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "print_modifiers",
+    "n": 18,
+    "passed": 18,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "thin_wall",
+    "n": 12,
+    "passed": 12,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass",
+    "role": "secondary share-based screen: cannot pass the build alone; the gate for local thickness is critical_features (finding 2)"
+   },
+   {
+    "check": "critical_features",
+    "n": 135,
+    "passed": 125,
+    "failed": 0,
+    "stub": 0,
+    "info": 10,
+    "status": "pass"
+   },
+   {
+    "check": "evf_restraint",
+    "n": 6,
+    "passed": 6,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "driver",
+    "n": 11,
+    "passed": 11,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "engrave_groove",
+    "n": 10,
+    "passed": 10,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "boss_geometry",
+    "n": 7,
+    "passed": 7,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "inserts",
+    "n": 4,
+    "passed": 4,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "j7_float",
+    "n": 11,
+    "passed": 11,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "lens_support",
+    "n": 32,
+    "passed": 28,
+    "failed": 0,
+    "stub": 0,
+    "info": 4,
+    "status": "pass",
+    "warnings": [
+     "kowa_lm6hc support band is 'drawing', not measured: G-LENS",
+     "fujinon_hf6xa support band is 'assumed', not measured: G-LENS",
+     "computar_h6z0812 support band is 'drawing', not measured: G-LENS"
+    ]
+   },
+   {
+    "check": "lens_clamp",
+    "n": 4,
+    "passed": 3,
+    "failed": 0,
+    "stub": 0,
+    "info": 1,
+    "status": "pass",
+    "warnings": [
+     "M_sep 0.170 N m < the 5 g moment 0.286 N m (the lens rocks elastically in the collar at a knock; aim only, recovers)"
+    ]
+   },
+   {
+    "check": "sweeps",
+    "n": 14,
+    "passed": 14,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "removals",
+    "n": 12,
+    "passed": 12,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "service_driver",
+    "n": 9,
+    "passed": 9,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "release_access",
+    "n": 2,
+    "passed": 2,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "stack_retention",
+    "n": 1,
+    "passed": 1,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "layout_self_check",
+    "n": 183,
+    "passed": 183,
+    "failed": 0,
+    "stub": 0,
+    "info": 0,
+    "status": "pass"
+   },
+   {
+    "check": "mass_com",
+    "status": "pass"
+   }
+  ],
+  "status_states": {
+   "cad_checks": "computed: pass",
+   "slicer_review": "not run",
+   "coupon_validation": "not run",
+   "measured_fit": "not run",
+   "assembly_operation": "not run"
+  },
+  "warnings": [
+   "lens_support: kowa_lm6hc support band is 'drawing', not measured: G-LENS",
+   "lens_support: fujinon_hf6xa support band is 'assumed', not measured: G-LENS",
+   "lens_support: computar_h6z0812 support band is 'drawing', not measured: G-LENS",
+   "lens_clamp: M_sep 0.170 N m < the 5 g moment 0.286 N m (the lens rocks elastically in the collar at a knock; aim only, recovers)"
+  ],
+  "j7_float_min": {
+   "body@0.0": {
+    "min_overall": 0.4,
+    "min_lateral": 0.8,
+    "min_axial": 0.4
+   },
+   "bfar@0.0": {
+    "min_overall": 0.5,
+    "min_lateral": 0.75,
+    "min_axial": 0.5
+   },
+   "body@1.25": {
+    "min_overall": 0.8,
+    "min_lateral": 0.8,
+    "min_axial": 1.65
+   },
+   "bfar@1.25": {
+    "min_overall": 0.5,
+    "min_lateral": 0.75,
+    "min_axial": 0.5
+   },
+   "body@3.0": {
+    "min_overall": 0.5,
+    "min_lateral": 0.8,
+    "min_axial": 0.5
+   },
+   "bfar@3.0": {
+    "min_overall": 0.5,
+    "min_lateral": 0.75,
+    "min_axial": 0.5
+   },
+   "adapter@None": {
+    "min_overall": 0.825,
+    "min_lateral": 0.825,
+    "min_axial": 3.325
+   }
+  },
+  "blocking": [],
+  "rebuild": {
+   "built_at": "2026-10-06 22:18:45 +0800",
+   "seconds": 484.6,
+   "summary": [
+    {
+     "check": "contract",
+     "n": 12,
+     "passed": 12,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "cots_containment",
+     "n": 20,
+     "passed": 20,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "interference",
+     "n": 62,
+     "passed": 62,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "mate_overlap",
+     "n": 40,
+     "passed": 40,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "clearance",
+     "n": 13,
+     "passed": 13,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "keepouts",
+     "n": 97,
+     "passed": 97,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "cable_routes",
+     "n": 10,
+     "passed": 8,
+     "failed": 0,
+     "stub": 0,
+     "info": 2,
+     "status": "pass"
+    },
+    {
+     "check": "bed_fit",
+     "n": 12,
+     "passed": 12,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "stl_mesh",
+     "n": 12,
+     "passed": 12,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "print_modifiers",
+     "n": 18,
+     "passed": 18,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "thin_wall",
+     "n": 12,
+     "passed": 12,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass",
+     "role": "secondary share-based screen: cannot pass the build alone; the gate for local thickness is critical_features (finding 2)"
+    },
+    {
+     "check": "critical_features",
+     "n": 135,
+     "passed": 125,
+     "failed": 0,
+     "stub": 0,
+     "info": 10,
+     "status": "pass"
+    },
+    {
+     "check": "evf_restraint",
+     "n": 6,
+     "passed": 6,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "driver",
+     "n": 11,
+     "passed": 11,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "engrave_groove",
+     "n": 10,
+     "passed": 10,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "boss_geometry",
+     "n": 7,
+     "passed": 7,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "inserts",
+     "n": 4,
+     "passed": 4,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "j7_float",
+     "n": 11,
+     "passed": 11,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "lens_support",
+     "n": 32,
+     "passed": 28,
+     "failed": 0,
+     "stub": 0,
+     "info": 4,
+     "status": "pass",
+     "warnings": [
+      "kowa_lm6hc support band is 'drawing', not measured: G-LENS",
+      "fujinon_hf6xa support band is 'assumed', not measured: G-LENS",
+      "computar_h6z0812 support band is 'drawing', not measured: G-LENS"
+     ]
+    },
+    {
+     "check": "lens_clamp",
+     "n": 4,
+     "passed": 3,
+     "failed": 0,
+     "stub": 0,
+     "info": 1,
+     "status": "pass",
+     "warnings": [
+      "M_sep 0.170 N m < the 5 g moment 0.286 N m (the lens rocks elastically in the collar at a knock; aim only, recovers)"
+     ]
+    },
+    {
+     "check": "sweeps",
+     "n": 14,
+     "passed": 14,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "removals",
+     "n": 12,
+     "passed": 12,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "service_driver",
+     "n": 9,
+     "passed": 9,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "release_access",
+     "n": 2,
+     "passed": 2,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "stack_retention",
+     "n": 1,
+     "passed": 1,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "layout_self_check",
+     "n": 183,
+     "passed": 183,
+     "failed": 0,
+     "stub": 0,
+     "info": 0,
+     "status": "pass"
+    },
+    {
+     "check": "mass_com",
+     "status": "pass"
+    }
+   ],
+   "cad_release_candidate": true,
+   "stubs": [],
+   "production_stl": 12,
+   "stl_mismatch": [],
+   "source_hashes_equal": true
+  }
+ },
+ "sources": [
+  {
+   "path": "layout.py",
+   "expected": "1e00a733d69169e309ea21d70c264d3405f7d1d7bfa871e663c3c23c608f184e",
+   "actual": "1e00a733d69169e309ea21d70c264d3405f7d1d7bfa871e663c3c23c608f184e",
+   "match": true
+  },
+  {
+   "path": "d2_common.py",
+   "expected": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+   "actual": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+   "match": true
+  },
+  {
+   "path": "cots.py",
+   "expected": "4cc87244043068f05a4b7432180925ae396039aba4380cc780d9906727ed1017",
+   "actual": "4cc87244043068f05a4b7432180925ae396039aba4380cc780d9906727ed1017",
+   "match": true
+  },
+  {
+   "path": "checks.py",
+   "expected": "3580f89ef68468629a45eaa8999740928d09846835d78e01c1d4ea73048ac090",
+   "actual": "3580f89ef68468629a45eaa8999740928d09846835d78e01c1d4ea73048ac090",
+   "match": true
+  },
+  {
+   "path": "build_d2.py",
+   "expected": "7788068279938d4e6ed1c756f30e0c6f31694390d3d2f1bab3704669adbb8be7",
+   "actual": "7788068279938d4e6ed1c756f30e0c6f31694390d3d2f1bab3704669adbb8be7",
+   "match": true
+  },
+  {
+   "path": "make_coupons.py",
+   "expected": "c23e3e3ae6f97244be3fbe2bb6f51504c31c4ec7cfc2968e33c35f2b9041a313",
+   "actual": "c23e3e3ae6f97244be3fbe2bb6f51504c31c4ec7cfc2968e33c35f2b9041a313",
+   "match": true
+  },
+  {
+   "path": "make_tables.py",
+   "expected": "8cdebebca33a1d7a1b86f1a9b3a686bbb30f2f9a4bd8228448338b707ba164fa",
+   "actual": "8cdebebca33a1d7a1b86f1a9b3a686bbb30f2f9a4bd8228448338b707ba164fa",
+   "match": true
+  },
+  {
+   "path": "SPEC.md",
+   "expected": "cb26c14256ef9e0f92f81a3891e7bec63cd5801b4efcd6ba61f1fa827fa708f4",
+   "actual": "cb26c14256ef9e0f92f81a3891e7bec63cd5801b4efcd6ba61f1fa827fa708f4",
+   "match": true
+  },
+  {
+   "path": "FASTENER-POLICY.md",
+   "expected": "6b27424bd58047b69d2e685c09f8847beaa7f39538cb76558fab77da7d0dcc99",
+   "actual": "6b27424bd58047b69d2e685c09f8847beaa7f39538cb76558fab77da7d0dcc99",
+   "match": true
+  },
+  {
+   "path": "printed_collar.py",
+   "expected": "267a2bfc62d2026527922ea761b546d1c1d39086ba2711f83f7ae12c7d2dbbea",
+   "actual": "267a2bfc62d2026527922ea761b546d1c1d39086ba2711f83f7ae12c7d2dbbea",
+   "match": true
+  },
+  {
+   "path": "printed_grip.py",
+   "expected": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
+   "actual": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
+   "match": true
+  },
+  {
+   "path": "printed_hood.py",
+   "expected": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+   "actual": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+   "match": true
+  },
+  {
+   "path": "printed_keeper.py",
+   "expected": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+   "actual": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+   "match": true
+  },
+  {
+   "path": "printed_panel.py",
+   "expected": "601dbf595fff6c53565b443f6c97c79a2b7a4eea2fad4368949c33d2c2abe89e",
+   "actual": "601dbf595fff6c53565b443f6c97c79a2b7a4eea2fad4368949c33d2c2abe89e",
+   "match": true
+  },
+  {
+   "path": "printed_small.py",
+   "expected": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+   "actual": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+   "match": true
+  },
+  {
+   "path": "printed_tub.py",
+   "expected": "8766c93f447e8e459c611a6290dbe695c2aa92a2e4c9a48824c723e43bf3ba5b",
+   "actual": "8766c93f447e8e459c611a6290dbe695c2aa92a2e4c9a48824c723e43bf3ba5b",
+   "match": true
+  },
+  {
+   "path": "coupons_r1.py",
+   "expected": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+   "actual": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+   "match": true
+  }
+ ],
+ "outputs": [
+  {
+   "path": "step/gs8-d2-assembly.step",
+   "expected": "eb20e1e662de1bafbcefd35d2d8aa10128ade57c4ec09e5b57e530a3f4666006",
+   "actual": "eb20e1e662de1bafbcefd35d2d8aa10128ade57c4ec09e5b57e530a3f4666006",
+   "match": true
+  },
+  {
+   "path": "step/parts/base_grip.step",
+   "expected": "c7733aed48c46f0d162d7396473f925e4035085a959ee2ab2eb2f7e5dbcea613",
+   "actual": "c7733aed48c46f0d162d7396473f925e4035085a959ee2ab2eb2f7e5dbcea613",
+   "match": true
+  },
+  {
+   "path": "step/parts/cap.step",
+   "expected": "483a380b181c1705e37a56cacdab255d2a4861cd58682948400d6873345a1045",
+   "actual": "483a380b181c1705e37a56cacdab255d2a4861cd58682948400d6873345a1045",
+   "match": true
+  },
+  {
+   "path": "step/parts/eyecup.step",
+   "expected": "dd10010072efdb1968485b581c9cd4f341a26f0184c01aae52889ce85f9a538b",
+   "actual": "dd10010072efdb1968485b581c9cd4f341a26f0184c01aae52889ce85f9a538b",
+   "match": true
+  },
+  {
+   "path": "step/parts/hood.step",
+   "expected": "ba7a262f3b7ff986e7e6462d041981fff916ef2d3c90ab78992062ce29809ca8",
+   "actual": "ba7a262f3b7ff986e7e6462d041981fff916ef2d3c90ab78992062ce29809ca8",
+   "match": true
+  },
+  {
+   "path": "step/parts/knob_exp.step",
+   "expected": "40015807f0b076d1185a41aee5d216ee892353e83f486506dd38392af1005e04",
+   "actual": "40015807f0b076d1185a41aee5d216ee892353e83f486506dd38392af1005e04",
+   "match": true
+  },
+  {
+   "path": "step/parts/knob_fps.step",
+   "expected": "cad67b421b8149d4ebad4dec44a35330a3107d47bd73d1b77ccd63c3e6206a8f",
+   "actual": "cad67b421b8149d4ebad4dec44a35330a3107d47bd73d1b77ccd63c3e6206a8f",
+   "match": true
+  },
+  {
+   "path": "step/parts/lens_collar.step",
+   "expected": "9a5e50f98f1b644ab62151bff383b1f7e466308ad6917913496933f9077389ea",
+   "actual": "9a5e50f98f1b644ab62151bff383b1f7e466308ad6917913496933f9077389ea",
+   "match": true
+  },
+  {
+   "path": "step/parts/panel.step",
+   "expected": "bfedb1f20d8eb148ec28c42076538a777df7c8836d67830c00ace54ff828ebdb",
+   "actual": "bfedb1f20d8eb148ec28c42076538a777df7c8836d67830c00ace54ff828ebdb",
+   "match": true
+  },
+  {
+   "path": "step/parts/pi_keeper.step",
+   "expected": "2b2271db5fdf144b9a8e2531cb7874d0e6d3ae1217facac99c1b09aca0f99f60",
+   "actual": "2b2271db5fdf144b9a8e2531cb7874d0e6d3ae1217facac99c1b09aca0f99f60",
+   "match": true
+  },
+  {
+   "path": "step/parts/plunger.step",
+   "expected": "bb739557b30f14b40be34c9966110015203d6ed31ce41eaf380154c4cb32ce67",
+   "actual": "bb739557b30f14b40be34c9966110015203d6ed31ce41eaf380154c4cb32ce67",
+   "match": true
+  },
+  {
+   "path": "step/parts/stick_sleeve.step",
+   "expected": "a4a5cc0d9a8bd530c3d52e4d1d4d370e3347d17265432fe283244781e976200b",
+   "actual": "a4a5cc0d9a8bd530c3d52e4d1d4d370e3347d17265432fe283244781e976200b",
+   "match": true
+  },
+  {
+   "path": "step/parts/tub.step",
+   "expected": "db35bc3a4733d8a6f9f9c50c912f1add65354eb9ddd4ada1983640f331da753d",
+   "actual": "db35bc3a4733d8a6f9f9c50c912f1add65354eb9ddd4ada1983640f331da753d",
+   "match": true
+  },
+  {
+   "path": "renders/hero.png",
+   "expected": "81c9b1ede3c2160ef012916bd4503aff6c81b8444930915ef43c779e06e2a68a",
+   "actual": "81c9b1ede3c2160ef012916bd4503aff6c81b8444930915ef43c779e06e2a68a",
+   "match": true
+  },
+  {
+   "path": "renders/exploded.png",
+   "expected": "f8666b0d5ae4d4e5488f4d9a9dcd89028442a4a3c0ab038813de75451d99db9e",
+   "actual": "f8666b0d5ae4d4e5488f4d9a9dcd89028442a4a3c0ab038813de75451d99db9e",
+   "match": true
+  },
+  {
+   "path": "renders/xray.png",
+   "expected": "afe856affd358503a88d91958d8ffba70e82ec17e270924d9526761895bd75f6",
+   "actual": "afe856affd358503a88d91958d8ffba70e82ec17e270924d9526761895bd75f6",
+   "match": true
+  },
+  {
+   "path": "renders/section-lens-axis.png",
+   "expected": "5665f4b8795c9be8842beddc9cd1826e6bb821b6eaa77980369dcb65d80b708b",
+   "actual": "5665f4b8795c9be8842beddc9cd1826e6bb821b6eaa77980369dcb65d80b708b",
+   "match": true
+  },
+  {
+   "path": "renders/section-evf-axis.png",
+   "expected": "b4da34e464816875d5ab260f10edbcd16aaa14ab1d95f8f8c7138a59bfdf141d",
+   "actual": "b4da34e464816875d5ab260f10edbcd16aaa14ab1d95f8f8c7138a59bfdf141d",
+   "match": true
+  },
+  {
+   "path": "renders/print-poses.png",
+   "expected": "24e87ac32d59c9d73f3f18b748318af3b2a1634874d3dd90af907d5a894328d1",
+   "actual": "24e87ac32d59c9d73f3f18b748318af3b2a1634874d3dd90af907d5a894328d1",
+   "match": true
+  },
+  {
+   "path": "renders/step-01.png",
+   "expected": "02d6224e6d4a22ac06cc31ce65215ff3bd2698245d83f83ebeef85dcba35eb1e",
+   "actual": "02d6224e6d4a22ac06cc31ce65215ff3bd2698245d83f83ebeef85dcba35eb1e",
+   "match": true
+  },
+  {
+   "path": "renders/step-02.png",
+   "expected": "03fcc926d4767cf7f0f15a98da517679d4210a5dcdfaffbacb9dd9ac67b33b70",
+   "actual": "03fcc926d4767cf7f0f15a98da517679d4210a5dcdfaffbacb9dd9ac67b33b70",
+   "match": true
+  },
+  {
+   "path": "renders/step-03.png",
+   "expected": "bad535ddd1191c4c879d4ebf795226d92c840999fe4cf80de297d44efbe4365a",
+   "actual": "bad535ddd1191c4c879d4ebf795226d92c840999fe4cf80de297d44efbe4365a",
+   "match": true
+  },
+  {
+   "path": "renders/step-04.png",
+   "expected": "9bd72094f0f25672eb21f8d268cff1bfdee1f5ea0252cc80dd68993c736febc6",
+   "actual": "9bd72094f0f25672eb21f8d268cff1bfdee1f5ea0252cc80dd68993c736febc6",
+   "match": true
+  },
+  {
+   "path": "renders/step-05.png",
+   "expected": "7f0112fab48dfe5c26e5f88cc1c5e48b348ce994c2334abad66137b30ce978ad",
+   "actual": "7f0112fab48dfe5c26e5f88cc1c5e48b348ce994c2334abad66137b30ce978ad",
+   "match": true
+  },
+  {
+   "path": "renders/step-06.png",
+   "expected": "f9d622aaced600f6c4c3feb2dc26f93e10e2b806bb0c3092442b68c387c6c5ee",
+   "actual": "f9d622aaced600f6c4c3feb2dc26f93e10e2b806bb0c3092442b68c387c6c5ee",
+   "match": true
+  },
+  {
+   "path": "renders/step-07.png",
+   "expected": "832543f244e1aadf756be2717e31d8651128c413c1a203ed7ca70c66145f0563",
+   "actual": "832543f244e1aadf756be2717e31d8651128c413c1a203ed7ca70c66145f0563",
+   "match": true
+  },
+  {
+   "path": "renders/step-08.png",
+   "expected": "025bb46fad2daa52f9e67b0f42056c557d194983c246cfb8d9318e6968f09aae",
+   "actual": "025bb46fad2daa52f9e67b0f42056c557d194983c246cfb8d9318e6968f09aae",
+   "match": true
+  },
+  {
+   "path": "renders/step-09.png",
+   "expected": "6d68dcabb50ded9aea702a6ea23f54abe52c25c83cda139eedcf17f788a54d5a",
+   "actual": "6d68dcabb50ded9aea702a6ea23f54abe52c25c83cda139eedcf17f788a54d5a",
+   "match": true
+  },
+  {
+   "path": "renders/step-10.png",
+   "expected": "ffb8bd5c73d2de23e2fefa8b0501761664811973c40f1cf53f60e01e5d075aa0",
+   "actual": "ffb8bd5c73d2de23e2fefa8b0501761664811973c40f1cf53f60e01e5d075aa0",
+   "match": true
+  },
+  {
+   "path": "renders/section-evf-board-z78.png",
+   "expected": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
+   "actual": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
+   "match": true
+  },
+  {
+   "path": "renders/section-evf-board-x137.png",
+   "expected": "a67c0cdc53cc6cff9e5367a99598768019af3375c7b5fa4ea4fe0781cc57298b",
+   "actual": "a67c0cdc53cc6cff9e5367a99598768019af3375c7b5fa4ea4fe0781cc57298b",
+   "match": true
+  },
+  {
+   "path": "renders/section-pi-keeper-y-20.png",
+   "expected": "c7447a947b52fbd846aaf8bbeb359e7a6067b6f19a307f64b6f7a50fa2f25dd7",
+   "actual": "c7447a947b52fbd846aaf8bbeb359e7a6067b6f19a307f64b6f7a50fa2f25dd7",
+   "match": true
+  },
+  {
+   "path": "renders/section-pi-keeper-x80.png",
+   "expected": "10b92067bc40a6b7b129a90ae72def75f6738ebfc86f1ee61d3864b61ae00212",
+   "actual": "10b92067bc40a6b7b129a90ae72def75f6738ebfc86f1ee61d3864b61ae00212",
+   "match": true
+  },
+  {
+   "path": "renders/section-pi-keeper-y12.png",
+   "expected": "0b31358c31908d9efd7eea1f62dbf3ec2df8d20288abb392f8194e0a784fbbfc",
+   "actual": "0b31358c31908d9efd7eea1f62dbf3ec2df8d20288abb392f8194e0a784fbbfc",
+   "match": true
+  },
+  {
+   "path": "renders/section-base-edge-x91.png",
+   "expected": "d3a6a8aa7afce1922e216dedb0d7211bd9206d081ecbba8e20a63351dce3c4d0",
+   "actual": "d3a6a8aa7afce1922e216dedb0d7211bd9206d081ecbba8e20a63351dce3c4d0",
+   "match": true
+  },
+  {
+   "path": "renders/section-j7-y0.png",
+   "expected": "9eaabac32ffb3e525a0fb750802fb9dab719b42cc9bfee03ecb77326b1d131a2",
+   "actual": "9eaabac32ffb3e525a0fb750802fb9dab719b42cc9bfee03ecb77326b1d131a2",
+   "match": true
+  },
+  {
+   "path": "renders/section-j7-z90.png",
+   "expected": "9810c8172ba75e1e7c68c9abb5a0e5e91c439bea92b34d8f6cc60ab22ac68f97",
+   "actual": "9810c8172ba75e1e7c68c9abb5a0e5e91c439bea92b34d8f6cc60ab22ac68f97",
+   "match": true
+  },
+  {
+   "path": "checks.json",
+   "expected": "c9d748c8f9028bb9b972300072203c38c4523f4c974436ed59933654951ecf71",
+   "actual": "c9d748c8f9028bb9b972300072203c38c4523f4c974436ed59933654951ecf71",
+   "match": true
+  },
+  {
+   "path": "print-manifest.json",
+   "expected": "e3b7c155f56e6715482cd5dac8143289bc64d59b83b1fe7dd74e3e052cd2f228",
+   "actual": "e3b7c155f56e6715482cd5dac8143289bc64d59b83b1fe7dd74e3e052cd2f228",
+   "match": true
+  },
+  {
+   "path": "parts-manifest.json",
+   "expected": "d3ca253158f2c2c59ae78252f7a36794bd8c3d958c2c6f14f692c592d206f32b",
+   "actual": "d3ca253158f2c2c59ae78252f7a36794bd8c3d958c2c6f14f692c592d206f32b",
+   "match": true
+  },
+  {
+   "path": "coupons-manifest.json",
+   "expected": "28b07039a7928eac1f5f58b6abf50a8734c251af37c7ce646b98aa295fc1f8b2",
+   "actual": "28b07039a7928eac1f5f58b6abf50a8734c251af37c7ce646b98aa295fc1f8b2",
+   "match": true
+  },
+  {
+   "path": "coupons-r1-manifest.json",
+   "expected": "5ed87a1e93c853faabc28ff77538fb676c4500ac0f5868986b654d18f1e957f8",
+   "actual": "5ed87a1e93c853faabc28ff77538fb676c4500ac0f5868986b654d18f1e957f8",
+   "match": true
+  },
+  {
+   "path": "checks-fujinon-sweep1mm.json",
+   "expected": "83b55def9d4bff52b48c2438cdba0a97d4f3133311740d2feedba280f48cabc2",
+   "actual": "83b55def9d4bff52b48c2438cdba0a97d4f3133311740d2feedba280f48cabc2",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/base_edge_base.stl",
+   "expected": "097c1a8307ce52fafdd991a0aeed91f0727bbfd8b002a44ebb68c33c43818a6e",
+   "actual": "097c1a8307ce52fafdd991a0aeed91f0727bbfd8b002a44ebb68c33c43818a6e",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/base_edge_panel.stl",
+   "expected": "981d5ee76f0ff26676490610a1446f3b5fc66e1b6a7877cf7237c1620590133e",
+   "actual": "981d5ee76f0ff26676490610a1446f3b5fc66e1b6a7877cf7237c1620590133e",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/base_edge_tub.stl",
+   "expected": "efa444108fb49d8aa4d1205a175f11062cde3baf36ee73931086dad1ad60250e",
+   "actual": "efa444108fb49d8aa4d1205a175f11062cde3baf36ee73931086dad1ad60250e",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/board_edge_plate.stl",
+   "expected": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+   "actual": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/cap_retention_cap.stl",
+   "expected": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+   "actual": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/cap_retention_grip.stl",
+   "expected": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+   "actual": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/clearance_comb.stl",
+   "expected": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+   "actual": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/collar_hood_plate.stl",
+   "expected": "0778c8f6e73d781dd057fe1ade9bca948ca8076f6d2e08a7a48b6c9916471cf0",
+   "actual": "0778c8f6e73d781dd057fe1ade9bca948ca8076f6d2e08a7a48b6c9916471cf0",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/collar_part.stl",
+   "expected": "d38f9dd731ed13db408d653706916d8400d478a96b383a84fbd46e235c907462",
+   "actual": "d38f9dd731ed13db408d653706916d8400d478a96b383a84fbd46e235c907462",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/collar_tub_front.stl",
+   "expected": "afc3dff4f1089f0221fcf8d3c0b6c471961066955bc2e3e2824de6e556bc9eae",
+   "actual": "afc3dff4f1089f0221fcf8d3c0b6c471961066955bc2e3e2824de6e556bc9eae",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-part.stl",
+   "expected": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+   "actual": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-pi.stl",
+   "expected": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+   "actual": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-tub.stl",
+   "expected": "e0325d05192edec1b6f01632fe4035f53917230519f87ea5c5927994176aee71",
+   "actual": "e0325d05192edec1b6f01632fe4035f53917230519f87ea5c5927994176aee71",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-x1203.stl",
+   "expected": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+   "actual": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/encoder_cradle_hook.stl",
+   "expected": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+   "actual": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/evf_stop_panel.stl",
+   "expected": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+   "actual": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/evf_stop_tub.stl",
+   "expected": "e8ff7144c47547a18b1484e1795958db1356f4b0262d708637ff3574e8bde161",
+   "actual": "e8ff7144c47547a18b1484e1795958db1356f4b0262d708637ff3574e8bde161",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/hood_hook.stl",
+   "expected": "91c43282e77a907ee58e9f804ea25929f672cda5b69e640e4116f8d3420951cb",
+   "actual": "91c43282e77a907ee58e9f804ea25929f672cda5b69e640e4116f8d3420951cb",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/hood_hook_ret.stl",
+   "expected": "eb303c381b41da77fea8d10a697dd925a4ac85ce127d256562f769b0ae7190ed",
+   "actual": "eb303c381b41da77fea8d10a697dd925a4ac85ce127d256562f769b0ae7190ed",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/hood_ledge.stl",
+   "expected": "828f5415fcffe35e212b530c8a9d9ec20c79463183c111abbb72dc8cfe582875",
+   "actual": "828f5415fcffe35e212b530c8a9d9ec20c79463183c111abbb72dc8cfe582875",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/hood_ledge_ret.stl",
+   "expected": "29a37dd4a4cb2925e51fe323b4b5462d72b76f895ba88a8a338c3214ba671d9d",
+   "actual": "29a37dd4a4cb2925e51fe323b4b5462d72b76f895ba88a8a338c3214ba671d9d",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/keyhole_slot.stl",
+   "expected": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+   "actual": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/knob_bore_ladder_enc.stl",
+   "expected": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+   "actual": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/knob_bore_ladder_sw.stl",
+   "expected": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+   "actual": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/pt_boss_bottom.stl",
+   "expected": "6b17b9cf06526684946b22d05fc1a4bf3e01798891dba9bfbb23d3ac404f9d94",
+   "actual": "6b17b9cf06526684946b22d05fc1a4bf3e01798891dba9bfbb23d3ac404f9d94",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/pt_boss_post.stl",
+   "expected": "f594701a1b769c56eccba06da0b06999ce00bc4f73bb17ef2107b40f3a5e3a4f",
+   "actual": "f594701a1b769c56eccba06da0b06999ce00bc4f73bb17ef2107b40f3a5e3a4f",
+   "match": true
+  },
+  {
+   "path": "stl/coupons/tongue.stl",
+   "expected": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+   "actual": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+   "match": true
+  },
+  {
+   "path": "stl/tub.stl",
+   "expected": "846cdb6db6bb4314ad155e258eeec0e1b2e353760a9b30761ddfb621fceb279b",
+   "actual": "846cdb6db6bb4314ad155e258eeec0e1b2e353760a9b30761ddfb621fceb279b",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_b1.stl",
+   "expected": "7ceec539a382153650df3d624537c89571cb868e0b97b6ae8283d0a4ae81e4b4",
+   "actual": "7ceec539a382153650df3d624537c89571cb868e0b97b6ae8283d0a4ae81e4b4",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_b2.stl",
+   "expected": "0c366e9921f34ef34937488d7bb76ffd032b9b2a4ae2b069306b03f7d4015ac7",
+   "actual": "0c366e9921f34ef34937488d7bb76ffd032b9b2a4ae2b069306b03f7d4015ac7",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_r1.stl",
+   "expected": "f3168dcc8f8345e69764839ffcfd75cd2c45247dfabfeec9f86b4effb4faf6e6",
+   "actual": "f3168dcc8f8345e69764839ffcfd75cd2c45247dfabfeec9f86b4effb4faf6e6",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_r2.stl",
+   "expected": "fce58f611e4cf02c7a27a711c7646efa324733c89c36b2ad1ab1e35081c6292e",
+   "actual": "fce58f611e4cf02c7a27a711c7646efa324733c89c36b2ad1ab1e35081c6292e",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_k1.stl",
+   "expected": "5703ec41a4f81cae00dce6e81251e8fa400977291ebccb79f09b70943ca63e14",
+   "actual": "5703ec41a4f81cae00dce6e81251e8fa400977291ebccb79f09b70943ca63e14",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_k2.stl",
+   "expected": "017c4773b07a41b9c05cf75c6a9b5cc064effc6690ff0617ea773d15736c5da8",
+   "actual": "017c4773b07a41b9c05cf75c6a9b5cc064effc6690ff0617ea773d15736c5da8",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_j.stl",
+   "expected": "be666bde812af647ccfc6d3a6e11ce1a43739520f39e5ea2364a59715e4af37c",
+   "actual": "be666bde812af647ccfc6d3a6e11ce1a43739520f39e5ea2364a59715e4af37c",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_c1.stl",
+   "expected": "c451773f1b8125a69e04b79172a7c41cde85488cff2622ec6cb8261ef85dc4fa",
+   "actual": "c451773f1b8125a69e04b79172a7c41cde85488cff2622ec6cb8261ef85dc4fa",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_c2.stl",
+   "expected": "8ab89f69fc79600d5acacdb75926bb26b05c6829602bbc9f716649e8eed16891",
+   "actual": "8ab89f69fc79600d5acacdb75926bb26b05c6829602bbc9f716649e8eed16891",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_c3.stl",
+   "expected": "f4f547991a1738adf6e53ffa571562f88abe6aa926a77fb997319b9824f885ba",
+   "actual": "f4f547991a1738adf6e53ffa571562f88abe6aa926a77fb997319b9824f885ba",
+   "match": true
+  },
+  {
+   "path": "stl/hood.stl",
+   "expected": "25974f9df332df0f509a02693a0e57260c909f7516c93bdaf44cce6fa4f69bd4",
+   "actual": "25974f9df332df0f509a02693a0e57260c909f7516c93bdaf44cce6fa4f69bd4",
+   "match": true
+  },
+  {
+   "path": "stl/panel.stl",
+   "expected": "eaad0f7c2cc92ea8b54594a726024deab25124fbcc79796fedaa5bab646c3ec7",
+   "actual": "eaad0f7c2cc92ea8b54594a726024deab25124fbcc79796fedaa5bab646c3ec7",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_b1.stl",
+   "expected": "eb676371da9228427d67d2daabd5ffeebfaf8eb83dd8cb535ba91bfe3c4f40f9",
+   "actual": "eb676371da9228427d67d2daabd5ffeebfaf8eb83dd8cb535ba91bfe3c4f40f9",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_b2.stl",
+   "expected": "1bf5778c64f7d629c6f3d924a44390f17ef41b76b36ebe5bb5db0d5392f49863",
+   "actual": "1bf5778c64f7d629c6f3d924a44390f17ef41b76b36ebe5bb5db0d5392f49863",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_r1.stl",
+   "expected": "74da679ee58b6ec9c84c93b4afdd45689b21350cb56784f986d39de9bd7f2360",
+   "actual": "74da679ee58b6ec9c84c93b4afdd45689b21350cb56784f986d39de9bd7f2360",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_r2.stl",
+   "expected": "7658726ceaa8238632261d35202d22f9452475350731f71aa40f2f5fdc69208c",
+   "actual": "7658726ceaa8238632261d35202d22f9452475350731f71aa40f2f5fdc69208c",
+   "match": true
+  },
+  {
+   "path": "stl/base_grip.stl",
+   "expected": "9c36007e864ecb2ddd407451d9e6180a2979789eaa836cb29a2d25975ba50534",
+   "actual": "9c36007e864ecb2ddd407451d9e6180a2979789eaa836cb29a2d25975ba50534",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_s_b1.stl",
+   "expected": "187afe668540b41ebadb1dd08ff0a26051b88e9894dafcec130f5a1565fdacfa",
+   "actual": "187afe668540b41ebadb1dd08ff0a26051b88e9894dafcec130f5a1565fdacfa",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_s_b2.stl",
+   "expected": "18d32c9c43681a680f2e62a828590355de878f5dc6eebebc406cc22bd99875b9",
+   "actual": "18d32c9c43681a680f2e62a828590355de878f5dc6eebebc406cc22bd99875b9",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_s_j.stl",
+   "expected": "6dbb65d5091f1e7abd03fb86913035f6cd6a14ca4753024295474ad983ae820b",
+   "actual": "6dbb65d5091f1e7abd03fb86913035f6cd6a14ca4753024295474ad983ae820b",
+   "match": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_tripod_nut.stl",
+   "expected": "48684550b955f416bf74ffd1380b41e209c2bdb319607ed8a1519785c7988394",
+   "actual": "48684550b955f416bf74ffd1380b41e209c2bdb319607ed8a1519785c7988394",
+   "match": true
+  },
+  {
+   "path": "stl/cap.stl",
+   "expected": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+   "actual": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+   "match": true
+  },
+  {
+   "path": "stl/plunger.stl",
+   "expected": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+   "actual": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+   "match": true
+  },
+  {
+   "path": "stl/knob_exp.stl",
+   "expected": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+   "actual": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+   "match": true
+  },
+  {
+   "path": "stl/knob_fps.stl",
+   "expected": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+   "actual": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+   "match": true
+  },
+  {
+   "path": "stl/eyecup.stl",
+   "expected": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+   "actual": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+   "match": true
+  },
+  {
+   "path": "stl/stick_sleeve.stl",
+   "expected": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+   "actual": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+   "match": true
+  },
+  {
+   "path": "stl/pi_keeper.stl",
+   "expected": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+   "actual": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+   "match": true
+  },
+  {
+   "path": "stl/lens_collar.stl",
+   "expected": "d38f9dd731ed13db408d653706916d8400d478a96b383a84fbd46e235c907462",
+   "actual": "d38f9dd731ed13db408d653706916d8400d478a96b383a84fbd46e235c907462",
+   "match": true
+  },
+  {
+   "path": "test_common.json",
+   "expected": "53cc51619bb52c8223b6338b48f857cb723ae96e3759d8de730522b50cc0046e",
+   "actual": "53cc51619bb52c8223b6338b48f857cb723ae96e3759d8de730522b50cc0046e",
+   "match": true
+  }
+ ],
+ "gate_docs": [
+  {
+   "path": "cad/gs8-d2-v1/MEASURED-PARTS.md",
+   "expected": "9ba1110671afdc4b954e05574d108d052aa68b9391b44230ef38fc7053cdfa02",
+   "actual": "9ba1110671afdc4b954e05574d108d052aa68b9391b44230ef38fc7053cdfa02",
+   "match": true
+  },
+  {
+   "path": "cad/gs8-d2-v1/SPEC.md",
+   "expected": "cb26c14256ef9e0f92f81a3891e7bec63cd5801b4efcd6ba61f1fa827fa708f4",
+   "actual": "cb26c14256ef9e0f92f81a3891e7bec63cd5801b4efcd6ba61f1fa827fa708f4",
+   "match": true
+  },
+  {
+   "path": "electronics/gs8-d2-v1/WIRING.md",
+   "expected": "3a42141b2f6fea1120c82d034ab74e320ebc91ec2fdbab138a7b952c8f277d75",
+   "actual": "3a42141b2f6fea1120c82d034ab74e320ebc91ec2fdbab138a7b952c8f277d75",
+   "match": true
+  },
+  {
+   "path": "electronics/gs8-evf-v1/EVF-SELECTION.md",
+   "expected": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390",
+   "actual": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390",
+   "match": true
+  }
+ ],
+ "meshes": [
+  {
+   "path": "stl/base_grip.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 91026.019,
+   "extents": [
+    116.5,
+    70.4,
+    110.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/cap.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 6737.198,
+   "extents": [
+    48.0,
+    30.0,
+    10.2
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/base_edge_base.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 1950.067,
+   "extents": [
+    16.0,
+    17.2,
+    8.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/base_edge_panel.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 1076.129,
+   "extents": [
+    16.0,
+    13.4,
+    10.9
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/base_edge_tub.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 903.369,
+   "extents": [
+    16.0,
+    8.0,
+    17.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/board_edge_plate.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 672.0,
+   "extents": [
+    30.0,
+    14.0,
+    1.6
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/cap_retention_cap.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 6737.198,
+   "extents": [
+    48.0,
+    30.0,
+    10.2
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/cap_retention_grip.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 2877.209,
+   "extents": [
+    48.0,
+    30.0,
+    10.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/clearance_comb.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 1375.5,
+   "extents": [
+    30.0,
+    20.0,
+    8.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/collar_hood_plate.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 6215.972,
+   "extents": [
+    2.5,
+    57.0,
+    67.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/collar_part.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 15887.868,
+   "extents": [
+    65.47,
+    68.0,
+    11.3
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/collar_tub_front.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 7118.399,
+   "extents": [
+    5.5,
+    67.3,
+    56.2
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-part.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 6210.398,
+   "extents": [
+    64.0,
+    54.9,
+    7.9
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-pi.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 7578.05,
+   "extents": [
+    85.0,
+    56.0,
+    1.6
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-tub.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 22827.746,
+   "extents": [
+    100.7,
+    10.0,
+    70.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/coupon-pi-keeper-x1203.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 7578.05,
+   "extents": [
+    85.0,
+    56.0,
+    1.6
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/encoder_cradle_hook.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 276.204,
+   "extents": [
+    12.0,
+    4.6,
+    12.05
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/evf_stop_panel.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 2787.829,
+   "extents": [
+    18.67,
+    36.0,
+    7.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/evf_stop_tub.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 10556.226,
+   "extents": [
+    20.0,
+    36.0,
+    67.2
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/hood_hook.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 332.42,
+   "extents": [
+    14.0,
+    4.85,
+    13.2
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/hood_hook_ret.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 351.6,
+   "extents": [
+    5.5,
+    14.0,
+    13.2
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/hood_ledge.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 519.112,
+   "extents": [
+    14.0,
+    14.75,
+    3.3
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/hood_ledge_ret.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 526.004,
+   "extents": [
+    3.3,
+    14.75,
+    14.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/keyhole_slot.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 2086.947,
+   "extents": [
+    26.0,
+    23.0,
+    6.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/knob_bore_ladder_enc.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 3891.357,
+   "extents": [
+    81.99,
+    14.0,
+    6.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/knob_bore_ladder_sw.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 3801.765,
+   "extents": [
+    81.99,
+    14.0,
+    6.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/pt_boss_bottom.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 889.229,
+   "extents": [
+    9.0,
+    12.0,
+    10.9
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/pt_boss_post.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 803.004,
+   "extents": [
+    8.0,
+    8.0,
+    13.4
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/coupons/tongue.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 1200.0,
+   "extents": [
+    12.0,
+    6.15,
+    23.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/eyecup.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4384.54,
+   "extents": [
+    45.5,
+    45.51,
+    16.3
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/hood.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 56880.146,
+   "extents": [
+    171.2,
+    67.35,
+    99.7
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/knob_exp.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4791.528,
+   "extents": [
+    28.0,
+    28.0,
+    9.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/knob_fps.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 1252.85,
+   "extents": [
+    19.99,
+    19.99,
+    7.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/lens_collar.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 15887.868,
+   "extents": [
+    65.47,
+    68.0,
+    11.3
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_s_b1.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.412,
+   "extents": [
+    16.0,
+    15.96,
+    20.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_s_b2.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.412,
+   "extents": [
+    16.0,
+    15.96,
+    20.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_s_j.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.413,
+   "extents": [
+    16.0,
+    15.96,
+    20.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/base_grip__mod_tripod_nut.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 10285.413,
+   "extents": [
+    27.4,
+    27.4,
+    13.7
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_b1.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.412,
+   "extents": [
+    16.0,
+    20.5,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_b2.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.412,
+   "extents": [
+    16.0,
+    20.5,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_r1.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.413,
+   "extents": [
+    15.96,
+    16.0,
+    20.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/panel__mod_s_r2.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.413,
+   "extents": [
+    15.96,
+    16.0,
+    20.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_b1.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.412,
+   "extents": [
+    16.0,
+    20.5,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_b2.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.413,
+   "extents": [
+    16.0,
+    20.5,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_c1.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 3705.787,
+   "extents": [
+    18.5,
+    16.0,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_c2.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 3705.787,
+   "extents": [
+    18.5,
+    16.0,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_c3.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 3705.787,
+   "extents": [
+    18.5,
+    16.0,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_j.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.413,
+   "extents": [
+    16.0,
+    20.5,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_k1.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.413,
+   "extents": [
+    16.0,
+    20.5,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_k2.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.412,
+   "extents": [
+    16.0,
+    20.5,
+    15.96
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_r1.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.413,
+   "extents": [
+    15.96,
+    16.0,
+    20.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/modifiers/tub__mod_s_r2.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 4106.412,
+   "extents": [
+    15.96,
+    16.0,
+    20.5
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/panel.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 51158.144,
+   "extents": [
+    148.63,
+    94.4,
+    65.4
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/pi_keeper.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 6210.398,
+   "extents": [
+    64.0,
+    54.9,
+    7.9
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/plunger.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 287.473,
+   "extents": [
+    7.8,
+    13.6,
+    4.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/stick_sleeve.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 1103.78,
+   "extents": [
+    13.0,
+    22.9,
+    16.0
+   ],
+   "linked": true
+  },
+  {
+   "path": "stl/tub.stl",
+   "watertight": true,
+   "winding": true,
+   "positive_volume": true,
+   "volume_mm3": 106228.538,
+   "extents": [
+    151.3,
+    100.95,
+    70.0
+   ],
+   "linked": true
+  }
+ ]
+}

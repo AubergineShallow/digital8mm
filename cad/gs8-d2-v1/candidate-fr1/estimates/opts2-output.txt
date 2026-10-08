@@ -1,0 +1,25 @@
+r2 (4 screws) {"L1 seam x-98": 0.001, "L3 EVF cap": 0.081, "L4 EVF stop": 0.061, "L5 encoder": 0.032, "L6 switch": 0.014, "L7 cam keeper": 0.01, "L2 bottom max": [0.674, -4.6], "L2 keys zone max": 0.002} 2s
+   profile [0.12, 0.06, 0.01, 0.0, 0.0, 0.0, 0.02, 0.08, 0.17, 0.31, 0.46, 0.67]
+A (keys, s_r1+s_r2) {"L1 seam x-98": 0.241, "L3 EVF cap": 0.085, "L4 EVF stop": 0.064, "L5 encoder": 0.057, "L6 switch": 0.015, "L7 cam keeper": 0.012, "L2 bottom max": [0.925, -4.6], "L2 keys zone max": 0.291} 2s
+   profile [0.18, 0.14, 0.16, 0.21, 0.24, 0.27, 0.33, 0.4, 0.48, 0.6, 0.73, 0.93]
+1a A+flange {"L1 seam x-98": 0.211, "L3 EVF cap": 0.084, "L4 EVF stop": 0.063, "L5 encoder": 0.056, "L6 switch": 0.015, "L7 cam keeper": 0.011, "L2 bottom max": [0.893, -4.6], "L2 keys zone max": 0.273} 2s
+   profile [0.15, 0.13, 0.14, 0.18, 0.21, 0.25, 0.31, 0.37, 0.45, 0.57, 0.7, 0.89]
+1b A+flange+diag {"L1 seam x-98": 0.065, "L3 EVF cap": 0.078, "L4 EVF stop": 0.06, "L5 encoder": 0.041, "L6 switch": 0.013, "L7 cam keeper": 0.011, "L2 bottom max": [0.759, -4.6], "L2 keys zone max": 0.094} 2s
+   profile [0.09, 0.06, 0.04, 0.05, 0.06, 0.08, 0.12, 0.18, 0.28, 0.41, 0.55, 0.76]
+1c A+flange+diag+rear {"L1 seam x-98": 0.062, "L3 EVF cap": 0.046, "L4 EVF stop": 0.042, "L5 encoder": 0.04, "L6 switch": 0.012, "L7 cam keeper": 0.011, "L2 bottom max": [0.757, -4.6], "L2 keys zone max": 0.091} 2s
+   profile [0.03, 0.02, 0.03, 0.05, 0.06, 0.08, 0.11, 0.18, 0.27, 0.41, 0.55, 0.76]
+1d A+diag only {"L1 seam x-98": 0.08, "L3 EVF cap": 0.078, "L4 EVF stop": 0.06, "L5 encoder": 0.046, "L6 switch": 0.013, "L7 cam keeper": 0.011, "L2 bottom max": [0.837, -4.6], "L2 keys zone max": 0.129} 2s
+   profile [0.13, 0.07, 0.04, 0.06, 0.08, 0.11, 0.17, 0.25, 0.35, 0.49, 0.63, 0.84]
+1e 1c+front rib {"L1 seam x-98": 0.057, "L3 EVF cap": 0.046, "L4 EVF stop": 0.041, "L5 encoder": 0.038, "L6 switch": 0.012, "L7 cam keeper": 0.006, "L2 bottom max": [0.467, -4.6], "L2 keys zone max": 0.084} 2s
+   profile [0.03, 0.02, 0.03, 0.04, 0.06, 0.07, 0.1, 0.14, 0.19, 0.25, 0.32, 0.47]
+1f 1e diag d10 {"L1 seam x-98": 0.092, "L3 EVF cap": 0.048, "L4 EVF stop": 0.042, "L5 encoder": 0.044, "L6 switch": 0.013, "L7 cam keeper": 0.006, "L2 bottom max": [0.476, -4.6], "L2 keys zone max": 0.131} 2s
+   profile [0.04, 0.03, 0.04, 0.07, 0.09, 0.12, 0.15, 0.19, 0.22, 0.27, 0.34, 0.48]
+1g A+front rib only {"L1 seam x-98": 0.207, "L3 EVF cap": 0.085, "L4 EVF stop": 0.064, "L5 encoder": 0.05, "L6 switch": 0.015, "L7 cam keeper": 0.007, "L2 bottom max": [0.51, -4.6], "L2 keys zone max": 0.236} 2s
+   profile [0.17, 0.14, 0.15, 0.19, 0.21, 0.23, 0.25, 0.27, 0.29, 0.32, 0.37, 0.51]
+2 s_r1+rear-bottom screw {"L1 seam x-98": 0.128, "L3 EVF cap": 0.467, "L4 EVF stop": 0.351, "L5 encoder": 0.06, "L6 switch": 0.122, "L7 cam keeper": 0.011, "L2 bottom max": [0.879, -4.6], "L2 keys zone max": 0.19} 1s
+   profile [0.01, 0.0, 0.03, 0.09, 0.13, 0.17, 0.23, 0.32, 0.41, 0.54, 0.67, 0.88]
+2b 2+flange+rear rib {"L1 seam x-98": 0.017, "L3 EVF cap": 0.221, "L4 EVF stop": 0.176, "L5 encoder": 0.042, "L6 switch": 0.071, "L7 cam keeper": 0.01, "L2 bottom max": [0.714, -4.6], "L2 keys zone max": 0.034} 2s
+   profile [0.0, 0.0, 0.0, 0.01, 0.02, 0.03, 0.05, 0.12, 0.22, 0.35, 0.5, 0.71]
+3 s_r1+s_b2 {"L1 seam x-98": 0.007, "L3 EVF cap": 0.726, "L4 EVF stop": 0.519, "L5 encoder": 0.042, "L6 switch": 0.191, "L7 cam keeper": 0.011, "L2 bottom max": [0.776, -4.6], "L2 keys zone max": 0.039} 2s
+   profile [0.25, 0.11, 0.02, 0.0, 0.01, 0.03, 0.07, 0.16, 0.27, 0.41, 0.56, 0.78]
+rc=0

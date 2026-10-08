@@ -1,0 +1,12 @@
+{
+ "item": "panel",
+ "state": "slicer_review",
+ "artifacts": {
+  "stl/panel.stl": "<sha256 of out/stl/panel.stl exactly as sliced: 64 lower-case hex digits>"
+ },
+ "profile": "<printer, nozzle, material and slicer + version + profile name (or the variant tag)>",
+ "verdict": "<pass or fail>",
+ "date": "<YYYY-MM-DD>",
+ "by": "<name>",
+ "notes": "<what was done and seen: settings, time, filament, supports, warnings, measured values>"
+}

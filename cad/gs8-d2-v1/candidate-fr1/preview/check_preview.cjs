@@ -1,0 +1,43 @@
+const {chromium}=require('C:/Users/Pre-Installed User/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const path=require('path');
+const fs=require('fs');
+(async()=>{
+  const browser=await chromium.launch({channel:'msedge',headless:true,args:['--enable-webgl','--use-gl=angle','--use-angle=swiftshader']});
+  const page=await browser.newPage({viewport:{width:1100,height:1000},deviceScaleFactor:1});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('file:///'+path.join(__dirname,'index.html').replaceAll('\\','/'));
+  const frame=page.frameLocator('iframe');
+  await frame.locator('[data-loading]').waitFor({state:'hidden',timeout:45000});
+  const content=page.frames().find(f=>f.parentFrame());
+  const state=()=>content.evaluate(()=>window.__fr1Preview?.getState());
+  const states={};
+  for(const mode of ['assembled','interior','exploded','evf']){
+    await frame.locator('[data-mode]').selectOption(mode);
+    await page.waitForTimeout(150);
+    states[mode]=await state();
+    await page.screenshot({path:path.join(__dirname,mode+'.png'),fullPage:true});
+  }
+  await frame.locator('[data-mode]').selectOption('assembled');
+  await frame.locator('summary').click();
+  await frame.locator('[data-part]').selectOption('pi_keeper');
+  await frame.locator('[data-isolate]').check();
+  states.isolated=await state();
+  if(JSON.stringify(states.isolated.visible)!==JSON.stringify(['pi_keeper']))throw Error('Part isolation failed');
+  await frame.locator('[data-section]').selectOption('y');
+  states.section=await state();
+  await frame.locator('[data-mode]').selectOption('assembled');
+  const canvas=frame.locator('canvas');const rect=await canvas.boundingBox();
+  await page.mouse.move(rect.x+rect.width*.5,rect.y+rect.height*.5);await page.mouse.down();await page.mouse.move(rect.x+rect.width*.55,rect.y+rect.height*.55,{steps:5});await page.mouse.up();
+  await page.mouse.wheel(0,-100);await page.waitForTimeout(100);states.orbited=await state();
+  await frame.locator('[data-view]').selectOption('perspective');
+  await page.setViewportSize({width:390,height:930});await page.waitForTimeout(200);
+  await frame.locator('summary').click();
+  await page.screenshot({path:path.join(__dirname,'mobile.png'),fullPage:true});
+  const overflow=await content.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth);
+  const errorVisible=await frame.locator('[data-error]').isVisible();
+  const count=await content.evaluate(()=>window.__fr1Preview.parts.length);
+  fs.writeFileSync(path.join(__dirname,'preview-check.json'),JSON.stringify({errors,errorVisible,overflow,count,states},null,2));
+  console.log(JSON.stringify({errors,errorVisible,overflow,count,states},null,2));
+  await browser.close();
+  if(errors.length||errorVisible||overflow||count!==35||states.evf.visible.length<3)process.exitCode=1;
+})().catch(error=>{console.error(error);process.exit(1)});

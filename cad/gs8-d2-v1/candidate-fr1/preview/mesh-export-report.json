@@ -1,0 +1,38 @@
+{
+  "parts": 35,
+  "printed": 11,
+  "cots": 20,
+  "hardware": 4,
+  "vertices": 72245,
+  "triangles": 72168,
+  "json_bytes": 3006976,
+  "gzip_bytes": 670781,
+  "base64_bytes": 894376,
+  "seconds": 26.68,
+  "inputs_sha256": {
+    "layout.py": "e8dc35abdb2fde2bbc471c547db84d33a8394146dff60a94c95e2da2b72c0983",
+    "cots.py": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+    "d2_common.py": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+    "build_d2.py": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+    "out/step/parts/tub.step": "07614abdb70fd2ebddd00ff210ad1b27dbcdeaeb15e191017fb7e6ee19d37bf6",
+    "out/step/parts/hood.step": "144914178a96d9b503b43f39381fe71c1af534eb7a0fa29cbf945ad443b320d6",
+    "out/step/parts/panel.step": "8442a088f5bfa94c9d3dd71beeb8db2615eda03401ad70907518c1ce438127e1",
+    "out/step/parts/base_grip.step": "f05209442004d1b3a22b3c69e355e47d4767cb8ce2056e37a73d4405cabeba6c",
+    "out/step/parts/cap.step": "3235491fec0fba92acdf477f85e8c2f8936e672fa4da55a28c0144420493c10c",
+    "out/step/parts/plunger.step": "550333de5be4a30a5a3eec346ec25a6c73773ccb2dd2d38a484bc90b5992a1d4",
+    "out/step/parts/knob_exp.step": "2e7dc90a3fe947bf58943bdac99e916779ef68990096c8078bc3343361b81746",
+    "out/step/parts/knob_fps.step": "c9f3bc6e37079cbfee685a7c57d4c4d400e6b75862a8f75e2e066c801dc50c73",
+    "out/step/parts/eyecup.step": "a896f3e963a63eb89546b46095b471453e8ff7bb1888514cd953c6a8d54b7f73",
+    "out/step/parts/stick_sleeve.step": "1240c407a78e8a07fe65ab0cbf124da9320aef7f1e8b2436dbc44a888ca1806c",
+    "out/step/parts/pi_keeper.step": "aa8984417130465a326cb6dd2200d6b45433260356fa54ed913fb8f422496ac2"
+  },
+  "outputs_sha256": {
+    "assembly-meshes.json": "22a0157e95e90c7ad4b585a28062faac9c835d69c51c061945fa0281758acba2",
+    "assembly-meshes.json.gz": "a8dfd7340e478435ce7f8c54493f94ef24d6ce68c724937ab1ba72a477ef0c69"
+  },
+  "skipped_non_geometric_rows": [
+    "pt_screws"
+  ],
+  "checks": "Receipt source and STEP hashes match; each imported solid valid; assembly bounds match parts manifest within 0.15 mm (tessellation bounds); every mesh nonempty.",
+  "notes": "Display export only. No manufacturing, tolerance, assembly or physical validation is implied."
+}

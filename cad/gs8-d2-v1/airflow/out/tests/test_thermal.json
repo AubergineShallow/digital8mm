@@ -1,0 +1,73 @@
+{
+ "advection_diffusion_1d": {
+  "Pe": 6.000000000000001,
+  "cell_Pe": 0.1,
+  "max_err_vs_discrete": 1.0593434462968787e-10,
+  "max_err_vs_analytic": 0.0172099203603287,
+  "iters": 21000,
+  "res": 6.308947034023945e-11
+ },
+ "_timing_s": {
+  "test_1d_advection_diffusion": 3.936715602874756,
+  "test_projection_and_energy_balance": 0.6078667640686035,
+  "test_tracers_and_age": 0.10642528533935547
+ },
+ "energy_balance": {
+  "projection": {
+   "cg_iters": 148,
+   "cg_rel_res": 8.620628311308823e-11,
+   "div_before_rel": 0.5770745524714133,
+   "div_after_rel": 5.6406733162082135e-11
+  },
+  "Q_out": 8.420320864701622e-05,
+  "Q_in": 8.420320864710363e-05,
+  "adiabatic": {
+   "heat_in_W": 2.0,
+   "enthalpy_out_W": 2.000000000011183,
+   "balance_rel": 5.591527241222138e-12,
+   "iters": 51,
+   "res": 8.883134939548865e-11
+  },
+  "exterior_h10": {
+   "heat_in_W": 2.0,
+   "enthalpy_out_W": 1.3868987389729448,
+   "shell_loss_W": 0.6131012610481337,
+   "balance_rel": 1.0539125128161686e-11,
+   "iters": 43,
+   "res": 3.7975628575104844e-10
+  },
+  "uniform_T_max_dev": 4.080822346708146e-10,
+  "mixing_cup_dT_K": 20.87341177301057,
+  "outlet_flux_mean_dT_K": 20.831161224834954,
+  "T_max_C": 70.44373952711871,
+  "bicgstab": {
+   "iters": 51,
+   "res": 8.883134939548865e-11,
+   "balance_rel": 5.591527241222138e-12,
+   "max_dT_vs_pseudo_K": 0.0
+  }
+ },
+ "tracers_age": {
+  "vents": [
+   "in",
+   "out"
+  ],
+  "tracer_sum_max_dev": 2.7987032691356717e-09,
+  "tracer_in_at_intake": {
+   "cells": 100,
+   "mean": 1.0000000000628289,
+   "max": 1.000000001347343,
+   "min": 0.9999999993854825
+  },
+  "age_out_s": 0.33255865371665216,
+  "V_over_Q_s": 0.33520125943639706,
+  "age_rel_err": -0.007883638994042319,
+  "recirc_at_intake": {
+   "cells": 100,
+   "mean": 7.164519278353862e-32,
+   "max": 6.259694805561157e-30,
+   "min": 3.948896286768945e-52
+  },
+  "age_iters": 47
+ }
+}

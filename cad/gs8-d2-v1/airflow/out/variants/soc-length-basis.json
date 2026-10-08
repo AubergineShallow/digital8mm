@@ -1,0 +1,27 @@
+{
+ "fin_flow_length_mean_and_mid_m3s": {
+  "existing": [
+   8.944960307093029e-05,
+   2.73646712879087e-05
+  ]
+ },
+ "soc_length_mean_basis_C_nominal_high": {
+  "existing|S2|wall_UA0.20": [
+   235.61281084173737,
+   241.25481084173737
+  ],
+  "existing|S2|adiabatic": [
+   1164.2366757364105,
+   1169.8786757364105
+  ],
+  "existing|S3|wall_UA0.20": [
+   440.5066744128593,
+   454.3386744128593
+  ],
+  "existing|S3|adiabatic": [
+   2102.788194622486,
+   2116.620194622486
+  ]
+ },
+ "label": "ESTIMATE (sensitivity of the SoC estimate to the fin-flow basis)"
+}

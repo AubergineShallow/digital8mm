@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "evidence_type": "not_run",
+  "build_id": "UNSET: actual camera, pack, media, firmware and source revision",
+  "reviewed_by": "UNSET",
+  "recorded_at": null,
+  "gates": {
+    "G-W10": {"status": "not_run", "report": null, "sha256": null},
+    "G-W11": {"status": "not_run", "report": null, "sha256": null},
+    "G-W12": {"status": "not_run", "report": null, "sha256": null}
+  },
+  "measurements": {
+    "power_100ms_w": null,
+    "header_min_mv": null,
+    "header_mean_mv": null,
+    "soc_temperature_c": null,
+    "boost_temperature_c": null,
+    "xt30_temperature_c": null,
+    "pad_temperature_c": null,
+    "sustained_write_mb_s": null
+  }
+}

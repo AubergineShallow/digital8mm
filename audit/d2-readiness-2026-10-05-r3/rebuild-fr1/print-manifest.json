@@ -1,0 +1,497 @@
+{
+ "revision": "GS8 D2 fastener-reduction candidate FR1 (EXPLORATORY; cad/gs8-d2-v1/candidate-fr1)",
+ "beds": {
+  "250x210x220 (Prusa MK4/Core One class)": [
+   250,
+   210,
+   220
+  ],
+  "256x256x256 (Bambu X1/P1 class)": [
+   256,
+   256,
+   256
+  ]
+ },
+ "fdm": {
+  "NOZZLE": 0.4,
+  "LAYER": 0.2,
+  "MIN_WALL": 1.2,
+  "MIN_WALL_LOADED": 1.6,
+  "MIN_FEATURE": 0.8,
+  "SLIDE": 0.25,
+  "LOCATE": 0.15,
+  "SEAM": 0.3,
+  "MAX_OVERHANG_DEG": 45.0,
+  "MAX_BRIDGE": 30.0,
+  "TEARDROP_ABOVE_D": 8.0,
+  "BED_CHAMFER": 0.6,
+  "ENGRAVE_DEPTH": 0.4,
+  "ENGRAVE_MIN_STROKE": 0.6,
+  "ENGRAVE_TEXT_GROW": 0.15,
+  "ENGRAVE_MAX_THIN_SHARE": 0.2,
+  "KNOB_BORE_OFFSET": 0.1,
+  "SNAP_GUSSET": 0.8,
+  "SNAP_KT": 1.5,
+  "ASA_DENSITY": 0.00107
+ },
+ "time_model": "6.0 mm3/s effective x 1.15 + 0.1 h (estimate, not a slicer result)",
+ "mass_model": "volume x density x infill factor (estimate, not weighed)",
+ "parts": [
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 13715.1,
+    "area_mm2": 3487.1,
+    "share": 0.0401,
+    "lowest_z": 0.2,
+    "near_bed_area_mm2": 446.9,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "tub",
+   "module": "printed_tub.py",
+   "material": "ASA",
+   "colour": "satin silver",
+   "face_down": "-Y",
+   "supports": "2 small paint-on supports under the -Y wings of the 2 keyhole T-tongue heads (each about 7.8 x 1.6, about 17 mm above the bed, the T undercut cannot face the bed); nothing else",
+   "notes": "Right wall on the bed; 4 perimeters, 25 % gyroid; 40 % infill modifier round the 2 s_r counterbore pads (the screw heads bear there). Brim 5 mm (ASA warp on a 151 x 101 footprint). Bridges: window/slot tops <= 20 mm, the \u00d87 counterbore shoulders, the cell -Y wall (13.9), the scoop roof (20). Teardrop bores 36.5 and 29.3 open toward +Y (print up). R1 r2: the 2 Pi-keeper bosses are teardrop prisms with the chin down (s_k2 has a 1.0 flat at its apex); 40 % infill modifier round them as for the s_r pads.",
+   "infill_class": "shell",
+   "infill_factor": 0.85,
+   "volume_mm3": 106569.9,
+   "mass_100pct_g": 114.0,
+   "mass_est_g": 96.9,
+   "filament_g_est": 101.8,
+   "print_time_est_h": 4.92,
+   "print_bbox_mm": [
+    151.34,
+    100.96,
+    70.01
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/tub.stl",
+   "stl_sha256": "093d116aca4ba255ac8d929caa6de9b1e53e527696380a18b5b959e4e6bf2081",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.299,
+    "min": 0.53
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 10160.8,
+    "area_mm2": 3132.8,
+    "share": 0.0637,
+    "lowest_z": 0.2,
+    "near_bed_area_mm2": 336.2,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "hood",
+   "module": "printed_hood.py",
+   "material": "ASA",
+   "colour": "black",
+   "face_down": "+Z",
+   "supports": "tree supports from the bed at 2 places only: (1) the upper half of the lens turret (8.5 mm overhang off the front plate); (2) the +Y lower strip of the eyepiece housing under its window (the window runs the full housing length, so the strip starts mid-air; support from outside, y > 35). Everything else is self-supporting: housing interior = 45 deg flanks + 15.2 mm bridge; J2 groove lip = 21 mm bridges between 6 piers; all holes in the plate are bridged <= 14.2 mm; the lens bore is a truncated teardrop (13.1 mm flat).",
+   "notes": "ASA black, 0.4 nozzle / 0.2 layer, 4 walls, 25 % gyroid. Roof on the bed (0.6 x 45 deg bed chamfer, 3.0 x 45 deg front-top chamfer). Hooks, rail block and rib grow upward. Remove the 2 tree supports; deburr the hook teeth and the groove mouth. Footprint 178.7 x 67.3, height 99.7. 5 mm brim on the roof (ASA, long flat first layer); enclosure closed, no part-cooling fan above 20 %.",
+   "infill_class": "shell",
+   "infill_factor": 0.85,
+   "volume_mm3": 70783.5,
+   "mass_100pct_g": 75.7,
+   "mass_est_g": 64.4,
+   "filament_g_est": 67.6,
+   "print_time_est_h": 3.3,
+   "print_bbox_mm": [
+    178.76,
+    67.38,
+    99.71
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/hood.stl",
+   "stl_sha256": "e02f09fd56ad8d39a068271c225cb1fd7a598e94da66d4cc5a4e6bf9db78b6df",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.489,
+    "min": 1.076
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 12513.6,
+    "area_mm2": 803.1,
+    "share": 0.0204,
+    "lowest_z": 0.2,
+    "near_bed_area_mm2": 606.1,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "panel",
+   "module": "printed_panel.py",
+   "material": "ASA",
+   "colour": "satin silver",
+   "face_down": "+Y",
+   "supports": "none: every feature grows from the inner face (posts, bosses, tongue teeth, hooks, ribs, keeper, EVF cap); the R5 end corners have a 45 deg facet at the bed; holes are vertical in print.",
+   "notes": "ASA satin silver, 0.4 nozzle / 0.2 layer, 4 walls, 25 % gyroid. Smooth PEI or textured sheet for the face; engraving 0.4 deep is the first 2 layers. Paint-fill the engraving (step 2). Footprint 150.3 x 94.4, height 65.4 (the posts). 5 mm brim on the face (ASA); the bed chamfer keeps the brim off the visible edge. Enclosure closed.",
+   "infill_class": "shell",
+   "infill_factor": 0.85,
+   "volume_mm3": 56421.6,
+   "mass_100pct_g": 60.4,
+   "mass_est_g": 51.3,
+   "filament_g_est": 53.9,
+   "print_time_est_h": 2.65,
+   "print_bbox_mm": [
+    148.63,
+    94.4,
+    65.47
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/panel.stl",
+   "stl_sha256": "f335e0d99407235e9a99d9e17a3392a75b7eeae81efd98fc410531053300b3ce",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.199,
+    "min": 1.199
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 6364.5,
+    "area_mm2": 2231.5,
+    "share": 0.0458,
+    "lowest_z": 0.2,
+    "near_bed_area_mm2": 315.1,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "base_grip",
+   "module": "printed_grip.py",
+   "material": "ASA",
+   "colour": "black",
+   "face_down": "+Z",
+   "supports": "none. Prints upside down (base top on the bed): keyhole lips are the first 1.6 mm, the head pockets bridge 18.5 (x), the nut-pocket ceiling bridges 11.4 round the dia 6.6 hole, the run-button shelf and rear stop bridge 25 between the bay walls, the heel strap slots bridge 13, the dia 13.6 run hole has a 45 deg teardrop roof, the cap grooves have 45 deg faces.",
+   "notes": "ASA black, 4 perimeters, 25 % gyroid; 40 % modifier 8 mm round the 2 counterbores and the nut pocket. Brim 5 mm (102 mm tall column on a 70 x 116 base). Clean the keyhole lips and the cap grooves with a file; test-slide the cap before assembly.",
+   "infill_class": "base_grip",
+   "infill_factor": 0.6,
+   "volume_mm3": 91537.1,
+   "mass_100pct_g": 97.9,
+   "mass_est_g": 58.8,
+   "filament_g_est": 61.7,
+   "print_time_est_h": 3.02,
+   "print_bbox_mm": [
+    116.5,
+    70.4,
+    110.03
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/base_grip.stl",
+   "stl_sha256": "684183466c80374ba6f302faec5c73b0ae5bb025acfc0c194c9ab86614fa6f34",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.599,
+    "min": 1.199
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 0.0,
+    "area_mm2": 247.4,
+    "share": 0.0546,
+    "lowest_z": 0.23,
+    "near_bed_area_mm2": 155.6,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "cap",
+   "module": "printed_grip.py",
+   "material": "ASA",
+   "colour": "black",
+   "face_down": "-Z",
+   "supports": "none (key heads 45 deg; detent bumps 0.35 proud, 1.2 tall)",
+   "notes": "ASA black, bottom (thumb grooves + open arrow) on the bed; 100 % or 6 perimeters.",
+   "infill_class": "small",
+   "infill_factor": 1.0,
+   "volume_mm3": 6739.3,
+   "mass_100pct_g": 7.2,
+   "mass_est_g": 7.2,
+   "filament_g_est": 7.6,
+   "print_time_est_h": 0.46,
+   "print_bbox_mm": [
+    48.04,
+    30.04,
+    10.22
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/cap.stl",
+   "stl_sha256": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.599,
+    "min": 1.599
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 85.2,
+    "area_mm2": 23.9,
+    "share": 0.0684,
+    "lowest_z": 0.1,
+    "near_bed_area_mm2": 23.9,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "plunger",
+   "module": "printed_small.py",
+   "material": "ASA natural (translucent; clear PETG allowed)",
+   "colour": "clear/natural",
+   "face_down": "+X",
+   "supports": "none (finger face + flange on the bed, stem and nib rise)",
+   "notes": "Natural ASA or clear PETG, 100 % infill, 0.1 mm layers if possible (light pipe). Do not sand the rear face (LED side). Paint-fill the power symbol white.",
+   "infill_class": "small",
+   "infill_factor": 1.0,
+   "volume_mm3": 287.5,
+   "mass_100pct_g": 0.3,
+   "mass_est_g": 0.3,
+   "filament_g_est": 0.3,
+   "print_time_est_h": 0.12,
+   "print_bbox_mm": [
+    7.82,
+    13.62,
+    4.01
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/plunger.stl",
+   "stl_sha256": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.199,
+    "min": 1.199
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 444.7,
+    "area_mm2": 71.7,
+    "share": 0.0293,
+    "lowest_z": 0.4,
+    "near_bed_area_mm2": 44.7,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "knob_exp",
+   "module": "printed_small.py",
+   "material": "ASA",
+   "colour": "black",
+   "face_down": "+Y",
+   "supports": "none (top face on the bed, knurl vertical, recess open up)",
+   "notes": "ASA black, 100 %. Press onto the D shaft; the shaft end sits 0.2 below the top face.",
+   "infill_class": "small",
+   "infill_factor": 1.0,
+   "volume_mm3": 4793.0,
+   "mass_100pct_g": 5.1,
+   "mass_est_g": 5.1,
+   "filament_g_est": 5.4,
+   "print_time_est_h": 0.36,
+   "print_bbox_mm": [
+    28.0,
+    28.0,
+    9.05
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/knob_exp.stl",
+   "stl_sha256": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 4.719,
+    "min": 4.337
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 209.6,
+    "area_mm2": 24.8,
+    "share": 0.0192,
+    "lowest_z": 0.6,
+    "near_bed_area_mm2": 0.0,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "knob_fps",
+   "module": "printed_small.py",
+   "material": "ASA",
+   "colour": "black",
+   "face_down": "+Y",
+   "supports": "none (top face on the bed, knurl vertical, recess open up)",
+   "notes": "ASA black, 100 %. Paint-fill the index. The index is on the D-flat side.",
+   "infill_class": "small",
+   "infill_factor": 1.0,
+   "volume_mm3": 1252.8,
+   "mass_100pct_g": 1.3,
+   "mass_est_g": 1.3,
+   "filament_g_est": 1.4,
+   "print_time_est_h": 0.17,
+   "print_bbox_mm": [
+    19.99,
+    19.99,
+    7.04
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/knob_fps.stl",
+   "stl_sha256": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.415,
+    "min": 0.994
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 189.2,
+    "area_mm2": 0.0,
+    "share": 0.0,
+    "lowest_z": null,
+    "near_bed_area_mm2": 0.0,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "eyecup",
+   "module": "printed_small.py",
+   "material": "TPU 95A",
+   "colour": "black",
+   "face_down": "+X",
+   "supports": "none (sleeve end on the bed; 15 deg flare, 45 deg inner lip)",
+   "notes": "TPU 95A, 100 %, 20 mm/s, no retraction tuning needed. Stretch over the eye-end body.",
+   "infill_class": "tpu",
+   "infill_factor": 1.0,
+   "volume_mm3": 4406.4,
+   "mass_100pct_g": 5.3,
+   "mass_est_g": 5.3,
+   "filament_g_est": 5.6,
+   "print_time_est_h": 0.33,
+   "print_bbox_mm": [
+    45.67,
+    45.69,
+    16.35
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/eyecup.stl",
+   "stl_sha256": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 1.595,
+    "min": 1.595
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 269.1,
+    "area_mm2": 35.8,
+    "share": 0.0135,
+    "lowest_z": 0.13,
+    "near_bed_area_mm2": 35.8,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "stick_sleeve",
+   "module": "printed_small.py",
+   "material": "ASA",
+   "colour": "satin silver",
+   "face_down": "-X",
+   "supports": "none (end face on the bed, walls vertical)",
+   "notes": "ASA satin silver, 2 perimeters (0.8 walls = layout section), 0.1 mm first layer care. Press onto the stick end with the slider out.",
+   "infill_class": "thin",
+   "infill_factor": 1.0,
+   "volume_mm3": 1103.9,
+   "mass_100pct_g": 1.2,
+   "mass_est_g": 1.2,
+   "filament_g_est": 1.2,
+   "print_time_est_h": 0.16,
+   "print_bbox_mm": [
+    13.03,
+    22.93,
+    16.02
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/stick_sleeve.stl",
+   "stl_sha256": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 0.799,
+    "min": 0.799
+   }
+  },
+  {
+   "overhang_screen": {
+    "bed_contact_mm2": 1148.4,
+    "area_mm2": 83.8,
+    "share": 0.0206,
+    "lowest_z": 0.2,
+    "near_bed_area_mm2": 6.8,
+    "note": "downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates"
+   },
+   "id": "pi_keeper",
+   "module": "printed_keeper.py",
+   "material": "ASA",
+   "colour": "black",
+   "face_down": "+Z",
+   "supports": "none",
+   "notes": "Top face (z 15.6) on the bed; 4 perimeters, 40 % gyroid (the fingers are solid: 1.6 tip). FR1: one screw (s_k2 spot-face notch bridges 7.0 at 1.3 above the bed); the arm-end tongue (8 x 5.8) prints flat with a 0.6 bed-face chamfer at its tip. Finger backs print at 45 deg. Black ASA.",
+   "infill_class": "small",
+   "infill_factor": 1.0,
+   "volume_mm3": 6611.4,
+   "mass_100pct_g": 7.1,
+   "mass_est_g": 7.1,
+   "filament_g_est": 7.4,
+   "print_time_est_h": 0.45,
+   "print_bbox_mm": [
+    64.0,
+    61.65,
+    7.9
+   ],
+   "bed_fit": {
+    "250x210x220 (Prusa MK4/Core One class)": true,
+    "256x256x256 (Bambu X1/P1 class)": true
+   },
+   "stl": "stl/pi_keeper.stl",
+   "stl_sha256": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+   "stub": false,
+   "thin_wall": {
+    "status": "pass",
+    "p1": 2.749,
+    "min": 1.954
+   }
+  }
+ ],
+ "totals": {
+  "mass_est_g": 298.9,
+  "mass_100pct_g": 375.5,
+  "print_time_est_h": 15.9
+ }
+}

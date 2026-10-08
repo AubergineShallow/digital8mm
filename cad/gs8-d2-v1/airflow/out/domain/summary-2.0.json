@@ -1,0 +1,991 @@
+{
+ "dx_mm": 2.0,
+ "shape": [
+  86,
+  45,
+  60
+ ],
+ "origin_mm": [
+  -155.0,
+  -51.0,
+  -3.0
+ ],
+ "frame": "layout.py assembly mm, X fwd, Y left, Z up",
+ "source": {
+  "revision": "GS8 D2 release v1 (cad/gs8-d2-v1)",
+  "lens": "kowa_lm6hc",
+  "variant": null,
+  "mesh_sources": {
+   "build_d2.py": "ad10d3d68675abadbbd82bb0126c417bfc1db35498ad0dd92302cad8d8cb638f",
+   "cots.py": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+   "d2_common.py": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+   "layout.py": "fdbdd16b3efa2629cb682ae969d7f1477a77b300446c9706effa25db895f0e08",
+   "printed_grip.py": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+   "printed_hood.py": "615d3e41f88a95abaef3b5f295981b28f920884b3f3e492040a8c13c73b8107f",
+   "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+   "printed_panel.py": "4886e74172625024dfae98abc382f37068cd7e8c9da327d6f6c0c6f4ffb83f04",
+   "printed_small.py": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+   "printed_tub.py": "76bd97697d78b73578b2829f5162049a099f615b9404b9d5bf5bf933957cb2e1"
+  },
+  "mesh_tol_mm": 0.05
+ },
+ "occupancy": {
+  "rule": "27 sub-samples per cell; shell parts ['tub', 'hood', 'panel', 'base_grip'] solid if any sub-sample inside, others if >= 14",
+  "parts": [
+   {
+    "id": "tub",
+    "rule": "any",
+    "cells": 21232,
+    "vol_subsample_mm3": 110254.2,
+    "vol_mesh_mm3": 105969.0,
+    "inside_grid": true,
+    "vol_err": 0.0404,
+    "seconds": 0.14
+   },
+   {
+    "id": "hood",
+    "rule": "any",
+    "cells": 12229,
+    "vol_subsample_mm3": 66104.0,
+    "vol_mesh_mm3": 70935.5,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.12
+   },
+   {
+    "id": "panel",
+    "rule": "any",
+    "cells": 9634,
+    "vol_subsample_mm3": 49446.8,
+    "vol_mesh_mm3": 51160.4,
+    "inside_grid": true,
+    "vol_err": -0.0335,
+    "seconds": 0.09
+   },
+   {
+    "id": "base_grip",
+    "rule": "any",
+    "cells": 3496,
+    "vol_subsample_mm3": 25678.5,
+    "vol_mesh_mm3": 91009.4,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   },
+   {
+    "id": "cap",
+    "rule": "majority",
+    "cells": 0,
+    "vol_subsample_mm3": 0.0,
+    "vol_mesh_mm3": 6734.8,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "plunger",
+    "rule": "majority",
+    "cells": 29,
+    "vol_subsample_mm3": 323.9,
+    "vol_mesh_mm3": 287.5,
+    "inside_grid": true,
+    "vol_err": 0.1266,
+    "seconds": 0.0
+   },
+   {
+    "id": "knob_exp",
+    "rule": "majority",
+    "cells": 124,
+    "vol_subsample_mm3": 1284.7,
+    "vol_mesh_mm3": 4790.1,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   },
+   {
+    "id": "knob_fps",
+    "rule": "majority",
+    "cells": 24,
+    "vol_subsample_mm3": 243.0,
+    "vol_mesh_mm3": 1253.4,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   },
+   {
+    "id": "eyecup",
+    "rule": "majority",
+    "cells": 0,
+    "vol_subsample_mm3": 0.0,
+    "vol_mesh_mm3": 4370.0,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "stick_sleeve",
+    "rule": "majority",
+    "cells": 23,
+    "vol_subsample_mm3": 886.5,
+    "vol_mesh_mm3": 1103.7,
+    "inside_grid": true,
+    "vol_err": -0.1968,
+    "seconds": 0.01
+   },
+   {
+    "id": "pi_keeper",
+    "rule": "majority",
+    "cells": 788,
+    "vol_subsample_mm3": 5834.7,
+    "vol_mesh_mm3": 6210.7,
+    "inside_grid": true,
+    "vol_err": -0.0605,
+    "seconds": 0.01
+   },
+   {
+    "id": "pi5",
+    "rule": "majority",
+    "cells": 3815,
+    "vol_subsample_mm3": 30344.0,
+    "vol_mesh_mm3": 31513.6,
+    "inside_grid": true,
+    "vol_err": -0.0371,
+    "seconds": 0.01
+   },
+   {
+    "id": "cooler",
+    "rule": "majority",
+    "cells": 2099,
+    "vol_subsample_mm3": 19906.7,
+    "vol_mesh_mm3": 19348.7,
+    "inside_grid": true,
+    "vol_err": 0.0288,
+    "seconds": 0.01
+   },
+   {
+    "id": "x1203",
+    "rule": "majority",
+    "cells": 1625,
+    "vol_subsample_mm3": 11664.6,
+    "vol_mesh_mm3": 12836.9,
+    "inside_grid": true,
+    "vol_err": -0.0913,
+    "seconds": 0.01
+   },
+   {
+    "id": "x1203_kit",
+    "rule": "majority",
+    "cells": 136,
+    "vol_subsample_mm3": 1284.1,
+    "vol_mesh_mm3": 1223.5,
+    "inside_grid": true,
+    "vol_err": 0.0496,
+    "seconds": 0.01
+   },
+   {
+    "id": "gs_camera",
+    "rule": "majority",
+    "cells": 4152,
+    "vol_subsample_mm3": 34710.5,
+    "vol_mesh_mm3": 33818.1,
+    "inside_grid": true,
+    "vol_err": 0.0264,
+    "seconds": 0.02
+   },
+   {
+    "id": "c_cs_adapter",
+    "rule": "majority",
+    "cells": 104,
+    "vol_subsample_mm3": 1052.4,
+    "vol_mesh_mm3": 997.0,
+    "inside_grid": true,
+    "vol_err": 0.0556,
+    "seconds": 0.01
+   },
+   {
+    "id": "lens",
+    "rule": "majority",
+    "cells": 1758,
+    "vol_subsample_mm3": 13336.3,
+    "vol_mesh_mm3": 124648.2,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.02
+   },
+   {
+    "id": "eyepiece",
+    "rule": "majority",
+    "cells": 616,
+    "vol_subsample_mm3": 5391.4,
+    "vol_mesh_mm3": 19026.9,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   },
+   {
+    "id": "hmx039",
+    "rule": "majority",
+    "cells": 48,
+    "vol_subsample_mm3": 426.7,
+    "vol_mesh_mm3": 364.1,
+    "inside_grid": true,
+    "vol_err": 0.1718,
+    "seconds": 0.0
+   },
+   {
+    "id": "evf_board",
+    "rule": "majority",
+    "cells": 604,
+    "vol_subsample_mm3": 4266.7,
+    "vol_mesh_mm3": 3948.0,
+    "inside_grid": true,
+    "vol_err": 0.0807,
+    "seconds": 0.01
+   },
+   {
+    "id": "usb_stick",
+    "rule": "majority",
+    "cells": 1941,
+    "vol_subsample_mm3": 14509.0,
+    "vol_mesh_mm3": 14379.8,
+    "inside_grid": true,
+    "vol_err": 0.009,
+    "seconds": 0.01
+   },
+   {
+    "id": "encoder",
+    "rule": "majority",
+    "cells": 392,
+    "vol_subsample_mm3": 2990.5,
+    "vol_mesh_mm3": 2927.3,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   },
+   {
+    "id": "switch_1824",
+    "rule": "majority",
+    "cells": 801,
+    "vol_subsample_mm3": 6808.9,
+    "vol_mesh_mm3": 7048.9,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   },
+   {
+    "id": "run_button",
+    "rule": "majority",
+    "cells": 0,
+    "vol_subsample_mm3": 0.0,
+    "vol_mesh_mm3": 2119.8,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "pack",
+    "rule": "majority",
+    "cells": 0,
+    "vol_subsample_mm3": 0.0,
+    "vol_mesh_mm3": 45227.5,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "xt30_pair",
+    "rule": "majority",
+    "cells": 0,
+    "vol_subsample_mm3": 0.0,
+    "vol_mesh_mm3": 1288.6,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "tripod_nut",
+    "rule": "majority",
+    "cells": 40,
+    "vol_subsample_mm3": 341.3,
+    "vol_mesh_mm3": 479.1,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "strap",
+    "rule": "majority",
+    "cells": 22,
+    "vol_subsample_mm3": 181.3,
+    "vol_mesh_mm3": 2237.6,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "microsd",
+    "rule": "majority",
+    "cells": 20,
+    "vol_subsample_mm3": 141.0,
+    "vol_mesh_mm3": 97.9,
+    "inside_grid": true,
+    "vol_err": 0.4406,
+    "seconds": 0.0
+   },
+   {
+    "id": "foam_pad",
+    "rule": "majority",
+    "cells": 0,
+    "vol_subsample_mm3": 142.2,
+    "vol_mesh_mm3": 212.2,
+    "inside_grid": true,
+    "vol_err": -0.3296,
+    "seconds": 0.0
+   },
+   {
+    "id": "s_b1",
+    "rule": "majority",
+    "cells": 19,
+    "vol_subsample_mm3": 140.1,
+    "vol_mesh_mm3": 146.7,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.0
+   },
+   {
+    "id": "s_b2",
+    "rule": "majority",
+    "cells": 19,
+    "vol_subsample_mm3": 140.1,
+    "vol_mesh_mm3": 146.7,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   },
+   {
+    "id": "s_r1",
+    "rule": "majority",
+    "cells": 10,
+    "vol_subsample_mm3": 130.4,
+    "vol_mesh_mm3": 146.7,
+    "inside_grid": true,
+    "vol_err": -0.1113,
+    "seconds": 0.0
+   },
+   {
+    "id": "s_r2",
+    "rule": "majority",
+    "cells": 10,
+    "vol_subsample_mm3": 130.4,
+    "vol_mesh_mm3": 146.7,
+    "inside_grid": true,
+    "vol_err": -0.1113,
+    "seconds": 0.0
+   },
+   {
+    "id": "s_k1",
+    "rule": "majority",
+    "cells": 18,
+    "vol_subsample_mm3": 139.9,
+    "vol_mesh_mm3": 146.7,
+    "inside_grid": true,
+    "vol_err": -0.0467,
+    "seconds": 0.01
+   },
+   {
+    "id": "s_k2",
+    "rule": "majority",
+    "cells": 18,
+    "vol_subsample_mm3": 150.5,
+    "vol_mesh_mm3": 146.7,
+    "inside_grid": true,
+    "vol_err": 0.026,
+    "seconds": 0.01
+   },
+   {
+    "id": "s_j",
+    "rule": "majority",
+    "cells": 18,
+    "vol_subsample_mm3": 136.3,
+    "vol_mesh_mm3": 146.7,
+    "inside_grid": false,
+    "vol_err": null,
+    "seconds": 0.01
+   }
+  ]
+ },
+ "label_legend": {
+  "0": "interior air",
+  "1": "solid (part)",
+  "2": "exterior inactive (solid)",
+  "3": "outside buffer air",
+  "4": "ambient reservoir",
+  "5": "vent porous zone",
+  "6": "fan actuator (blower interior)",
+  "7": "fan intake opening",
+  "8": "fin block (porous, X)",
+  "9": "dropped pocket (solid)",
+  "10": "plug (closed hole, solid)"
+ },
+ "label_counts": {
+  "interior air": 82051,
+  "solid (part)": 61537,
+  "exterior inactive (solid)": 80051,
+  "outside buffer air": 2706,
+  "ambient reservoir": 1907,
+  "vent porous zone": 794,
+  "fan actuator (blower interior)": 816,
+  "fan intake opening": 62,
+  "fin block (porous, X)": 1008,
+  "dropped pocket (solid)": 1200,
+  "plug (closed hole, solid)": 68
+ },
+ "fan": {
+  "force_unit": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "note": "body force +X in mask__fan_actuator (blower interior, from the intake to the fin entry); walls -X, +-Y, top are solid cells (1 cell), bottom = cooler plate; the +X layer is open only over the fin height",
+  "intake_radius_mm": 9.0,
+  "intake_basis": "proxy hub circle r 9.0 in cots.cooler (ESTIMATE, no published intake size used)",
+  "blower_cells": [
+   [
+    42,
+    14,
+    14
+   ],
+   [
+    56,
+    27,
+    19
+   ]
+  ],
+  "intake_r_mm": 9.0,
+  "intake_centre": [
+   -57.8,
+   -10.0
+  ],
+  "fin_z": [
+   23.4,
+   30.5
+  ],
+  "fin_x": [
+   -42.8,
+   -9.5
+  ],
+  "fin_y": [
+   -25.55,
+   16.95
+  ],
+  "outlet_i": 73,
+  "fin_section_discrete_mm2": 252.0,
+  "fin_section_proxy_mm2": 301.8,
+  "fin_length_cells": 16,
+  "fin_length_mm": 33.3,
+  "blower_outlet_open_discrete_mm2": 144.0,
+  "blower_outlet_proxy_mm2": 198.8,
+  "intake_area_discrete_mm2": 248.0,
+  "intake_area_circle_mm2": 254.5
+ },
+ "fins": {
+  "porous_axis": "x",
+  "plate_normal": "y",
+  "note": "cots.cooler fins: 1.0 thick plates at 2.5 pitch normal to Y, open on top in the proxy (no shroud modelled): low resistance along X (and Z between plates), high along Y; metal volume fraction in the proxy fin block = 0.4"
+ },
+ "vents": {
+  "inlet_roof": {
+   "normal": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "axis": "z",
+   "wall_interval_mm": [
+    97.3,
+    100.0
+   ],
+   "thickness_cells": 2,
+   "zone_cells": 392,
+   "face_cells": 196,
+   "face_area_discrete_mm2": 784.0,
+   "face_area_box_mm2": 728.0,
+   "area_ratio_discrete_to_box": 1.077,
+   "cells_blocked_by_cots": 0,
+   "blocked_by": [],
+   "slot_w": 2.0,
+   "pitch": 3.6,
+   "open_area_ratio_slots": 0.556,
+   "path_cells_from_fan_intake": 31,
+   "path_cells_from_fin_exit": 52
+  },
+  "out_band": {
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "axis": "x",
+   "wall_interval_mm": [
+    -5.2,
+    0.0
+   ],
+   "thickness_cells": 3,
+   "zone_cells": 132,
+   "face_cells": 44,
+   "face_area_discrete_mm2": 176.0,
+   "face_area_box_mm2": 167.2,
+   "area_ratio_discrete_to_box": 1.053,
+   "cells_blocked_by_cots": 0,
+   "blocked_by": [],
+   "slot_w": 2.0,
+   "pitch": 3.4,
+   "open_area_ratio_slots": 0.588,
+   "path_cells_from_fan_intake": 27,
+   "path_cells_from_fin_exit": 2
+  },
+  "out_corner": {
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "axis": "x",
+   "wall_interval_mm": [
+    -5.2,
+    0.0
+   ],
+   "thickness_cells": 3,
+   "zone_cells": 54,
+   "face_cells": 18,
+   "face_area_discrete_mm2": 72.0,
+   "face_area_box_mm2": 60.0,
+   "area_ratio_discrete_to_box": 1.2,
+   "cells_blocked_by_cots": 0,
+   "blocked_by": [],
+   "slot_w": 2.0,
+   "pitch": 3.4,
+   "open_area_ratio_slots": 0.588,
+   "path_cells_from_fan_intake": 27,
+   "path_cells_from_fin_exit": 4
+  },
+  "out_wall": {
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "axis": "y",
+   "wall_interval_mm": [
+    -35.0,
+    -32.5
+   ],
+   "thickness_cells": 2,
+   "zone_cells": 144,
+   "face_cells": 72,
+   "face_area_discrete_mm2": 288.0,
+   "face_area_box_mm2": 224.0,
+   "area_ratio_discrete_to_box": 1.286,
+   "cells_blocked_by_cots": 0,
+   "blocked_by": [],
+   "slot_w": 2.0,
+   "pitch": 3.4,
+   "open_area_ratio_slots": 0.588,
+   "path_cells_from_fan_intake": 26,
+   "path_cells_from_fin_exit": 7
+  },
+  "x1203": {
+   "normal": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "axis": "y",
+   "wall_interval_mm": [
+    -35.0,
+    -32.5
+   ],
+   "thickness_cells": 2,
+   "zone_cells": 72,
+   "face_cells": 36,
+   "face_area_discrete_mm2": 144.0,
+   "face_area_box_mm2": 128.0,
+   "area_ratio_discrete_to_box": 1.125,
+   "cells_blocked_by_cots": 0,
+   "blocked_by": [],
+   "slot_w": 2.0,
+   "pitch": 4.4,
+   "open_area_ratio_slots": 0.455,
+   "path_cells_from_fan_intake": 49,
+   "path_cells_from_fin_exit": 60
+  }
+ },
+ "heat": {
+  "x1203": {
+   "source": "X1203 charger/boost field proxy box (cots.x1203 \"parts\": x0+12..x0+40, y0+12..y1-12, z 7.6..11)",
+   "proxy_cells": 765,
+   "air_cells": 1068,
+   "radius_cells": 1
+  },
+  "evf_board": {
+   "source": "evf_board",
+   "proxy_cells": 604,
+   "air_cells": 464,
+   "radius_cells": 1
+  },
+  "camera": {
+   "source": "gs_camera",
+   "proxy_cells": 4152,
+   "air_cells": 1230,
+   "radius_cells": 1
+  },
+  "usb_stick": {
+   "source": "usb_stick",
+   "proxy_cells": 1941,
+   "air_cells": 484,
+   "radius_cells": 1
+  },
+  "pi_board": {
+   "source": "Pi 5 PCB slab + underside parts (PI x/y, z 16.0..21.4); the jack blocks get no heat",
+   "proxy_cells": 3741,
+   "air_cells": 2979,
+   "radius_cells": 1
+  },
+  "soc": {
+   "source": "SoC heat into the fin block air (cooler fins)",
+   "air_cells": 1008
+  }
+ },
+ "connectivity": {
+  "fluid_components": 1,
+  "component_cells": [
+   89344
+  ],
+  "all_vents_reach_intake": true,
+  "all_vents_reach_fin_exit": true,
+  "ambient_reachable_from_intake": true
+ },
+ "pockets": {
+  "policy": "every interior air region not connected to the main body air (the region holding the fan intake) is dropped (label 9, solid): with no path to the fan or a vent it carries no forced flow",
+  "list": [
+   {
+    "cells": 1082,
+    "vol_mm3": 8656.0,
+    "centroid": [
+     1.8,
+     0.0,
+     59.5
+    ],
+    "bounded_by": [
+     "tub",
+     "hood",
+     "gs_camera",
+     "c_cs_adapter",
+     "lens"
+    ]
+   },
+   {
+    "cells": 48,
+    "vol_mm3": 384.0,
+    "centroid": [
+     -145.0,
+     16.0,
+     78.0
+    ],
+    "bounded_by": [
+     "tub",
+     "panel",
+     "hmx039",
+     "evf_board"
+    ]
+   },
+   {
+    "cells": 22,
+    "vol_mm3": 176.0,
+    "centroid": [
+     -149.0,
+     26.5,
+     78.0
+    ],
+    "bounded_by": [
+     "tub",
+     "panel",
+     "eyepiece"
+    ]
+   },
+   {
+    "cells": 16,
+    "vol_mm3": 128.0,
+    "centroid": [
+     -149.0,
+     16.0,
+     78.0
+    ],
+    "bounded_by": [
+     "tub",
+     "eyepiece",
+     "hmx039"
+    ]
+   },
+   {
+    "cells": 9,
+    "vol_mm3": 72.0,
+    "centroid": [
+     -15.0,
+     15.0,
+     75.0
+    ],
+    "bounded_by": [
+     "tub",
+     "panel",
+     "gs_camera"
+    ]
+   },
+   {
+    "cells": 6,
+    "vol_mm3": 48.0,
+    "centroid": [
+     -153.0,
+     31.0,
+     78.0
+    ],
+    "bounded_by": [
+     "tub",
+     "panel",
+     "eyepiece"
+    ]
+   },
+   {
+    "cells": 5,
+    "vol_mm3": 40.0,
+    "centroid": [
+     -7.0,
+     -31.0,
+     13.0
+    ],
+    "bounded_by": [
+     "tub",
+     "pi5",
+     "x1203",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -123.0,
+     33.0,
+     65.0
+    ],
+    "bounded_by": [
+     "panel",
+     "switch_1824"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -79.0,
+     -33.0,
+     -1.0
+    ],
+    "bounded_by": [
+     "tub",
+     "base_grip",
+     "strap"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -69.0,
+     -29.0,
+     7.0
+    ],
+    "bounded_by": [
+     "x1203",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -69.0,
+     -29.0,
+     19.0
+    ],
+    "bounded_by": [
+     "pi5",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -67.0,
+     19.0,
+     7.0
+    ],
+    "bounded_by": [
+     "x1203",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -67.0,
+     19.0,
+     19.0
+    ],
+    "bounded_by": [
+     "pi5",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -11.0,
+     -29.0,
+     7.0
+    ],
+    "bounded_by": [
+     "x1203",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -11.0,
+     -29.0,
+     19.0
+    ],
+    "bounded_by": [
+     "pi5",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -9.0,
+     19.0,
+     7.0
+    ],
+    "bounded_by": [
+     "x1203",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -9.0,
+     19.0,
+     19.0
+    ],
+    "bounded_by": [
+     "pi5",
+     "x1203_kit"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -5.0,
+     17.0,
+     53.0
+    ],
+    "bounded_by": [
+     "tub",
+     "hood",
+     "gs_camera"
+    ]
+   },
+   {
+    "cells": 1,
+    "vol_mm3": 8.0,
+    "centroid": [
+     -5.0,
+     17.0,
+     67.0
+    ],
+    "bounded_by": [
+     "tub",
+     "hood",
+     "gs_camera"
+    ]
+   }
+  ],
+  "n": 19,
+  "total_mm3": 9600.0
+ },
+ "plugs": {
+  "note": "closed (solid, label 10): floor_pigtail and floor_run_lead = lead holes into the grip / battery bay (bay excluded, holes treated as closed by the leads + grommet); sd_slot = microSD tweezer slot through both front walls (ko_sd) treated closed (card in place; a real leak path of about 12 x 2.3 mm minus the card). mask__leak__* lets the solver open them as a sensitivity",
+  "cells": {
+   "floor_run_lead": 18,
+   "floor_pigtail": 40,
+   "sd_slot": 10
+  }
+ },
+ "masks": {
+  "vent__inlet_roof": 392,
+  "vent__out_band": 132,
+  "vent__out_corner": 54,
+  "vent__out_wall": 144,
+  "vent__x1203": 72,
+  "ambient": 1907,
+  "fan_actuator": 816,
+  "fan_intake": 62,
+  "fin_block": 1008,
+  "fan_outlet": 63,
+  "heat__x1203": 1068,
+  "heat__evf_board": 464,
+  "heat__camera": 1230,
+  "heat__usb_stick": 484,
+  "heat__pi_board": 2979,
+  "heat__soc": 1008,
+  "probe__fan_intake_air": 124,
+  "probe__evf_board": 464,
+  "probe__x1203_ic": 1068,
+  "probe__pi_board": 2979,
+  "probe__camera": 1230,
+  "probe__usb_stick": 484,
+  "probe__exhaust_plenum": 294,
+  "probe__fin_exit": 63,
+  "probe__roof_inlet_inner": 196,
+  "probe__outside_inlet_roof": 196,
+  "probe__outside_out_band": 44,
+  "probe__outside_out_corner": 18,
+  "probe__outside_out_wall": 72,
+  "probe__outside_x1203": 36,
+  "leak__floor_run_lead": 18,
+  "leak__floor_pigtail": 40,
+  "leak__sd_slot": 10
+ },
+ "figures": [
+  "domain/slice-2.0-z27.png",
+  "domain/slice-2.0-z33.png",
+  "domain/slice-2.0-z13.png",
+  "domain/slice-2.0-xm7.png",
+  "domain/slice-2.0-xm140.png",
+  "domain/slice-2.0-ym10.png",
+  "domain/slice-2.0-ym33.6.png",
+  "domain/slice-2.0-xm58.png"
+ ],
+ "interior_air_mm3": 656408.0,
+ "fluid_cells": 89344
+}

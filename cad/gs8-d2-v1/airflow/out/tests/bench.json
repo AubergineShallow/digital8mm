@@ -1,0 +1,96 @@
+{
+ "150000": {
+  "shape": [
+   79,
+   48,
+   40
+  ],
+  "cells": 151680,
+  "fluid": 129680,
+  "lbm_s_per_step_threads1": 0.06833437283833822,
+  "lbm_info": {
+   "dx_m": 0.002,
+   "dt_s": 2.12602916254693e-05,
+   "tau0": 0.505,
+   "nu_lat": 0.001666666666666668,
+   "nu_lat_true": 8.50411665018772e-05,
+   "re_factor": 0.05102469990112628,
+   "cs_smag": 0.16,
+   "u_scale_mps": 94.07208683835972,
+   "p_scale_Pa": 9999.999999999998,
+   "shape": [
+    79,
+    48,
+    40
+   ],
+   "fluid_cells": 129680,
+   "u_lat_at_u_ref": 0.013071519013745479,
+   "drho_at_dp_max": 0.030000000000000006
+  },
+  "setup_notes": [
+   "u_ref 1.23 m/s = 2 x Qmax/A_outlet (A_outlet 836 mm2)",
+   "vent IN: K 8 over 1.00 cells, 209 cells",
+   "vent OUT: K 8 over 1.00 cells, 209 cells",
+   "fins axis [1.0, 0.0, 0.0] K_per_cell 0.4286, beta_t 4.0",
+   "fan: 1045 cells, speed 1.0, curve 'curve_100'",
+   "{\"dx_m\": 0.002, \"dt_s\": 2.1e-05, \"tau0\": 0.505, \"nu_lat\": 0.001667, \"nu_lat_true\": 8.5e-05, \"re_factor\": 0.051025, \"cs_smag\": 0.16, \"u_scale_mps\": 94.072087, \"p_scale_Pa\": 10000.0, \"shape\": [79, 48, 40], \"fluid_cells\": 129680, \"u_lat_at_u_ref\": 0.013072, \"drho_at_dp_max\": 0.03}"
+  ],
+  "lbm_s_per_step_threads4": 0.10854677756627401,
+  "thermal_setup_s": 10.794997215270996,
+  "projection": {
+   "cg_iters": 550,
+   "cg_rel_res": 9.93666524517954e-11,
+   "div_before_rel": 2.014216979308703,
+   "div_after_rel": 1.9986335348524592e-10
+  },
+  "thermal_s_per_iter": 0.02426345109939575,
+  "ram_free_mb_after": 4197.97265625
+ },
+ "400000": {
+  "shape": [
+   110,
+   66,
+   55
+  ],
+  "cells": 399300,
+  "fluid": 356817,
+  "lbm_s_per_step_threads1": 0.14970807234446207,
+  "lbm_info": {
+   "dx_m": 0.002,
+   "dt_s": 2.12602916254693e-05,
+   "tau0": 0.505,
+   "nu_lat": 0.001666666666666668,
+   "nu_lat_true": 8.50411665018772e-05,
+   "re_factor": 0.05102469990112628,
+   "cs_smag": 0.16,
+   "u_scale_mps": 94.07208683835972,
+   "p_scale_Pa": 9999.999999999998,
+   "shape": [
+    110,
+    66,
+    55
+   ],
+   "fluid_cells": 356817,
+   "u_lat_at_u_ref": 0.01063014581273465,
+   "drho_at_dp_max": 0.030000000000000006
+  },
+  "setup_notes": [
+   "u_ref 1.00 m/s = 2 x Qmax/A_outlet (A_outlet 1728 mm2)",
+   "vent IN: K 8 over 1.00 cells, 432 cells",
+   "vent OUT: K 8 over 1.00 cells, 405 cells",
+   "fins axis [1.0, 0.0, 0.0] K_per_cell 0.4286, beta_t 4.0",
+   "fan: 2160 cells, speed 1.0, curve 'curve_100'",
+   "{\"dx_m\": 0.002, \"dt_s\": 2.1e-05, \"tau0\": 0.505, \"nu_lat\": 0.001667, \"nu_lat_true\": 8.5e-05, \"re_factor\": 0.051025, \"cs_smag\": 0.16, \"u_scale_mps\": 94.072087, \"p_scale_Pa\": 10000.0, \"shape\": [110, 66, 55], \"fluid_cells\": 356817, \"u_lat_at_u_ref\": 0.01063, \"drho_at_dp_max\": 0.03}"
+  ],
+  "lbm_s_per_step_threads4": 0.14485378662745158,
+  "thermal_setup_s": 44.291868925094604,
+  "projection": {
+   "cg_iters": 767,
+   "cg_rel_res": 9.73429250672182e-11,
+   "div_before_rel": 1.990238947343947,
+   "div_after_rel": 1.9352492079286044e-10
+  },
+  "thermal_s_per_iter": 0.10865615606307984,
+  "ram_free_mb_after": 4034.140625
+ }
+}

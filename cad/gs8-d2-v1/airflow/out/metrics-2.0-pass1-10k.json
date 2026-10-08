@@ -1,0 +1,1094 @@
+{
+ "tag": "2.0-pass1-10k",
+ "status": "converged",
+ "args": {
+  "dx": "2.0",
+  "case": "",
+  "speed": 1.0,
+  "curve": "curve_100",
+  "fin_model": null,
+  "init": null,
+  "max_min": 55.0,
+  "chunk": 2000,
+  "max_steps": 40000,
+  "final_window": 2000
+ },
+ "info": {
+  "dx_m": 0.002,
+  "dt_s": 3.290930348433165e-05,
+  "tau0": 0.5004060185317379,
+  "nu_lat": 0.00013533951057931315,
+  "nu_lat_true": 0.0001353395105793139,
+  "re_factor": 1.0000000000000056,
+  "cs_smag": 0.16,
+  "u_scale_mps": 60.773088101126596,
+  "p_scale_Pa": 4232.6,
+  "shape": [
+   86,
+   45,
+   60
+  ],
+  "fluid_cells": 89344,
+  "u_lat_at_u_ref": 0.06717938054924559,
+  "drho_at_dp_max": 0.03
+ },
+ "criteria": {
+  "ok": true,
+  "step": 8000,
+  "window_steps": 3000,
+  "Q_intake_mean": 0.0003459657593126037,
+  "Q_rel_range": 0.0005051263828497784,
+  "fan_dp": 19.812775700114138,
+  "fan_dp_curve": 19.83435933134658,
+  "fan_rel_err": 0.0010881940208842965,
+  "fan_lambda": 2.6434072330176583,
+  "vent_Q": {
+   "inlet_roof": -7.281918775783148e-06,
+   "out_band": -1.8776632279448654e-07,
+   "out_corner": 2.93184396706141e-06,
+   "out_wall": 4.64091267705264e-06,
+   "x1203": -1.0747440140101624e-10
+  },
+  "Q_in": 7.469792572979035e-06,
+  "Q_out": 7.572756644114049e-06,
+  "mass_rel": 0.013784060284012786
+ },
+ "criteria_final": {
+  "ok": false,
+  "step": 10000,
+  "window_steps": 3000,
+  "Q_intake_mean": 0.0003459927441664808,
+  "Q_rel_range": 0.0005257815167737585,
+  "fan_dp": 19.947650788174982,
+  "fan_dp_curve": 19.85128836566293,
+  "fan_rel_err": 0.004854215038190201,
+  "fan_lambda": 2.6345282524177325,
+  "vent_Q": {
+   "inlet_roof": -7.288786352634257e-06,
+   "out_band": -2.2748131810746321e-07,
+   "out_corner": 2.9058882271604117e-06,
+   "out_wall": 4.6715188767900805e-06,
+   "x1203": -1.0486582874577051e-10
+  },
+  "Q_in": 7.516372536570466e-06,
+  "Q_out": 7.577407103950493e-06,
+  "mass_rel": 0.008120215846549227
+ },
+ "problem": {
+  "active_cells": 87437,
+  "ambient_cells": 1907,
+  "disconnected_fluid_cells": 0,
+  "projection": {
+   "cg_iters": 616,
+   "cg_rel_res": 9.775224124080053e-11,
+   "div_before_rel": 0.1687588439044609,
+   "div_after_rel": 4.703232017188598e-11
+  },
+  "Q_out_m3s": 1.0400698267320345e-05,
+  "Q_in_m3s": 1.0400698266442833e-05,
+  "setup_s": 25.365221738815308,
+  "notes": []
+ },
+ "history_last": {
+  "step": 10000,
+  "res_u": 0.16553104887921471,
+  "umax_lat": 0.07963772863149643,
+  "umax_mps": 4.839830698295544,
+  "umean_max_mps": 4.868144409372904,
+  "nut_max_lat": 0.002493254840373993,
+  "rho_min": 0.9763583540916443,
+  "rho_max": 1.0143933296203613,
+  "Q_vent__inlet_roof": -7.288786352634257e-06,
+  "Q_vent__out_band": -2.2748131810746321e-07,
+  "Q_vent__out_corner": 2.9058882271604117e-06,
+  "Q_vent__out_wall": 4.6715188767900805e-06,
+  "Q_vent__x1203": -1.0486582874577051e-10,
+  "Q_fan_intake": 0.0003458765710762514,
+  "Q_fan_outlet": 1.91555496625226e-06,
+  "fan_Q": 0.0003458765710762514,
+  "fan_dp": 19.947650788174982,
+  "fan_lambda": 2.6345282524177325,
+  "fan_force_mean_Npm3": 2389.526858436875,
+  "fan_dp_curve": 19.85128836566293,
+  "wall_s": 242.84833002090454
+ },
+ "n_windows": 17,
+ "fan": {
+  "Q_m3s": 0.0003458765710762514,
+  "Q_CFM": 0.7329446303798505,
+  "dp_delivered_Pa": 19.947650788174982,
+  "dp_curve_Pa": 19.85128836566293,
+  "lambda": 2.6345282524177325,
+  "Q_fin_exit_plane_m3s": 1.91555496625226e-06
+ },
+ "vents_Q_out_positive_m3s": {
+  "inlet_roof": -7.288786352634257e-06,
+  "out_band": -2.2748131810746321e-07,
+  "out_corner": 2.9058882271604117e-06,
+  "out_wall": 4.6715188767900805e-06,
+  "x1203": -1.0486582874577051e-10
+ },
+ "Q_through_m3s": {
+  "in": 7.516372536570466e-06,
+  "out": 7.577407103950493e-06
+ },
+ "probes": {
+  "fan_intake": {
+   "cells": 62,
+   "speed_mean_mps": 2.3885148284132205,
+   "speed_max_mps": 3.995494216934235,
+   "p_mean_Pa": -4.738868236541748
+  },
+  "fin_block": {
+   "cells": 1008,
+   "speed_mean_mps": 0.4511114974183051,
+   "speed_max_mps": 3.598259734793469,
+   "p_mean_Pa": 0.09926703572273254
+  },
+  "fan_outlet": {
+   "cells": 63,
+   "speed_mean_mps": 0.24607681004080112,
+   "speed_max_mps": 0.5737617255059291,
+   "p_mean_Pa": 0.19787368178367615
+  },
+  "probe__fan_intake_air": {
+   "cells": 124,
+   "speed_mean_mps": 1.5633147485352636,
+   "speed_max_mps": 3.068423574978845,
+   "p_mean_Pa": -1.6721042394638062
+  },
+  "probe__evf_board": {
+   "cells": 464,
+   "speed_mean_mps": 0.0019020935728902835,
+   "speed_max_mps": 0.012000106192270573,
+   "p_mean_Pa": -0.10942686349153519
+  },
+  "probe__x1203_ic": {
+   "cells": 1068,
+   "speed_mean_mps": 0.01364215169465113,
+   "speed_max_mps": 0.054970230168798824,
+   "p_mean_Pa": -0.04483071342110634
+  },
+  "probe__pi_board": {
+   "cells": 2979,
+   "speed_mean_mps": 0.01489136587140438,
+   "speed_max_mps": 0.389035034368482,
+   "p_mean_Pa": -0.08462846279144287
+  },
+  "probe__camera": {
+   "cells": 1230,
+   "speed_mean_mps": 0.23806532494095697,
+   "speed_max_mps": 1.4885540817189262,
+   "p_mean_Pa": -0.02471139281988144
+  },
+  "probe__usb_stick": {
+   "cells": 484,
+   "speed_mean_mps": 0.004564644527427038,
+   "speed_max_mps": 0.019552179333005685,
+   "p_mean_Pa": -0.11760175973176956
+  },
+  "probe__exhaust_plenum": {
+   "cells": 294,
+   "speed_mean_mps": 0.2941999954476432,
+   "speed_max_mps": 1.0070465416845473,
+   "p_mean_Pa": 0.18396525084972382
+  },
+  "probe__fin_exit": {
+   "cells": 63,
+   "speed_mean_mps": 0.24607681004080112,
+   "speed_max_mps": 0.5737617255059291,
+   "p_mean_Pa": 0.19787368178367615
+  },
+  "probe__roof_inlet_inner": {
+   "cells": 196,
+   "speed_mean_mps": 0.13219688975119825,
+   "speed_max_mps": 0.43558160023025305,
+   "p_mean_Pa": -0.1267029494047165
+  },
+  "probe__outside_inlet_roof": {
+   "cells": 196,
+   "speed_mean_mps": 0.02767333318061676,
+   "speed_max_mps": 0.06057698311181669,
+   "p_mean_Pa": -0.12163111567497253
+  },
+  "probe__outside_out_band": {
+   "cells": 44,
+   "speed_mean_mps": 0.035242083579464,
+   "speed_max_mps": 0.07791125977842905,
+   "p_mean_Pa": 0.03960072621703148
+  },
+  "probe__outside_out_corner": {
+   "cells": 18,
+   "speed_mean_mps": 0.038006409665625136,
+   "speed_max_mps": 0.08890007125568562,
+   "p_mean_Pa": 0.10195955634117126
+  },
+  "probe__outside_out_wall": {
+   "cells": 72,
+   "speed_mean_mps": 0.02573702145640851,
+   "speed_max_mps": 0.078195603280904,
+   "p_mean_Pa": 0.13294827938079834
+  },
+  "probe__outside_x1203": {
+   "cells": 36,
+   "speed_mean_mps": 8.298094801133998e-06,
+   "speed_max_mps": 1.657453615495121e-05,
+   "p_mean_Pa": 4.671900569519494e-06
+  }
+ },
+ "body_air": {
+  "cells": 86621,
+  "speed_mean_mps": 0.12118830515481376,
+  "p_mean_Pa": -0.11658389121294022
+ },
+ "fins": {
+  "x_faces_flux_m3s": [
+   0.0003382472616870775,
+   0.00030019573042184525,
+   0.0002417302565963179,
+   0.00020126228720823252,
+   0.00015129482967263927,
+   0.00011526272350739149,
+   7.699527276161901e-05,
+   5.108605778225953e-05,
+   2.73646712879087e-05,
+   1.464985784668423e-05,
+   2.5543034338395565e-06,
+   -5.6977667727014585e-06,
+   -1.1188129586623323e-05,
+   -1.608562955086316e-05,
+   -2.589684023372238e-05,
+   -3.5497323233487315e-05,
+   -2.9304853039523163e-05
+  ],
+  "Q_fin_inlet_m3s": 0.0003382472616870775,
+  "Q_fin_exit_face_m3s": -2.9304853039523163e-05,
+  "x0": 57,
+  "x1": 72
+ },
+ "intake_air_by_vent": {
+  "inlet_roof": 0.8687626426341919,
+  "out_band": 0.12261397013959431,
+  "out_corner": 0.00016128091559412924,
+  "out_wall": 0.0055182210539637235,
+  "x1203": 0.002939025908466479
+ },
+ "intake_air_by_vent_sum": 0.9999951406518105,
+ "recirculation": {
+  "tag_fin_exit_at_intake": 0.7968125733355977,
+  "source_method_R": 0.9725877985084014,
+  "source_c_in_K_per_W": 88.88933730562695,
+  "source_rise_K_per_W": 2.505329008253516,
+  "note": "fraction of fan intake air that has already passed through the fan"
+ },
+ "mean_age_s": {
+  "fan_intake": 71.06302444858444,
+  "probe__fan_intake_air": 71.07744055133348,
+  "probe__evf_board": 79.31035387512405,
+  "probe__x1203_ic": 83.87026341853841,
+  "probe__pi_board": 75.67289603847733,
+  "probe__camera": 71.46588779740465,
+  "probe__usb_stick": 78.81982108631894,
+  "probe__exhaust_plenum": 68.83438217747373,
+  "probe__fin_exit": 68.67819978027678,
+  "probe__roof_inlet_inner": 54.51723800391978,
+  "probe__outside_inlet_roof": 30.302359044300328,
+  "probe__outside_out_band": 13.853303091460292,
+  "probe__outside_out_corner": 37.46005669385146,
+  "probe__outside_out_wall": 49.86528971109232,
+  "probe__outside_x1203": 9.919618788594414
+ },
+ "thermal": {
+  "S2__adiabatic": {
+   "heat_in_W": 12.193,
+   "enthalpy_out_W": 12.193000227064982,
+   "shell_loss_W": 0.0,
+   "balance_rel": 1.8622568845078153e-08,
+   "not_applied": {
+    "encoder": "0.1 W: no mask__heat__encoder"
+   },
+   "iters": 875,
+   "res": 8.465021286123172e-07,
+   "h_ext_W_m2K": null,
+   "probes": {
+    "fan_intake": {
+     "mean": 1121.7302897314387,
+     "max": 1131.65506423141,
+     "flux_mean": 1120.9597358730825
+    },
+    "heat__x1203": {
+     "mean": 1791.1587764969024,
+     "max": 3409.234533031085,
+     "flux_mean": null
+    },
+    "heat__evf_board": {
+     "mean": 1714.4508519624405,
+     "max": 2737.9183399161425,
+     "flux_mean": null
+    },
+    "heat__camera": {
+     "mean": 1135.8458219120344,
+     "max": 1365.5177489611244,
+     "flux_mean": null
+    },
+    "heat__usb_stick": {
+     "mean": 1535.8801535338944,
+     "max": 2790.1037130167265,
+     "flux_mean": null
+    },
+    "heat__pi_board": {
+     "mean": 1369.2296751721342,
+     "max": 2705.0673033292564,
+     "flux_mean": null
+    },
+    "heat__soc": {
+     "mean": 1145.6056990622828,
+     "max": 1241.5956580496859,
+     "flux_mean": null
+    },
+    "probe__fan_intake_air": {
+     "mean": 1122.2165053186047,
+     "max": 1136.6509989972246,
+     "flux_mean": null
+    },
+    "probe__evf_board": {
+     "mean": 1714.4508519624405,
+     "max": 2737.9183399161425,
+     "flux_mean": null
+    },
+    "probe__x1203_ic": {
+     "mean": 1791.1587764969024,
+     "max": 3409.234533031085,
+     "flux_mean": null
+    },
+    "probe__pi_board": {
+     "mean": 1369.2296751721342,
+     "max": 2705.0673033292564,
+     "flux_mean": null
+    },
+    "probe__camera": {
+     "mean": 1135.8458219120344,
+     "max": 1365.5177489611244,
+     "flux_mean": null
+    },
+    "probe__usb_stick": {
+     "mean": 1535.8801535338944,
+     "max": 2790.1037130167265,
+     "flux_mean": null
+    },
+    "probe__exhaust_plenum": {
+     "mean": 1102.2593542470765,
+     "max": 1146.8660654412167,
+     "flux_mean": null
+    },
+    "probe__fin_exit": {
+     "mean": 1098.1615115997126,
+     "max": 1130.8201483541939,
+     "flux_mean": null
+    },
+    "probe__roof_inlet_inner": {
+     "mean": 863.2319667519314,
+     "max": 1126.8044305023325,
+     "flux_mean": null
+    },
+    "probe__outside_inlet_roof": {
+     "mean": 488.98299446152686,
+     "max": 1047.5175224976913,
+     "flux_mean": null
+    },
+    "probe__outside_out_band": {
+     "mean": 239.63970005162685,
+     "max": 462.5861720659517,
+     "flux_mean": null
+    },
+    "probe__outside_out_corner": {
+     "mean": 607.5385307271288,
+     "max": 996.0938577058945,
+     "flux_mean": null
+    },
+    "probe__outside_out_wall": {
+     "mean": 796.3257690787509,
+     "max": 1070.5951746032097,
+     "flux_mean": null
+    },
+    "probe__outside_x1203": {
+     "mean": 189.37804297270722,
+     "max": 234.15790490887545,
+     "flux_mean": null
+    }
+   },
+   "exhaust_T_by_vent_C": {
+    "inlet_roof": {
+     "flux_mean": 698.030263858995,
+     "max": 1120.0838674301137,
+     "direction": "in"
+    },
+    "out_band": {
+     "flux_mean": 622.3339099674032,
+     "max": 1014.3849161722517,
+     "direction": "in"
+    },
+    "out_corner": {
+     "flux_mean": 1074.7572127122128,
+     "max": 1127.7874825824567,
+     "direction": "out"
+    },
+    "out_wall": {
+     "flux_mean": 1052.5162779405491,
+     "max": 1126.816936906436,
+     "direction": "out"
+    },
+    "x1203": {
+     "flux_mean": 435.08062986237985,
+     "max": 681.1984932171858,
+     "direction": "in"
+    }
+   },
+   "soc_estimate": {
+    "T_fin_inlet_air_C": 1120.300269190257,
+    "Q_fin_m3s": 0.0003382472616870775,
+    "P_soc_W": 4.03,
+    "by_R_jc": {
+     "nominal": {
+      "R_sink_K_per_W": 4.8250677611126,
+      "T_soc_C": 1139.745292267541
+     },
+     "low": {
+      "R_sink_K_per_W": 4.4250677611126,
+      "T_soc_C": 1138.1332922675408
+     },
+     "high": {
+      "R_sink_K_per_W": 6.2250677611126,
+      "T_soc_C": 1145.3872922675407
+     }
+    },
+    "label": "ESTIMATE"
+   }
+  },
+  "S2__wall_loss": {
+   "heat_in_W": 12.193,
+   "enthalpy_out_W": 1.901804758102109,
+   "shell_loss_W": 10.291194433098008,
+   "balance_rel": -6.633313230372351e-08,
+   "not_applied": {
+    "encoder": "0.1 W: no mask__heat__encoder"
+   },
+   "iters": 567,
+   "res": 5.98371997959496e-07,
+   "h_ext_W_m2K": 3.0692076228686056,
+   "probes": {
+    "fan_intake": {
+     "mean": 189.94182757608996,
+     "max": 197.3441491585456,
+     "flux_mean": 189.84383895732253
+    },
+    "heat__x1203": {
+     "mean": 409.2660145050776,
+     "max": 665.2016093191103,
+     "flux_mean": null
+    },
+    "heat__evf_board": {
+     "mean": 401.8167715753516,
+     "max": 1073.7297918201425,
+     "flux_mean": null
+    },
+    "heat__camera": {
+     "mean": 202.50906053196672,
+     "max": 429.423274339959,
+     "flux_mean": null
+    },
+    "heat__usb_stick": {
+     "mean": 528.3436072384882,
+     "max": 1831.4277448533132,
+     "flux_mean": null
+    },
+    "heat__pi_board": {
+     "mean": 409.044027348683,
+     "max": 1746.4719476501111,
+     "flux_mean": null
+    },
+    "heat__soc": {
+     "mean": 227.60934089885632,
+     "max": 325.13119472337235,
+     "flux_mean": null
+    },
+    "probe__fan_intake_air": {
+     "mean": 189.36339209940846,
+     "max": 200.09092663309042,
+     "flux_mean": null
+    },
+    "probe__evf_board": {
+     "mean": 401.8167715753516,
+     "max": 1073.7297918201425,
+     "flux_mean": null
+    },
+    "probe__x1203_ic": {
+     "mean": 409.2660145050776,
+     "max": 665.2016093191103,
+     "flux_mean": null
+    },
+    "probe__pi_board": {
+     "mean": 409.044027348683,
+     "max": 1746.4719476501111,
+     "flux_mean": null
+    },
+    "probe__camera": {
+     "mean": 202.50906053196672,
+     "max": 429.423274339959,
+     "flux_mean": null
+    },
+    "probe__usb_stick": {
+     "mean": 528.3436072384882,
+     "max": 1831.4277448533132,
+     "flux_mean": null
+    },
+    "probe__exhaust_plenum": {
+     "mean": 203.45820173715256,
+     "max": 242.93810986732123,
+     "flux_mean": null
+    },
+    "probe__fin_exit": {
+     "mean": 201.54598391740453,
+     "max": 214.19869893214863,
+     "flux_mean": null
+    },
+    "probe__roof_inlet_inner": {
+     "mean": 150.51541458664818,
+     "max": 192.36049301939525,
+     "flux_mean": null
+    },
+    "probe__outside_inlet_roof": {
+     "mean": 97.57944149743109,
+     "max": 180.41887904203347,
+     "flux_mean": null
+    },
+    "probe__outside_out_band": {
+     "mean": 60.47814345470988,
+     "max": 91.98654269851406,
+     "flux_mean": null
+    },
+    "probe__outside_out_corner": {
+     "mean": 118.80750475547954,
+     "max": 178.43280536429685,
+     "flux_mean": null
+    },
+    "probe__outside_out_wall": {
+     "mean": 148.47579022702354,
+     "max": 190.0780385276825,
+     "flux_mean": null
+    },
+    "probe__outside_x1203": {
+     "mean": 80.64027263932326,
+     "max": 94.17592563740287,
+     "flux_mean": null
+    }
+   },
+   "exhaust_T_by_vent_C": {
+    "inlet_roof": {
+     "flux_mean": 128.10335549647053,
+     "max": 191.2986197646891,
+     "direction": "in"
+    },
+    "out_band": {
+     "flux_mean": 122.37111843174075,
+     "max": 185.25279599211257,
+     "direction": "in"
+    },
+    "out_corner": {
+     "flux_mean": 190.71800351047543,
+     "max": 198.89538581730147,
+     "direction": "out"
+    },
+    "out_wall": {
+     "flux_mean": 187.98556742870073,
+     "max": 199.64785906809706,
+     "direction": "out"
+    },
+    "x1203": {
+     "flux_mean": 157.7193977979483,
+     "max": 220.70253993281207,
+     "direction": "in"
+    }
+   },
+   "soc_estimate": {
+    "T_fin_inlet_air_C": 191.67640429558386,
+    "Q_fin_m3s": 0.0003382472616870775,
+    "P_soc_W": 4.03,
+    "by_R_jc": {
+     "nominal": {
+      "R_sink_K_per_W": 4.8250677611126,
+      "T_soc_C": 211.12142737286766
+     },
+     "low": {
+      "R_sink_K_per_W": 4.4250677611126,
+      "T_soc_C": 209.50942737286763
+     },
+     "high": {
+      "R_sink_K_per_W": 6.2250677611126,
+      "T_soc_C": 216.76342737286765
+     }
+    },
+    "label": "ESTIMATE"
+   }
+  },
+  "S3__adiabatic": {
+   "heat_in_W": 22.020999999999997,
+   "enthalpy_out_W": 22.021000019157395,
+   "shell_loss_W": 0.0,
+   "balance_rel": 8.699603762853163e-10,
+   "not_applied": {
+    "encoder": "0.1 W: no mask__heat__encoder"
+   },
+   "iters": 857,
+   "res": 7.323990339837495e-07,
+   "h_ext_W_m2K": null,
+   "probes": {
+    "fan_intake": {
+     "mean": 1998.2979595411612,
+     "max": 2020.1710150013148,
+     "flux_mean": 1997.095959422448
+    },
+    "heat__x1203": {
+     "mean": 3162.6481586717223,
+     "max": 6063.328368567829,
+     "flux_mean": null
+    },
+    "heat__evf_board": {
+     "mean": 2671.6881366184057,
+     "max": 3854.3771899312437,
+     "flux_mean": null
+    },
+    "heat__camera": {
+     "mean": 2022.2878852071567,
+     "max": 2250.6419416388185,
+     "flux_mean": null
+    },
+    "heat__usb_stick": {
+     "mean": 2717.739094749527,
+     "max": 4913.495516457471,
+     "flux_mean": null
+    },
+    "heat__pi_board": {
+     "mean": 2366.484604146578,
+     "max": 4750.33704086002,
+     "flux_mean": null
+    },
+    "heat__soc": {
+     "mean": 2060.468904630178,
+     "max": 2284.6080987841915,
+     "flux_mean": null
+    },
+    "probe__fan_intake_air": {
+     "mean": 2000.2686435841392,
+     "max": 2031.3806170127727,
+     "flux_mean": null
+    },
+    "probe__evf_board": {
+     "mean": 2671.6881366184057,
+     "max": 3854.3771899312437,
+     "flux_mean": null
+    },
+    "probe__x1203_ic": {
+     "mean": 3162.6481586717223,
+     "max": 6063.328368567829,
+     "flux_mean": null
+    },
+    "probe__pi_board": {
+     "mean": 2366.484604146578,
+     "max": 4750.33704086002,
+     "flux_mean": null
+    },
+    "probe__camera": {
+     "mean": 2022.2878852071567,
+     "max": 2250.6419416388185,
+     "flux_mean": null
+    },
+    "probe__usb_stick": {
+     "mean": 2717.739094749527,
+     "max": 4913.495516457471,
+     "flux_mean": null
+    },
+    "probe__exhaust_plenum": {
+     "mean": 1965.732801014723,
+     "max": 2034.7895081894844,
+     "flux_mean": null
+    },
+    "probe__fin_exit": {
+     "mean": 1960.7094560887267,
+     "max": 2024.3821913191255,
+     "flux_mean": null
+    },
+    "probe__roof_inlet_inner": {
+     "mean": 1534.2780478503187,
+     "max": 2010.3524048900133,
+     "flux_mean": null
+    },
+    "probe__outside_inlet_roof": {
+     "mean": 858.6978601741334,
+     "max": 1867.1711213739634,
+     "flux_mean": null
+    },
+    "probe__outside_out_band": {
+     "mean": 408.62398553993336,
+     "max": 811.0154105420061,
+     "flux_mean": null
+    },
+    "probe__outside_out_corner": {
+     "mean": 1074.2649742641997,
+     "max": 1776.7013078515924,
+     "flux_mean": null
+    },
+    "probe__outside_out_wall": {
+     "mean": 1416.5552359500023,
+     "max": 1913.3136408668263,
+     "flux_mean": null
+    },
+    "probe__outside_x1203": {
+     "mean": 302.1662491881264,
+     "max": 378.6473030492631,
+     "flux_mean": null
+    }
+   },
+   "exhaust_T_by_vent_C": {
+    "inlet_roof": {
+     "flux_mean": 1236.1204072178068,
+     "max": 1998.2166188285014,
+     "direction": "in"
+    },
+    "out_band": {
+     "flux_mean": 1100.206795170821,
+     "max": 1810.6616481259505,
+     "direction": "in"
+    },
+    "out_corner": {
+     "flux_mean": 1919.0879750065665,
+     "max": 2014.3935471544924,
+     "direction": "out"
+    },
+    "out_wall": {
+     "flux_mean": 1880.524133883802,
+     "max": 2015.2002461754907,
+     "direction": "out"
+    },
+    "x1203": {
+     "flux_mean": 721.6621845077586,
+     "max": 1138.8096952148308,
+     "direction": "in"
+    }
+   },
+   "soc_estimate": {
+    "T_fin_inlet_air_C": 1995.0731334125614,
+    "Q_fin_m3s": 0.0003382472616870775,
+    "P_soc_W": 9.88,
+    "by_R_jc": {
+     "nominal": {
+      "R_sink_K_per_W": 4.8250677611126,
+      "T_soc_C": 2042.7448028923538
+     },
+     "low": {
+      "R_sink_K_per_W": 4.4250677611126,
+      "T_soc_C": 2038.7928028923538
+     },
+     "high": {
+      "R_sink_K_per_W": 6.2250677611126,
+      "T_soc_C": 2056.576802892354
+     }
+    },
+    "label": "ESTIMATE"
+   }
+  },
+  "S3__wall_loss": {
+   "heat_in_W": 22.020999999999997,
+   "enthalpy_out_W": 3.5914936932145856,
+   "shell_loss_W": 18.429507104520884,
+   "balance_rel": 3.62261237259961e-08,
+   "not_applied": {
+    "encoder": "0.1 W: no mask__heat__encoder"
+   },
+   "iters": 538,
+   "res": 9.66151192146651e-07,
+   "h_ext_W_m2K": 3.0692076228686056,
+   "probes": {
+    "fan_intake": {
+     "mean": 330.26839912419985,
+     "max": 342.4075324841869,
+     "flux_mean": 330.2373245947356
+    },
+    "heat__x1203": {
+     "mean": 695.0843345948257,
+     "max": 1168.3705263924592,
+     "flux_mean": null
+    },
+    "heat__evf_board": {
+     "mean": 508.6060528424691,
+     "max": 1295.7161015732418,
+     "flux_mean": null
+    },
+    "heat__camera": {
+     "mean": 350.99547740245845,
+     "max": 576.2965471475967,
+     "flux_mean": null
+    },
+    "heat__usb_stick": {
+     "mean": 920.5995019865635,
+     "max": 3197.7113005179904,
+     "flux_mean": null
+    },
+    "heat__pi_board": {
+     "mean": 653.681889316933,
+     "max": 3034.6953190399768,
+     "flux_mean": null
+    },
+    "heat__soc": {
+     "mean": 417.61073985647096,
+     "max": 648.313269477459,
+     "flux_mean": null
+    },
+    "probe__fan_intake_air": {
+     "mean": 330.08649962473584,
+     "max": 347.7979596013952,
+     "flux_mean": null
+    },
+    "probe__evf_board": {
+     "mean": 508.6060528424691,
+     "max": 1295.7161015732418,
+     "flux_mean": null
+    },
+    "probe__x1203_ic": {
+     "mean": 695.0843345948257,
+     "max": 1168.3705263924592,
+     "flux_mean": null
+    },
+    "probe__pi_board": {
+     "mean": 653.681889316933,
+     "max": 3034.6953190399768,
+     "flux_mean": null
+    },
+    "probe__camera": {
+     "mean": 350.99547740245845,
+     "max": 576.2965471475967,
+     "flux_mean": null
+    },
+    "probe__usb_stick": {
+     "mean": 920.5995019865635,
+     "max": 3197.7113005179904,
+     "flux_mean": null
+    },
+    "probe__exhaust_plenum": {
+     "mean": 357.0160460014672,
+     "max": 414.88520182925464,
+     "flux_mean": null
+    },
+    "probe__fin_exit": {
+     "mean": 355.8531916433128,
+     "max": 382.92545155815003,
+     "flux_mean": null
+    },
+    "probe__roof_inlet_inner": {
+     "mean": 257.56091952941523,
+     "max": 336.91185649601294,
+     "flux_mean": null
+    },
+    "probe__outside_inlet_roof": {
+     "mean": 157.70853964116748,
+     "max": 314.3020889828999,
+     "flux_mean": null
+    },
+    "probe__outside_out_band": {
+     "mean": 87.69659135261486,
+     "max": 147.13500442994643,
+     "flux_mean": null
+    },
+    "probe__outside_out_corner": {
+     "mean": 199.04721542464893,
+     "max": 312.4384051467104,
+     "flux_mean": null
+    },
+    "probe__outside_out_wall": {
+     "mean": 256.00878780358863,
+     "max": 336.00863008886785,
+     "flux_mean": null
+    },
+    "probe__outside_x1203": {
+     "mean": 109.31858565219477,
+     "max": 130.4619021165176,
+     "flux_mean": null
+    }
+   },
+   "exhaust_T_by_vent_C": {
+    "inlet_roof": {
+     "flux_mean": 215.370927803672,
+     "max": 334.89442951230825,
+     "direction": "in"
+    },
+    "out_band": {
+     "flux_mean": 205.1017142810578,
+     "max": 325.9152147926349,
+     "direction": "in"
+    },
+    "out_corner": {
+     "flux_mean": 335.9633904759617,
+     "max": 351.64133916449816,
+     "direction": "out"
+    },
+    "out_wall": {
+     "flux_mean": 331.8773942863936,
+     "max": 354.7956658659115,
+     "direction": "out"
+    },
+    "x1203": {
+     "flux_mean": 229.93479155789782,
+     "max": 325.6999442615042,
+     "direction": "in"
+    }
+   },
+   "soc_estimate": {
+    "T_fin_inlet_air_C": 332.79161320293457,
+    "Q_fin_m3s": 0.0003382472616870775,
+    "P_soc_W": 9.88,
+    "by_R_jc": {
+     "nominal": {
+      "R_sink_K_per_W": 4.8250677611126,
+      "T_soc_C": 380.4632826827271
+     },
+     "low": {
+      "R_sink_K_per_W": 4.4250677611126,
+      "T_soc_C": 376.5112826827271
+     },
+     "high": {
+      "R_sink_K_per_W": 6.2250677611126,
+      "T_soc_C": 394.2952826827271
+     }
+    },
+    "label": "ESTIMATE"
+   }
+  }
+ },
+ "wall_loss_model": {
+  "U_W_m2K": 3.0692076228686056,
+  "shell_face_area_m2": 0.031024,
+  "params_wall_area_m2": 0.06636,
+  "label_legend": "{\"0\": \"interior air\", \"1\": \"solid (part)\", \"2\": \"exterior inactive (solid)\", \"3\": \"outside buffer air\", \"4\": \"ambient reservoir\", \"5\": \"vent porous zone\", \"6\": \"fan actuator (blower interior)\", \"7\": \"fan intake opening\", \"8\": \"fin block (porous, X)\", \"9\": \"dropped pocket (solid)\", \"10\": \"plug (closed hole, solid)\"}",
+  "note": "exterior = label 2 cells; shell = solid within 2 cells of it; loss = U x (active-cell faces on the shell) x (T_air - 30 C)"
+ },
+ "network_compare": {
+  "proxy|beta0.0|P": {
+   "Q_fan_m3s": 0.0004875,
+   "Q_fin_m3s": 0.0001017,
+   "Q_bypass_m3s": 0.0003859,
+   "recirculation_fraction": 0.873,
+   "Q_through_m3s": 6.197e-05,
+   "vents": {
+    "inlet_roof": -5.25e-05,
+    "out_band": 2.094e-05,
+    "out_corner": 8.356e-06,
+    "out_wall": 3.267e-05,
+    "x1203": -8.173e-06,
+    "sd_slot": -1.298e-06
+   },
+   "S2_T_soc_C": 234.3,
+   "S3_T_soc_C": 418.8,
+   "S2_T_body_C": 193.9
+  },
+  "proxy|beta1.0|P": {
+   "Q_fan_m3s": 0.0004877,
+   "Q_fin_m3s": 0.0001017,
+   "Q_bypass_m3s": 0.000386,
+   "recirculation_fraction": 0.782,
+   "Q_through_m3s": 0.0001061,
+   "vents": {
+    "inlet_roof": -8.955e-05,
+    "out_band": 8.858e-05,
+    "out_corner": 3.514e-06,
+    "out_wall": 1.4e-05,
+    "x1203": -1.394e-05,
+    "sd_slot": -2.598e-06
+   },
+   "S2_T_soc_C": 162.8,
+   "S3_T_soc_C": 290.1,
+   "S2_T_body_C": 122.4
+  },
+  "covered|beta0.0|P": {
+   "Q_fan_m3s": 0.0004332,
+   "Q_fin_m3s": 0.0004332,
+   "Q_bypass_m3s": 0.0,
+   "recirculation_fraction": 0.544,
+   "Q_through_m3s": 0.0001974,
+   "vents": {
+    "inlet_roof": -0.0001658,
+    "out_band": 6.861e-05,
+    "out_corner": 2.656e-05,
+    "out_wall": 0.0001022,
+    "x1203": -2.58e-05,
+    "sd_slot": -5.752e-06
+   },
+   "S2_T_soc_C": 90.62,
+   "S3_T_soc_C": 143.4,
+   "S2_T_body_C": 74.9
+  },
+  "covered|beta1.0|P": {
+   "Q_fan_m3s": 0.0004339,
+   "Q_fin_m3s": 0.0004339,
+   "Q_bypass_m3s": 0.0,
+   "recirculation_fraction": 0.507,
+   "Q_through_m3s": 0.0002138,
+   "vents": {
+    "inlet_roof": -0.0001795,
+    "out_band": 0.0001009,
+    "out_corner": 2.325e-05,
+    "out_wall": 8.961e-05,
+    "x1203": -2.793e-05,
+    "sd_slot": -6.355e-06
+   },
+   "S2_T_soc_C": 86.48,
+   "S3_T_soc_C": 136.0,
+   "S2_T_body_C": 70.78
+  },
+  "ducted|beta0.0|P": {
+   "Q_fan_m3s": 0.0004151,
+   "Q_fin_m3s": 0.0004151,
+   "Q_bypass_m3s": 0.0,
+   "recirculation_fraction": 0.0,
+   "Q_through_m3s": 0.0004151,
+   "vents": {
+    "inlet_roof": -0.000347,
+    "out_band": 0.0001456,
+    "out_corner": 5.58e-05,
+    "out_wall": 0.0002138,
+    "x1203": -5.398e-05,
+    "sd_slot": -1.414e-05
+   },
+   "S2_T_soc_C": 62.24,
+   "S3_T_soc_C": 92.3,
+   "S2_T_body_C": 46.2
+  }
+ },
+ "compute_s": 676.5616631507874,
+ "tracer_solve": {
+  "inlet_roof": {
+   "ambient_cells": 664,
+   "iters": 809,
+   "res": 9.64564234418571e-07
+  },
+  "out_band": {
+   "ambient_cells": 382,
+   "iters": 703,
+   "res": 8.835078171283529e-07
+  },
+  "out_corner": {
+   "ambient_cells": 154,
+   "iters": 523,
+   "res": 9.664076456300744e-07
+  },
+  "out_wall": {
+   "ambient_cells": 413,
+   "iters": 631,
+   "res": 8.405698010023088e-07
+  },
+  "x1203": {
+   "ambient_cells": 294,
+   "iters": 737,
+   "res": 9.844365137153774e-07
+  }
+ }
+}

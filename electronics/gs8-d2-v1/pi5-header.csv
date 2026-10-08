@@ -1,0 +1,11 @@
+pin,signal,connected_to,cable,bias_logic
+1,3V3,encoder V+ (QT red),qt,3.3 V supply
+"2, 4",5V,X1203 pogo pins (feed in),none (pogo),5.1 V from the X1203
+3,GPIO2 / SDA1,encoder SDA (QT blue); X1203 gauge (pogo),qt,Pi 1.8 k pull-up
+5,GPIO3 / SCL1,encoder SCL (QT yellow); X1203 gauge (pogo),qt,Pi 1.8 k pull-up
+6,GND,encoder GND (QT black),qt,
+33,GPIO13,"18/24 switch, common lug",fps_lead,"input, pull-up; low = 24 fps, high = 18 fps"
+34,GND,"18/24 switch, position-2 lug",fps_lead,
+37,GPIO26,run button,run_lead,"input, pull-up; low = pressed (run toggles on press)"
+39,GND,run button,run_lead,
+(pogo),X1203 status lines,X1203,none,"**reserved**: Geekworm documents GPIO lines for power-loss detect and charge control on the X120x family (GPIO6 / GPIO16 on the X1200 wiki, recalled, not re-read). Do not use GPIO6 or GPIO16 until G-W2 confirms them"

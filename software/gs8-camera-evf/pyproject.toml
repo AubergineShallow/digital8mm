@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gs8-camera-evf"
+version = "0.2.0.dev0"
+description = "GS8 EVF fork: Pi camera capture and bounded DRM live view"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+dependencies = []
+
+[project.scripts]
+gs8-camera-evf = "gs8_camera_evf.cli:main"
+
+[tool.setuptools]
+packages = ["gs8_camera_evf"]
+

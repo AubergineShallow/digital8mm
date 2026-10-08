@@ -1,0 +1,273 @@
+{
+  "scope": "Pure logic/synthetic tests only; no production edits, CAD construction, slicing or physical testing.",
+  "source_hashes": {
+    "build_d2.py": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+    "checks.py": "ec6023f27ad8ce42eaba7eeae79ea692a46b408f491edeb1d19626403447b649",
+    "test_r3_regressions.py": "06afa2681faeabd8ce8b6ae87992b3a4c6b09b1b6edf2d55f2b417220cb366ee"
+  },
+  "regressions": {
+    "total": 27,
+    "passed": 27,
+    "results": [
+      {
+        "test": "test_baseline_joint_ids_fixed",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_baseline_registry_joints_complete",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_calibration_items_registered",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_conflicting_records",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_coupon_record_cannot_cover_production_part",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_current_pass_closes_only_when_all_items_pass",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_deleted_joint_entries_fail",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_deleted_joint_with_its_probes_fails",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_empty_category_fails",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_even_span_measures_origin_and_stale_origin_fails",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_failed_verdict_stays_open",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_file_names_are_not_evidence",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_flexure_is_gated_exception_not_ordinary_pass",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_info_only_category_does_not_pass",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_item_typo_keeps_state_open",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_joint_registry_required",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_joint_rejects_unknown_feature_status",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_measured_and_assembly_records_name_doc_and_stls",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_missing_required_coupon_artifact_rejected",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_old_revision_production_record_is_stale",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_rejected_fail_beside_pass_stays_open",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_root_is_found_from_a_deeper_folder",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_stale_r1_record_is_stale",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_unexpected_missing_ray_fails_and_expect_outside_allows_it",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_unknown_state_fail_record_stays_open",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_unknown_status_rejected",
+        "passed": true,
+        "returned": null
+      },
+      {
+        "test": "test_unreadable_record_is_listed_and_open",
+        "passed": true,
+        "returned": null
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "malformed_field_array_state",
+      "fixture": {
+        "item": "panel",
+        "state": [
+          "slicer_review"
+        ],
+        "artifacts": {
+          "stl/panel.stl": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "profile": "synthetic audit",
+        "verdict": "fail",
+        "date": "2026-10-05",
+        "by": "audit"
+      },
+      "observed": {
+        "exception": "TypeError",
+        "message": "unhashable type: 'list'"
+      },
+      "source": "build_d2.py:727-743,880-882",
+      "implication": "Syntactically valid JSON with an invalid field type raises instead of being rejected.",
+      "recommendation": "Check item/state/profile/date/by field types before membership lookups; retain a rejected record."
+    },
+    {
+      "id": "malformed_field_object_item",
+      "fixture": {
+        "item": {
+          "part": "panel"
+        },
+        "state": "slicer_review",
+        "artifacts": {
+          "stl/panel.stl": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "profile": "synthetic audit",
+        "verdict": "fail",
+        "date": "2026-10-05",
+        "by": "audit"
+      },
+      "observed": {
+        "exception": "TypeError",
+        "message": "unhashable type: 'dict'"
+      },
+      "source": "build_d2.py:727-743,880-882",
+      "implication": "Syntactically valid JSON with an invalid field type raises instead of being rejected.",
+      "recommendation": "Check item/state/profile/date/by field types before membership lookups; retain a rejected record."
+    },
+    {
+      "id": "unvalidated_replacement_waives_required_joint",
+      "observed": [
+        {
+          "kind": "joint",
+          "id": "J1",
+          "parts": [
+            "hood"
+          ],
+          "required": [
+            "f"
+          ],
+          "note": "",
+          "gated_exceptions": {},
+          "problems": [],
+          "status": "pass"
+        }
+      ],
+      "all_rows_pass": true,
+      "source": "checks.py:970-983",
+      "implication": "An FR_JOINTS declaration absent from CRITICAL_JOINTS can waive a required baseline joint without being checked.",
+      "qualification": "The actual candidate merges its replacements into CRITICAL_JOINTS; this demonstrates a regression gap, not a current geometry failure.",
+      "recommendation": "Only validated entries actually in CRITICAL_JOINTS may replace a required joint; require usable feature coverage."
+    },
+    {
+      "id": "whole_hood_test_bound_only_to_local_coupons",
+      "required_artifacts": [
+        "stl/coupons/board_edge_plate.stl",
+        "stl/coupons/encoder_cradle_hook.stl",
+        "stl/coupons/hood_hook.stl",
+        "stl/coupons/hood_hook_ret.stl",
+        "stl/coupons/hood_ledge.stl",
+        "stl/coupons/hood_ledge_ret.stl"
+      ],
+      "recorded_artifacts": [
+        "stl/coupons/board_edge_plate.stl",
+        "stl/coupons/encoder_cradle_hook.stl",
+        "stl/coupons/hood_hook.stl",
+        "stl/coupons/hood_hook_ret.stl",
+        "stl/coupons/hood_ledge.stl",
+        "stl/coupons/hood_ledge_ret.stl"
+      ],
+      "before_outcome": "pass",
+      "after_simulated_production_change_outcome": "pass",
+      "source": "build_d2.py:967-977; SPEC.md:353-356",
+      "implication": "A G-SNAP-2 record can remain current after whole hood/tub geometry changes outside its coupon cuts.",
+      "qualification": "All current physical evidence is not run; no existing physical result was invalidated by this audit.",
+      "recommendation": "Split coupon and whole-assembly subtests, or require the full hood/tub STL hashes and acceptance-document hash for this gate."
+    }
+  ],
+  "candidate_physical_states": {
+    "slicer_review": {
+      "items_required": 11,
+      "items_pass": 0,
+      "open": true,
+      "status": "not run"
+    },
+    "coupon_validation": {
+      "items_required": 9,
+      "items_pass": 0,
+      "open": true,
+      "status": "not run"
+    },
+    "measured_fit": {
+      "items_required": 17,
+      "items_pass": 0,
+      "open": true,
+      "status": "not run"
+    },
+    "assembly_operation": {
+      "items_required": 22,
+      "items_pass": 0,
+      "open": true,
+      "status": "not run"
+    }
+  },
+  "candidate_artifact_binding_note": "build_d2.py:1321-1322 resolves STL hashes from this build's output files and coupons; RELEASE_DIR shares acceptance docs, not baseline production STL hashes."
+}

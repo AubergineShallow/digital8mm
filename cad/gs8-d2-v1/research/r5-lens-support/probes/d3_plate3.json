@@ -1,0 +1,87 @@
+{
+ "LCB rd28.5 pitch (left ss, top free)": {
+  "rot_deg_per_Nm": 0.07873064407086262,
+  "sigma_y_MPa_per_Nm": [
+   4.746292471233808,
+   [
+    29.3,
+    67.7
+   ]
+  ],
+  "sigma_z_MPa_per_Nm": [
+   2.299753877447107,
+   [
+    29.3,
+    69.6
+   ]
+  ]
+ },
+ "LCB rd28.5 yaw (left ss, top free)": {
+  "rot_deg_per_Nm": 0.007544204045155134,
+  "sigma_y_MPa_per_Nm": [
+   1.80475716986912,
+   [
+    29.3,
+    67.7
+   ]
+  ],
+  "sigma_z_MPa_per_Nm": [
+   0.7133558219359876,
+   [
+    29.3,
+    67.7
+   ]
+  ]
+ },
+ "LCB rd28.5 pitch (left free, top free)": {
+  "rot_deg_per_Nm": 0.14553864264276023,
+  "sigma_y_MPa_per_Nm": [
+   6.290616779366427,
+   [
+    -28.3,
+    50.6
+   ]
+  ],
+  "sigma_z_MPa_per_Nm": [
+   3.4655194156151197,
+   [
+    -24.4,
+    79.2
+   ]
+  ]
+ },
+ "today seat rd20 pitch (left free, top free)": {
+  "rot_deg_per_Nm": 0.7432909965300355,
+  "sigma_y_MPa_per_Nm": [
+   9.829916775668927,
+   [
+    -16.8,
+    44.8
+   ]
+  ],
+  "sigma_z_MPa_per_Nm": [
+   7.944184724102391,
+   [
+    -16.8,
+    44.8
+   ]
+  ]
+ },
+ "today seat rd20 pitch (left ss, top free)": {
+  "rot_deg_per_Nm": 0.47873745083023517,
+  "sigma_y_MPa_per_Nm": [
+   6.070129914429838,
+   [
+    -16.8,
+    44.8
+   ]
+  ],
+  "sigma_z_MPa_per_Nm": [
+   5.042784895547384,
+   [
+    -16.8,
+    44.8
+   ]
+  ]
+ }
+}

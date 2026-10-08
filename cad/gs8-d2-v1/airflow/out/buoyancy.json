@@ -1,0 +1,45 @@
+{
+ "label": "ESTIMATE (order of magnitude, not simulated)",
+ "H_m": 0.07198204419889502,
+ "z_vents_mm": {
+  "inlet_roof": 98.0,
+  "out_band": 28.0,
+  "out_corner": 35.0,
+  "out_wall": 29.0,
+  "x1203": 14.0
+ },
+ "z_low_mm": 26.01795580110497,
+ "rows": [
+  {
+   "dT_K": 5.0,
+   "stack_dp_Pa": 0.013130632098255227,
+   "Q_m3s": 1.184704968232506e-05,
+   "heat_W": 0.06835877984248065
+  },
+  {
+   "dT_K": 10.0,
+   "stack_dp_Pa": 0.025841956130144325,
+   "Q_m3s": 2.0836964777510535e-05,
+   "heat_W": 0.24046315766472262
+  },
+  {
+   "dT_K": 20.0,
+   "stack_dp_Pa": 0.05008453388305552,
+   "Q_m3s": 3.4707640592033755e-05,
+   "heat_W": 0.8010676162259995
+  },
+  {
+   "dT_K": 40.0,
+   "stack_dp_Pa": 0.09433085894978517,
+   "Q_m3s": 5.447667305885627e-05,
+   "heat_W": 2.514691167869097
+  },
+  {
+   "dT_K": 60.0,
+   "stack_dp_Pa": 0.13370356980016018,
+   "Q_m3s": 6.886812836780053e-05,
+   "heat_W": 4.768520114115954
+  }
+ ],
+ "direction": "warm air leaves through the roof vent and enters through the low front/side vents (opposite to the fan-driven direction found in the network model)"
+}

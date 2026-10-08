@@ -1,0 +1,805 @@
+{
+ "revision": "GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)",
+ "parts": [
+  {
+   "id": "pi5",
+   "kind": "cots",
+   "stub": false,
+   "name": "Raspberry Pi 5 (4/8 GB)",
+   "pn": "SC1111/SC1112",
+   "src": "datasheet RP-008347",
+   "step": 4,
+   "mass_g": 46.0,
+   "bbox": [
+    -94.0,
+    -5.55,
+    -32.3,
+    23.7,
+    16.0,
+    36.1
+   ]
+  },
+  {
+   "id": "cooler",
+   "kind": "cots",
+   "stub": false,
+   "name": "Raspberry Pi Active Cooler",
+   "pn": "SC1148",
+   "src": "datasheet RP-008188",
+   "step": 1,
+   "mass_g": 25.0,
+   "bbox": [
+    -72.8,
+    -9.5,
+    -25.55,
+    16.95,
+    20.2,
+    36.31
+   ]
+  },
+  {
+   "id": "x1203",
+   "kind": "cots",
+   "stub": false,
+   "name": "Geekworm X1203 UPS (pogo pins, XH lead to any 1S pack)",
+   "pn": "X1203",
+   "src": "listing; height estimate",
+   "step": 1,
+   "mass_g": 30.0,
+   "bbox": [
+    -91.0,
+    -6.0,
+    -32.3,
+    23.7,
+    6.0,
+    16.0
+   ]
+  },
+  {
+   "id": "x1203_kit",
+   "kind": "cots",
+   "stub": false,
+   "name": "X1203 kit standoffs + screws",
+   "pn": "kit",
+   "src": "listing (estimate)",
+   "step": 1,
+   "mass_g": 6.0,
+   "bbox": [
+    -70.39,
+    -6.61,
+    -31.3,
+    22.7,
+    4.25,
+    21.85
+   ]
+  },
+  {
+   "id": "gs_camera",
+   "kind": "cots",
+   "stub": false,
+   "name": "Raspberry Pi Global Shutter Camera (tripod block removed at B0)",
+   "pn": "SC0926 class",
+   "src": "official GS side drawing (gs_side.png) via R5 judge 3 s6.1; MP-CAM open",
+   "step": 7,
+   "mass_g": 34.0,
+   "bbox": [
+    -25.09,
+    -4.38,
+    -19.75,
+    19.75,
+    40.25,
+    82.1
+   ]
+  },
+  {
+   "id": "c_cs_adapter",
+   "kind": "cots",
+   "stub": false,
+   "name": "C-CS adapter ring 5 mm (with the camera)",
+   "pn": "kit",
+   "src": "GS drawing (dia 30.75 x 5.0 face to face; MP-CAM)",
+   "step": 7,
+   "mass_g": 4.0,
+   "bbox": [
+    -4.42,
+    0.62,
+    -15.39,
+    15.39,
+    44.62,
+    75.39
+   ]
+  },
+  {
+   "id": "lens",
+   "kind": "cots",
+   "stub": false,
+   "name": "Fujinon HF6XA-5M 6 mm C-mount",
+   "pn": "see LENSES",
+   "src": "repo: PALETTE.md dia 39 x 51, 100 g; r5 split into rear step / band / rings ASSUMED (design 1 / judge 3 band +2.0..+7.8; G-LENS)",
+   "step": 8,
+   "mass_g": 100.0,
+   "bbox": [
+    -3.92,
+    51.64,
+    -19.53,
+    19.54,
+    40.47,
+    79.54
+   ]
+  },
+  {
+   "id": "eyepiece",
+   "kind": "cots",
+   "stub": false,
+   "name": "Display Components 0PE039-16X glass eyepiece",
+   "pn": "0PE039-16X",
+   "src": "repo EVF-SELECTION.md",
+   "step": 6,
+   "mass_g": 35.0,
+   "bbox": [
+    -174.32,
+    -149.48,
+    -3.27,
+    35.27,
+    58.75,
+    97.27
+   ]
+  },
+  {
+   "id": "hmx039",
+   "kind": "cots",
+   "stub": false,
+   "name": "Hicenda HMX039-V1 micro-OLED + 50 mm flex",
+   "pn": "HMX039 kit",
+   "src": "repo",
+   "step": 6,
+   "mass_g": 2.0,
+   "bbox": [
+    -148.0,
+    -146.07,
+    8.2,
+    23.8,
+    71.2,
+    84.8
+   ]
+  },
+  {
+   "id": "evf_board",
+   "kind": "cots",
+   "stub": false,
+   "name": "Hicenda HDMI driver board Rev I",
+   "pn": "HMX039 kit",
+   "src": "repo; thickness estimate",
+   "step": 6,
+   "mass_g": 8.0,
+   "bbox": [
+    -144.8,
+    -136.8,
+    1.0,
+    28.0,
+    64.0,
+    92.5
+   ]
+  },
+  {
+   "id": "usb_stick",
+   "kind": "cots",
+   "stub": false,
+   "name": "SanDisk Extreme PRO USB 3.2 SSD stick",
+   "pn": "SDCZ880",
+   "src": "listing 71 x 21.3 x 11.4",
+   "step": 9,
+   "mass_g": 22.0,
+   "bbox": [
+    -153.0,
+    -82.0,
+    -15.95,
+    5.35,
+    18.7,
+    30.1
+   ]
+  },
+  {
+   "id": "encoder",
+   "kind": "cots",
+   "stub": false,
+   "name": "Adafruit 5880 I2C QT rotary encoder (A0 bridged, 0x37)",
+   "pn": "5880",
+   "src": "listing; depth estimate",
+   "step": 2,
+   "mass_g": 8.0,
+   "bbox": [
+    -75.65,
+    -50.35,
+    19.6,
+    44.0,
+    44.2,
+    69.8
+   ]
+  },
+  {
+   "id": "switch_1824",
+   "kind": "cots",
+   "stub": false,
+   "name": "mini 2-position rotary switch + nut + washer",
+   "pn": "Lorlin CK1049 class",
+   "src": "estimate",
+   "step": 2,
+   "mass_g": 12.0,
+   "bbox": [
+    -135.51,
+    -110.49,
+    19.18,
+    42.0,
+    44.5,
+    69.52
+   ]
+  },
+  {
+   "id": "run_button",
+   "kind": "cots",
+   "stub": false,
+   "name": "pre-wired momentary, red cap (Squid Button class)",
+   "pn": "Pi Hut Squid",
+   "src": "estimate",
+   "step": 3,
+   "mass_g": 4.0,
+   "bbox": [
+    -35.0,
+    -20.49,
+    -6.51,
+    6.51,
+    -27.51,
+    -14.49
+   ]
+  },
+  {
+   "id": "pack",
+   "kind": "cots",
+   "stub": false,
+   "name": "1S2P 18650 pack, BMS, XT30 male lead, pull ribbon",
+   "pn": "class",
+   "src": "estimate",
+   "step": 10,
+   "mass_g": 105.0,
+   "bbox": [
+    -64.31,
+    -26.69,
+    -9.31,
+    9.31,
+    -108.81,
+    -36.8
+   ]
+  },
+  {
+   "id": "xt30_pair",
+   "kind": "cots",
+   "stub": false,
+   "name": "XT30 pair (pigtail female + pack male) + 180 mm 18 AWG pigtail with its inline 15 A fuse",
+   "pn": "XT30U; fuse Littelfuse 0251015.MXL",
+   "src": "estimate; fuse body: Littelfuse 251 datasheet rev VL",
+   "step": 10,
+   "mass_g": 11.6,
+   "bbox": [
+    -63.0,
+    -37.0,
+    -5.1,
+    5.1,
+    -26.0,
+    -14.8
+   ]
+  },
+  {
+   "id": "tripod_nut",
+   "kind": "cots",
+   "stub": false,
+   "name": "1/4-20 UNC hex nut, steel",
+   "pn": "ISO 4032 class",
+   "src": "standard",
+   "step": 3,
+   "mass_g": 4.0,
+   "bbox": [
+    -113.41,
+    -100.59,
+    -5.55,
+    5.55,
+    -5.7,
+    -0.1
+   ]
+  },
+  {
+   "id": "strap",
+   "kind": "cots",
+   "stub": false,
+   "name": "12 mm hand strap with buckle",
+   "pn": "class",
+   "src": "estimate",
+   "step": 3,
+   "mass_g": 15.0,
+   "bbox": [
+    -93.71,
+    -72.3,
+    -33.5,
+    -21.5,
+    -104.27,
+    -0.2
+   ]
+  },
+  {
+   "id": "microsd",
+   "kind": "cots",
+   "stub": false,
+   "name": "microSD card (OS), 32 GB A2 class",
+   "pn": "consumable class",
+   "src": "PALETTE.md: protrudes ~2-3 mm past the Pi edge (2.5 used); socket part inside the pi5 underside proxy is not modelled (proxy x -12.4..-3.5)",
+   "step": 5,
+   "mass_g": 0.4,
+   "bbox": [
+    -12.4,
+    -3.5,
+    -11.0,
+    0.0,
+    16.9,
+    17.9
+   ]
+  },
+  {
+   "id": "pt_screws",
+   "kind": "hardware",
+   "stub": false,
+   "name": "7 x PT 3.0 x 12 PH1",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class",
+   "step": 8,
+   "mass_g": 0.0,
+   "bbox": null
+  },
+  {
+   "id": "foam_pad",
+   "kind": "cots",
+   "stub": false,
+   "name": "closed-cell foam 16 x 14 x 1.0 (OLED pad)",
+   "pn": "consumable",
+   "src": "estimate",
+   "step": 6,
+   "mass_g": 0.1,
+   "bbox": [
+    -146.07,
+    -145.07,
+    8.2,
+    23.8,
+    71.2,
+    84.8
+   ]
+  },
+  {
+   "id": "m3_hw",
+   "kind": "hardware",
+   "stub": false,
+   "name": "lens collar M3 hardware: 3 x M3 x 10 + 1 x M3 x 16 ISO 7045 PH1 A2, 4 x ISO 7089 M3 washers, 3 x M3 short heat-set inserts (tub) + 1 x M3 L 5.7 insert (collar lug)",
+   "pn": "ISO 7045 / ISO 7089 / heat-set insert class",
+   "src": "standard class (FASTENER-POLICY s I, r5)",
+   "step": 7,
+   "mass_g": 0.0,
+   "bbox": null
+  },
+  {
+   "id": "s_b1",
+   "kind": "hardware",
+   "stub": false,
+   "name": "PT 3.0 x 12 PH1 (panel boss_b1)",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class (PT)",
+   "step": 8,
+   "mass_g": 0.7999999999999999,
+   "bbox": [
+    -94.0,
+    -88.0,
+    24.85,
+    30.85,
+    -4.4,
+    10.0
+   ]
+  },
+  {
+   "id": "s_b2",
+   "kind": "hardware",
+   "stub": false,
+   "name": "PT 3.0 x 12 PH1 (panel boss_b2)",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class (PT)",
+   "step": 8,
+   "mass_g": 0.7999999999999999,
+   "bbox": [
+    -108.0,
+    -102.0,
+    24.85,
+    30.85,
+    -4.4,
+    10.0
+   ]
+  },
+  {
+   "id": "s_r1",
+   "kind": "hardware",
+   "stub": false,
+   "name": "PT 3.0 x 12 PH1 (panel post_f)",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class (PT)",
+   "step": 8,
+   "mass_g": 0.7999999999999999,
+   "bbox": [
+    -34.5,
+    -28.5,
+    -34.8,
+    -20.4,
+    82.5,
+    88.5
+   ]
+  },
+  {
+   "id": "s_r2",
+   "kind": "hardware",
+   "stub": false,
+   "name": "PT 3.0 x 12 PH1 (panel post_r)",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class (PT)",
+   "step": 8,
+   "mass_g": 0.7999999999999999,
+   "bbox": [
+    -146.5,
+    -140.5,
+    -34.8,
+    -20.4,
+    44.5,
+    50.5
+   ]
+  },
+  {
+   "id": "s_k1",
+   "kind": "hardware",
+   "stub": false,
+   "name": "PT 3.0 x 12 PH1 (tub keeper boss s_k1)",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class (PT)",
+   "step": 4,
+   "mass_g": 0.7999999999999999,
+   "bbox": [
+    -102.5,
+    -96.5,
+    13.0,
+    19.0,
+    2.3,
+    16.7
+   ]
+  },
+  {
+   "id": "s_k2",
+   "kind": "hardware",
+   "stub": false,
+   "name": "PT 3.0 x 12 PH1 (tub keeper boss s_k2)",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class (PT)",
+   "step": 4,
+   "mass_g": 0.7999999999999999,
+   "bbox": [
+    -67.0,
+    -61.0,
+    25.25,
+    31.25,
+    2.3,
+    16.7
+   ]
+  },
+  {
+   "id": "s_j",
+   "kind": "hardware",
+   "stub": false,
+   "name": "PT 3.0 x 12 PH1 (tub j4 lock boss)",
+   "pn": "PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt)",
+   "src": "standard class (PT)",
+   "step": 3,
+   "mass_g": 0.7999999999999999,
+   "bbox": [
+    -114.0,
+    -108.0,
+    -23.0,
+    -17.0,
+    -4.4,
+    10.0
+   ]
+  },
+  {
+   "id": "s_c1",
+   "kind": "hardware",
+   "stub": false,
+   "name": "M3 x 10 ISO 7045 M3 pan head cross recess PH1, A2 stainless + washer + insert (tub insert TL)",
+   "pn": "M3 x 10 ISO 7045 M3 pan head cross recess PH1, A2 stainless",
+   "src": "standard class (M3, r5)",
+   "step": 7,
+   "mass_g": 1.09,
+   "bbox": [
+    -6.8,
+    5.7,
+    7.5,
+    14.5,
+    87.0,
+    94.0
+   ]
+  },
+  {
+   "id": "s_c2",
+   "kind": "hardware",
+   "stub": false,
+   "name": "M3 x 10 ISO 7045 M3 pan head cross recess PH1, A2 stainless + washer + insert (tub insert TR)",
+   "pn": "M3 x 10 ISO 7045 M3 pan head cross recess PH1, A2 stainless",
+   "src": "standard class (M3, r5)",
+   "step": 7,
+   "mass_g": 1.09,
+   "bbox": [
+    -6.8,
+    5.7,
+    -14.5,
+    -7.5,
+    87.0,
+    94.0
+   ]
+  },
+  {
+   "id": "s_c3",
+   "kind": "hardware",
+   "stub": false,
+   "name": "M3 x 10 ISO 7045 M3 pan head cross recess PH1, A2 stainless + washer + insert (tub insert LL)",
+   "pn": "M3 x 10 ISO 7045 M3 pan head cross recess PH1, A2 stainless",
+   "src": "standard class (M3, r5)",
+   "step": 7,
+   "mass_g": 1.09,
+   "bbox": [
+    -6.8,
+    5.7,
+    24.5,
+    31.5,
+    32.5,
+    39.5
+   ]
+  },
+  {
+   "id": "s_c4",
+   "kind": "hardware",
+   "stub": false,
+   "name": "M3 x 16 ISO 7045 M3 pan head cross recess PH1, A2 stainless + washer + insert (lens_collar lug insert)",
+   "pn": "M3 x 16 ISO 7045 M3 pan head cross recess PH1, A2 stainless",
+   "src": "standard class (M3, r5)",
+   "step": 8,
+   "mass_g": 1.57,
+   "bbox": [
+    1.2,
+    8.2,
+    -34.5,
+    -27.5,
+    50.1,
+    68.9
+   ]
+  },
+  {
+   "id": "tub",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_tub.py",
+   "pn": null,
+   "src": null,
+   "step": 3,
+   "mass_g": 96.6,
+   "bbox": [
+    -154.02,
+    -2.68,
+    -35.0,
+    35.01,
+    -3.65,
+    97.31
+   ]
+  },
+  {
+   "id": "hood",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_hood.py",
+   "pn": null,
+   "src": null,
+   "step": 5,
+   "mass_g": 51.7,
+   "bbox": [
+    -170.23,
+    1.0,
+    -32.36,
+    35.03,
+    0.29,
+    100.0
+   ]
+  },
+  {
+   "id": "panel",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_panel.py",
+   "pn": null,
+   "src": null,
+   "step": 8,
+   "mass_g": 46.5,
+   "bbox": [
+    -152.67,
+    -4.03,
+    -30.42,
+    35.03,
+    2.58,
+    97.0
+   ]
+  },
+  {
+   "id": "base_grip",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_grip.py",
+   "pn": null,
+   "src": null,
+   "step": 3,
+   "mass_g": 58.4,
+   "bbox": [
+    -117.0,
+    -0.5,
+    -35.2,
+    35.2,
+    -110.04,
+    0.0
+   ]
+  },
+  {
+   "id": "cap",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_grip.py",
+   "pn": null,
+   "src": null,
+   "step": 10,
+   "mass_g": 7.2,
+   "bbox": [
+    -71.03,
+    -22.97,
+    -15.03,
+    15.03,
+    -116.03,
+    -105.8
+   ]
+  },
+  {
+   "id": "plunger",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_small.py",
+   "pn": null,
+   "src": null,
+   "step": 5,
+   "mass_g": 0.3,
+   "bbox": [
+    -5.3,
+    -1.29,
+    2.19,
+    15.81,
+    16.59,
+    24.41
+   ]
+  },
+  {
+   "id": "knob_exp",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_small.py",
+   "pn": null,
+   "src": null,
+   "step": 9,
+   "mass_g": 5.1,
+   "bbox": [
+    -77.0,
+    -49.0,
+    35.17,
+    44.22,
+    43.0,
+    71.0
+   ]
+  },
+  {
+   "id": "knob_fps",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_small.py",
+   "pn": null,
+   "src": null,
+   "step": 9,
+   "mass_g": 1.3,
+   "bbox": [
+    -133.0,
+    -113.0,
+    35.16,
+    42.23,
+    47.0,
+    67.0
+   ]
+  },
+  {
+   "id": "eyecup",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_small.py",
+   "pn": null,
+   "src": null,
+   "step": 9,
+   "mass_g": 5.3,
+   "bbox": [
+    -187.63,
+    -171.28,
+    -6.84,
+    38.84,
+    55.18,
+    100.85
+   ]
+  },
+  {
+   "id": "stick_sleeve",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_small.py",
+   "pn": null,
+   "src": null,
+   "step": 9,
+   "mass_g": 1.2,
+   "bbox": [
+    -154.02,
+    -138.0,
+    -16.77,
+    6.17,
+    17.88,
+    30.92
+   ]
+  },
+  {
+   "id": "pi_keeper",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_keeper.py",
+   "pn": null,
+   "src": null,
+   "step": 4,
+   "mass_g": 6.6,
+   "bbox": [
+    -105.0,
+    -41.0,
+    -23.0,
+    31.9,
+    7.7,
+    15.61
+   ]
+  },
+  {
+   "id": "lens_collar",
+   "kind": "printed",
+   "stub": false,
+   "name": "printed_collar.py",
+   "pn": null,
+   "src": null,
+   "step": 7,
+   "mass_g": 18.4,
+   "bbox": [
+    -2.7,
+    8.64,
+    -35.0,
+    33.01,
+    29.98,
+    95.51
+   ]
+  }
+ ],
+ "lens_options": [
+  "kowa_lm6hc",
+  "fujinon_hf6xa"
+ ]
+}

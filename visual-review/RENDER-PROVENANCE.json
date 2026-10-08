@@ -1,0 +1,246 @@
+{
+  "revision": "r5-cloud-polish-20261007",
+  "variant_shown": "kowa_lm6hc",
+  "assembly_geometry": "final post-processed assembly STEP, not print-stock membranes",
+  "source_receipt": {
+    "file": "cad/gs8-d2-v1/out/build-receipt.json",
+    "sha256": "806c7b381e1133a5e69c2d1547d915ac305bec2e1cb5e5cf168f74d81eae4832",
+    "built_at": "2026-10-07 00:06:26 +0800"
+  },
+  "assembly_step": {
+    "file": "cad/gs8-d2-v1/out/step/gs8-d2-assembly.step",
+    "sha256": "774fe32a536d0c81cedc930e19f79afecdc2b2dfdd844298f168d6944f47394c"
+  },
+  "checks_sha256": "dd48fa61d0cd470faafad676814a687230a655655c3215ba49b11e7c05c3b8c7",
+  "source_hashes": {
+    "layout.py": "a48df6678f8911eff62d855ed493cb6b3c65899b4b7518f352e348bc3efec439",
+    "d2_common.py": "6b3aeb4ef41c51d959be87820fd4b811d57bd5ad6d67370fc297103d168c6d05",
+    "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
+    "checks.py": "81e80adfdda93a5ef92b268deed2aa7b149d7caeea526e9eb5816ac0d3da2788",
+    "build_d2.py": "54e67f655b81c603be627a411b354191cf9b02a13b3630321b987fcd409fb233",
+    "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
+    "make_tables.py": "8cdebebca33a1d7a1b86f1a9b3a686bbb30f2f9a4bd8228448338b707ba164fa",
+    "SPEC.md": "189f5f006c47ad4d697440cc27c524eecc258effb8faff78b7b8d12ff5379c7c",
+    "FASTENER-POLICY.md": "fe2f4bbecb428f75ca032382babb3470e22699ba70f0b2f38a73cbb253e9ddde",
+    "printed_collar.py": "92fac260510ac00ff7937916b45d07f171ff5428d05e34014d3ec5768ca94c01",
+    "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
+    "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+    "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+    "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
+    "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+    "printed_tub.py": "8766c93f447e8e459c611a6290dbe695c2aa92a2e4c9a48824c723e43bf3ba5b",
+    "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
+    "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
+    "fonts/DejaVuSans-Bold.ttf": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890",
+    "fonts/LICENSE-DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
+  },
+  "gate_document_hashes": {
+    "cad/gs8-d2-v1/MEASURED-PARTS.md": "462201381247ced88e1a3adcfc2b0b8bcf6109a7fc8a050b11e373181d43ded4",
+    "cad/gs8-d2-v1/SPEC.md": "189f5f006c47ad4d697440cc27c524eecc258effb8faff78b7b8d12ff5379c7c",
+    "electronics/gs8-d2-v1/WIRING.md": "3a42141b2f6fea1120c82d034ab74e320ebc91ec2fdbab138a7b952c8f277d75",
+    "electronics/gs8-evf-v1/EVF-SELECTION.md": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390"
+  },
+  "part_steps": [
+    {
+      "part": "tub",
+      "file": "cad/gs8-d2-v1/out/step/parts/tub.step",
+      "sha256": "e5876a63b0f0c3895390e31ac585cf036ece9ce1d311c9d6b25d96d891c19232"
+    },
+    {
+      "part": "hood",
+      "file": "cad/gs8-d2-v1/out/step/parts/hood.step",
+      "sha256": "1965cdd03b49a857c8c09c91ac3bfdb35a89f8f17990c4a5028806f8411d2155"
+    },
+    {
+      "part": "panel",
+      "file": "cad/gs8-d2-v1/out/step/parts/panel.step",
+      "sha256": "6cb79c592650d8c670c81352892003712eb8623010641fa358776149724e3618"
+    },
+    {
+      "part": "base_grip",
+      "file": "cad/gs8-d2-v1/out/step/parts/base_grip.step",
+      "sha256": "bdc43e3e4b2bc616cff236c0fbce915b50334640ffeb4569cc8f787a781d1eb8"
+    },
+    {
+      "part": "cap",
+      "file": "cad/gs8-d2-v1/out/step/parts/cap.step",
+      "sha256": "ae04501fc1668fba043dab1145662515008d1f3db6b9cc8c704ce0e8a3341430"
+    },
+    {
+      "part": "plunger",
+      "file": "cad/gs8-d2-v1/out/step/parts/plunger.step",
+      "sha256": "2c77c6e7aa5b20a75bf42365a69afb570cc1c137f53134c23fb401d05038418f"
+    },
+    {
+      "part": "knob_exp",
+      "file": "cad/gs8-d2-v1/out/step/parts/knob_exp.step",
+      "sha256": "733562f8830401dcb9cfce0377ba7a502091071a91bc084daf42d8a4974746d1"
+    },
+    {
+      "part": "knob_fps",
+      "file": "cad/gs8-d2-v1/out/step/parts/knob_fps.step",
+      "sha256": "cb504e780c5ff950f4bd63425196b86db987c3f3a2c7ff777d1b8783730a72ff"
+    },
+    {
+      "part": "eyecup",
+      "file": "cad/gs8-d2-v1/out/step/parts/eyecup.step",
+      "sha256": "94fb58b1ea485d984b890e06be928a53a1133fb649b271bc1525059ce1fe2eb9"
+    },
+    {
+      "part": "stick_sleeve",
+      "file": "cad/gs8-d2-v1/out/step/parts/stick_sleeve.step",
+      "sha256": "acebd13383359c001de423e8aca237298d4013071005a6d1aff2dffc0de00812"
+    },
+    {
+      "part": "pi_keeper",
+      "file": "cad/gs8-d2-v1/out/step/parts/pi_keeper.step",
+      "sha256": "0efe9c60d5c4b91fa1f00187e37351bc365605217acb86dd461a83bc19fba375"
+    },
+    {
+      "part": "lens_collar",
+      "file": "cad/gs8-d2-v1/out/step/parts/lens_collar.step",
+      "sha256": "fe5d0a2dead56fe64fb38eda4a63cc842d7f7be6446507a32b7570bf024500f7"
+    }
+  ],
+  "mesh_export_manifest_sha256": "716e14707468d5e54c28fb9ec4629286a44f0e3d2f35dc602bf1ae45bf7b49a5",
+  "mesh_export_runtime": "2.6.1",
+  "verified_source_and_step_entries": [
+    "build_d2.py",
+    "checks.py",
+    "cots.py",
+    "coupons_r1.py",
+    "d2_common.py",
+    "fonts/DejaVuSans-Bold.ttf",
+    "layout.py",
+    "make_coupons.py",
+    "make_tables.py",
+    "printed_collar.py",
+    "printed_grip.py",
+    "printed_hood.py",
+    "printed_keeper.py",
+    "printed_panel.py",
+    "printed_small.py",
+    "printed_tub.py",
+    "run_locked.py",
+    "step/parts/tub.step",
+    "step/parts/hood.step",
+    "step/parts/panel.step",
+    "step/parts/base_grip.step",
+    "step/parts/cap.step",
+    "step/parts/plunger.step",
+    "step/parts/knob_exp.step",
+    "step/parts/knob_fps.step",
+    "step/parts/eyecup.step",
+    "step/parts/stick_sleeve.step",
+    "step/parts/pi_keeper.step",
+    "step/parts/lens_collar.step"
+  ],
+  "secondary_fujinon_integrity": {
+    "status": "pass",
+    "receipt_sha256": "3fa4d8f95e0358202c8676ac9b9edf3d6ce43a09480af4bec8ca70b9adb061ae",
+    "checks_sha256": "ce34cb1c8aabd1312a112809eef7c9b536b6f937cfef4804007823a4edc7115c",
+    "not_depicted": true
+  },
+  "renderer": {
+    "name": "Blender",
+    "version": "4.3.2",
+    "engine": "Cycles CPU",
+    "samples": 128,
+    "denoising": false,
+    "external_scene_assets": false
+  },
+  "images": [
+    {
+      "file": "renders/hero.png",
+      "sha256": "47dc40eb0cfd75bac4f2a0db7a75402ee9138242f3a020d1755044f17fef65c8",
+      "pixels": [
+        1800,
+        1400
+      ],
+      "intended_paint_fill": true,
+      "visually_inspected": true,
+      "exploded": false
+    },
+    {
+      "file": "renders/controls.png",
+      "sha256": "c225a6357df62e5f32c38e318751a3469976ced918daa0d54887aeff45b46c4c",
+      "pixels": [
+        1800,
+        1400
+      ],
+      "intended_paint_fill": true,
+      "visually_inspected": true,
+      "exploded": false
+    },
+    {
+      "file": "renders/controls-raw.png",
+      "sha256": "d22d051196a359f9f444a76efee7bffdeb5c83336853ef8d9dc8324b6f11ed07",
+      "pixels": [
+        1800,
+        1400
+      ],
+      "intended_paint_fill": false,
+      "visually_inspected": true,
+      "exploded": false
+    },
+    {
+      "file": "renders/collar_pinch.png",
+      "sha256": "a63db89ba5eeace3b24992cbc521385cde9779019884e2fcae83b184227213f3",
+      "pixels": [
+        1800,
+        1400
+      ],
+      "intended_paint_fill": true,
+      "visually_inspected": true,
+      "exploded": false
+    },
+    {
+      "file": "renders/rear.png",
+      "sha256": "992149c664fdaca8d855f27737a2963da772d35622bae03ab0ded16da84da1ed",
+      "pixels": [
+        1800,
+        1400
+      ],
+      "intended_paint_fill": true,
+      "visually_inspected": true,
+      "exploded": false
+    },
+    {
+      "file": "renders/service.png",
+      "sha256": "baf7ab6a8bc4aeffc7b605c0e78de3b0fe14f24c6f54092005fb8fb2038b7363",
+      "pixels": [
+        1800,
+        1400
+      ],
+      "intended_paint_fill": true,
+      "visually_inspected": true,
+      "exploded": true
+    }
+  ],
+  "scripts": {
+    "build_visual_gallery.py": "1fe91b03c6ef4d9d72779885c32c5fd601adcce63faf03d26019259ac7a44a3e",
+    "export_review_meshes.py": "fdb42cde6062bbb8a96631c89e61dc621b297de7e875c9dfd3c3d18956ed5cfe",
+    "render_review.py": "89ab97709d19eb712fbc6f972ddcc6a49c8bb174bf2689c9f637e6513a32cc27"
+  },
+  "pdf_gallery": {
+    "delivered_separately": true,
+    "filename": "D2-cloud-polish-visual-supplement.pdf",
+    "sha256": "5c1f3cb38e9bb202b010a89c63eb7853d4978e1b43059af6bdcbc4145daec32b",
+    "pages": 6,
+    "visually_inspected_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "limitations": [
+    "Intended materials and paint fill only; no physical build or test.",
+    "Purchased parts are geometric proxies.",
+    "Exploded offsets are illustrative; harnesses are omitted.",
+    "All 53 physical gates remain open."
+  ],
+  "geometry_modified_by_renderer": false
+}

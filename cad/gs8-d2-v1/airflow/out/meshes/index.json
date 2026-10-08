@@ -1,0 +1,950 @@
+{
+ "revision": "GS8 D2 release v1 (cad/gs8-d2-v1)",
+ "lens": "kowa_lm6hc",
+ "variant": null,
+ "tol_mm": 0.05,
+ "ang_tol": 0.3,
+ "frame": "assembly mm (layout.py FRAME: X forward, Y left, Z up)",
+ "modules": {
+  "printed_tub.py": {
+   "status": "built",
+   "parts": [
+    "tub"
+   ],
+   "seconds": 3.03
+  },
+  "printed_hood.py": {
+   "status": "built",
+   "parts": [
+    "hood"
+   ],
+   "seconds": 2.71
+  },
+  "printed_panel.py": {
+   "status": "built",
+   "parts": [
+    "panel"
+   ],
+   "seconds": 110.1
+  },
+  "printed_grip.py": {
+   "status": "built",
+   "parts": [
+    "base_grip",
+    "cap"
+   ],
+   "seconds": 2.03
+  },
+  "printed_small.py": {
+   "status": "built",
+   "parts": [
+    "plunger",
+    "knob_exp",
+    "knob_fps",
+    "eyecup",
+    "stick_sleeve"
+   ],
+   "seconds": 1.81
+  },
+  "printed_keeper.py": {
+   "status": "built",
+   "parts": [
+    "pi_keeper"
+   ],
+   "seconds": 0.16
+  }
+ },
+ "parts": {
+  "tub": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/tub.stl",
+   "triangles": 7894,
+   "watertight": true,
+   "bounds": [
+    [
+     -154.032,
+     -35.01,
+     -3.65
+    ],
+    [
+     -2.651,
+     35.018,
+     97.323
+    ]
+   ],
+   "volume_brep": 105968.4,
+   "volume_mesh": 105969.0,
+   "sha256": "2c99382aeb968473e1825a3a931466abb228324216d21f529c15c987c918e4b8"
+  },
+  "hood": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/hood.stl",
+   "triangles": 7780,
+   "watertight": true,
+   "bounds": [
+    [
+     -170.232,
+     -32.361,
+     0.289
+    ],
+    [
+     8.581,
+     35.032,
+     100.003
+    ]
+   ],
+   "volume_brep": 70995.6,
+   "volume_mesh": 70935.5,
+   "sha256": "b67c0cd1f0841ac7d9ea22822381c4f290a3899b443da78ce640568a39afda07"
+  },
+  "panel": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/panel.stl",
+   "triangles": 10688,
+   "watertight": true,
+   "bounds": [
+    [
+     -152.666,
+     -30.416,
+     2.584
+    ],
+    [
+     -4.034,
+     35.058,
+     97.0
+    ]
+   ],
+   "volume_brep": 51156.1,
+   "volume_mesh": 51160.4,
+   "sha256": "9ed6bd35b898edef65aad70f8ba861e16ddb16e90da4037a7d1fbcebbb327dd6"
+  },
+  "base_grip": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/base_grip.stl",
+   "triangles": 3618,
+   "watertight": true,
+   "bounds": [
+    [
+     -117.0,
+     -35.2,
+     -110.042
+    ],
+    [
+     -0.5,
+     35.2,
+     0.005
+    ]
+   ],
+   "volume_brep": 91038.9,
+   "volume_mesh": 91009.4,
+   "sha256": "bf68df7339a40924937af4536a6507959ac2fb346812ff08835be5564077dd11"
+  },
+  "cap": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/cap.stl",
+   "triangles": 728,
+   "watertight": true,
+   "bounds": [
+    [
+     -71.031,
+     -15.031,
+     -116.031
+    ],
+    [
+     -22.969,
+     15.031,
+     -105.8
+    ]
+   ],
+   "volume_brep": 6739.3,
+   "volume_mesh": 6734.8,
+   "sha256": "78636bd35f14420d9fd52ed13037b447790f0eae4fbabda73974502077244582"
+  },
+  "plunger": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/plunger.stl",
+   "triangles": 900,
+   "watertight": true,
+   "bounds": [
+    [
+     -5.303,
+     2.188,
+     16.588
+    ],
+    [
+     -1.288,
+     15.812,
+     24.412
+    ]
+   ],
+   "volume_brep": 287.5,
+   "volume_mesh": 287.5,
+   "sha256": "7b9998e52633271129093663f6bbd3c1ecd38cc04a366952e5b4ea80a2bdb08c"
+  },
+  "knob_exp": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/knob_exp.stl",
+   "triangles": 2476,
+   "watertight": true,
+   "bounds": [
+    [
+     -76.998,
+     35.148,
+     43.002
+    ],
+    [
+     -49.002,
+     44.243,
+     70.998
+    ]
+   ],
+   "volume_brep": 4793.0,
+   "volume_mesh": 4790.1,
+   "sha256": "6d35d6f60fe14109f4f1a63edca1937e64e4c02f47710efcdee950e7794d7bf9"
+  },
+  "knob_fps": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/knob_fps.stl",
+   "triangles": 1484,
+   "watertight": true,
+   "bounds": [
+    [
+     -132.996,
+     35.161,
+     47.004
+    ],
+    [
+     -113.004,
+     42.234,
+     66.996
+    ]
+   ],
+   "volume_brep": 1252.8,
+   "volume_mesh": 1253.4,
+   "sha256": "894d6bc0c75b1e34fda75dff8bfc457cd9bbcb90b3909aa8c8e291cf0b45be68"
+  },
+  "eyecup": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/eyecup.stl",
+   "triangles": 2688,
+   "watertight": true,
+   "bounds": [
+    [
+     -187.666,
+     -6.911,
+     55.026
+    ],
+    [
+     -171.245,
+     38.911,
+     100.974
+    ]
+   ],
+   "volume_brep": 4406.4,
+   "volume_mesh": 4370.0,
+   "sha256": "c1411f057cd6e92a289f0c5d7b6c56b1c18dd0ef30bde06f5f2638c2ae5e10ce"
+  },
+  "stick_sleeve": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/stick_sleeve.stl",
+   "triangles": 516,
+   "watertight": true,
+   "bounds": [
+    [
+     -154.016,
+     -16.766,
+     17.884
+    ],
+    [
+     -137.997,
+     6.166,
+     30.916
+    ]
+   ],
+   "volume_brep": 1103.9,
+   "volume_mesh": 1103.7,
+   "sha256": "1ade6b8c89761c3f352547a74da6e334d367bf25fdbca69673851ea4956f63a9"
+  },
+  "pi_keeper": {
+   "kind": "printed",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/pi_keeper.stl",
+   "triangles": 694,
+   "watertight": true,
+   "bounds": [
+    [
+     -105.0,
+     -23.0,
+     7.7
+    ],
+    [
+     -41.0,
+     31.9,
+     15.61
+    ]
+   ],
+   "volume_brep": 6210.2,
+   "volume_mesh": 6210.7,
+   "sha256": "f169569fcab6bec4b3c00c9298d6c32b52bb4e148cfef7d43088be1bb70efe70"
+  },
+  "pi5": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/pi5.stl",
+   "triangles": 900,
+   "watertight": true,
+   "bounds": [
+    [
+     -94.0,
+     -32.3,
+     16.0
+    ],
+    [
+     -5.55,
+     23.7,
+     36.1
+    ]
+   ],
+   "volume_brep": 31513.5,
+   "volume_mesh": 31513.6,
+   "sha256": "f375516d79e3e067c3b1a0c09c67771450acd74dcd31ab6162ad7e1ab36c4fc1"
+  },
+  "cooler": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/cooler.stl",
+   "triangles": 1126,
+   "watertight": true,
+   "bounds": [
+    [
+     -72.8,
+     -25.55,
+     20.196
+    ],
+    [
+     -9.5,
+     16.95,
+     36.325
+    ]
+   ],
+   "volume_brep": 19348.2,
+   "volume_mesh": 19348.7,
+   "sha256": "1fb5e516dab7406d3f7ea71fd1a60395ddbd4e0214d8eb7f16ce5cb684a6d807"
+  },
+  "x1203": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/x1203.stl",
+   "triangles": 748,
+   "watertight": true,
+   "bounds": [
+    [
+     -91.0,
+     -32.3,
+     5.996
+    ],
+    [
+     -6.0,
+     23.7,
+     16.0
+    ]
+   ],
+   "volume_brep": 12836.8,
+   "volume_mesh": 12836.9,
+   "sha256": "006be961968e6baa588361bcd688c790bec305e2269c2d916064edc836217f9e"
+  },
+  "x1203_kit": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/x1203_kit.stl",
+   "triangles": 2768,
+   "watertight": true,
+   "bounds": [
+    [
+     -70.387,
+     -31.3,
+     4.244
+    ],
+    [
+     -6.613,
+     22.7,
+     21.856
+    ]
+   ],
+   "volume_brep": 1224.5,
+   "volume_mesh": 1223.5,
+   "sha256": "dea7016af480380bcd764e847f1a8a6252f866bfdd653bf52ccf7274e9317399"
+  },
+  "gs_camera": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/gs_camera.stl",
+   "triangles": 1220,
+   "watertight": true,
+   "bounds": [
+    [
+     -24.473,
+     -19.75,
+     40.25
+    ],
+    [
+     5.643,
+     19.75,
+     79.75
+    ]
+   ],
+   "volume_brep": 33832.5,
+   "volume_mesh": 33818.1,
+   "sha256": "4f2896a4b70c024a1c8826daf92edfa04dc8a2ffc08ead13cced6b2fcc05bb0d"
+  },
+  "c_cs_adapter": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/c_cs_adapter.stl",
+   "triangles": 336,
+   "watertight": true,
+   "bounds": [
+    [
+     5.558,
+     -15.0,
+     44.958
+    ],
+    [
+     10.642,
+     15.0,
+     75.042
+    ]
+   ],
+   "volume_brep": 1000.8,
+   "volume_mesh": 997.0,
+   "sha256": "7ef06fb34fd1672b83f333324024e5de59f5863c9d3c6a359aa2ed043510d132"
+  },
+  "lens": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/lens.stl",
+   "triangles": 1560,
+   "watertight": true,
+   "bounds": [
+    [
+     6.064,
+     -32.007,
+     32.925
+    ],
+    [
+     67.274,
+     27.0,
+     87.075
+    ]
+   ],
+   "volume_brep": 125106.3,
+   "volume_mesh": 124648.2,
+   "sha256": "64d88ac7cfda6678740a01e5e9ca7e567cf26180cbc7e7789ea6f6b766c1dbf2"
+  },
+  "eyepiece": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/eyepiece.stl",
+   "triangles": 668,
+   "watertight": true,
+   "bounds": [
+    [
+     -174.351,
+     -3.25,
+     58.696
+    ],
+    [
+     -149.459,
+     35.25,
+     97.304
+    ]
+   ],
+   "volume_brep": 19098.1,
+   "volume_mesh": 19026.9,
+   "sha256": "fbd12c1a584a6fe649116b53ef756619567de729d34927ea5a51fb4ec3035131"
+  },
+  "hmx039": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/hmx039.stl",
+   "triangles": 28,
+   "watertight": true,
+   "bounds": [
+    [
+     -148.0,
+     8.2,
+     71.2
+    ],
+    [
+     -146.07,
+     23.8,
+     84.8
+    ]
+   ],
+   "volume_brep": 364.1,
+   "volume_mesh": 364.1,
+   "sha256": "c09c67b3ca954daebc6b83f00b9cb970b0d9453122411549c5b5e04d8be14325"
+  },
+  "evf_board": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/evf_board.stl",
+   "triangles": 60,
+   "watertight": true,
+   "bounds": [
+    [
+     -144.8,
+     1.0,
+     64.0
+    ],
+    [
+     -136.8,
+     28.0,
+     92.5
+    ]
+   ],
+   "volume_brep": 3948.0,
+   "volume_mesh": 3948.0,
+   "sha256": "f6861c99745fe981adc5ac48ed39feaad791e9bfd0b30cc2d264b046241e4595"
+  },
+  "usb_stick": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/usb_stick.stl",
+   "triangles": 60,
+   "watertight": true,
+   "bounds": [
+    [
+     -153.0,
+     -15.95,
+     18.7
+    ],
+    [
+     -82.0,
+     5.35,
+     30.1
+    ]
+   ],
+   "volume_brep": 14379.8,
+   "volume_mesh": 14379.8,
+   "sha256": "c500d8149802dd104dcd13ee110d17114206b6afa9769fe9c4b8be4445e1d918"
+  },
+  "encoder": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/encoder.stl",
+   "triangles": 360,
+   "watertight": true,
+   "bounds": [
+    [
+     -75.65,
+     19.6,
+     44.2
+    ],
+    [
+     -50.35,
+     44.008,
+     69.8
+    ]
+   ],
+   "volume_brep": 2928.5,
+   "volume_mesh": 2927.3,
+   "sha256": "e9e784d61459f7b09a1b9914ae3edcd522e4a9ba5464a4ab829c193d325a11f3"
+  },
+  "switch_1824": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/switch_1824.stl",
+   "triangles": 660,
+   "watertight": true,
+   "bounds": [
+    [
+     -135.5,
+     19.165,
+     44.465
+    ],
+    [
+     -110.5,
+     42.008,
+     69.535
+    ]
+   ],
+   "volume_brep": 7073.9,
+   "volume_mesh": 7048.9,
+   "sha256": "d6caa9bbf80f6f9512142c15489dc57f939745d2f0dafdc822c03a967a3abddb"
+  },
+  "run_button": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/run_button.stl",
+   "triangles": 184,
+   "watertight": true,
+   "bounds": [
+    [
+     -35.0,
+     -6.518,
+     -27.518
+    ],
+    [
+     -20.482,
+     6.518,
+     -14.482
+    ]
+   ],
+   "volume_brep": 2122.4,
+   "volume_mesh": 2119.8,
+   "sha256": "109d6721343342886d4e11b6be938326d9477d8210ea271ca73bf93c2094e4fe"
+  },
+  "pack": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/pack.stl",
+   "triangles": 208,
+   "watertight": true,
+   "bounds": [
+    [
+     -64.322,
+     -9.322,
+     -108.822
+    ],
+    [
+     -26.678,
+     9.322,
+     -36.8
+    ]
+   ],
+   "volume_brep": 45274.1,
+   "volume_mesh": 45227.5,
+   "sha256": "6a5d977848dccbffdfdbd3d81d702d2b0aaae9747cbc3717dcb81ea121f80dbb"
+  },
+  "xt30_pair": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/xt30_pair.stl",
+   "triangles": 28,
+   "watertight": true,
+   "bounds": [
+    [
+     -63.0,
+     -5.1,
+     -20.0
+    ],
+    [
+     -37.0,
+     5.1,
+     -14.8
+    ]
+   ],
+   "volume_brep": 1288.6,
+   "volume_mesh": 1288.6,
+   "sha256": "51aa3a4bf44d18914549353e593a1fb6ab9b9e153d7bdb17f7eb3ce5ff931f3c"
+  },
+  "tripod_nut": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/tripod_nut.stl",
+   "triangles": 192,
+   "watertight": true,
+   "bounds": [
+    [
+     -113.409,
+     -5.55,
+     -5.707
+    ],
+    [
+     -100.591,
+     5.55,
+     -0.093
+    ]
+   ],
+   "volume_brep": 478.6,
+   "volume_mesh": 479.1,
+   "sha256": "6df21d189fb557930dcc3f320fc5513a24874bc9246d8876ad902a187f63e140"
+  },
+  "strap": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/strap.stl",
+   "triangles": 100,
+   "watertight": true,
+   "bounds": [
+    [
+     -93.713,
+     -33.5,
+     -104.269
+    ],
+    [
+     -72.3,
+     -21.5,
+     -0.2
+    ]
+   ],
+   "volume_brep": 2237.6,
+   "volume_mesh": 2237.6,
+   "sha256": "2cad7679d78c08a073b7e40f2e0fd81a314b0a17bdfa0968dc6d48a2d3652f6e"
+  },
+  "microsd": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/microsd.stl",
+   "triangles": 12,
+   "watertight": true,
+   "bounds": [
+    [
+     -12.4,
+     -11.0,
+     16.9
+    ],
+    [
+     -3.5,
+     0.0,
+     17.9
+    ]
+   ],
+   "volume_brep": 97.9,
+   "volume_mesh": 97.9,
+   "sha256": "be5ef57de851ccc34aa36ab8bd7d8e8f417e5e230133b1d85b46b6ed75363775"
+  },
+  "pt_screws": {
+   "kind": "hardware",
+   "skipped": "no shape"
+  },
+  "foam_pad": {
+   "kind": "cots",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/foam_pad.stl",
+   "triangles": 12,
+   "watertight": true,
+   "bounds": [
+    [
+     -146.07,
+     8.2,
+     71.2
+    ],
+    [
+     -145.07,
+     23.8,
+     84.8
+    ]
+   ],
+   "volume_brep": 212.2,
+   "volume_mesh": 212.2,
+   "sha256": "17dd5ebf15850da11a26a32a971180ba7a64144c9ca9d09b18aa3229790c1a3c"
+  },
+  "s_b1": {
+   "kind": "hardware",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/s_b1.stl",
+   "triangles": 500,
+   "watertight": true,
+   "bounds": [
+    [
+     -94.008,
+     24.85,
+     -4.408
+    ],
+    [
+     -87.992,
+     30.85,
+     10.004
+    ]
+   ],
+   "volume_brep": 147.3,
+   "volume_mesh": 146.7,
+   "sha256": "ac705e791ab4540e0fbe821c9ac9f008d9fc22571e37d0015655c677cc9181b1"
+  },
+  "s_b2": {
+   "kind": "hardware",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/s_b2.stl",
+   "triangles": 500,
+   "watertight": true,
+   "bounds": [
+    [
+     -108.008,
+     24.85,
+     -4.408
+    ],
+    [
+     -101.992,
+     30.85,
+     10.004
+    ]
+   ],
+   "volume_brep": 147.3,
+   "volume_mesh": 146.7,
+   "sha256": "740dfff97471fb63f9de5d4922029216438e3a6ab1c0519ae6714193ab424e33"
+  },
+  "s_r1": {
+   "kind": "hardware",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/s_r1.stl",
+   "triangles": 500,
+   "watertight": true,
+   "bounds": [
+    [
+     -34.5,
+     -34.808,
+     82.492
+    ],
+    [
+     -28.5,
+     -20.396,
+     88.508
+    ]
+   ],
+   "volume_brep": 147.3,
+   "volume_mesh": 146.7,
+   "sha256": "0bd5d459328df83da8e8dd703efbaca957ff24db670d399fa500ad44325c9944"
+  },
+  "s_r2": {
+   "kind": "hardware",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/s_r2.stl",
+   "triangles": 500,
+   "watertight": true,
+   "bounds": [
+    [
+     -146.5,
+     -34.808,
+     44.492
+    ],
+    [
+     -140.5,
+     -20.396,
+     50.508
+    ]
+   ],
+   "volume_brep": 147.3,
+   "volume_mesh": 146.7,
+   "sha256": "e14340c2104994f1a694406bcee5ac0a2d1c7d7000bc0d22fe651ade87de46d3"
+  },
+  "s_k1": {
+   "kind": "hardware",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/s_k1.stl",
+   "triangles": 500,
+   "watertight": true,
+   "bounds": [
+    [
+     -102.508,
+     13.0,
+     2.296
+    ],
+    [
+     -96.492,
+     19.0,
+     16.708
+    ]
+   ],
+   "volume_brep": 147.3,
+   "volume_mesh": 146.7,
+   "sha256": "8feaf0c84dc6ff7c99dfaed36b1c699378f308107b92382fe700a344b3022449"
+  },
+  "s_k2": {
+   "kind": "hardware",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/s_k2.stl",
+   "triangles": 500,
+   "watertight": true,
+   "bounds": [
+    [
+     -67.008,
+     25.25,
+     2.296
+    ],
+    [
+     -60.992,
+     31.25,
+     16.708
+    ]
+   ],
+   "volume_brep": 147.3,
+   "volume_mesh": 146.7,
+   "sha256": "256616283664d307f5f89de5edab3d7e9c4cd119e129f92375225dd9d0fdd30b"
+  },
+  "s_j": {
+   "kind": "hardware",
+   "stub": false,
+   "stub_reason": "",
+   "stl": "meshes/s_j.stl",
+   "triangles": 500,
+   "watertight": true,
+   "bounds": [
+    [
+     -114.008,
+     -23.0,
+     -4.408
+    ],
+    [
+     -107.992,
+     -17.0,
+     10.004
+    ]
+   ],
+   "volume_brep": 147.3,
+   "volume_mesh": 146.7,
+   "sha256": "0b3c6713f91d00be2b54518089fc7204715cb950dd2cbbf4dec6560703aae592"
+  }
+ },
+ "sources": {
+  "build_d2.py": "ad10d3d68675abadbbd82bb0126c417bfc1db35498ad0dd92302cad8d8cb638f",
+  "cots.py": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+  "d2_common.py": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+  "layout.py": "fdbdd16b3efa2629cb682ae969d7f1477a77b300446c9706effa25db895f0e08",
+  "printed_grip.py": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+  "printed_hood.py": "615d3e41f88a95abaef3b5f295981b28f920884b3f3e492040a8c13c73b8107f",
+  "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+  "printed_panel.py": "4886e74172625024dfae98abc382f37068cd7e8c9da327d6f6c0c6f4ffb83f04",
+  "printed_small.py": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+  "printed_tub.py": "76bd97697d78b73578b2829f5162049a099f615b9404b9d5bf5bf933957cb2e1"
+ },
+ "seconds": 129.1
+}

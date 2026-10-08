@@ -1,0 +1,360 @@
+{
+  "status": "pass",
+  "revision": "GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)",
+  "receipt_sha256": "6cdd3dd730ec8210545659645489040d66d1f2eee59c68a0875114356084ce8c",
+  "checks_sha256": "58b0c9ae5a74d70bcc5ed7343776572388905c8c0b5824c286fb4eba990c444b",
+  "hash_links": {
+    "sources": {
+      "total": 20,
+      "verified": 20
+    },
+    "outputs": {
+      "total": 85,
+      "verified": 85
+    },
+    "gate_docs": {
+      "total": 4,
+      "verified": 4
+    }
+  },
+  "categories": 27,
+  "meshes": [
+    {
+      "part": "tub",
+      "triangles": 12538,
+      "shells": 1,
+      "volume_mm3": 106228.5375384438,
+      "manifest_volume_mm3": 106228.7,
+      "relative_deviation": 1.5293565317395177e-06,
+      "status": "pass"
+    },
+    {
+      "part": "hood",
+      "triangles": 9044,
+      "shells": 1,
+      "volume_mm3": 56880.14562568082,
+      "manifest_volume_mm3": 56878.0,
+      "relative_deviation": 3.772329689551824e-05,
+      "status": "pass"
+    },
+    {
+      "part": "panel",
+      "triangles": 12592,
+      "shells": 1,
+      "volume_mm3": 51175.17838003005,
+      "manifest_volume_mm3": 51173.2,
+      "relative_deviation": 3.866047130236482e-05,
+      "status": "pass"
+    },
+    {
+      "part": "base_grip",
+      "triangles": 5726,
+      "shells": 1,
+      "volume_mm3": 91026.01880891292,
+      "manifest_volume_mm3": 91038.9,
+      "relative_deviation": 0.00014149106686341535,
+      "status": "pass"
+    },
+    {
+      "part": "cap",
+      "triangles": 968,
+      "shells": 1,
+      "volume_mm3": 6737.198008242392,
+      "manifest_volume_mm3": 6739.3,
+      "relative_deviation": 0.0003119006065331162,
+      "status": "pass"
+    },
+    {
+      "part": "plunger",
+      "triangles": 1256,
+      "shells": 1,
+      "volume_mm3": 287.4727166383307,
+      "manifest_volume_mm3": 287.5,
+      "relative_deviation": 9.48986492844399e-05,
+      "status": "pass"
+    },
+    {
+      "part": "knob_exp",
+      "triangles": 2896,
+      "shells": 1,
+      "volume_mm3": 4791.5276566844395,
+      "manifest_volume_mm3": 4793.0,
+      "relative_deviation": 0.00030718617057385044,
+      "status": "pass"
+    },
+    {
+      "part": "knob_fps",
+      "triangles": 1736,
+      "shells": 1,
+      "volume_mm3": 1252.8496089844882,
+      "manifest_volume_mm3": 1252.8,
+      "relative_deviation": 3.959848697977252e-05,
+      "status": "pass"
+    },
+    {
+      "part": "eyecup",
+      "triangles": 5548,
+      "shells": 1,
+      "volume_mm3": 4384.539617539445,
+      "manifest_volume_mm3": 4406.4,
+      "relative_deviation": 0.004961052664432262,
+      "status": "pass"
+    },
+    {
+      "part": "stick_sleeve",
+      "triangles": 788,
+      "shells": 1,
+      "volume_mm3": 1103.7801332520787,
+      "manifest_volume_mm3": 1103.9,
+      "relative_deviation": 0.00010858478840599528,
+      "status": "pass"
+    },
+    {
+      "part": "pi_keeper",
+      "triangles": 946,
+      "shells": 1,
+      "volume_mm3": 6210.3978170904875,
+      "manifest_volume_mm3": 6210.2,
+      "relative_deviation": 3.185357806313172e-05,
+      "status": "pass"
+    },
+    {
+      "part": "lens_collar",
+      "triangles": 4440,
+      "shells": 1,
+      "volume_mm3": 15723.750156080627,
+      "manifest_volume_mm3": 15714.5,
+      "relative_deviation": 0.0005886382691543966,
+      "status": "pass"
+    }
+  ],
+  "physical_gates": {
+    "total": 55,
+    "open": 53,
+    "withdrawn": 2
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "system": "Windows",
+    "lock_sha256": "935beb24e0ed79d3753de06396185d54ef209350b8d0ca347ef8daadf0208324",
+    "packages": [
+      {
+        "name": "aiohappyeyeballs",
+        "pinned": "2.7.1",
+        "actual": "2.7.1"
+      },
+      {
+        "name": "aiohttp",
+        "pinned": "3.14.3",
+        "actual": "3.14.3"
+      },
+      {
+        "name": "aiosignal",
+        "pinned": "1.4.0",
+        "actual": "1.4.0"
+      },
+      {
+        "name": "attrs",
+        "pinned": "26.1.0",
+        "actual": "26.1.0"
+      },
+      {
+        "name": "cadquery",
+        "pinned": "2.6.1",
+        "actual": "2.6.1"
+      },
+      {
+        "name": "cadquery-ocp",
+        "pinned": "7.8.1.1.post1",
+        "actual": "7.8.1.1.post1"
+      },
+      {
+        "name": "casadi",
+        "pinned": "3.8.1",
+        "actual": "3.8.1"
+      },
+      {
+        "name": "charset-normalizer",
+        "pinned": "3.5.1",
+        "actual": "3.5.1"
+      },
+      {
+        "name": "contourpy",
+        "pinned": "1.4.0",
+        "actual": "1.4.0"
+      },
+      {
+        "name": "cycler",
+        "pinned": "0.12.1",
+        "actual": "0.12.1"
+      },
+      {
+        "name": "ezdxf",
+        "pinned": "1.4.4",
+        "actual": "1.4.4"
+      },
+      {
+        "name": "fonttools",
+        "pinned": "4.65.0",
+        "actual": "4.65.0"
+      },
+      {
+        "name": "frozenlist",
+        "pinned": "1.8.0",
+        "actual": "1.8.0"
+      },
+      {
+        "name": "idna",
+        "pinned": "3.20",
+        "actual": "3.20"
+      },
+      {
+        "name": "kiwisolver",
+        "pinned": "1.5.1",
+        "actual": "1.5.1"
+      },
+      {
+        "name": "manifold3d",
+        "pinned": "3.5.4",
+        "actual": "3.5.4"
+      },
+      {
+        "name": "matplotlib",
+        "pinned": "3.11.2",
+        "actual": "3.11.2"
+      },
+      {
+        "name": "more-itertools",
+        "pinned": "11.1.0",
+        "actual": "11.1.0"
+      },
+      {
+        "name": "msgpack",
+        "pinned": "1.2.2",
+        "actual": "1.2.2"
+      },
+      {
+        "name": "multidict",
+        "pinned": "6.9.0",
+        "actual": "6.9.0"
+      },
+      {
+        "name": "multimethod",
+        "pinned": "1.12",
+        "actual": "1.12"
+      },
+      {
+        "name": "nlopt",
+        "pinned": "2.11.0",
+        "actual": "2.11.0"
+      },
+      {
+        "name": "numpy",
+        "pinned": "2.5.3",
+        "actual": "2.5.3"
+      },
+      {
+        "name": "packaging",
+        "pinned": "26.3",
+        "actual": "26.3"
+      },
+      {
+        "name": "path",
+        "pinned": "17.1.1",
+        "actual": "17.1.1"
+      },
+      {
+        "name": "pillow",
+        "pinned": "12.3.0",
+        "actual": "12.3.0"
+      },
+      {
+        "name": "propcache",
+        "pinned": "0.5.4",
+        "actual": "0.5.4"
+      },
+      {
+        "name": "pymupdf",
+        "pinned": "1.28.2",
+        "actual": "1.28.2"
+      },
+      {
+        "name": "pyparsing",
+        "pinned": "3.3.2",
+        "actual": "3.3.2"
+      },
+      {
+        "name": "python-dateutil",
+        "pinned": "2.9.0.post0",
+        "actual": "2.9.0.post0"
+      },
+      {
+        "name": "PyYAML",
+        "pinned": "6.0.3",
+        "actual": "6.0.3"
+      },
+      {
+        "name": "reportlab",
+        "pinned": "5.0.1",
+        "actual": "5.0.1"
+      },
+      {
+        "name": "six",
+        "pinned": "1.17.0",
+        "actual": "1.17.0"
+      },
+      {
+        "name": "trame",
+        "pinned": "4.0.0",
+        "actual": "4.0.0"
+      },
+      {
+        "name": "trame-client",
+        "pinned": "4.1.0",
+        "actual": "4.1.0"
+      },
+      {
+        "name": "trame-common",
+        "pinned": "1.2.7",
+        "actual": "1.2.7"
+      },
+      {
+        "name": "trame-server",
+        "pinned": "4.0.0",
+        "actual": "4.0.0"
+      },
+      {
+        "name": "trame-vtk",
+        "pinned": "2.8.13",
+        "actual": "2.8.13"
+      },
+      {
+        "name": "typing_extensions",
+        "pinned": "4.16.0",
+        "actual": "4.16.0"
+      },
+      {
+        "name": "typish",
+        "pinned": "1.9.3",
+        "actual": "1.9.3"
+      },
+      {
+        "name": "vtk",
+        "pinned": "9.3.1",
+        "actual": "9.3.1"
+      },
+      {
+        "name": "wslink",
+        "pinned": "2.5.7",
+        "actual": "2.5.7"
+      },
+      {
+        "name": "yarl",
+        "pinned": "1.25.1",
+        "actual": "1.25.1"
+      }
+    ]
+  },
+  "failures": [],
+  "note": "Computational artifact integrity only; no slicer, measurement, fabrication or hardware qualification."
+}

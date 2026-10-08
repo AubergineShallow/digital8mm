@@ -1,0 +1,3344 @@
+{
+  "release": {
+    "summary": {
+      "built_at": "2026-10-05 16:53:58 +0800",
+      "variant": null,
+      "source_count": 16,
+      "source_mismatches": [],
+      "declared_missing_sources": [],
+      "output_count": 76,
+      "output_mismatches": [],
+      "gate_doc_count": 4,
+      "gate_doc_mismatches": [],
+      "mesh_count": 35,
+      "production_mesh_count": 11,
+      "mesh_failures": [],
+      "unlinked_meshes": [],
+      "separate_coupon_hash_count": 0,
+      "separate_coupon_hash_mismatches": [],
+      "changed_from_r2": [
+        "stl/coupons/coupon-pi-keeper-tub.stl",
+        "stl/tub.stl"
+      ],
+      "cad_categories": [
+        {
+          "check": "contract",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "cots_containment",
+          "n": 20,
+          "passed": 20,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "interference",
+          "n": 55,
+          "passed": 55,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "mate_overlap",
+          "n": 30,
+          "passed": 30,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "clearance",
+          "n": 12,
+          "passed": 12,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "keepouts",
+          "n": 81,
+          "passed": 81,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "bed_fit",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "stl_mesh",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "thin_wall",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass",
+          "role": "secondary share-based screen: cannot pass the build alone; the gate for local thickness is critical_features (finding 2)"
+        },
+        {
+          "check": "critical_features",
+          "n": 119,
+          "passed": 109,
+          "failed": 0,
+          "stub": 0,
+          "info": 10,
+          "status": "pass"
+        },
+        {
+          "check": "evf_restraint",
+          "n": 6,
+          "passed": 6,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "driver",
+          "n": 7,
+          "passed": 7,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "engrave_groove",
+          "n": 10,
+          "passed": 10,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "boss_geometry",
+          "n": 7,
+          "passed": 7,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "sweeps",
+          "n": 12,
+          "passed": 12,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "removals",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "service_driver",
+          "n": 6,
+          "passed": 6,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "release_access",
+          "n": 2,
+          "passed": 2,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "stack_retention",
+          "n": 1,
+          "passed": 1,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "layout_self_check",
+          "n": 129,
+          "passed": 129,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "mass_com",
+          "status": "pass"
+        }
+      ],
+      "states": {
+        "cad_checks": {
+          "status": "computed: pass"
+        },
+        "slicer_review": {
+          "status": "not run",
+          "items_required": 11
+        },
+        "coupon_validation": {
+          "status": "not run",
+          "items_required": 9
+        },
+        "measured_fit": {
+          "status": "not run",
+          "items_required": 17
+        },
+        "assembly_operation": {
+          "status": "not run",
+          "items_required": 22
+        }
+      }
+    },
+    "source_hashes": [
+      {
+        "path": "layout.py",
+        "expected": "4307a13e4051aed82dde1f364ba615a01d540a716c9dab7dbd12b46cfd4e0fb9",
+        "actual": "4307a13e4051aed82dde1f364ba615a01d540a716c9dab7dbd12b46cfd4e0fb9",
+        "match": true
+      },
+      {
+        "path": "d2_common.py",
+        "expected": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+        "actual": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+        "match": true
+      },
+      {
+        "path": "cots.py",
+        "expected": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+        "actual": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+        "match": true
+      },
+      {
+        "path": "checks.py",
+        "expected": "ec6023f27ad8ce42eaba7eeae79ea692a46b408f491edeb1d19626403447b649",
+        "actual": "ec6023f27ad8ce42eaba7eeae79ea692a46b408f491edeb1d19626403447b649",
+        "match": true
+      },
+      {
+        "path": "build_d2.py",
+        "expected": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+        "actual": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+        "match": true
+      },
+      {
+        "path": "make_coupons.py",
+        "expected": "03afcb93bec6b5eb83da20f5693f1bc55f144fcb002b67af591b43ab33cd4285",
+        "actual": "03afcb93bec6b5eb83da20f5693f1bc55f144fcb002b67af591b43ab33cd4285",
+        "match": true
+      },
+      {
+        "path": "make_tables.py",
+        "expected": "cf98df1f5c81a3a7e359d705346f72f090834947050bb182ebb8385b7df13fac",
+        "actual": "cf98df1f5c81a3a7e359d705346f72f090834947050bb182ebb8385b7df13fac",
+        "match": true
+      },
+      {
+        "path": "SPEC.md",
+        "expected": "1674374cab240a0d04378b714fc1b0e431286c430e3296ec0b588afffe372c25",
+        "actual": "1674374cab240a0d04378b714fc1b0e431286c430e3296ec0b588afffe372c25",
+        "match": true
+      },
+      {
+        "path": "FASTENER-POLICY.md",
+        "expected": "a84f16186e614234964474135f8e9fd477829a0c5c06b31c52f877761f23257b",
+        "actual": "a84f16186e614234964474135f8e9fd477829a0c5c06b31c52f877761f23257b",
+        "match": true
+      },
+      {
+        "path": "printed_grip.py",
+        "expected": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+        "actual": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+        "match": true
+      },
+      {
+        "path": "printed_hood.py",
+        "expected": "615d3e41f88a95abaef3b5f295981b28f920884b3f3e492040a8c13c73b8107f",
+        "actual": "615d3e41f88a95abaef3b5f295981b28f920884b3f3e492040a8c13c73b8107f",
+        "match": true
+      },
+      {
+        "path": "printed_keeper.py",
+        "expected": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+        "actual": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+        "match": true
+      },
+      {
+        "path": "printed_panel.py",
+        "expected": "4886e74172625024dfae98abc382f37068cd7e8c9da327d6f6c0c6f4ffb83f04",
+        "actual": "4886e74172625024dfae98abc382f37068cd7e8c9da327d6f6c0c6f4ffb83f04",
+        "match": true
+      },
+      {
+        "path": "printed_small.py",
+        "expected": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+        "actual": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+        "match": true
+      },
+      {
+        "path": "printed_tub.py",
+        "expected": "76bd97697d78b73578b2829f5162049a099f615b9404b9d5bf5bf933957cb2e1",
+        "actual": "76bd97697d78b73578b2829f5162049a099f615b9404b9d5bf5bf933957cb2e1",
+        "match": true
+      },
+      {
+        "path": "coupons_r1.py",
+        "expected": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+        "actual": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+        "match": true
+      }
+    ],
+    "output_hashes": [
+      {
+        "path": "step/gs8-d2-assembly.step",
+        "expected": "aeebfba8aa5d985fa3ceb83d16dbe70d73b7f8a04845f874cfebf168a8194bdf",
+        "actual": "aeebfba8aa5d985fa3ceb83d16dbe70d73b7f8a04845f874cfebf168a8194bdf",
+        "match": true
+      },
+      {
+        "path": "step/parts/base_grip.step",
+        "expected": "f420bd694d8a77f130a7da40318dee9b4d7c74725ae2f7fac2533736ce90fb27",
+        "actual": "f420bd694d8a77f130a7da40318dee9b4d7c74725ae2f7fac2533736ce90fb27",
+        "match": true
+      },
+      {
+        "path": "step/parts/cap.step",
+        "expected": "8073c857e6707c6a48a80550e172f8dd7960ba16d166b5b78951ee48c9d8d81c",
+        "actual": "8073c857e6707c6a48a80550e172f8dd7960ba16d166b5b78951ee48c9d8d81c",
+        "match": true
+      },
+      {
+        "path": "step/parts/eyecup.step",
+        "expected": "8ef23a22cf44481dbbddf1375aeb3ff43bcca5194e993d1d3a503764e4fc2e6c",
+        "actual": "8ef23a22cf44481dbbddf1375aeb3ff43bcca5194e993d1d3a503764e4fc2e6c",
+        "match": true
+      },
+      {
+        "path": "step/parts/hood.step",
+        "expected": "b07d80db53c25cf645507097aab0f2d31abfd27a975ed4e92689091890be3be1",
+        "actual": "b07d80db53c25cf645507097aab0f2d31abfd27a975ed4e92689091890be3be1",
+        "match": true
+      },
+      {
+        "path": "step/parts/knob_exp.step",
+        "expected": "af080bb4a4aa01638ec2476b434e311255e4b2b0f59fc3bfb559d31e30d6dcf0",
+        "actual": "af080bb4a4aa01638ec2476b434e311255e4b2b0f59fc3bfb559d31e30d6dcf0",
+        "match": true
+      },
+      {
+        "path": "step/parts/knob_fps.step",
+        "expected": "26f3a7142bb6c280946d8c64ad8f3cbfe34d512bb8a3ecc8b3c1dbcbfaf74096",
+        "actual": "26f3a7142bb6c280946d8c64ad8f3cbfe34d512bb8a3ecc8b3c1dbcbfaf74096",
+        "match": true
+      },
+      {
+        "path": "step/parts/panel.step",
+        "expected": "444c4a12a45ad0cc6aacdc52a4a55ca25ca59ea2ccf55f6fe2e87cf96e7a76d5",
+        "actual": "444c4a12a45ad0cc6aacdc52a4a55ca25ca59ea2ccf55f6fe2e87cf96e7a76d5",
+        "match": true
+      },
+      {
+        "path": "step/parts/pi_keeper.step",
+        "expected": "13a1ac3909410889eb25077af26b85869e1079aa51be10d76030ad7e1a62a0c1",
+        "actual": "13a1ac3909410889eb25077af26b85869e1079aa51be10d76030ad7e1a62a0c1",
+        "match": true
+      },
+      {
+        "path": "step/parts/plunger.step",
+        "expected": "d0f2de2f17d932957ed5f17ffa13761661e4a169699096a9d0a1fc4caf012d75",
+        "actual": "d0f2de2f17d932957ed5f17ffa13761661e4a169699096a9d0a1fc4caf012d75",
+        "match": true
+      },
+      {
+        "path": "step/parts/stick_sleeve.step",
+        "expected": "ac6191d6762c27ee55ca47892871cbecc1bfdacd7fb055bfcc0700a202d1d904",
+        "actual": "ac6191d6762c27ee55ca47892871cbecc1bfdacd7fb055bfcc0700a202d1d904",
+        "match": true
+      },
+      {
+        "path": "step/parts/tub.step",
+        "expected": "24b179e0f4410d520d5a8a731c0c64d772346a9c0ced0f34931bc2ea751900b6",
+        "actual": "24b179e0f4410d520d5a8a731c0c64d772346a9c0ced0f34931bc2ea751900b6",
+        "match": true
+      },
+      {
+        "path": "renders/hero.png",
+        "expected": "224cb375da33abde8aeb6e7313b8c1c8566599ca32f376476a80520db334c01d",
+        "actual": "224cb375da33abde8aeb6e7313b8c1c8566599ca32f376476a80520db334c01d",
+        "match": true
+      },
+      {
+        "path": "renders/exploded.png",
+        "expected": "1b5fec4869939219916432a05a479e8dff25fd8ca5f08e66d1d469ef948df305",
+        "actual": "1b5fec4869939219916432a05a479e8dff25fd8ca5f08e66d1d469ef948df305",
+        "match": true
+      },
+      {
+        "path": "renders/xray.png",
+        "expected": "a4b55a92c56b8d62f844249134b66f8a92d42481fadcb261235e05e6ea88f551",
+        "actual": "a4b55a92c56b8d62f844249134b66f8a92d42481fadcb261235e05e6ea88f551",
+        "match": true
+      },
+      {
+        "path": "renders/section-lens-axis.png",
+        "expected": "35dee7bec3c53d4dbc5bd6c42e6dcc3f3041f4c761c2d71e54168b0be91d7452",
+        "actual": "35dee7bec3c53d4dbc5bd6c42e6dcc3f3041f4c761c2d71e54168b0be91d7452",
+        "match": true
+      },
+      {
+        "path": "renders/section-evf-axis.png",
+        "expected": "99a10b9170474f5cf6e1c0af6de809140903efe781b991222ee786c0838ca388",
+        "actual": "99a10b9170474f5cf6e1c0af6de809140903efe781b991222ee786c0838ca388",
+        "match": true
+      },
+      {
+        "path": "renders/print-poses.png",
+        "expected": "b11d02c29b817694155ba08fac6719f95925bd0e674f8488bb0d6b8253bb5e80",
+        "actual": "b11d02c29b817694155ba08fac6719f95925bd0e674f8488bb0d6b8253bb5e80",
+        "match": true
+      },
+      {
+        "path": "renders/step-01.png",
+        "expected": "02d6224e6d4a22ac06cc31ce65215ff3bd2698245d83f83ebeef85dcba35eb1e",
+        "actual": "02d6224e6d4a22ac06cc31ce65215ff3bd2698245d83f83ebeef85dcba35eb1e",
+        "match": true
+      },
+      {
+        "path": "renders/step-02.png",
+        "expected": "03fcc926d4767cf7f0f15a98da517679d4210a5dcdfaffbacb9dd9ac67b33b70",
+        "actual": "03fcc926d4767cf7f0f15a98da517679d4210a5dcdfaffbacb9dd9ac67b33b70",
+        "match": true
+      },
+      {
+        "path": "renders/step-03.png",
+        "expected": "674f9dbf8a5ace462993d8b37a89547fc0ad55805122317e304397e3ef4efa6d",
+        "actual": "674f9dbf8a5ace462993d8b37a89547fc0ad55805122317e304397e3ef4efa6d",
+        "match": true
+      },
+      {
+        "path": "renders/step-04.png",
+        "expected": "07f0a2ea9d36f14078190d0c072ea1d60c22c78bc76ce71b48ed063c32ed8478",
+        "actual": "07f0a2ea9d36f14078190d0c072ea1d60c22c78bc76ce71b48ed063c32ed8478",
+        "match": true
+      },
+      {
+        "path": "renders/step-05.png",
+        "expected": "b5dd3b5f4f118d4a388ef5388a52fb0519b3a55f387146e6e49b78cea69e7194",
+        "actual": "b5dd3b5f4f118d4a388ef5388a52fb0519b3a55f387146e6e49b78cea69e7194",
+        "match": true
+      },
+      {
+        "path": "renders/step-06.png",
+        "expected": "d0ca8148f68e04144bb06013cf6e73c1d8dbb6badcd23e2ef2212f68cb4c26b0",
+        "actual": "d0ca8148f68e04144bb06013cf6e73c1d8dbb6badcd23e2ef2212f68cb4c26b0",
+        "match": true
+      },
+      {
+        "path": "renders/step-07.png",
+        "expected": "4e80372d2fb70ecbe1c8d0565d1bfe7d597b795724e4f83ced73ccb6bfbcd9ee",
+        "actual": "4e80372d2fb70ecbe1c8d0565d1bfe7d597b795724e4f83ced73ccb6bfbcd9ee",
+        "match": true
+      },
+      {
+        "path": "renders/step-08.png",
+        "expected": "f84f1469bab94b28c0dd44ff95a32460fd28d8997e2ba3c4634a324483ac67f9",
+        "actual": "f84f1469bab94b28c0dd44ff95a32460fd28d8997e2ba3c4634a324483ac67f9",
+        "match": true
+      },
+      {
+        "path": "renders/step-09.png",
+        "expected": "eca3d38f0c343f8e0c71178fa46472780069cef85a04763351f478fad05df2c7",
+        "actual": "eca3d38f0c343f8e0c71178fa46472780069cef85a04763351f478fad05df2c7",
+        "match": true
+      },
+      {
+        "path": "renders/step-10.png",
+        "expected": "0a630cee59d2f212c7df2b567b7cdb854baa1b7661d7ba9bdba1842909dd0fe2",
+        "actual": "0a630cee59d2f212c7df2b567b7cdb854baa1b7661d7ba9bdba1842909dd0fe2",
+        "match": true
+      },
+      {
+        "path": "renders/section-evf-board-z78.png",
+        "expected": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
+        "actual": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
+        "match": true
+      },
+      {
+        "path": "renders/section-evf-board-x137.png",
+        "expected": "a67c0cdc53cc6cff9e5367a99598768019af3375c7b5fa4ea4fe0781cc57298b",
+        "actual": "a67c0cdc53cc6cff9e5367a99598768019af3375c7b5fa4ea4fe0781cc57298b",
+        "match": true
+      },
+      {
+        "path": "renders/section-pi-keeper-y-20.png",
+        "expected": "c7447a947b52fbd846aaf8bbeb359e7a6067b6f19a307f64b6f7a50fa2f25dd7",
+        "actual": "c7447a947b52fbd846aaf8bbeb359e7a6067b6f19a307f64b6f7a50fa2f25dd7",
+        "match": true
+      },
+      {
+        "path": "renders/section-pi-keeper-x80.png",
+        "expected": "10b92067bc40a6b7b129a90ae72def75f6738ebfc86f1ee61d3864b61ae00212",
+        "actual": "10b92067bc40a6b7b129a90ae72def75f6738ebfc86f1ee61d3864b61ae00212",
+        "match": true
+      },
+      {
+        "path": "renders/section-pi-keeper-y12.png",
+        "expected": "0b31358c31908d9efd7eea1f62dbf3ec2df8d20288abb392f8194e0a784fbbfc",
+        "actual": "0b31358c31908d9efd7eea1f62dbf3ec2df8d20288abb392f8194e0a784fbbfc",
+        "match": true
+      },
+      {
+        "path": "renders/section-base-edge-x91.png",
+        "expected": "d3a6a8aa7afce1922e216dedb0d7211bd9206d081ecbba8e20a63351dce3c4d0",
+        "actual": "d3a6a8aa7afce1922e216dedb0d7211bd9206d081ecbba8e20a63351dce3c4d0",
+        "match": true
+      },
+      {
+        "path": "checks.json",
+        "expected": "0e0de579d234021f65068ec741fc59e548ecf8144f868e3d5c7e6498d479b6f1",
+        "actual": "0e0de579d234021f65068ec741fc59e548ecf8144f868e3d5c7e6498d479b6f1",
+        "match": true
+      },
+      {
+        "path": "print-manifest.json",
+        "expected": "7a6f0fb67b22cdfb2f5a1c60f106dd6b0c074bd17e1ee30146759ee7d75101d3",
+        "actual": "7a6f0fb67b22cdfb2f5a1c60f106dd6b0c074bd17e1ee30146759ee7d75101d3",
+        "match": true
+      },
+      {
+        "path": "parts-manifest.json",
+        "expected": "50af1b167c4bc81649575d0b482b8f5b26578b9137bf9d69497bac6738a4923b",
+        "actual": "50af1b167c4bc81649575d0b482b8f5b26578b9137bf9d69497bac6738a4923b",
+        "match": true
+      },
+      {
+        "path": "coupons-manifest.json",
+        "expected": "65249e86d377b017927a59d169778543bafb9b8beb24490e029a0d142144038c",
+        "actual": "65249e86d377b017927a59d169778543bafb9b8beb24490e029a0d142144038c",
+        "match": true
+      },
+      {
+        "path": "coupons-r1-manifest.json",
+        "expected": "5ed87a1e93c853faabc28ff77538fb676c4500ac0f5868986b654d18f1e957f8",
+        "actual": "5ed87a1e93c853faabc28ff77538fb676c4500ac0f5868986b654d18f1e957f8",
+        "match": true
+      },
+      {
+        "path": "checks-fujinon-sweep1mm.json",
+        "expected": "7eeb5c200435b9768a640ed906349b375c5c69d4e08e3bef2a1e3a3892b2c4bb",
+        "actual": "7eeb5c200435b9768a640ed906349b375c5c69d4e08e3bef2a1e3a3892b2c4bb",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/base_edge_base.stl",
+        "expected": "097c1a8307ce52fafdd991a0aeed91f0727bbfd8b002a44ebb68c33c43818a6e",
+        "actual": "097c1a8307ce52fafdd991a0aeed91f0727bbfd8b002a44ebb68c33c43818a6e",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/base_edge_panel.stl",
+        "expected": "981d5ee76f0ff26676490610a1446f3b5fc66e1b6a7877cf7237c1620590133e",
+        "actual": "981d5ee76f0ff26676490610a1446f3b5fc66e1b6a7877cf7237c1620590133e",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/base_edge_tub.stl",
+        "expected": "efa444108fb49d8aa4d1205a175f11062cde3baf36ee73931086dad1ad60250e",
+        "actual": "efa444108fb49d8aa4d1205a175f11062cde3baf36ee73931086dad1ad60250e",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/board_edge_plate.stl",
+        "expected": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "actual": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_cap.stl",
+        "expected": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "actual": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_grip.stl",
+        "expected": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "actual": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/clearance_comb.stl",
+        "expected": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "actual": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-part.stl",
+        "expected": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+        "actual": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-pi.stl",
+        "expected": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+        "actual": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-tub.stl",
+        "expected": "e0325d05192edec1b6f01632fe4035f53917230519f87ea5c5927994176aee71",
+        "actual": "e0325d05192edec1b6f01632fe4035f53917230519f87ea5c5927994176aee71",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-x1203.stl",
+        "expected": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+        "actual": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/encoder_cradle_hook.stl",
+        "expected": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "actual": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_panel.stl",
+        "expected": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "actual": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_tub.stl",
+        "expected": "e8ff7144c47547a18b1484e1795958db1356f4b0262d708637ff3574e8bde161",
+        "actual": "e8ff7144c47547a18b1484e1795958db1356f4b0262d708637ff3574e8bde161",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/hood_hook.stl",
+        "expected": "91c43282e77a907ee58e9f804ea25929f672cda5b69e640e4116f8d3420951cb",
+        "actual": "91c43282e77a907ee58e9f804ea25929f672cda5b69e640e4116f8d3420951cb",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/hood_hook_ret.stl",
+        "expected": "eb303c381b41da77fea8d10a697dd925a4ac85ce127d256562f769b0ae7190ed",
+        "actual": "eb303c381b41da77fea8d10a697dd925a4ac85ce127d256562f769b0ae7190ed",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/hood_ledge.stl",
+        "expected": "828f5415fcffe35e212b530c8a9d9ec20c79463183c111abbb72dc8cfe582875",
+        "actual": "828f5415fcffe35e212b530c8a9d9ec20c79463183c111abbb72dc8cfe582875",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/hood_ledge_ret.stl",
+        "expected": "c5e3e103563cd9eb3ef40b96c6bed4343a3827437a070b2c6ddde825930c8c09",
+        "actual": "c5e3e103563cd9eb3ef40b96c6bed4343a3827437a070b2c6ddde825930c8c09",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/keyhole_slot.stl",
+        "expected": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "actual": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_enc.stl",
+        "expected": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "actual": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_sw.stl",
+        "expected": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "actual": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_bottom.stl",
+        "expected": "6b17b9cf06526684946b22d05fc1a4bf3e01798891dba9bfbb23d3ac404f9d94",
+        "actual": "6b17b9cf06526684946b22d05fc1a4bf3e01798891dba9bfbb23d3ac404f9d94",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_post.stl",
+        "expected": "f594701a1b769c56eccba06da0b06999ce00bc4f73bb17ef2107b40f3a5e3a4f",
+        "actual": "f594701a1b769c56eccba06da0b06999ce00bc4f73bb17ef2107b40f3a5e3a4f",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/tongue.stl",
+        "expected": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "actual": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "match": true
+      },
+      {
+        "path": "stl/tub.stl",
+        "expected": "0d4bbca8ada7f24e342116f313848b65c3a529bf0d21eeb47c8160bea96dfebc",
+        "actual": "0d4bbca8ada7f24e342116f313848b65c3a529bf0d21eeb47c8160bea96dfebc",
+        "match": true
+      },
+      {
+        "path": "stl/hood.stl",
+        "expected": "5505c710a4b2a3aff3537508d473d4a02e3cf98a3668a580eea53c9e6ef7eeff",
+        "actual": "5505c710a4b2a3aff3537508d473d4a02e3cf98a3668a580eea53c9e6ef7eeff",
+        "match": true
+      },
+      {
+        "path": "stl/panel.stl",
+        "expected": "db433e498f0ee456f0d34288461a0049dcf79346ba717283d16b722e278e4e70",
+        "actual": "db433e498f0ee456f0d34288461a0049dcf79346ba717283d16b722e278e4e70",
+        "match": true
+      },
+      {
+        "path": "stl/base_grip.stl",
+        "expected": "9c36007e864ecb2ddd407451d9e6180a2979789eaa836cb29a2d25975ba50534",
+        "actual": "9c36007e864ecb2ddd407451d9e6180a2979789eaa836cb29a2d25975ba50534",
+        "match": true
+      },
+      {
+        "path": "stl/cap.stl",
+        "expected": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "actual": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "match": true
+      },
+      {
+        "path": "stl/plunger.stl",
+        "expected": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "actual": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "match": true
+      },
+      {
+        "path": "stl/knob_exp.stl",
+        "expected": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "actual": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "match": true
+      },
+      {
+        "path": "stl/knob_fps.stl",
+        "expected": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "actual": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "match": true
+      },
+      {
+        "path": "stl/eyecup.stl",
+        "expected": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "actual": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "match": true
+      },
+      {
+        "path": "stl/stick_sleeve.stl",
+        "expected": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "actual": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "match": true
+      },
+      {
+        "path": "stl/pi_keeper.stl",
+        "expected": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+        "actual": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+        "match": true
+      },
+      {
+        "path": "test_common.json",
+        "expected": "8197411d3df63c5a293205972d4801cb851f2a77019cca8d4fcea6fc57d6d0d9",
+        "actual": "8197411d3df63c5a293205972d4801cb851f2a77019cca8d4fcea6fc57d6d0d9",
+        "match": true
+      }
+    ],
+    "gate_doc_hashes": [
+      {
+        "path": "cad/gs8-d2-v1/MEASURED-PARTS.md",
+        "expected": "ac5ac10ac66d18a1781b03e04c15301ed6c8b28faa7a66d6d4fd7fcddc2e677a",
+        "actual": "ac5ac10ac66d18a1781b03e04c15301ed6c8b28faa7a66d6d4fd7fcddc2e677a",
+        "match": true
+      },
+      {
+        "path": "cad/gs8-d2-v1/SPEC.md",
+        "expected": "1674374cab240a0d04378b714fc1b0e431286c430e3296ec0b588afffe372c25",
+        "actual": "1674374cab240a0d04378b714fc1b0e431286c430e3296ec0b588afffe372c25",
+        "match": true
+      },
+      {
+        "path": "electronics/gs8-d2-v1/WIRING.md",
+        "expected": "39c453cb80d675616e11fbe867235ba328f0c160f2ad05cd773ecfa77d3fd93b",
+        "actual": "39c453cb80d675616e11fbe867235ba328f0c160f2ad05cd773ecfa77d3fd93b",
+        "match": true
+      },
+      {
+        "path": "electronics/gs8-evf-v1/EVF-SELECTION.md",
+        "expected": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390",
+        "actual": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390",
+        "match": true
+      }
+    ],
+    "meshes": [
+      {
+        "path": "stl/base_grip.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 91026.0188,
+        "extents_mm": [
+          116.5,
+          70.4000015258789,
+          110.0
+        ],
+        "sha256": "9c36007e864ecb2ddd407451d9e6180a2979789eaa836cb29a2d25975ba50534",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/cap.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6737.198,
+        "extents_mm": [
+          47.9999989811331,
+          30.000000888481736,
+          10.199999744072556
+        ],
+        "sha256": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/base_edge_base.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1950.0673,
+        "extents_mm": [
+          16.0,
+          17.200000762939453,
+          7.999999999999999
+        ],
+        "sha256": "097c1a8307ce52fafdd991a0aeed91f0727bbfd8b002a44ebb68c33c43818a6e",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/base_edge_panel.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1076.1292,
+        "extents_mm": [
+          16.0,
+          13.399999618530265,
+          10.899999618530266
+        ],
+        "sha256": "981d5ee76f0ff26676490610a1446f3b5fc66e1b6a7877cf7237c1620590133e",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/base_edge_tub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 903.3691,
+        "extents_mm": [
+          16.0,
+          8.0,
+          16.999999999999837
+        ],
+        "sha256": "efa444108fb49d8aa4d1205a175f11062cde3baf36ee73931086dad1ad60250e",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/board_edge_plate.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 672.0,
+        "extents_mm": [
+          30.0,
+          14.0,
+          1.600000023841858
+        ],
+        "sha256": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_cap.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6737.1981,
+        "extents_mm": [
+          48.0,
+          30.0,
+          10.199999809265137
+        ],
+        "sha256": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_grip.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2877.2091,
+        "extents_mm": [
+          48.0,
+          30.0,
+          10.000000000000002
+        ],
+        "sha256": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/clearance_comb.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1375.5001,
+        "extents_mm": [
+          30.0,
+          20.0,
+          8.0
+        ],
+        "sha256": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-part.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6210.3978,
+        "extents_mm": [
+          64.0,
+          54.9000015258789,
+          7.900000095367432
+        ],
+        "sha256": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-pi.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 7578.0498,
+        "extents_mm": [
+          85.0,
+          56.0,
+          1.600000023841858
+        ],
+        "sha256": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-tub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 22827.7455,
+        "extents_mm": [
+          100.69999694824219,
+          10.0,
+          70.0
+        ],
+        "sha256": "e0325d05192edec1b6f01632fe4035f53917230519f87ea5c5927994176aee71",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-x1203.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 7578.0498,
+        "extents_mm": [
+          85.0,
+          56.0,
+          1.600000023841858
+        ],
+        "sha256": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/encoder_cradle_hook.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 276.2041,
+        "extents_mm": [
+          12.0,
+          4.599999904632568,
+          12.050000190734863
+        ],
+        "sha256": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_panel.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2787.8289,
+        "extents_mm": [
+          18.666061401367188,
+          35.99999989999999,
+          7.499999776837171
+        ],
+        "sha256": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_tub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 10556.226,
+        "extents_mm": [
+          20.0,
+          35.999999999999986,
+          67.19999694824219
+        ],
+        "sha256": "e8ff7144c47547a18b1484e1795958db1356f4b0262d708637ff3574e8bde161",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/hood_hook.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 332.42,
+        "extents_mm": [
+          14.0,
+          4.849999904632565,
+          13.199999809265137
+        ],
+        "sha256": "91c43282e77a907ee58e9f804ea25929f672cda5b69e640e4116f8d3420951cb",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/hood_hook_ret.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 351.6,
+        "extents_mm": [
+          5.4999999999999964,
+          13.999999999999996,
+          13.199999809265137
+        ],
+        "sha256": "eb303c381b41da77fea8d10a697dd925a4ac85ce127d256562f769b0ae7190ed",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/hood_ledge.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 519.1118,
+        "extents_mm": [
+          14.0,
+          14.749999999999986,
+          3.299999952316284
+        ],
+        "sha256": "828f5415fcffe35e212b530c8a9d9ec20c79463183c111abbb72dc8cfe582875",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/hood_ledge_ret.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 526.0041,
+        "extents_mm": [
+          3.2999999523162806,
+          14.75,
+          14.0
+        ],
+        "sha256": "c5e3e103563cd9eb3ef40b96c6bed4343a3827437a070b2c6ddde825930c8c09",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/keyhole_slot.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2086.9475,
+        "extents_mm": [
+          26.0,
+          23.0,
+          5.999999999999999
+        ],
+        "sha256": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_enc.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 3891.3571,
+        "extents_mm": [
+          81.99175662081689,
+          13.997732163581531,
+          6.0
+        ],
+        "sha256": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_sw.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 3801.7648,
+        "extents_mm": [
+          81.99175662081689,
+          13.997732163581531,
+          6.0
+        ],
+        "sha256": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_bottom.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 889.2292,
+        "extents_mm": [
+          9.0,
+          11.999999999999991,
+          10.899999618530266
+        ],
+        "sha256": "6b17b9cf06526684946b22d05fc1a4bf3e01798891dba9bfbb23d3ac404f9d94",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_post.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 803.0036,
+        "extents_mm": [
+          8.0,
+          8.0,
+          13.399999618530273
+        ],
+        "sha256": "f594701a1b769c56eccba06da0b06999ce00bc4f73bb17ef2107b40f3a5e3a4f",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/tongue.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1200.0,
+        "extents_mm": [
+          12.0,
+          6.150000095367432,
+          23.0
+        ],
+        "sha256": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/eyecup.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 4384.5396,
+        "extents_mm": [
+          45.49822132848203,
+          45.512366357725114,
+          16.29999923706055
+        ],
+        "sha256": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/hood.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 70968.8412,
+        "extents_mm": [
+          178.6999969482422,
+          67.3499984741211,
+          99.69999694824216
+        ],
+        "sha256": "5505c710a4b2a3aff3537508d473d4a02e3cf98a3668a580eea53c9e6ef7eeff",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/knob_exp.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 4791.5277,
+        "extents_mm": [
+          27.996545791625977,
+          27.996545791625977,
+          9.000000000000002
+        ],
+        "sha256": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/knob_fps.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1252.8496,
+        "extents_mm": [
+          19.99132537841797,
+          19.99132537841797,
+          7.000000000000001
+        ],
+        "sha256": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/panel.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 51158.1457,
+        "extents_mm": [
+          148.6321258544922,
+          94.40000152587889,
+          65.40000142587891
+        ],
+        "sha256": "db433e498f0ee456f0d34288461a0049dcf79346ba717283d16b722e278e4e70",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/pi_keeper.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6210.3978,
+        "extents_mm": [
+          64.0,
+          54.9000015258789,
+          7.900000095367432
+        ],
+        "sha256": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/plunger.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 287.4727,
+        "extents_mm": [
+          7.800000190734863,
+          13.600000381469727,
+          4.0
+        ],
+        "sha256": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/stick_sleeve.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1103.7801,
+        "extents_mm": [
+          13.0,
+          22.899999618530273,
+          16.0
+        ],
+        "sha256": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/tub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 105946.6559,
+        "extents_mm": [
+          151.3000030517578,
+          100.94999694824219,
+          70.0
+        ],
+        "sha256": "0d4bbca8ada7f24e342116f313848b65c3a529bf0d21eeb47c8160bea96dfebc",
+        "linked_by_receipt": true
+      }
+    ],
+    "comparison_to_r2": [
+      {
+        "path": "stl/base_grip.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/cap.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/base_edge_base.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/base_edge_panel.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/base_edge_tub.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/board_edge_plate.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_cap.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_grip.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/clearance_comb.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-part.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-pi.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-tub.stl",
+        "same_as_r2": false
+      },
+      {
+        "path": "stl/coupons/coupon-pi-keeper-x1203.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/encoder_cradle_hook.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_panel.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_tub.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/hood_hook.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/hood_hook_ret.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/hood_ledge.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/hood_ledge_ret.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/keyhole_slot.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_enc.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_sw.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_bottom.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_post.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/tongue.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/eyecup.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/hood.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/knob_exp.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/knob_fps.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/panel.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/pi_keeper.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/plunger.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/stick_sleeve.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/tub.stl",
+        "same_as_r2": false
+      }
+    ],
+    "separate_coupon_hashes": []
+  },
+  "candidate_fr1": {
+    "summary": {
+      "built_at": "2026-10-05 15:26:25 +0800",
+      "variant": "FR1 hood=yslide,keeper=True,panel=True",
+      "source_count": 19,
+      "source_mismatches": [],
+      "declared_missing_sources": [
+        "SPEC.md",
+        "FASTENER-POLICY.md"
+      ],
+      "output_count": 61,
+      "output_mismatches": [],
+      "gate_doc_count": 4,
+      "gate_doc_mismatches": [
+        {
+          "path": "cad/gs8-d2-v1/SPEC.md",
+          "expected": "e0e6fa39c4a49d9cd423ce015f1e44400e3f68b0e50e586a2dfa16ee86d5a5c8",
+          "actual": "1674374cab240a0d04378b714fc1b0e431286c430e3296ec0b588afffe372c25",
+          "match": false
+        },
+        {
+          "path": "electronics/gs8-d2-v1/WIRING.md",
+          "expected": "087b57f81f5a2704e5b8e5697919db2bc11789a58fcbb804c40aff25d80256b3",
+          "actual": "39c453cb80d675616e11fbe867235ba328f0c160f2ad05cd773ecfa77d3fd93b",
+          "match": false
+        }
+      ],
+      "mesh_count": 35,
+      "production_mesh_count": 11,
+      "mesh_failures": [],
+      "unlinked_meshes": [
+        "stl/coupons-fr/coupon-fr-hood-hood-yk1.stl",
+        "stl/coupons-fr/coupon-fr-hood-hood-yk3.stl",
+        "stl/coupons-fr/coupon-fr-hood-tub-yk1.stl",
+        "stl/coupons-fr/coupon-fr-hood-tub-yk3.stl",
+        "stl/coupons-fr/coupon-fr-keeper-part.stl",
+        "stl/coupons-fr/coupon-fr-keeper-pi.stl",
+        "stl/coupons-fr/coupon-fr-keeper-seat.stl",
+        "stl/coupons-fr/coupon-fr-keeper-stub.stl",
+        "stl/coupons-fr/coupon-fr-keeper-tub.stl",
+        "stl/coupons-fr/coupon-fr-keeper-x1203.stl",
+        "stl/coupons-fr/coupon-frp-panel-keys.stl",
+        "stl/coupons-fr/coupon-frp-tub-lip.stl"
+      ],
+      "separate_coupon_hash_count": 24,
+      "separate_coupon_hash_mismatches": [],
+      "changed_from_r2": [
+        "stl/base_grip.stl",
+        "stl/coupons/evf_stop_tub.stl",
+        "stl/coupons/pt_boss_post.stl",
+        "stl/hood.stl",
+        "stl/panel.stl",
+        "stl/pi_keeper.stl",
+        "stl/tub.stl"
+      ],
+      "cad_categories": [
+        {
+          "check": "contract",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "cots_containment",
+          "n": 20,
+          "passed": 20,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "interference",
+          "n": 49,
+          "passed": 49,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "mate_overlap",
+          "n": 30,
+          "passed": 30,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "clearance",
+          "n": 12,
+          "passed": 12,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "keepouts",
+          "n": 81,
+          "passed": 81,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "bed_fit",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "stl_mesh",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "thin_wall",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass",
+          "role": "secondary share-based screen: cannot pass the build alone; the gate for local thickness is critical_features (finding 2)"
+        },
+        {
+          "check": "critical_features",
+          "n": 136,
+          "passed": 126,
+          "failed": 0,
+          "stub": 0,
+          "info": 10,
+          "status": "pass"
+        },
+        {
+          "check": "evf_restraint",
+          "n": 6,
+          "passed": 6,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "driver",
+          "n": 4,
+          "passed": 4,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "engrave_groove",
+          "n": 10,
+          "passed": 10,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "boss_geometry",
+          "n": 4,
+          "passed": 4,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "sweeps",
+          "n": 12,
+          "passed": 12,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "removals",
+          "n": 11,
+          "passed": 11,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "service_driver",
+          "n": 3,
+          "passed": 3,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "release_access",
+          "n": 1,
+          "passed": 1,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "stack_retention",
+          "n": 1,
+          "passed": 1,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "layout_self_check",
+          "n": 120,
+          "passed": 120,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        {
+          "check": "mass_com",
+          "status": "pass"
+        }
+      ],
+      "states": {
+        "cad_checks": {
+          "status": "computed: pass"
+        },
+        "slicer_review": {
+          "status": "not run",
+          "items_required": 11
+        },
+        "coupon_validation": {
+          "status": "not run",
+          "items_required": 9
+        },
+        "measured_fit": {
+          "status": "not run",
+          "items_required": 17
+        },
+        "assembly_operation": {
+          "status": "not run",
+          "items_required": 22
+        }
+      }
+    },
+    "source_hashes": [
+      {
+        "path": "layout.py",
+        "expected": "e8dc35abdb2fde2bbc471c547db84d33a8394146dff60a94c95e2da2b72c0983",
+        "actual": "e8dc35abdb2fde2bbc471c547db84d33a8394146dff60a94c95e2da2b72c0983",
+        "match": true
+      },
+      {
+        "path": "d2_common.py",
+        "expected": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+        "actual": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+        "match": true
+      },
+      {
+        "path": "cots.py",
+        "expected": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+        "actual": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+        "match": true
+      },
+      {
+        "path": "checks.py",
+        "expected": "9feb6c292834af851a5be0eff944ca583cc6ae21c3ca9527f0bf9695087a3182",
+        "actual": "9feb6c292834af851a5be0eff944ca583cc6ae21c3ca9527f0bf9695087a3182",
+        "match": true
+      },
+      {
+        "path": "build_d2.py",
+        "expected": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+        "actual": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+        "match": true
+      },
+      {
+        "path": "make_coupons.py",
+        "expected": "e8fa7278bee94d9120d8f944cffdc11b5123a70188cd05fb9bd7ae4f789963d2",
+        "actual": "e8fa7278bee94d9120d8f944cffdc11b5123a70188cd05fb9bd7ae4f789963d2",
+        "match": true
+      },
+      {
+        "path": "make_tables.py",
+        "expected": "a4c79a1005f7942a343c53fd57a820e2a6f2b2ea312209a04e4b9a2c30946c76",
+        "actual": "a4c79a1005f7942a343c53fd57a820e2a6f2b2ea312209a04e4b9a2c30946c76",
+        "match": true
+      },
+      {
+        "path": "SPEC.md",
+        "expected": "missing",
+        "actual": "missing",
+        "match": true
+      },
+      {
+        "path": "FASTENER-POLICY.md",
+        "expected": "missing",
+        "actual": "missing",
+        "match": true
+      },
+      {
+        "path": "printed_grip.py",
+        "expected": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+        "actual": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+        "match": true
+      },
+      {
+        "path": "printed_hood.py",
+        "expected": "013f699ea7c9963e7ff3618ee9e24a84cfe0e16c49102a4c7f2c274e2a18e6bc",
+        "actual": "013f699ea7c9963e7ff3618ee9e24a84cfe0e16c49102a4c7f2c274e2a18e6bc",
+        "match": true
+      },
+      {
+        "path": "printed_keeper.py",
+        "expected": "376e169178902703ef5284d07e0dccb5fb2e818599e97217a3d2b638d4f761f4",
+        "actual": "376e169178902703ef5284d07e0dccb5fb2e818599e97217a3d2b638d4f761f4",
+        "match": true
+      },
+      {
+        "path": "printed_panel.py",
+        "expected": "23361fb44cef0b7dd6e0ee73011396b6a26cba5ea29e8667b584e2477393a78d",
+        "actual": "23361fb44cef0b7dd6e0ee73011396b6a26cba5ea29e8667b584e2477393a78d",
+        "match": true
+      },
+      {
+        "path": "printed_small.py",
+        "expected": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+        "actual": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+        "match": true
+      },
+      {
+        "path": "printed_tub.py",
+        "expected": "10af7d38233fcd0711c2c9e1e2ce2dd475a5ddd8f3f278da2e4f1b52d59d198e",
+        "actual": "10af7d38233fcd0711c2c9e1e2ce2dd475a5ddd8f3f278da2e4f1b52d59d198e",
+        "match": true
+      },
+      {
+        "path": "coupons_fr_hood.py",
+        "expected": "4f9b6fb57911733c99751f1442fe3a46dd139e699994c77f194178e42ef1ad2c",
+        "actual": "4f9b6fb57911733c99751f1442fe3a46dd139e699994c77f194178e42ef1ad2c",
+        "match": true
+      },
+      {
+        "path": "coupons_fr_keeper.py",
+        "expected": "d992a5a05ec95a8592dc832aa6e77feff0e5bd69c9ad7001285e7196d799248f",
+        "actual": "d992a5a05ec95a8592dc832aa6e77feff0e5bd69c9ad7001285e7196d799248f",
+        "match": true
+      },
+      {
+        "path": "coupons_fr_panel.py",
+        "expected": "cf55dec6025f5c95e3187a4b74a549d979e28dea122276fc5517ef5f59f543ce",
+        "actual": "cf55dec6025f5c95e3187a4b74a549d979e28dea122276fc5517ef5f59f543ce",
+        "match": true
+      },
+      {
+        "path": "coupons_r1.py",
+        "expected": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+        "actual": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+        "match": true
+      }
+    ],
+    "output_hashes": [
+      {
+        "path": "step/gs8-d2-assembly.step",
+        "expected": "a84bb220a32a6a1fed7fbd0fe30a49c05cfa5c938b222eeedba3fc3545295c1d",
+        "actual": "a84bb220a32a6a1fed7fbd0fe30a49c05cfa5c938b222eeedba3fc3545295c1d",
+        "match": true
+      },
+      {
+        "path": "step/parts/base_grip.step",
+        "expected": "f05209442004d1b3a22b3c69e355e47d4767cb8ce2056e37a73d4405cabeba6c",
+        "actual": "f05209442004d1b3a22b3c69e355e47d4767cb8ce2056e37a73d4405cabeba6c",
+        "match": true
+      },
+      {
+        "path": "step/parts/cap.step",
+        "expected": "3235491fec0fba92acdf477f85e8c2f8936e672fa4da55a28c0144420493c10c",
+        "actual": "3235491fec0fba92acdf477f85e8c2f8936e672fa4da55a28c0144420493c10c",
+        "match": true
+      },
+      {
+        "path": "step/parts/eyecup.step",
+        "expected": "a896f3e963a63eb89546b46095b471453e8ff7bb1888514cd953c6a8d54b7f73",
+        "actual": "a896f3e963a63eb89546b46095b471453e8ff7bb1888514cd953c6a8d54b7f73",
+        "match": true
+      },
+      {
+        "path": "step/parts/hood.step",
+        "expected": "144914178a96d9b503b43f39381fe71c1af534eb7a0fa29cbf945ad443b320d6",
+        "actual": "144914178a96d9b503b43f39381fe71c1af534eb7a0fa29cbf945ad443b320d6",
+        "match": true
+      },
+      {
+        "path": "step/parts/knob_exp.step",
+        "expected": "2e7dc90a3fe947bf58943bdac99e916779ef68990096c8078bc3343361b81746",
+        "actual": "2e7dc90a3fe947bf58943bdac99e916779ef68990096c8078bc3343361b81746",
+        "match": true
+      },
+      {
+        "path": "step/parts/knob_fps.step",
+        "expected": "c9f3bc6e37079cbfee685a7c57d4c4d400e6b75862a8f75e2e066c801dc50c73",
+        "actual": "c9f3bc6e37079cbfee685a7c57d4c4d400e6b75862a8f75e2e066c801dc50c73",
+        "match": true
+      },
+      {
+        "path": "step/parts/panel.step",
+        "expected": "8442a088f5bfa94c9d3dd71beeb8db2615eda03401ad70907518c1ce438127e1",
+        "actual": "8442a088f5bfa94c9d3dd71beeb8db2615eda03401ad70907518c1ce438127e1",
+        "match": true
+      },
+      {
+        "path": "step/parts/pi_keeper.step",
+        "expected": "aa8984417130465a326cb6dd2200d6b45433260356fa54ed913fb8f422496ac2",
+        "actual": "aa8984417130465a326cb6dd2200d6b45433260356fa54ed913fb8f422496ac2",
+        "match": true
+      },
+      {
+        "path": "step/parts/plunger.step",
+        "expected": "550333de5be4a30a5a3eec346ec25a6c73773ccb2dd2d38a484bc90b5992a1d4",
+        "actual": "550333de5be4a30a5a3eec346ec25a6c73773ccb2dd2d38a484bc90b5992a1d4",
+        "match": true
+      },
+      {
+        "path": "step/parts/stick_sleeve.step",
+        "expected": "1240c407a78e8a07fe65ab0cbf124da9320aef7f1e8b2436dbc44a888ca1806c",
+        "actual": "1240c407a78e8a07fe65ab0cbf124da9320aef7f1e8b2436dbc44a888ca1806c",
+        "match": true
+      },
+      {
+        "path": "step/parts/tub.step",
+        "expected": "07614abdb70fd2ebddd00ff210ad1b27dbcdeaeb15e191017fb7e6ee19d37bf6",
+        "actual": "07614abdb70fd2ebddd00ff210ad1b27dbcdeaeb15e191017fb7e6ee19d37bf6",
+        "match": true
+      },
+      {
+        "path": "renders/hero.png",
+        "expected": "67025fdc7506ea5681af0952b4ba3222097cd707d204c6674cc8938066466d24",
+        "actual": "67025fdc7506ea5681af0952b4ba3222097cd707d204c6674cc8938066466d24",
+        "match": true
+      },
+      {
+        "path": "renders/exploded.png",
+        "expected": "9ce542c94b9e4cbf7fe631bd0483da98d171b9fcd195544005a4a33e5a3a1307",
+        "actual": "9ce542c94b9e4cbf7fe631bd0483da98d171b9fcd195544005a4a33e5a3a1307",
+        "match": true
+      },
+      {
+        "path": "renders/xray.png",
+        "expected": "43b54e26210cab11af2c18c3a83ee28e599efbc5e87e1d47201c228f12297294",
+        "actual": "43b54e26210cab11af2c18c3a83ee28e599efbc5e87e1d47201c228f12297294",
+        "match": true
+      },
+      {
+        "path": "renders/section-lens-axis.png",
+        "expected": "a1f639aec6fc514db6bd7504bf5b99a99ea2b08e9d2bce7b348f060b109699ca",
+        "actual": "a1f639aec6fc514db6bd7504bf5b99a99ea2b08e9d2bce7b348f060b109699ca",
+        "match": true
+      },
+      {
+        "path": "renders/section-evf-axis.png",
+        "expected": "c23a349fac1a0950b7ee275171dd2e67dd3567b893ffec816be3732d27105dbd",
+        "actual": "c23a349fac1a0950b7ee275171dd2e67dd3567b893ffec816be3732d27105dbd",
+        "match": true
+      },
+      {
+        "path": "renders/print-poses.png",
+        "expected": "bc30252c8ea04704f012edd0bd198afd38e3747c4d8b6ec7d1e027e44e343fac",
+        "actual": "bc30252c8ea04704f012edd0bd198afd38e3747c4d8b6ec7d1e027e44e343fac",
+        "match": true
+      },
+      {
+        "path": "renders/step-01.png",
+        "expected": "02d6224e6d4a22ac06cc31ce65215ff3bd2698245d83f83ebeef85dcba35eb1e",
+        "actual": "02d6224e6d4a22ac06cc31ce65215ff3bd2698245d83f83ebeef85dcba35eb1e",
+        "match": true
+      },
+      {
+        "path": "renders/step-02.png",
+        "expected": "b176611a5a1062920c2559f71916204bc608b84f89548022da9cf9ae703ce17c",
+        "actual": "b176611a5a1062920c2559f71916204bc608b84f89548022da9cf9ae703ce17c",
+        "match": true
+      },
+      {
+        "path": "renders/step-03.png",
+        "expected": "e4c163904c41423db85690d514d54437ac066aee190aa3c61ffd9339c5984743",
+        "actual": "e4c163904c41423db85690d514d54437ac066aee190aa3c61ffd9339c5984743",
+        "match": true
+      },
+      {
+        "path": "renders/step-04.png",
+        "expected": "51bb73f707c5436cc88b5f783c71f65332abce0bf4df8c055c849bb8475f8b89",
+        "actual": "51bb73f707c5436cc88b5f783c71f65332abce0bf4df8c055c849bb8475f8b89",
+        "match": true
+      },
+      {
+        "path": "renders/step-05.png",
+        "expected": "002c85a1e9186108e3f4f66cadd37a2850bb0e1ecb0fec23407849dcb1482853",
+        "actual": "002c85a1e9186108e3f4f66cadd37a2850bb0e1ecb0fec23407849dcb1482853",
+        "match": true
+      },
+      {
+        "path": "renders/step-06.png",
+        "expected": "cec8ac3694623a25492325fed62f5d425b57fb3980c59345c04e608d2781ca49",
+        "actual": "cec8ac3694623a25492325fed62f5d425b57fb3980c59345c04e608d2781ca49",
+        "match": true
+      },
+      {
+        "path": "renders/step-07.png",
+        "expected": "558768fbd20e15dad81cd6bdbd6744e69c0b7a8ad002e492a4f9bb3904a7405e",
+        "actual": "558768fbd20e15dad81cd6bdbd6744e69c0b7a8ad002e492a4f9bb3904a7405e",
+        "match": true
+      },
+      {
+        "path": "renders/step-08.png",
+        "expected": "f8f34e64547810881269e37718d32e1f2baef85eed52309e4d025758ee025050",
+        "actual": "f8f34e64547810881269e37718d32e1f2baef85eed52309e4d025758ee025050",
+        "match": true
+      },
+      {
+        "path": "renders/step-09.png",
+        "expected": "d760b3ae0b100bd3f11b83cb44f7455889310bbce67fda7fdc4743f7d2ed327e",
+        "actual": "d760b3ae0b100bd3f11b83cb44f7455889310bbce67fda7fdc4743f7d2ed327e",
+        "match": true
+      },
+      {
+        "path": "renders/step-10.png",
+        "expected": "7e5a69b356d74590e28d9500c25e99f0d6ee6340437e8acb9da449e8539f318b",
+        "actual": "7e5a69b356d74590e28d9500c25e99f0d6ee6340437e8acb9da449e8539f318b",
+        "match": true
+      },
+      {
+        "path": "renders/section-evf-board-z78.png",
+        "expected": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
+        "actual": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
+        "match": true
+      },
+      {
+        "path": "renders/section-evf-board-x137.png",
+        "expected": "a67c0cdc53cc6cff9e5367a99598768019af3375c7b5fa4ea4fe0781cc57298b",
+        "actual": "a67c0cdc53cc6cff9e5367a99598768019af3375c7b5fa4ea4fe0781cc57298b",
+        "match": true
+      },
+      {
+        "path": "renders/section-pi-keeper-y-20.png",
+        "expected": "e25b26958ba50f157d01d407c0004b3d95eb473305a42939975200123ec4d9a7",
+        "actual": "e25b26958ba50f157d01d407c0004b3d95eb473305a42939975200123ec4d9a7",
+        "match": true
+      },
+      {
+        "path": "renders/section-pi-keeper-x80.png",
+        "expected": "f1f868544e7c3fbbc1c347f0d2d3bf71b61953c501ea916abc9d0788a256b3de",
+        "actual": "f1f868544e7c3fbbc1c347f0d2d3bf71b61953c501ea916abc9d0788a256b3de",
+        "match": true
+      },
+      {
+        "path": "renders/section-pi-keeper-y12.png",
+        "expected": "6abc2df72c358ae7f3321b8094b5f20504cc38209a3824a8c8c8fb37f2cf517d",
+        "actual": "6abc2df72c358ae7f3321b8094b5f20504cc38209a3824a8c8c8fb37f2cf517d",
+        "match": true
+      },
+      {
+        "path": "renders/section-base-edge-x91.png",
+        "expected": "06c283c34a995af767da0cd94b6481379f8d69b970f3d857d27d98dd4cfac1c7",
+        "actual": "06c283c34a995af767da0cd94b6481379f8d69b970f3d857d27d98dd4cfac1c7",
+        "match": true
+      },
+      {
+        "path": "checks.json",
+        "expected": "97084ae14fcc5f42c689bd6180d846a062a5d39775485e4ebf82f74af838ddb3",
+        "actual": "97084ae14fcc5f42c689bd6180d846a062a5d39775485e4ebf82f74af838ddb3",
+        "match": true
+      },
+      {
+        "path": "print-manifest.json",
+        "expected": "faed0bbdc6b8f8a1f9d809002275a852f5eeda116b140baa781bcd966acf7567",
+        "actual": "faed0bbdc6b8f8a1f9d809002275a852f5eeda116b140baa781bcd966acf7567",
+        "match": true
+      },
+      {
+        "path": "parts-manifest.json",
+        "expected": "66fe0dab6b242d7e45249ca1691c7ac6a6dde2b5d0dfe1f1bf8b77329a5a2c89",
+        "actual": "66fe0dab6b242d7e45249ca1691c7ac6a6dde2b5d0dfe1f1bf8b77329a5a2c89",
+        "match": true
+      },
+      {
+        "path": "coupons-manifest.json",
+        "expected": "de26ba09d549c72854ddcdfb91e0de8081b212d59dce74c3586ca2e5ff67766f",
+        "actual": "de26ba09d549c72854ddcdfb91e0de8081b212d59dce74c3586ca2e5ff67766f",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/board_edge_plate.stl",
+        "expected": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "actual": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_cap.stl",
+        "expected": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "actual": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_grip.stl",
+        "expected": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "actual": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/clearance_comb.stl",
+        "expected": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "actual": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/encoder_cradle_hook.stl",
+        "expected": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "actual": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_panel.stl",
+        "expected": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "actual": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_tub.stl",
+        "expected": "bbd8f7a4dac9bf452b5d227ee2059db4b1984f2f03741eaf2be88766b87732b0",
+        "actual": "bbd8f7a4dac9bf452b5d227ee2059db4b1984f2f03741eaf2be88766b87732b0",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/keyhole_slot.stl",
+        "expected": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "actual": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_enc.stl",
+        "expected": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "actual": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_sw.stl",
+        "expected": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "actual": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_post.stl",
+        "expected": "5de9372bb2c8385a2ec7c89a4d8116a3e99736f36358e660de3627a84f98693c",
+        "actual": "5de9372bb2c8385a2ec7c89a4d8116a3e99736f36358e660de3627a84f98693c",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/tongue.stl",
+        "expected": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "actual": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "match": true
+      },
+      {
+        "path": "stl/tub.stl",
+        "expected": "093d116aca4ba255ac8d929caa6de9b1e53e527696380a18b5b959e4e6bf2081",
+        "actual": "093d116aca4ba255ac8d929caa6de9b1e53e527696380a18b5b959e4e6bf2081",
+        "match": true
+      },
+      {
+        "path": "stl/hood.stl",
+        "expected": "e02f09fd56ad8d39a068271c225cb1fd7a598e94da66d4cc5a4e6bf9db78b6df",
+        "actual": "e02f09fd56ad8d39a068271c225cb1fd7a598e94da66d4cc5a4e6bf9db78b6df",
+        "match": true
+      },
+      {
+        "path": "stl/panel.stl",
+        "expected": "f335e0d99407235e9a99d9e17a3392a75b7eeae81efd98fc410531053300b3ce",
+        "actual": "f335e0d99407235e9a99d9e17a3392a75b7eeae81efd98fc410531053300b3ce",
+        "match": true
+      },
+      {
+        "path": "stl/base_grip.stl",
+        "expected": "684183466c80374ba6f302faec5c73b0ae5bb025acfc0c194c9ab86614fa6f34",
+        "actual": "684183466c80374ba6f302faec5c73b0ae5bb025acfc0c194c9ab86614fa6f34",
+        "match": true
+      },
+      {
+        "path": "stl/cap.stl",
+        "expected": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "actual": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "match": true
+      },
+      {
+        "path": "stl/plunger.stl",
+        "expected": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "actual": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "match": true
+      },
+      {
+        "path": "stl/knob_exp.stl",
+        "expected": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "actual": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "match": true
+      },
+      {
+        "path": "stl/knob_fps.stl",
+        "expected": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "actual": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "match": true
+      },
+      {
+        "path": "stl/eyecup.stl",
+        "expected": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "actual": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "match": true
+      },
+      {
+        "path": "stl/stick_sleeve.stl",
+        "expected": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "actual": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "match": true
+      },
+      {
+        "path": "stl/pi_keeper.stl",
+        "expected": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "actual": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "match": true
+      }
+    ],
+    "gate_doc_hashes": [
+      {
+        "path": "cad/gs8-d2-v1/MEASURED-PARTS.md",
+        "expected": "ac5ac10ac66d18a1781b03e04c15301ed6c8b28faa7a66d6d4fd7fcddc2e677a",
+        "actual": "ac5ac10ac66d18a1781b03e04c15301ed6c8b28faa7a66d6d4fd7fcddc2e677a",
+        "match": true
+      },
+      {
+        "path": "cad/gs8-d2-v1/SPEC.md",
+        "expected": "e0e6fa39c4a49d9cd423ce015f1e44400e3f68b0e50e586a2dfa16ee86d5a5c8",
+        "actual": "1674374cab240a0d04378b714fc1b0e431286c430e3296ec0b588afffe372c25",
+        "match": false
+      },
+      {
+        "path": "electronics/gs8-d2-v1/WIRING.md",
+        "expected": "087b57f81f5a2704e5b8e5697919db2bc11789a58fcbb804c40aff25d80256b3",
+        "actual": "39c453cb80d675616e11fbe867235ba328f0c160f2ad05cd773ecfa77d3fd93b",
+        "match": false
+      },
+      {
+        "path": "electronics/gs8-evf-v1/EVF-SELECTION.md",
+        "expected": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390",
+        "actual": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390",
+        "match": true
+      }
+    ],
+    "meshes": [
+      {
+        "path": "stl/base_grip.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 91523.3244,
+        "extents_mm": [
+          116.5,
+          70.4000015258789,
+          110.0
+        ],
+        "sha256": "684183466c80374ba6f302faec5c73b0ae5bb025acfc0c194c9ab86614fa6f34",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/cap.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6737.198,
+        "extents_mm": [
+          47.9999989811331,
+          30.000000888481736,
+          10.199999744072556
+        ],
+        "sha256": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/board_edge_plate.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 672.0,
+        "extents_mm": [
+          30.0,
+          14.0,
+          1.600000023841858
+        ],
+        "sha256": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_cap.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6737.1981,
+        "extents_mm": [
+          48.0,
+          30.0,
+          10.199999809265137
+        ],
+        "sha256": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_grip.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2877.2091,
+        "extents_mm": [
+          48.0,
+          30.0,
+          10.000000000000002
+        ],
+        "sha256": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/clearance_comb.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1375.5001,
+        "extents_mm": [
+          30.0,
+          20.0,
+          8.0
+        ],
+        "sha256": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/encoder_cradle_hook.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 276.2041,
+        "extents_mm": [
+          12.0,
+          4.599999904632568,
+          12.050000190734863
+        ],
+        "sha256": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_panel.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2787.8289,
+        "extents_mm": [
+          18.666061401367188,
+          35.99999989999999,
+          7.499999776837171
+        ],
+        "sha256": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_tub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 10558.6579,
+        "extents_mm": [
+          20.0,
+          35.999999999999986,
+          67.19999694824219
+        ],
+        "sha256": "bbd8f7a4dac9bf452b5d227ee2059db4b1984f2f03741eaf2be88766b87732b0",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/keyhole_slot.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2086.9475,
+        "extents_mm": [
+          26.0,
+          23.0,
+          5.999999999999999
+        ],
+        "sha256": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_enc.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 3891.3571,
+        "extents_mm": [
+          81.99175662081689,
+          13.997732163581531,
+          6.0
+        ],
+        "sha256": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_sw.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 3801.7648,
+        "extents_mm": [
+          81.99175662081689,
+          13.997732163581531,
+          6.0
+        ],
+        "sha256": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_post.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 803.0036,
+        "extents_mm": [
+          8.0,
+          8.0,
+          13.399999618530273
+        ],
+        "sha256": "5de9372bb2c8385a2ec7c89a4d8116a3e99736f36358e660de3627a84f98693c",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons/tongue.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1200.0,
+        "extents_mm": [
+          12.0,
+          6.150000095367432,
+          23.0
+        ],
+        "sha256": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-hood-yk1.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1265.8127,
+        "extents_mm": [
+          30.0,
+          13.850000381469723,
+          12.100000381469727
+        ],
+        "sha256": "d81c69351b3b39016e38935d5ee6434c588588097ceddc6a99299e033e2c3c75",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-hood-yk3.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1701.5623,
+        "extents_mm": [
+          15.199999809265137,
+          20.0,
+          16.0
+        ],
+        "sha256": "41062c8399cb010ac090b263fe9a49a80f4f383de42174020e83eb1dd0f045f7",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-tub-yk1.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1373.3464,
+        "extents_mm": [
+          30.0,
+          17.299999237060533,
+          4.5
+        ],
+        "sha256": "a9d133ff51a1d0eec7b3a43e2fa82f86e000bbc3a147010993a61c04e7b243e0",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-tub-yk3.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 872.3547,
+        "extents_mm": [
+          4.300000190734862,
+          17.299999237060547,
+          20.0
+        ],
+        "sha256": "c22e510967427be2126a2c44159fae151a302f7306ccd3ed7befac340dfc3308",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-part.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6611.4535,
+        "extents_mm": [
+          64.0,
+          61.6500015258789,
+          7.900000095367432
+        ],
+        "sha256": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-pi.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 7578.0498,
+        "extents_mm": [
+          85.0,
+          56.0,
+          1.600000023841858
+        ],
+        "sha256": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-seat.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2562.1679,
+        "extents_mm": [
+          17.70000076293944,
+          19.5,
+          15.0
+        ],
+        "sha256": "9a098810e93a843c1a7ac45b9d3a1c34ba55ba9551a96e89390ee43562030425",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-stub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 990.8933,
+        "extents_mm": [
+          14.649999618530273,
+          14.749999999999998,
+          7.900000095367432
+        ],
+        "sha256": "73f06a414313a574f736b04824f819f7f5cf7427f490c6b6b5046d63e198f887",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-tub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 24634.9152,
+        "extents_mm": [
+          104.5500030517578,
+          19.5,
+          70.0
+        ],
+        "sha256": "c589fb621d6f1b0cbf5e065c8c0314de125754d6a5a854d77e0b7853d1f551b2",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-x1203.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 7578.0498,
+        "extents_mm": [
+          85.0,
+          56.0,
+          1.600000023841858
+        ],
+        "sha256": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-frp-panel-keys.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 2797.0275,
+        "extents_mm": [
+          30.0,
+          15.399999618530265,
+          10.899999618530266
+        ],
+        "sha256": "dabd3144d5f297e7098d1c8b42a65a64b03857d4777dd0a8c2b25d5036039587",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/coupons-fr/coupon-frp-tub-lip.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1653.0998,
+        "extents_mm": [
+          30.0,
+          7.900000095367432,
+          17.0
+        ],
+        "sha256": "70a982c742b0f739ea81be02528ff1a0503749d79903eb22e1133a3635328098",
+        "linked_by_receipt": false
+      },
+      {
+        "path": "stl/eyecup.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 4384.5396,
+        "extents_mm": [
+          45.49822132848203,
+          45.512366357725114,
+          16.29999923706055
+        ],
+        "sha256": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/hood.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 70756.7387,
+        "extents_mm": [
+          178.6999969482422,
+          67.3499984741211,
+          99.69999694824216
+        ],
+        "sha256": "e02f09fd56ad8d39a068271c225cb1fd7a598e94da66d4cc5a4e6bf9db78b6df",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/knob_exp.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 4791.5277,
+        "extents_mm": [
+          27.996545791625977,
+          27.996545791625977,
+          9.000000000000002
+        ],
+        "sha256": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/knob_fps.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1252.8496,
+        "extents_mm": [
+          19.99132537841797,
+          19.99132537841797,
+          7.000000000000001
+        ],
+        "sha256": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/panel.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 56423.5125,
+        "extents_mm": [
+          148.6321258544922,
+          94.40000152587889,
+          65.40000142587891
+        ],
+        "sha256": "f335e0d99407235e9a99d9e17a3392a75b7eeae81efd98fc410531053300b3ce",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/pi_keeper.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 6611.4535,
+        "extents_mm": [
+          64.0,
+          61.6500015258789,
+          7.900000095367432
+        ],
+        "sha256": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/plunger.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 287.4727,
+        "extents_mm": [
+          7.800000190734863,
+          13.600000381469727,
+          4.0
+        ],
+        "sha256": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/stick_sleeve.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 1103.7801,
+        "extents_mm": [
+          13.0,
+          22.899999618530273,
+          16.0
+        ],
+        "sha256": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "linked_by_receipt": true
+      },
+      {
+        "path": "stl/tub.stl",
+        "watertight": true,
+        "consistent_winding": true,
+        "positive_volume": true,
+        "volume_mm3": 106570.1615,
+        "extents_mm": [
+          151.3000030517578,
+          100.94999694824219,
+          70.0
+        ],
+        "sha256": "093d116aca4ba255ac8d929caa6de9b1e53e527696380a18b5b959e4e6bf2081",
+        "linked_by_receipt": true
+      }
+    ],
+    "comparison_to_r2": [
+      {
+        "path": "stl/base_grip.stl",
+        "same_as_r2": false
+      },
+      {
+        "path": "stl/cap.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/board_edge_plate.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_cap.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_grip.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/clearance_comb.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/encoder_cradle_hook.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_panel.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_tub.stl",
+        "same_as_r2": false
+      },
+      {
+        "path": "stl/coupons/keyhole_slot.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_enc.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_sw.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_post.stl",
+        "same_as_r2": false
+      },
+      {
+        "path": "stl/coupons/tongue.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/eyecup.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/hood.stl",
+        "same_as_r2": false
+      },
+      {
+        "path": "stl/knob_exp.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/knob_fps.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/panel.stl",
+        "same_as_r2": false
+      },
+      {
+        "path": "stl/pi_keeper.stl",
+        "same_as_r2": false
+      },
+      {
+        "path": "stl/plunger.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/stick_sleeve.stl",
+        "same_as_r2": true
+      },
+      {
+        "path": "stl/tub.stl",
+        "same_as_r2": false
+      }
+    ],
+    "separate_coupon_hashes": [
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-hood-yk1.stl",
+        "expected": "d81c69351b3b39016e38935d5ee6434c588588097ceddc6a99299e033e2c3c75",
+        "actual": "d81c69351b3b39016e38935d5ee6434c588588097ceddc6a99299e033e2c3c75",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-hood-yk3.stl",
+        "expected": "41062c8399cb010ac090b263fe9a49a80f4f383de42174020e83eb1dd0f045f7",
+        "actual": "41062c8399cb010ac090b263fe9a49a80f4f383de42174020e83eb1dd0f045f7",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-tub-yk1.stl",
+        "expected": "a9d133ff51a1d0eec7b3a43e2fa82f86e000bbc3a147010993a61c04e7b243e0",
+        "actual": "a9d133ff51a1d0eec7b3a43e2fa82f86e000bbc3a147010993a61c04e7b243e0",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-hood-tub-yk3.stl",
+        "expected": "c22e510967427be2126a2c44159fae151a302f7306ccd3ed7befac340dfc3308",
+        "actual": "c22e510967427be2126a2c44159fae151a302f7306ccd3ed7befac340dfc3308",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-part.stl",
+        "expected": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "actual": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-pi.stl",
+        "expected": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+        "actual": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-seat.stl",
+        "expected": "9a098810e93a843c1a7ac45b9d3a1c34ba55ba9551a96e89390ee43562030425",
+        "actual": "9a098810e93a843c1a7ac45b9d3a1c34ba55ba9551a96e89390ee43562030425",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-stub.stl",
+        "expected": "73f06a414313a574f736b04824f819f7f5cf7427f490c6b6b5046d63e198f887",
+        "actual": "73f06a414313a574f736b04824f819f7f5cf7427f490c6b6b5046d63e198f887",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-tub.stl",
+        "expected": "c589fb621d6f1b0cbf5e065c8c0314de125754d6a5a854d77e0b7853d1f551b2",
+        "actual": "c589fb621d6f1b0cbf5e065c8c0314de125754d6a5a854d77e0b7853d1f551b2",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-fr-keeper-x1203.stl",
+        "expected": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+        "actual": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-frp-panel-keys.stl",
+        "expected": "dabd3144d5f297e7098d1c8b42a65a64b03857d4777dd0a8c2b25d5036039587",
+        "actual": "dabd3144d5f297e7098d1c8b42a65a64b03857d4777dd0a8c2b25d5036039587",
+        "match": true
+      },
+      {
+        "path": "stl/coupons-fr/coupon-frp-tub-lip.stl",
+        "expected": "70a982c742b0f739ea81be02528ff1a0503749d79903eb22e1133a3635328098",
+        "actual": "70a982c742b0f739ea81be02528ff1a0503749d79903eb22e1133a3635328098",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/board_edge_plate.stl",
+        "expected": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "actual": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_cap.stl",
+        "expected": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "actual": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/cap_retention_grip.stl",
+        "expected": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "actual": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/clearance_comb.stl",
+        "expected": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "actual": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/encoder_cradle_hook.stl",
+        "expected": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "actual": "b8be25242779531ef2dccc40e3693c4baadecf80d24ae6f313581f8045de84f9",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_panel.stl",
+        "expected": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "actual": "8c0e5d4c91ba3ac8fe77e88a62bde4acaf48c514f10c3bfebd5e9b8ab133fc48",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/evf_stop_tub.stl",
+        "expected": "bbd8f7a4dac9bf452b5d227ee2059db4b1984f2f03741eaf2be88766b87732b0",
+        "actual": "bbd8f7a4dac9bf452b5d227ee2059db4b1984f2f03741eaf2be88766b87732b0",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/keyhole_slot.stl",
+        "expected": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "actual": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_enc.stl",
+        "expected": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "actual": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/knob_bore_ladder_sw.stl",
+        "expected": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "actual": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/pt_boss_post.stl",
+        "expected": "5de9372bb2c8385a2ec7c89a4d8116a3e99736f36358e660de3627a84f98693c",
+        "actual": "5de9372bb2c8385a2ec7c89a4d8116a3e99736f36358e660de3627a84f98693c",
+        "match": true
+      },
+      {
+        "path": "stl/coupons/tongue.stl",
+        "expected": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "actual": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
+        "match": true
+      }
+    ]
+  },
+  "independent_candidate_rebuild": {
+    "built_at": "2026-10-05 17:20:05 +0800",
+    "seconds": 307.0,
+    "argv": [
+      "--fast",
+      "--sweep-step",
+      "1.0",
+      "--out",
+      "audit/d2-readiness-2026-10-05-r3/rebuild-fr1"
+    ],
+    "variant": "FR1 hood=yslide,keeper=True,panel=True",
+    "summary": [
+      {
+        "check": "contract",
+        "n": 11,
+        "passed": 11,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "cots_containment",
+        "n": 20,
+        "passed": 20,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "interference",
+        "n": 49,
+        "passed": 49,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "mate_overlap",
+        "n": 30,
+        "passed": 30,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "clearance",
+        "n": 12,
+        "passed": 12,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "keepouts",
+        "n": 81,
+        "passed": 81,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "bed_fit",
+        "n": 11,
+        "passed": 11,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "stl_mesh",
+        "n": 11,
+        "passed": 11,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "thin_wall",
+        "n": 11,
+        "passed": 11,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass",
+        "role": "secondary share-based screen: cannot pass the build alone; the gate for local thickness is critical_features (finding 2)"
+      },
+      {
+        "check": "critical_features",
+        "n": 136,
+        "passed": 126,
+        "failed": 0,
+        "stub": 0,
+        "info": 10,
+        "status": "pass"
+      },
+      {
+        "check": "evf_restraint",
+        "n": 6,
+        "passed": 6,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "driver",
+        "n": 4,
+        "passed": 4,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "engrave_groove",
+        "n": 10,
+        "passed": 10,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "boss_geometry",
+        "n": 4,
+        "passed": 4,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "sweeps",
+        "n": 12,
+        "passed": 12,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "removals",
+        "n": 11,
+        "passed": 11,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "service_driver",
+        "n": 3,
+        "passed": 3,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "release_access",
+        "n": 1,
+        "passed": 1,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "stack_retention",
+        "n": 1,
+        "passed": 1,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "layout_self_check",
+        "n": 120,
+        "passed": 120,
+        "failed": 0,
+        "stub": 0,
+        "info": 0,
+        "status": "pass"
+      },
+      {
+        "check": "mass_com",
+        "status": "pass"
+      }
+    ],
+    "categories_pass": true,
+    "source_hashes": [
+      {
+        "path": "layout.py",
+        "expected": "e8dc35abdb2fde2bbc471c547db84d33a8394146dff60a94c95e2da2b72c0983",
+        "actual": "e8dc35abdb2fde2bbc471c547db84d33a8394146dff60a94c95e2da2b72c0983",
+        "match": true
+      },
+      {
+        "path": "d2_common.py",
+        "expected": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+        "actual": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+        "match": true
+      },
+      {
+        "path": "cots.py",
+        "expected": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+        "actual": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+        "match": true
+      },
+      {
+        "path": "checks.py",
+        "expected": "9feb6c292834af851a5be0eff944ca583cc6ae21c3ca9527f0bf9695087a3182",
+        "actual": "9feb6c292834af851a5be0eff944ca583cc6ae21c3ca9527f0bf9695087a3182",
+        "match": true
+      },
+      {
+        "path": "build_d2.py",
+        "expected": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+        "actual": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+        "match": true
+      },
+      {
+        "path": "make_coupons.py",
+        "expected": "e8fa7278bee94d9120d8f944cffdc11b5123a70188cd05fb9bd7ae4f789963d2",
+        "actual": "e8fa7278bee94d9120d8f944cffdc11b5123a70188cd05fb9bd7ae4f789963d2",
+        "match": true
+      },
+      {
+        "path": "make_tables.py",
+        "expected": "a4c79a1005f7942a343c53fd57a820e2a6f2b2ea312209a04e4b9a2c30946c76",
+        "actual": "a4c79a1005f7942a343c53fd57a820e2a6f2b2ea312209a04e4b9a2c30946c76",
+        "match": true
+      },
+      {
+        "path": "SPEC.md",
+        "expected": "missing",
+        "actual": "missing",
+        "match": true
+      },
+      {
+        "path": "FASTENER-POLICY.md",
+        "expected": "missing",
+        "actual": "missing",
+        "match": true
+      },
+      {
+        "path": "printed_grip.py",
+        "expected": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+        "actual": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+        "match": true
+      },
+      {
+        "path": "printed_hood.py",
+        "expected": "013f699ea7c9963e7ff3618ee9e24a84cfe0e16c49102a4c7f2c274e2a18e6bc",
+        "actual": "013f699ea7c9963e7ff3618ee9e24a84cfe0e16c49102a4c7f2c274e2a18e6bc",
+        "match": true
+      },
+      {
+        "path": "printed_keeper.py",
+        "expected": "376e169178902703ef5284d07e0dccb5fb2e818599e97217a3d2b638d4f761f4",
+        "actual": "376e169178902703ef5284d07e0dccb5fb2e818599e97217a3d2b638d4f761f4",
+        "match": true
+      },
+      {
+        "path": "printed_panel.py",
+        "expected": "23361fb44cef0b7dd6e0ee73011396b6a26cba5ea29e8667b584e2477393a78d",
+        "actual": "23361fb44cef0b7dd6e0ee73011396b6a26cba5ea29e8667b584e2477393a78d",
+        "match": true
+      },
+      {
+        "path": "printed_small.py",
+        "expected": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+        "actual": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+        "match": true
+      },
+      {
+        "path": "printed_tub.py",
+        "expected": "10af7d38233fcd0711c2c9e1e2ce2dd475a5ddd8f3f278da2e4f1b52d59d198e",
+        "actual": "10af7d38233fcd0711c2c9e1e2ce2dd475a5ddd8f3f278da2e4f1b52d59d198e",
+        "match": true
+      },
+      {
+        "path": "coupons_fr_hood.py",
+        "expected": "4f9b6fb57911733c99751f1442fe3a46dd139e699994c77f194178e42ef1ad2c",
+        "actual": "4f9b6fb57911733c99751f1442fe3a46dd139e699994c77f194178e42ef1ad2c",
+        "match": true
+      },
+      {
+        "path": "coupons_fr_keeper.py",
+        "expected": "d992a5a05ec95a8592dc832aa6e77feff0e5bd69c9ad7001285e7196d799248f",
+        "actual": "d992a5a05ec95a8592dc832aa6e77feff0e5bd69c9ad7001285e7196d799248f",
+        "match": true
+      },
+      {
+        "path": "coupons_fr_panel.py",
+        "expected": "cf55dec6025f5c95e3187a4b74a549d979e28dea122276fc5517ef5f59f543ce",
+        "actual": "cf55dec6025f5c95e3187a4b74a549d979e28dea122276fc5517ef5f59f543ce",
+        "match": true
+      },
+      {
+        "path": "coupons_r1.py",
+        "expected": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+        "actual": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4",
+        "match": true
+      }
+    ],
+    "production_stl_hashes": [
+      {
+        "path": "stl/tub.stl",
+        "expected": "093d116aca4ba255ac8d929caa6de9b1e53e527696380a18b5b959e4e6bf2081",
+        "actual": "093d116aca4ba255ac8d929caa6de9b1e53e527696380a18b5b959e4e6bf2081",
+        "match": true
+      },
+      {
+        "path": "stl/hood.stl",
+        "expected": "e02f09fd56ad8d39a068271c225cb1fd7a598e94da66d4cc5a4e6bf9db78b6df",
+        "actual": "e02f09fd56ad8d39a068271c225cb1fd7a598e94da66d4cc5a4e6bf9db78b6df",
+        "match": true
+      },
+      {
+        "path": "stl/panel.stl",
+        "expected": "f335e0d99407235e9a99d9e17a3392a75b7eeae81efd98fc410531053300b3ce",
+        "actual": "f335e0d99407235e9a99d9e17a3392a75b7eeae81efd98fc410531053300b3ce",
+        "match": true
+      },
+      {
+        "path": "stl/base_grip.stl",
+        "expected": "684183466c80374ba6f302faec5c73b0ae5bb025acfc0c194c9ab86614fa6f34",
+        "actual": "684183466c80374ba6f302faec5c73b0ae5bb025acfc0c194c9ab86614fa6f34",
+        "match": true
+      },
+      {
+        "path": "stl/cap.stl",
+        "expected": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "actual": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+        "match": true
+      },
+      {
+        "path": "stl/plunger.stl",
+        "expected": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "actual": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+        "match": true
+      },
+      {
+        "path": "stl/knob_exp.stl",
+        "expected": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "actual": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+        "match": true
+      },
+      {
+        "path": "stl/knob_fps.stl",
+        "expected": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "actual": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+        "match": true
+      },
+      {
+        "path": "stl/eyecup.stl",
+        "expected": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "actual": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+        "match": true
+      },
+      {
+        "path": "stl/stick_sleeve.stl",
+        "expected": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "actual": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+        "match": true
+      },
+      {
+        "path": "stl/pi_keeper.stl",
+        "expected": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "actual": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832",
+        "match": true
+      }
+    ],
+    "all_production_stl_hashes_match": true,
+    "note": "Independent FR1 all source/checks/STL rebuild, 1 mm sweeps, --fast skips full renders and STEP. Coupons not regenerated."
+  },
+  "note": "Independent checks of existing files. A valid mesh and matching hashes do not prove physical fit or operation."
+}

@@ -1,0 +1,3 @@
+include LICENSE README.md BACKEND-CONTRACT.md AUDIT-RESPONSE.md D2-INTEGRATION.md D2-PRESENTATION.md
+recursive-include tests *.py
+recursive-include examples *.json *.py

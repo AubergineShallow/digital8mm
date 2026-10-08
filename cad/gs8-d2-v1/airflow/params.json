@@ -1,0 +1,602 @@
+{
+ "fluid": {
+  "rho": 1.146,
+  "mu": 1.885e-05,
+  "nu": 1.645e-05,
+  "cp": 1007.0,
+  "k_air": 0.0268,
+  "Pr": 0.707,
+  "T_amb_C": 30.0,
+  "basis": "dry air at 35 C, 101.3 kPa (standard property tables; film temperature between 30 C ambient and about 40 C interior). Singapore-level humidity changes rho*cp by < 1 %."
+ },
+ "fan": {
+  "curve_100": [
+   [
+    0.0,
+    42.326
+   ],
+   [
+    5.144e-05,
+    41.263
+   ],
+   [
+    0.00010288,
+    39.103
+   ],
+   [
+    0.00015433,
+    36.16
+   ],
+   [
+    0.00020577,
+    32.556
+   ],
+   [
+    0.00025721,
+    28.364
+   ],
+   [
+    0.00030865,
+    23.634
+   ],
+   [
+    0.0003601,
+    18.406
+   ],
+   [
+    0.00041154,
+    12.708
+   ],
+   [
+    0.00046298,
+    6.566
+   ],
+   [
+    0.00051442,
+    0.0
+   ]
+  ],
+  "speed_fractions": [
+   0.5,
+   1.0
+  ],
+  "range": {
+   "low": [
+    [
+     0.0,
+     25.0
+    ],
+    [
+     4.373e-05,
+     23.423
+    ],
+    [
+     8.745e-05,
+     21.376
+    ],
+    [
+     0.00013118,
+     19.105
+    ],
+    [
+     0.0001749,
+     16.674
+    ],
+    [
+     0.00021863,
+     14.118
+    ],
+    [
+     0.00026236,
+     11.457
+    ],
+    [
+     0.00030608,
+     8.705
+    ],
+    [
+     0.00034981,
+     5.873
+    ],
+    [
+     0.00039353,
+     2.969
+    ],
+    [
+     0.00043726,
+     0.0
+    ]
+   ],
+   "high": [
+    [
+     0.0,
+     70.0
+    ],
+    [
+     5.916e-05,
+     69.3
+    ],
+    [
+     0.00011832,
+     67.2
+    ],
+    [
+     0.00017748,
+     63.7
+    ],
+    [
+     0.00023663,
+     58.8
+    ],
+    [
+     0.00029579,
+     52.5
+    ],
+    [
+     0.00035495,
+     44.8
+    ],
+    [
+     0.00041411,
+     35.7
+    ],
+    [
+     0.00047327,
+     25.2
+    ],
+    [
+     0.00053243,
+     13.3
+    ],
+    [
+     0.00059159,
+     0.0
+    ]
+   ]
+  },
+  "curves": {
+   "nominal": {
+    "Q_max_m3s": 0.0005144218666666666,
+    "dp0_Pa": 42.326,
+    "n": 1.6
+   },
+   "low": {
+    "Q_max_m3s": 0.00043725858666666663,
+    "dp0_Pa": 25.0,
+    "n": 1.2
+   },
+   "high": {
+    "Q_max_m3s": 0.0005915851466666666,
+    "dp0_Pa": 70.0,
+    "n": 2.0
+   }
+  },
+  "law": "dp = dp0 (1 - (Q/Qmax)^n); speed s: Qmax*s, dp0*s^2 (fan laws); 50 % = half SPEED, not half PWM",
+  "rpm": 8000.0,
+  "power_W": 0.5,
+  "reference_blower": {
+   "model": "Delta BFB0305MA-A (30 x 30 x 10, 5 V blower, obsolete)",
+   "Q_max_CFM": 1.2,
+   "dp_max_inH2O": 0.206,
+   "dp_max_Pa": 51.3,
+   "P_W": 0.4,
+   "src": "DigiKey listing 603-1560-ND, read 2026-10-05 from a search summary (not the PDF)"
+  },
+  "basis": "Q_max 1.09 CFM = 5.144e-04 m3/s and 8000 rpm +-15 % from the Active Cooler product brief RP-008188 (via cad/gs8-pxl-v2/COMPUTE-OPTICS-COMPONENTS.md; confirmed by distributor listings, search 2026-10-05). NO static pressure or curve is published (search 2026-10-05). dp0 nominal = Delta BFB0305MA-A (30 x 30 x 10 5 V blower, 1.2 CFM, 51.3 Pa) scaled by the fan law (Q ratio)^2 = 42.3 Pa; low = 0.85 Qmax / 25 Pa / n 1.2, high = 1.15 Qmax / 70 Pa / n 2.0 (rpm tolerance and impeller uncertainty; tip-speed bound rho (pi D n)^2 about 115 Pa for a 24 mm impeller). It is not known whether 1.09 CFM is free air or through the cooler fins; treating it as the bare fan is the conservative reading."
+ },
+ "vents": {
+  "inlet_roof": {
+   "node": "B",
+   "part": "hood",
+   "face": "+z",
+   "box": {
+    "x": [
+     -71.0,
+     -45.0
+    ],
+    "y": [
+     -24.0,
+     4.0
+    ],
+    "z": [
+     97.3,
+     100.0
+    ]
+   },
+   "area_mm2": 728.0,
+   "open_area_mm2": 385.99,
+   "open_area_ratio": 0.5302,
+   "n_slots": 7,
+   "slot_w_mm": 2.0,
+   "slot_len_mm": 28.0,
+   "pitch_mm": 3.6,
+   "thickness_mm": 2.7,
+   "d_h_mm": 3.784,
+   "l_over_dh": 0.713,
+   "K": 5.156,
+   "a_lin_Pa_per_mps": 0.2936,
+   "dp_model": "dp = a_lin*v + K*0.5*rho*v*|v|, v = Q / area (face velocity over the gross box area)",
+   "basis": "Idelchik thick-plate inertial terms (entry 0.5(1-f)^0.75 + tau(1-f)^1.375) with the downstream term replaced by the full exit loss 1.0 (wall vent between two large volumes); laminar slot friction fRe = 87.6 (Shah-London rectangle, aspect 0.071) on t/d_h; slot count/size as d2_common.vent_slots"
+  },
+  "out_band": {
+   "node": "P",
+   "part": "hood",
+   "face": "+x",
+   "box": {
+    "x": [
+     -2.5,
+     0.0
+    ],
+    "y": [
+     -26.5,
+     17.5
+    ],
+    "z": [
+     25.9,
+     29.7
+    ]
+   },
+   "area_mm2": 167.2,
+   "open_area_mm2": 87.64,
+   "open_area_ratio": 0.5242,
+   "n_slots": 13,
+   "slot_w_mm": 2.0,
+   "slot_len_mm": 3.8,
+   "pitch_mm": 3.4,
+   "thickness_mm": 2.5,
+   "d_h_mm": 2.729,
+   "l_over_dh": 0.916,
+   "K": 5.439,
+   "a_lin_Pa_per_mps": 0.3716,
+   "dp_model": "dp = a_lin*v + K*0.5*rho*v*|v|, v = Q / area (face velocity over the gross box area)",
+   "basis": "Idelchik thick-plate inertial terms (entry 0.5(1-f)^0.75 + tau(1-f)^1.375) with the downstream term replaced by the full exit loss 1.0 (wall vent between two large volumes); laminar slot friction fRe = 61.5 (Shah-London rectangle, aspect 0.526) on t/d_h; slot count/size as d2_common.vent_slots; + tub window entry K 0.4 (window 2.5 thick, same box, 0.2 gap to the hood plate)"
+  },
+  "out_corner": {
+   "node": "P",
+   "part": "hood",
+   "face": "+x",
+   "box": {
+    "x": [
+     -2.5,
+     0.0
+    ],
+    "y": [
+     -31.0,
+     -21.0
+    ],
+    "z": [
+     32.0,
+     38.0
+    ]
+   },
+   "area_mm2": 60.0,
+   "open_area_mm2": 33.42,
+   "open_area_ratio": 0.5571,
+   "n_slots": 3,
+   "slot_w_mm": 2.0,
+   "slot_len_mm": 6.0,
+   "pitch_mm": 3.4,
+   "thickness_mm": 2.5,
+   "d_h_mm": 3.12,
+   "l_over_dh": 0.801,
+   "K": 4.862,
+   "a_lin_Pa_per_mps": 0.2971,
+   "dp_model": "dp = a_lin*v + K*0.5*rho*v*|v|, v = Q / area (face velocity over the gross box area)",
+   "basis": "Idelchik thick-plate inertial terms (entry 0.5(1-f)^0.75 + tau(1-f)^1.375) with the downstream term replaced by the full exit loss 1.0 (wall vent between two large volumes); laminar slot friction fRe = 68.4 (Shah-London rectangle, aspect 0.333) on t/d_h; slot count/size as d2_common.vent_slots; + tub window entry K 0.4 (window 2.5 thick, same box, 0.2 gap to the hood plate)"
+  },
+  "out_wall": {
+   "node": "P",
+   "part": "tub",
+   "face": "-y",
+   "box": {
+    "x": [
+     -19.0,
+     -5.0
+    ],
+    "y": [
+     -35.0,
+     -32.5
+    ],
+    "z": [
+     21.0,
+     37.0
+    ]
+   },
+   "area_mm2": 224.0,
+   "open_area_mm2": 124.57,
+   "open_area_ratio": 0.5561,
+   "n_slots": 4,
+   "slot_w_mm": 2.0,
+   "slot_len_mm": 16.0,
+   "pitch_mm": 3.4,
+   "thickness_mm": 2.5,
+   "d_h_mm": 3.633,
+   "l_over_dh": 0.688,
+   "K": 4.663,
+   "a_lin_Pa_per_mps": 0.2643,
+   "dp_model": "dp = a_lin*v + K*0.5*rho*v*|v|, v = Q / area (face velocity over the gross box area)",
+   "basis": "Idelchik thick-plate inertial terms (entry 0.5(1-f)^0.75 + tau(1-f)^1.375) with the downstream term replaced by the full exit loss 1.0 (wall vent between two large volumes); laminar slot friction fRe = 82.4 (Shah-London rectangle, aspect 0.125) on t/d_h; slot count/size as d2_common.vent_slots"
+  },
+  "x1203": {
+   "node": "B",
+   "part": "tub",
+   "face": "-y",
+   "box": {
+    "x": [
+     -65.0,
+     -49.0
+    ],
+    "y": [
+     -35.0,
+     -32.5
+    ],
+    "z": [
+     9.5,
+     17.5
+    ]
+   },
+   "area_mm2": 128.0,
+   "open_area_mm2": 60.57,
+   "open_area_ratio": 0.4732,
+   "n_slots": 4,
+   "slot_w_mm": 2.0,
+   "slot_len_mm": 8.0,
+   "pitch_mm": 4.4,
+   "thickness_mm": 2.5,
+   "d_h_mm": 3.313,
+   "l_over_dh": 0.755,
+   "K": 6.59,
+   "a_lin_Pa_per_mps": 0.331,
+   "dp_model": "dp = a_lin*v + K*0.5*rho*v*|v|, v = Q / area (face velocity over the gross box area)",
+   "basis": "Idelchik thick-plate inertial terms (entry 0.5(1-f)^0.75 + tau(1-f)^1.375) with the downstream term replaced by the full exit loss 1.0 (wall vent between two large volumes); laminar slot friction fRe = 72.9 (Shah-London rectangle, aspect 0.250) on t/d_h; slot count/size as d2_common.vent_slots"
+  },
+  "sd_slot": {
+   "node": "B",
+   "part": "tub+hood",
+   "face": "+x",
+   "box": {
+    "x": [
+     -5.2,
+     0.0
+    ],
+    "y": [
+     -11.5,
+     0.5
+    ],
+    "z": [
+     15.9,
+     18.6
+    ]
+   },
+   "area_mm2": 32.4,
+   "open_area_mm2": 19.44,
+   "open_area_ratio": 0.6,
+   "n_slots": 1,
+   "thickness_mm": 5.2,
+   "d_h_mm": 2.855,
+   "K": 4.167,
+   "a_lin_Pa_per_mps": 0.8166,
+   "dp_model": "dp = a_lin*v + K*0.5*rho*v*|v|, v = Q / area (face velocity over the gross box area)",
+   "basis": "NOT a J14 vent: the microSD access slot (layout SD_SLOT) is open through both walls in the existing arrangement; card + socket block an estimated 40 %; K = (0.5 entry + 1 exit)/f^2; laminar duct friction over 5.2 mm"
+  }
+ },
+ "fins": {
+  "n_fins": 16,
+  "fin_t_mm": 1.0,
+  "pitch_mm": 2.5,
+  "gap_mm": 1.5,
+  "length_x_mm": 33.3,
+  "z_mm": [
+   23.4,
+   30.5
+  ],
+  "height_mm": 7.100000000000001,
+  "gaps_mm": [
+   [
+    -25.55,
+    -24.55
+   ],
+   [
+    -23.55,
+    -22.05
+   ],
+   [
+    -21.05,
+    -19.55
+   ],
+   [
+    -18.55,
+    -17.05
+   ],
+   [
+    -16.05,
+    -14.55
+   ],
+   [
+    -13.55,
+    -12.05
+   ],
+   [
+    -11.05,
+    -9.55
+   ],
+   [
+    -8.55,
+    -7.05
+   ],
+   [
+    -6.05,
+    -4.55
+   ],
+   [
+    -3.55,
+    -2.05
+   ],
+   [
+    -1.05,
+    0.45
+   ],
+   [
+    1.45,
+    2.95
+   ],
+   [
+    3.95,
+    5.45
+   ],
+   [
+    6.45,
+    7.95
+   ],
+   [
+    8.95,
+    10.45
+   ],
+   [
+    11.45,
+    12.95
+   ],
+   [
+    13.95,
+    16.95
+   ]
+  ],
+  "fed_channels": 11,
+  "fed_y_mm": [
+   -24.0,
+   4.0
+  ],
+  "blower_outlet_z_mm": [
+   23.4,
+   36.3
+  ],
+  "bypass_height_mm": 5.8,
+  "open_area_ratio": 0.6235,
+  "porous_axis": "+X",
+  "frontal_box": {
+   "x": [
+    -42.8,
+    -9.5
+   ],
+   "y": [
+    -25.55,
+    16.95
+   ],
+   "z": [
+    23.4,
+    30.5
+   ]
+  },
+  "K_per_mm": {
+   "a_Pa_per_mps_per_mm": 0.16123,
+   "b_Pa_per_mps2_per_mm": 0.046028,
+   "model": "dp/dx = a*u + b*u*|u| per mm along +X, u = superficial velocity over the frontal box"
+  },
+  "K_total": 1.04,
+  "K_parts": {
+   "contraction": 0.194,
+   "expansion": 0.16,
+   "developing_K_inf": 0.686
+  },
+  "basis": "laminar parallel-plate channels (Re_dh about 200-500): fully developed 12 mu v/g^2 per length plus Shah-London incremental K(inf) 0.686, abrupt contraction (1/Cc - 1)^2 with Cc = 0.61 + 0.39 sigma^3, Borda exit (1-sigma)^2, sigma = 0.6 (gap/pitch). Heat transfer: Stephan mean Nu for simultaneously developing flow between plates. Fin count/positions exactly as cots.cooler (proxy, not the real Active Cooler: real fin height and any top cover are not modelled in the repo).",
+  "proxy_warning": "The proxy blower is 12.9 tall (z 23.4..36.3) but the fins only 7.1 (z 23.4..30.5) and have no top cover, so 45 % of the blower outlet face opens over the fins straight into the plenum / body. The real SC1148 envelope is 13.7 incl. spring pins; whether its fins are full height and covered is not recorded. The network runs both (proxy as drawn = base; full-height covered fins = variant)."
+ },
+ "paths": {
+  "bypass": {
+   "area_mm2": 162.4,
+   "K": 1.0,
+   "basis": "proxy blower outlet strip over the fins (y -24..4, z 30.5..36.3); free jet, exit dynamic head lost (K 1.0)"
+  },
+  "plenum_body": {
+   "area_mm2_proxy": 1169.8,
+   "area_mm2_covered": 237.4,
+   "K": 1.5,
+   "basis": "ko_exhaust (x -9.4..-5.3, y -27.4..16.9, z 22.6..36.2) top + +y end are open to the body since the baffle was deleted (J14 T3); proxy case adds the open top of the over-fin strip (33.3 x 28). K 1.5 (between a free exit, 1.0, and a sharp orifice, 1/0.6^2 = 2.8)"
+  },
+  "jet_credit": {
+   "beta": [
+    0.0,
+    1.0
+   ],
+   "basis": "fraction of the merged fin-exit dynamic pressure that stagnates on out_band (4 mm ahead of the fins); 0 = conservative base"
+  }
+ },
+ "heat": {
+  "S1": {
+   "soc": 2.68,
+   "pi_board_rest": 1.82,
+   "x1203": 0.8,
+   "evf_board": 1.56,
+   "camera": 0.4,
+   "usb_stick": 0.3,
+   "fan": 0.3,
+   "encoder": 0.1,
+   "total": 7.96,
+   "x1203_worst_eta085": 1.271
+  },
+  "S2": {
+   "soc": 4.03,
+   "pi_board_rest": 1.97,
+   "x1203": 1.233,
+   "evf_board": 1.56,
+   "camera": 0.4,
+   "usb_stick": 2.5,
+   "fan": 0.5,
+   "encoder": 0.1,
+   "total": 12.293,
+   "x1203_worst_eta085": 1.959
+  },
+  "S3": {
+   "soc": 9.88,
+   "pi_board_rest": 2.62,
+   "x1203": 2.211,
+   "evf_board": 1.81,
+   "camera": 0.4,
+   "usb_stick": 4.6,
+   "fan": 0.5,
+   "encoder": 0.1,
+   "total": 22.121,
+   "x1203_worst_eta085": 3.512
+  },
+  "basis": "WIRING.md s4.2 (r2 table, all [est]/[pub] there) at 5.1 V: board S1 4.5 / S2 6.0 / S3 12.5 W split SoC vs rest as soc = 1.6 + 0.9 x (board - 3.3 idle) [est: the CPU/ISP increment above the published 3.3 W idle is almost all BCM2712; idle SoC 1.6 W, RP1 + LPDDR4X + PMIC losses about 1.7 W]; X1203 boost loss = total output x (1/eta - 1), eta 0.90 (WIRING s4.7 estimate; 0.85 at a low cell = x1203_worst_eta085); evf_board = EVF board + panel + HDMI pin-19 5 V (0.26 W limit); fan motor heat goes into the blower air; encoder + gauge as \"encoder\" (panel). The cells are outside the body air (grip) and are not counted.",
+  "placement": {
+   "soc": "fin-block air (the cooler)",
+   "fan": "blower air",
+   "pi_board_rest": "air over the Pi PCB",
+   "x1203": "air at the X1203 boost IC (stack gap, z 7.6..18.5)",
+   "evf_board": "EVF board box",
+   "camera": "camera box",
+   "usb_stick": "stick box",
+   "encoder": "panel / misc"
+  }
+ },
+ "walls": {
+  "area_m2": 0.06636,
+  "h_in": 5.0,
+  "t_m": 0.0025,
+  "k_asa": 0.17,
+  "h_out": 9.0,
+  "U_range": [
+   2.0,
+   4.5
+  ],
+  "basis": "[est] body box 154 x 70 x 100 (layout L, W, H) outer area; ASA wall 2.5 mm k 0.17; inside forced/mixed convection h 5; outside natural convection 3-4 + radiation about 5-6 (emissivity 0.9) = 9. Lens, turret, grip and the hand are not modelled. Second case only: the base case is adiabatic.",
+  "U": 3.0692076228686056,
+  "UA_W_per_K": 0.20367261785356067
+ },
+ "sink": {
+  "R_jc_K_per_W": {
+   "nominal": 1.0,
+   "low": 0.6,
+   "high": 2.4
+  },
+  "k_fin_W_mK": 150.0,
+  "model": "R_sink(Q_fin) = R_jc + 1/(eps rho cp Q_fin), eps = 1 - exp(-h A eta/(rho cp Q_fin)), Nu Stephan (developing plates), A = fed channels only; referenced to the FIN INLET air (= fan intake + fan motor heat)",
+  "basis": "[est] R_jc: BCM2712 die/lid + thermal pad (0.5 mm, k 3-6 W/mK over about 17 x 17 mm: 0.3-0.6 K/W) + base spreading 0.2-0.4 K/W; no Raspberry Pi thermal-resistance figure is published (not searched: search budget used on the fan). Heat into the PCB (parallel path) is ignored: conservative for the SoC. Plausibility (not re-checked in this job, no search left): commonly cited open-air Pi 5 + Active Cooler all-core results in the 60s C at room temperature imply about 4-5 K/W total, i.e. R_jc nearer the high value 2.4; the nominal 1.0 may be optimistic."
+ },
+ "notes": [
+  "All values are estimates for a basic simulation; none closes G-W11 / G-W12 P4.",
+  "Vent K and a_lin are referenced to the face velocity over the gross vent box area (area_mm2).",
+  "Node of each vent (B body / P plenum) is the lumped network assignment; the 3D model uses geometry."
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "output": "/media/gs8/takes",
+  "wb_gains": null,
+  "simulation_only": false,
+  "reserve_mib": 1024,
+  "commissioning_manifest": "d2.commissioning.json",
+  "shutdown_mode": "drain_only",
+  "poll_interval_ms": 5,
+  "drain_timeout_seconds": 15,
+  "stop_millivolts": 3300
+}

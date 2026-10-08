@@ -1,0 +1,2 @@
+# Persistent kernel-lock inode is runtime state, never a source artifact.
+.cad.lock

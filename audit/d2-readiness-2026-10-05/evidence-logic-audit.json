@@ -1,0 +1,253 @@
+{
+  "scope": "Read-only source extraction; temporary synthetic evidence; no CAD process or production mutation.",
+  "source_hashes": {
+    "build_d2.py": "5859b990b40142031dad951fabd06f7dc15c1659c8a5270d870ad08ff57f9583",
+    "checks.py": "3e8840bd1833123a8cfaf77a80844da2c6131391b7f16bd817b871777b33dbf1",
+    "layout.py": "3569785bd729bb1fa4e60d79bbd00451d51a0569487fb00d994f249a5c91e131"
+  },
+  "current_receipt_qualification": "Current physical states are not run. These diagnostics do not disprove current CAD results.",
+  "current_row_counts": {
+    "n": 532,
+    "passed": 526,
+    "failed": 0,
+    "stub": 0,
+    "info": 6
+  },
+  "current_coupon_evidence_items": {
+    "G-CAP-1": "no evidence",
+    "G-EVF-2": "no evidence",
+    "G-KEEP-1": "no evidence",
+    "G-PANEL-1": "no evidence",
+    "G-PT-1": "no evidence",
+    "G-SNAP-2": "no evidence"
+  },
+  "coupon_evidence_coverage_note": "The six required coupon gate IDs omit the knob-bore ladder, clearance-comb calibration and J4 fit record listed in PRINT-GUIDE.md:145-147,165-167; see build_d2.py:675,739.",
+  "cases": [
+    {
+      "id": "failed_verdict_completes_evidence_collection",
+      "observed": {
+        "evidence_dir": "evidence/coupons/",
+        "needed": "Synthetic audit fixture",
+        "items_required": 1,
+        "items_with_verdict": 1,
+        "items": {
+          "G-CAP-1": "verdict recorded: fail"
+        },
+        "status": "evidence with a recorded verdict for all 1 items (hash-linked; read by a person, not judged by this build)",
+        "files": {
+          "evidence/coupons/G-CAP-1-r1.md": "bae575234c7f5dd05a8820ab6c314762341587b056e9d3fd85e29d04669c6271"
+        }
+      },
+      "retained_in_open_evidence": false,
+      "source": "build_d2.py:699-719,1065-1066",
+      "implication": "A failed verdict completes evidence collection and removes the state from open_evidence.",
+      "qualification": "The text explicitly does not judge evidence; this is not an explicit hardware-pass claim.",
+      "recommendation": "Separate evidence completeness from outcome; retain failed/conflicting verdicts as unresolved."
+    },
+    {
+      "id": "stale_revision_is_not_checked",
+      "observed": {
+        "evidence_dir": "evidence/coupons/",
+        "needed": "Synthetic audit fixture",
+        "items_required": 1,
+        "items_with_verdict": 1,
+        "items": {
+          "G-CAP-1": "verdict recorded: pass"
+        },
+        "status": "evidence with a recorded verdict for all 1 items (hash-linked; read by a person, not judged by this build)",
+        "files": {
+          "evidence/coupons/G-CAP-1-r1.md": "62910a5874d752db4b3d9a82f209f4175315b52feec720cfd4864a3131ad7929"
+        }
+      },
+      "source": "build_d2.py:685-696,699-724",
+      "implication": "The report hash is recorded but its tested revision/source hash is not checked.",
+      "recommendation": "Require tested artifact/source hashes and invalidate affected evidence when those change."
+    },
+    {
+      "id": "coupon_filename_can_cover_production_part",
+      "observed": {
+        "evidence_dir": "evidence/slicer/",
+        "needed": "Synthetic audit fixture",
+        "items_required": 1,
+        "items_with_verdict": 1,
+        "items": {
+          "panel": "verdict recorded: pass"
+        },
+        "status": "evidence with a recorded verdict for all 1 items (hash-linked; read by a person, not judged by this build)",
+        "files": {
+          "evidence/slicer/base_edge_panel.md": "d8ab540da4e7022889247d4c633410076ddc0e93fa79b3eac83262f8f3bec800"
+        }
+      },
+      "token_examples": {
+        "panel.md": true,
+        "base_edge_panel.md": true,
+        "old-panel-r1.md": true
+      },
+      "source": "build_d2.py:680-693",
+      "implication": "A review of a panel coupon can be counted as the complete panel's slicer evidence.",
+      "recommendation": "Match explicit artifact_id and artifact_hash fields, not part tokens in filenames."
+    },
+    {
+      "id": "unrecognized_status_passes_info_neutral_summary",
+      "observed": {
+        "not run": {
+          "check": "critical_features",
+          "n": 1,
+          "passed": 0,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        },
+        "error": {
+          "check": "critical_features",
+          "n": 1,
+          "passed": 0,
+          "failed": 0,
+          "stub": 0,
+          "info": 0,
+          "status": "pass"
+        }
+      },
+      "source": "build_d2.py:776-784",
+      "implication": "The group reports pass with zero passing rows if the sole non-info row has an unrecognized status.",
+      "qualification": "No such status occurs in the current recorded critical-feature results.",
+      "recommendation": "Require nonempty core and all(status == 'pass'); reject unknown statuses explicitly."
+    },
+    {
+      "id": "even_span_does_not_test_nominated_origin",
+      "observed": [
+        {
+          "kind": "feature",
+          "id": "hood_groove_lower_lip",
+          "part": "hood",
+          "min_mm": 1.6,
+          "structural": true,
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "direction": [
+            0,
+            0,
+            1
+          ],
+          "note": "",
+          "cls": "lip",
+          "entry_min_mm": 1.6,
+          "rays": 4,
+          "rays_outside": 0,
+          "values": [
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ],
+          "measured_mm": 2.0,
+          "entry": [
+            -18.0,
+            0.0,
+            -1.0
+          ],
+          "exit": [
+            -18.0,
+            0.0,
+            1.0
+          ],
+          "method": "OCP IntCurvesFace_ShapeIntersector chord through origin (B-rep, exact)",
+          "status": "pass"
+        },
+        {
+          "kind": "coverage",
+          "part": "hood",
+          "structural_entries": 1,
+          "status": "pass",
+          "error": null
+        }
+      ],
+      "queried_points": [
+        [
+          -18.0,
+          0.0,
+          0.0
+        ],
+        [
+          -6.0,
+          0.0,
+          0.0
+        ],
+        [
+          6.0,
+          0.0,
+          0.0
+        ],
+        [
+          18.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "origin_was_queried": false,
+      "source": "checks.py:832-846; layout.py:793-794; SPEC.md:176-179",
+      "implication": "The nominated origin can be outside material without a stale-origin failure for even-length spans.",
+      "qualification": "Synthetic geometry response only; the current hood's origin is not demonstrated to be outside.",
+      "recommendation": "Always query the origin and validate expected span coverage; classify intentional missing rays explicitly."
+    },
+    {
+      "id": "missing_feature_is_not_missing_part_coverage",
+      "observed": [
+        {
+          "kind": "feature",
+          "id": "remaining_feature",
+          "part": "base_grip",
+          "min_mm": 1.6,
+          "structural": true,
+          "origin": [
+            1,
+            0,
+            0
+          ],
+          "direction": [
+            0,
+            0,
+            1
+          ],
+          "note": "",
+          "cls": "lip",
+          "entry_min_mm": 1.6,
+          "rays": 1,
+          "rays_outside": 0,
+          "values": [
+            2.0
+          ],
+          "measured_mm": 2.0,
+          "entry": [
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "exit": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "method": "OCP IntCurvesFace_ShapeIntersector chord through origin (B-rep, exact)",
+          "status": "pass"
+        },
+        {
+          "kind": "coverage",
+          "part": "base_grip",
+          "structural_entries": 1,
+          "status": "pass",
+          "error": null
+        }
+      ],
+      "removed_feature": "base_keyhole_lip_f_l",
+      "source": "checks.py:869-875",
+      "implication": "At-least-one-entry-per-part coverage cannot detect deletion of one required critical feature.",
+      "qualification": "The current registry contains all four named base keyhole lip entries; this is a regression protection gap.",
+      "recommendation": "Maintain required feature IDs or derive required checks from each joint/retention feature; test deletion explicitly."
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+ "revision": "GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)",
+ "producer": {
+  "script": "test_common.py",
+  "generated_at": 1791335026.4768114,
+  "source_hashes": {
+   "layout.py": "a48df6678f8911eff62d855ed493cb6b3c65899b4b7518f352e348bc3efec439",
+   "d2_common.py": "6b3aeb4ef41c51d959be87820fd4b811d57bd5ad6d67370fc297103d168c6d05",
+   "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
+   "checks.py": "81e80adfdda93a5ef92b268deed2aa7b149d7caeea526e9eb5816ac0d3da2788",
+   "build_d2.py": "54e67f655b81c603be627a411b354191cf9b02a13b3630321b987fcd409fb233",
+   "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
+   "make_tables.py": "8cdebebca33a1d7a1b86f1a9b3a686bbb30f2f9a4bd8228448338b707ba164fa",
+   "SPEC.md": "189f5f006c47ad4d697440cc27c524eecc258effb8faff78b7b8d12ff5379c7c",
+   "FASTENER-POLICY.md": "fe2f4bbecb428f75ca032382babb3470e22699ba70f0b2f38a73cbb253e9ddde",
+   "printed_collar.py": "92fac260510ac00ff7937916b45d07f171ff5428d05e34014d3ec5768ca94c01",
+   "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
+   "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+   "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+   "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
+   "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+   "printed_tub.py": "8766c93f447e8e459c611a6290dbe695c2aa92a2e4c9a48824c723e43bf3ba5b",
+   "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
+   "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
+   "fonts/DejaVuSans-Bold.ttf": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890",
+   "fonts/LICENSE-DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0",
+   "test_common.py": "7ec7df2f34de0a9699374d4abe252cdc338d64744c5fe974d7e0b3c912f3a333"
+  }
+ },
+ "results": [
+  {
+   "helper": "box_solid",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 1069161.45,
+   "s": 0.0,
+   "bbox0": [
+    -154.0,
+    -35.0,
+    -3.65,
+    -2.7,
+    35.0,
+    97.3
+   ]
+  },
+  {
+   "helper": "cyl_solid(tube)",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 608.605,
+   "s": 0.01,
+   "bbox0": [
+    -5.6,
+    -18.0,
+    42.0,
+    -4.4,
+    18.0,
+    78.0
+   ]
+  },
+  {
+   "helper": "pt_boss",
+   "ok": true,
+   "n": 2,
+   "volume_mm3": 512.706,
+   "s": 0.01,
+   "bbox0": [
+    -95.0,
+    23.85,
+    2.6,
+    -87.0,
+    31.85,
+    12.0
+   ]
+  },
+  {
+   "helper": "counterbore",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 274.596,
+   "s": 0.0,
+   "bbox0": [
+    -94.5,
+    24.35,
+    -8.05,
+    -87.5,
+    31.35,
+    2.6
+   ]
+  },
+  {
+   "helper": "snap_hook(hood hk1)",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 141.29,
+   "s": 0.02,
+   "bbox0": [
+    -49.0,
+    -32.1,
+    86.8,
+    -41.0,
+    -29.85,
+    97.3
+   ]
+  },
+  {
+   "helper": "snap_strain",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 0.012,
+   "s": 0.0,
+   "bbox0": [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.01
+   ]
+  },
+  {
+   "helper": "keyhole_tongue",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 863.78,
+   "s": 0.02,
+   "bbox0": [
+    -22.0,
+    -16.16,
+    -3.65,
+    -14.0,
+    18.0,
+    0.0
+   ]
+  },
+  {
+   "helper": "keyhole_slot",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 2473.475,
+   "s": 0.01,
+   "bbox0": [
+    -22.25,
+    -18.25,
+    -3.9,
+    -3.75,
+    18.25,
+    0.0
+   ]
+  },
+  {
+   "helper": "dovetail(rail)",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 416.64,
+   "s": 0.01,
+   "bbox0": [
+    -110.0,
+    34.0,
+    -6.7,
+    -1.5,
+    35.2,
+    -2.3
+   ]
+  },
+  {
+   "helper": "dovetail(groove)",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 685.61,
+   "s": 0.01,
+   "bbox0": [
+    -110.25,
+    33.75,
+    -6.95,
+    -1.25,
+    35.45,
+    -2.05
+   ]
+  },
+  {
+   "helper": "vent_slots(out_band)",
+   "ok": true,
+   "n": 13,
+   "volume_mm3": 271.686,
+   "s": 0.35,
+   "bbox0": [
+    -2.8,
+    -25.9,
+    25.9,
+    0.3,
+    -23.9,
+    29.7
+   ]
+  },
+  {
+   "helper": "vent_slots(inlet_roof)",
+   "ok": true,
+   "n": 7,
+   "volume_mm3": 1273.771,
+   "s": 0.14,
+   "bbox0": [
+    -69.8,
+    -24.0,
+    97.0,
+    -67.8,
+    4.0,
+    100.3
+   ]
+  },
+  {
+   "helper": "engrave(all items)",
+   "ok": true,
+   "n": 26,
+   "volume_mm3": 81.253,
+   "s": 110.83,
+   "bbox0": [
+    -80.45,
+    34.6,
+    53.97,
+    -45.55,
+    35.05,
+    74.45
+   ]
+  },
+  {
+   "helper": "teardrop",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 209.762,
+   "s": 0.04,
+   "bbox0": [
+    -17.0,
+    -35.0,
+    55.0,
+    -7.0,
+    -32.5,
+    67.07
+   ]
+  },
+  {
+   "helper": "bed_chamfer",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 3275.728,
+   "s": 0.02,
+   "bbox0": [
+    -140.0,
+    34.0,
+    -8.0,
+    -10.0,
+    35.6,
+    8.0
+   ]
+  },
+  {
+   "helper": "safe_fillet(bad r falls back)",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 8.0,
+   "s": 0.06,
+   "bbox0": [
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "helper": "safe_fillet(ok)",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 1982.832,
+   "s": 0.03,
+   "bbox0": [
+    -0.0,
+    -0.0,
+    0.0,
+    20.0,
+    20.0,
+    5.0
+   ]
+  },
+  {
+   "helper": "to_print_pose(-Y)",
+   "ok": true,
+   "n": 1,
+   "volume_mm3": 1069161.45,
+   "s": 0.0,
+   "bbox0": [
+    0.0,
+    0.0,
+    0.0,
+    151.3,
+    100.95,
+    70.0
+   ]
+  }
+ ],
+ "hood_hook_strain": 0.012,
+ "helper_notes": [
+  "fillet |Z r5.00 failed: BRep_API: command not done"
+ ],
+ "all_ok": true
+}

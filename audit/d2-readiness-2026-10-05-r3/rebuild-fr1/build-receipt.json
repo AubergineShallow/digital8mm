@@ -1,0 +1,635 @@
+{
+ "revision": "GS8 D2 fastener-reduction candidate FR1 (EXPLORATORY; cad/gs8-d2-v1/candidate-fr1)",
+ "variant": "FR1 hood=yslide,keeper=True,panel=True",
+ "built_at": "2026-10-05 17:20:05 +0800",
+ "argv": [
+  "--fast",
+  "--sweep-step",
+  "1.0",
+  "--out",
+  "audit/d2-readiness-2026-10-05-r3/rebuild-fr1"
+ ],
+ "sources": {
+  "layout.py": "e8dc35abdb2fde2bbc471c547db84d33a8394146dff60a94c95e2da2b72c0983",
+  "d2_common.py": "09435a2c2ee19936acc5980419798ecfecd592d1aee5283f050843b0317eb91a",
+  "cots.py": "94a7762929d5cb0153999f22153683d468bba3f4e75105a2dc88a9a140a8bf75",
+  "checks.py": "9feb6c292834af851a5be0eff944ca583cc6ae21c3ca9527f0bf9695087a3182",
+  "build_d2.py": "a5cc232081061186c02277dde6cf26ed3129141ada5ae7c3f590eddf3447bbb6",
+  "make_coupons.py": "e8fa7278bee94d9120d8f944cffdc11b5123a70188cd05fb9bd7ae4f789963d2",
+  "make_tables.py": "a4c79a1005f7942a343c53fd57a820e2a6f2b2ea312209a04e4b9a2c30946c76",
+  "SPEC.md": "missing",
+  "FASTENER-POLICY.md": "missing",
+  "printed_grip.py": "096ecad3599693052c5155d94906045a1341deaf701f4f23a17f3aa90f770af6",
+  "printed_hood.py": "013f699ea7c9963e7ff3618ee9e24a84cfe0e16c49102a4c7f2c274e2a18e6bc",
+  "printed_keeper.py": "376e169178902703ef5284d07e0dccb5fb2e818599e97217a3d2b638d4f761f4",
+  "printed_panel.py": "23361fb44cef0b7dd6e0ee73011396b6a26cba5ea29e8667b584e2477393a78d",
+  "printed_small.py": "443d72c4f0502ebd4e4a11439827ca6b7fbd1f697e1f1f6f3d7d9bf63c26250f",
+  "printed_tub.py": "10af7d38233fcd0711c2c9e1e2ce2dd475a5ddd8f3f278da2e4f1b52d59d198e",
+  "coupons_fr_hood.py": "4f9b6fb57911733c99751f1442fe3a46dd139e699994c77f194178e42ef1ad2c",
+  "coupons_fr_keeper.py": "d992a5a05ec95a8592dc832aa6e77feff0e5bd69c9ad7001285e7196d799248f",
+  "coupons_fr_panel.py": "cf55dec6025f5c95e3187a4b74a549d979e28dea122276fc5517ef5f59f543ce",
+  "coupons_r1.py": "5d183a1f96fecbbb09aa3878645e534994b12816b01d15e9a39a27e555c78fb4"
+ },
+ "modules": {
+  "printed_tub.py": {
+   "status": "built",
+   "parts": [
+    "tub"
+   ],
+   "seconds": 1.47
+  },
+  "printed_hood.py": {
+   "status": "built",
+   "parts": [
+    "hood"
+   ],
+   "seconds": 1.16
+  },
+  "printed_panel.py": {
+   "status": "built",
+   "parts": [
+    "panel"
+   ],
+   "seconds": 119.3
+  },
+  "printed_grip.py": {
+   "status": "built",
+   "parts": [
+    "base_grip",
+    "cap"
+   ],
+   "seconds": 1.68
+  },
+  "printed_small.py": {
+   "status": "built",
+   "parts": [
+    "plunger",
+    "knob_exp",
+    "knob_fps",
+    "eyecup",
+    "stick_sleeve"
+   ],
+   "seconds": 1.31
+  },
+  "printed_keeper.py": {
+   "status": "built",
+   "parts": [
+    "pi_keeper"
+   ],
+   "seconds": 0.14
+  }
+ },
+ "stubs": [],
+ "summary": [
+  {
+   "check": "contract",
+   "n": 11,
+   "passed": 11,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "cots_containment",
+   "n": 20,
+   "passed": 20,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "interference",
+   "n": 49,
+   "passed": 49,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "mate_overlap",
+   "n": 30,
+   "passed": 30,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "clearance",
+   "n": 12,
+   "passed": 12,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "keepouts",
+   "n": 81,
+   "passed": 81,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "bed_fit",
+   "n": 11,
+   "passed": 11,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "stl_mesh",
+   "n": 11,
+   "passed": 11,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "thin_wall",
+   "n": 11,
+   "passed": 11,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass",
+   "role": "secondary share-based screen: cannot pass the build alone; the gate for local thickness is critical_features (finding 2)"
+  },
+  {
+   "check": "critical_features",
+   "n": 136,
+   "passed": 126,
+   "failed": 0,
+   "stub": 0,
+   "info": 10,
+   "status": "pass"
+  },
+  {
+   "check": "evf_restraint",
+   "n": 6,
+   "passed": 6,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "driver",
+   "n": 4,
+   "passed": 4,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "engrave_groove",
+   "n": 10,
+   "passed": 10,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "boss_geometry",
+   "n": 4,
+   "passed": 4,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "sweeps",
+   "n": 12,
+   "passed": 12,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "removals",
+   "n": 11,
+   "passed": 11,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "service_driver",
+   "n": 3,
+   "passed": 3,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "release_access",
+   "n": 1,
+   "passed": 1,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "stack_retention",
+   "n": 1,
+   "passed": 1,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "layout_self_check",
+   "n": 120,
+   "passed": 120,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "mass_com",
+   "status": "pass"
+  }
+ ],
+ "status_states": {
+  "cad_checks": {
+   "status": "computed: pass",
+   "checks_passed": 21,
+   "checks_not_passed": 0,
+   "failed": [],
+   "rows_passed": 534,
+   "rows_failed": 0,
+   "checks_json_sha256": "97084ae14fcc5f42c689bd6180d846a062a5d39775485e4ebf82f74af838ddb3",
+   "note": "CAD geometry checks on built solids and purchased-part proxies only"
+  },
+  "slicer_review": {
+   "evidence_dir": "evidence/slicer/",
+   "needed": "slice every production STL (out/stl/<part>.stl) with the PRINT-GUIDE settings; one record per part naming that STL and its sha256 (no slicer is installed on the build machine)",
+   "items_required": 11,
+   "items_complete": 0,
+   "items_pass": 0,
+   "outcomes": {
+    "pass": 0,
+    "fail": 0,
+    "conflict": 0,
+    "rejected": 0,
+    "stale": 0,
+    "not run": 11
+   },
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "not_run": [
+    "base_grip",
+    "cap",
+    "eyecup",
+    "hood",
+    "knob_exp",
+    "knob_fps",
+    "panel",
+    "pi_keeper",
+    "plunger",
+    "stick_sleeve",
+    "tub"
+   ],
+   "unmatched_records": [],
+   "open": true,
+   "items": {},
+   "status": "not run"
+  },
+  "coupon_validation": {
+   "evidence_dir": "evidence/coupons/",
+   "needed": "print the gate coupons (out/stl/coupons) and record fit, torque, insertion/release cycles; one record per gate or calibration id naming every coupon STL it used with its sha256",
+   "items_required": 9,
+   "items_complete": 0,
+   "items_pass": 0,
+   "outcomes": {
+    "pass": 0,
+    "fail": 0,
+    "conflict": 0,
+    "rejected": 0,
+    "stale": 0,
+    "not run": 9
+   },
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "not_run": [
+    "G-CAP-1",
+    "G-COMB-1",
+    "G-EVF-2",
+    "G-J4-1",
+    "G-KEEP-1",
+    "G-KNOB-1",
+    "G-PANEL-1",
+    "G-PT-1",
+    "G-SNAP-2"
+   ],
+   "unmatched_records": [],
+   "open": true,
+   "items": {},
+   "status": "not run"
+  },
+  "measured_fit": {
+   "evidence_dir": "evidence/measured/",
+   "needed": "measure the purchased parts against the MEASURED-PARTS.md gates",
+   "items_required": 17,
+   "items_complete": 0,
+   "items_pass": 0,
+   "outcomes": {
+    "pass": 0,
+    "fail": 0,
+    "conflict": 0,
+    "rejected": 0,
+    "stale": 0,
+    "not run": 17
+   },
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "not_run": [
+    "EVF-G1",
+    "EVF-G7",
+    "EVF-G8",
+    "G-CAM-1",
+    "G-ENC-1",
+    "G-HDMI",
+    "G-LENS",
+    "G-MP-ENC",
+    "G-MP-EVF",
+    "G-MP-FPC",
+    "G-MP-PACK",
+    "G-MP-STICK",
+    "G-MP-SW",
+    "G-MP-X1203",
+    "G-PI-1",
+    "G-PLG-1",
+    "G-RUN-1"
+   ],
+   "unmatched_records": [],
+   "open": true,
+   "items": {},
+   "status": "not run"
+  },
+  "assembly_operation": {
+   "evidence_dir": "evidence/assembly/",
+   "needed": "dry assembly, non-destructive service cycles and a powered recording test (ASSEMBLY.md, WIRING.md bench gates)",
+   "items_required": 22,
+   "items_complete": 0,
+   "items_pass": 0,
+   "outcomes": {
+    "pass": 0,
+    "fail": 0,
+    "conflict": 0,
+    "rejected": 0,
+    "stale": 0,
+    "not run": 22
+   },
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "not_run": [
+    "EVF-G2",
+    "EVF-G3",
+    "EVF-G4",
+    "EVF-G4b",
+    "EVF-G5",
+    "EVF-G6",
+    "EVF-G9",
+    "G-EVF-1",
+    "G-FPC-1",
+    "G-W1",
+    "G-W10",
+    "G-W11",
+    "G-W12",
+    "G-W13",
+    "G-W2",
+    "G-W3",
+    "G-W4",
+    "G-W5",
+    "G-W6",
+    "G-W7",
+    "G-W8",
+    "G-W9"
+   ],
+   "unmatched_records": [],
+   "open": true,
+   "items": {},
+   "status": "not run"
+  }
+ },
+ "totals": {
+  "printed": 11,
+  "cots": 20,
+  "screws": 4,
+  "printed_mass_est_g": 298.9,
+  "print_time_est_h": 15.9,
+  "estimates_note": "mass = solid volume x density x infill factor; print time = volume / 6.0 mm3/s x 1.15 + 0.1 h per part. Estimates, NOT slicer results (slicer_review: see status_states).",
+  "mass_com": {
+   "kowa_lm6hc": {
+    "total_g": 890.7,
+    "com": [
+     -43.47,
+     0.9,
+     26.68
+    ],
+    "ahead_of_grip_axis": 3.53,
+    "above_grip_top": 34.68
+   },
+   "fujinon_hf6xa": {
+    "total_g": 775.7,
+    "com": [
+     -56.07,
+     1.04,
+     21.74
+    ],
+    "ahead_of_grip_axis": -9.07,
+    "above_grip_top": 29.74
+   }
+  }
+ },
+ "files": {
+  "renders/section-evf-board-z78.png": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
+  "renders/section-evf-board-x137.png": "a67c0cdc53cc6cff9e5367a99598768019af3375c7b5fa4ea4fe0781cc57298b",
+  "renders/section-pi-keeper-y-20.png": "e25b26958ba50f157d01d407c0004b3d95eb473305a42939975200123ec4d9a7",
+  "renders/section-pi-keeper-x80.png": "f1f868544e7c3fbbc1c347f0d2d3bf71b61953c501ea916abc9d0788a256b3de",
+  "renders/section-pi-keeper-y12.png": "6abc2df72c358ae7f3321b8094b5f20504cc38209a3824a8c8c8fb37f2cf517d",
+  "renders/section-base-edge-x91.png": "06c283c34a995af767da0cd94b6481379f8d69b970f3d857d27d98dd4cfac1c7",
+  "checks.json": "97084ae14fcc5f42c689bd6180d846a062a5d39775485e4ebf82f74af838ddb3",
+  "print-manifest.json": "faed0bbdc6b8f8a1f9d809002275a852f5eeda116b140baa781bcd966acf7567",
+  "parts-manifest.json": "cfe73e1c76946819ab6fe964458ccefc35a9216d68d6b12798052f98eaa68acc",
+  "stl/tub.stl": "093d116aca4ba255ac8d929caa6de9b1e53e527696380a18b5b959e4e6bf2081",
+  "stl/hood.stl": "e02f09fd56ad8d39a068271c225cb1fd7a598e94da66d4cc5a4e6bf9db78b6df",
+  "stl/panel.stl": "f335e0d99407235e9a99d9e17a3392a75b7eeae81efd98fc410531053300b3ce",
+  "stl/base_grip.stl": "684183466c80374ba6f302faec5c73b0ae5bb025acfc0c194c9ab86614fa6f34",
+  "stl/cap.stl": "9790861bba3bedd88d2e9e82b8ee8273ec20586df486874c27fe63b54f3b90a1",
+  "stl/plunger.stl": "56b96668d3bf150c87a58f8f2b41835958bbfec181e8f5634dac553b0f3d6a9e",
+  "stl/knob_exp.stl": "48bf5d2152c6f616dff2cdd95f0ba690d998f1e7065976cf90ffc0d70cb54919",
+  "stl/knob_fps.stl": "528973f3d83a8fa0cdfa004f112cd170ed594d2849815eb355eef08e2aa57e3d",
+  "stl/eyecup.stl": "f8ba81dcea8d6d8523092489642879627a152215fb32341434730697f8b087a7",
+  "stl/stick_sleeve.stl": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
+  "stl/pi_keeper.stl": "630d80c7ed7b6476e1f2e7ae5c10ceab2f83b6239965cc4c9c105c39f6b95832"
+ },
+ "carried_files": {},
+ "timings_s": {
+  "layout self-check": 0.0,
+  "printed modules": 125.06,
+  "cots": 1.0,
+  "contract": 1.56,
+  "interference": 11.33,
+  "clearance": 2.27,
+  "keepouts": 12.33,
+  "thin wall": 24.89,
+  "driver audit": 1.25,
+  "critical features": 15.48,
+  "evf restraint": 1.82,
+  "removals + service driver": 9.42,
+  "engrave + bosses": 73.89,
+  "sweeps": 12.79,
+  "mass/CoM": 0.79,
+  "stl + bed fit": 9.48,
+  "section renders": 3.37
+ },
+ "total_s": 307.0,
+ "peak_mem_mb": 753.2,
+ "cad_release_candidate": true,
+ "blocking": [],
+ "open_evidence": [
+  "slicer_review (not run: 11 item(s))",
+  "coupon_validation (not run: 9 item(s))",
+  "measured_fit (not run: 17 item(s))",
+  "assembly_operation (not run: 22 item(s))"
+ ],
+ "open_evidence_detail": {
+  "slicer_review": {
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "unmatched_records": [],
+   "not_run": 11,
+   "items_pass": 0,
+   "items_required": 11
+  },
+  "coupon_validation": {
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "unmatched_records": [],
+   "not_run": 9,
+   "items_pass": 0,
+   "items_required": 9
+  },
+  "measured_fit": {
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "unmatched_records": [],
+   "not_run": 17,
+   "items_pass": 0,
+   "items_required": 17
+  },
+  "assembly_operation": {
+   "failed": [],
+   "conflict": [],
+   "stale": [],
+   "rejected": [],
+   "unmatched_records": [],
+   "not_run": 22,
+   "items_pass": 0,
+   "items_required": 22
+  }
+ },
+ "evidence": {
+  "record_files": {},
+  "ignored_files": [],
+  "coupons_from": "cad/gs8-d2-v1/candidate-fr1/out/stl/coupons",
+  "rejected_records": [],
+  "unassigned_records": [],
+  "format": "evidence/README.md (structured JSON records bound to artifact sha256; no file-name matching)"
+ },
+ "hardware_gates": {
+  "source_docs": {
+   "cad/gs8-d2-v1/MEASURED-PARTS.md": "ac5ac10ac66d18a1781b03e04c15301ed6c8b28faa7a66d6d4fd7fcddc2e677a",
+   "cad/gs8-d2-v1/SPEC.md": "1674374cab240a0d04378b714fc1b0e431286c430e3296ec0b588afffe372c25",
+   "electronics/gs8-d2-v1/WIRING.md": "39c453cb80d675616e11fbe867235ba328f0c160f2ad05cd773ecfa77d3fd93b",
+   "electronics/gs8-evf-v1/EVF-SELECTION.md": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390"
+  },
+  "gates": {
+   "EVF-G1": "open (no record)",
+   "EVF-G2": "open (no record)",
+   "EVF-G3": "open (no record)",
+   "EVF-G4": "open (no record)",
+   "EVF-G4b": "open (no record)",
+   "EVF-G5": "open (no record)",
+   "EVF-G6": "open (no record)",
+   "EVF-G7": "open (no record)",
+   "EVF-G8": "open (no record)",
+   "EVF-G9": "open (no record)",
+   "G-CAM-1": "open (no record)",
+   "G-CAP-1": "open (no record)",
+   "G-COMB-1": "open (no record)",
+   "G-ENC-1": "open (no record)",
+   "G-EVF-1": "open (no record)",
+   "G-EVF-2": "open (no record)",
+   "G-FPC-1": "open (no record)",
+   "G-HDMI": "open (no record)",
+   "G-J4-1": "open (no record)",
+   "G-KEEP-1": "open (no record)",
+   "G-KNOB-1": "open (no record)",
+   "G-LENS": "open (no record)",
+   "G-MP-ENC": "open (no record)",
+   "G-MP-EVF": "open (no record)",
+   "G-MP-FPC": "open (no record)",
+   "G-MP-PACK": "open (no record)",
+   "G-MP-STICK": "open (no record)",
+   "G-MP-SW": "open (no record)",
+   "G-MP-X1203": "open (no record)",
+   "G-PANEL-1": "open (no record)",
+   "G-PI-1": "open (no record)",
+   "G-PLG-1": "open (no record)",
+   "G-PT-1": "open (no record)",
+   "G-RUN-1": "open (no record)",
+   "G-SKIRT-1": "withdrawn (feature deleted; see the gate doc)",
+   "G-SNAP-1": "withdrawn (feature deleted; see the gate doc)",
+   "G-SNAP-2": "open (no record)",
+   "G-W1": "open (no record)",
+   "G-W10": "open (no record)",
+   "G-W11": "open (no record)",
+   "G-W12": "open (no record)",
+   "G-W13": "open (no record)",
+   "G-W2": "open (no record)",
+   "G-W3": "open (no record)",
+   "G-W4": "open (no record)",
+   "G-W5": "open (no record)",
+   "G-W6": "open (no record)",
+   "G-W7": "open (no record)",
+   "G-W8": "open (no record)",
+   "G-W9": "open (no record)"
+  }
+ },
+ "unclassified_thin_spots": [],
+ "note": "cad_release_candidate (was release_candidate) is true only if every CAD check passes, the critical-feature gate passes and no printed part is a stub. It is NOT a hardware, print or finished-camera claim: slicer review, coupons, measured fit and assembly/operation are separate states (status_states) and stay \"not run\" until structured evidence records exist (evidence/README.md); a state stays in open_evidence until every item has a current pass."
+}

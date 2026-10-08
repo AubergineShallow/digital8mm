@@ -1,0 +1,194 @@
+{
+ "Kowa LM6HC 215 g": {
+  "static": {
+   "M_wall_Nm": 0.088,
+   "M_sleeve_Nm": 0.049,
+   "aim_deg": [
+    0.03,
+    0.036
+   ],
+   "wall_sigma_MPa": [
+    0.2,
+    0.41
+   ]
+  },
+  "5 g": {
+   "M_wall_Nm": 0.439,
+   "M_sleeve_Nm": 0.247,
+   "aim_deg": [
+    0.149,
+    0.178
+   ],
+   "wall_sigma_MPa": [
+    1.01,
+    2.06
+   ]
+  },
+  "hand": {
+   "M_wall_Nm": 0.95,
+   "M_sleeve_Nm": 0.676,
+   "aim_deg": [
+    0.388,
+    0.452
+   ],
+   "wall_sigma_MPa": [
+    2.18,
+    4.46
+   ]
+  },
+  "static creep aim_deg": [
+   0.066,
+   0.079
+  ],
+  "k_sleeve_Nmm_per_rad": 124000.0,
+  "today_static_M_seat_Nm": 0.093,
+  "today_static_wall_deg": [
+   0.045,
+   0.069
+  ]
+ },
+ "Fujinon HF6XA 100 g": {
+  "static": {
+   "M_wall_Nm": 0.038,
+   "M_sleeve_Nm": 0.02,
+   "aim_deg": [
+    0.008,
+    0.01
+   ],
+   "wall_sigma_MPa": [
+    0.09,
+    0.18
+   ]
+  },
+  "5 g": {
+   "M_wall_Nm": 0.189,
+   "M_sleeve_Nm": 0.102,
+   "aim_deg": [
+    0.038,
+    0.051
+   ],
+   "wall_sigma_MPa": [
+    0.44,
+    0.89
+   ]
+  },
+  "hand": {
+   "M_wall_Nm": 0.875,
+   "M_sleeve_Nm": 0.608,
+   "aim_deg": [
+    0.208,
+    0.267
+   ],
+   "wall_sigma_MPa": [
+    2.01,
+    4.11
+   ]
+  },
+  "static creep aim_deg": [
+   0.018,
+   0.022
+  ],
+  "k_sleeve_Nmm_per_rad": 250000.0,
+  "today_static_M_seat_Nm": 0.04,
+  "today_static_wall_deg": [
+   0.019,
+   0.03
+  ]
+ },
+ "Computar H6Z0812 305 g": {
+  "static": {
+   "M_wall_Nm": 0.157,
+   "M_sleeve_Nm": 0.081,
+   "aim_deg": [
+    0.013,
+    0.023
+   ],
+   "wall_sigma_MPa": [
+    0.36,
+    0.74
+   ]
+  },
+  "5 g": {
+   "M_wall_Nm": 0.785,
+   "M_sleeve_Nm": 0.407,
+   "aim_deg": [
+    0.064,
+    0.117
+   ],
+   "wall_sigma_MPa": [
+    1.81,
+    3.69
+   ]
+  },
+  "hand": {
+   "M_wall_Nm": 1.666,
+   "M_sleeve_Nm": 1.16,
+   "aim_deg": [
+    0.138,
+    0.25
+   ],
+   "wall_sigma_MPa": [
+    3.83,
+    7.83
+   ]
+  },
+  "static creep aim_deg": [
+   0.029,
+   0.051
+  ],
+  "k_sleeve_Nmm_per_rad": 9657000.0,
+  "today_static_M_seat_Nm": 0.165,
+  "today_static_wall_deg": [
+   0.079,
+   0.122
+  ]
+ },
+ "Optivaron 6-66 600 g": {
+  "static": {
+   "M_wall_Nm": 0.403,
+   "M_sleeve_Nm": 0.254,
+   "aim_deg": [
+    0.033,
+    0.06
+   ],
+   "wall_sigma_MPa": [
+    0.93,
+    1.89
+   ]
+  },
+  "5 g": {
+   "M_wall_Nm": 2.016,
+   "M_sleeve_Nm": 1.271,
+   "aim_deg": [
+    0.167,
+    0.302
+   ],
+   "wall_sigma_MPa": [
+    4.64,
+    9.47
+   ]
+  },
+  "hand": {
+   "M_wall_Nm": 1.866,
+   "M_sleeve_Nm": 1.36,
+   "aim_deg": [
+    0.156,
+    0.281
+   ],
+   "wall_sigma_MPa": [
+    4.29,
+    8.77
+   ]
+  },
+  "static creep aim_deg": [
+   0.073,
+   0.132
+  ],
+  "k_sleeve_Nmm_per_rad": 8976000.0,
+  "today_static_M_seat_Nm": 0.418,
+  "today_static_wall_deg": [
+   0.201,
+   0.309
+  ]
+ }
+}

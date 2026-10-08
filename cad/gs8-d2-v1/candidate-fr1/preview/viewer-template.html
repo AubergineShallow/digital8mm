@@ -1,0 +1,142 @@
+<div id="fr1-camera-preview">
+  <div class="viz-controls">
+    <label class="form-label">Assembly
+      <select class="form-select" data-mode aria-label="Assembly display">
+        <option value="assembled">Assembled</option><option value="interior">Interior</option>
+        <option value="exploded">Exploded</option><option value="evf">EVF assembly</option>
+      </select>
+    </label>
+    <label class="form-label">View
+      <select class="form-select" data-view aria-label="Camera angle">
+        <option value="perspective">Perspective</option><option value="side">Control side</option>
+        <option value="front">Lens front</option><option value="rear">EVF rear</option><option value="top">Top</option>
+      </select>
+    </label>
+    <label class="form-label" data-explode-label hidden>Separation <span data-explode-value class="tabular-nums">70%</span>
+      <input class="form-range" data-explode type="range" min="0" max="100" step="1" value="70" aria-label="Exploded separation">
+    </label>
+  </div>
+  <div class="fr1-stage">
+    <canvas data-canvas aria-label="Interactive FR1 pistol camera. Drag to orbit, right drag to pan, scroll to zoom, click a part to identify it. Use the view and part selectors for keyboard access." role="img"></canvas>
+    <div class="fr1-loading text-small" data-loading role="status">Loading the camera geometry…</div>
+    <div class="fr1-error text-destructive" data-error role="alert" hidden></div>
+  </div>
+  <div class="text-small" data-selected aria-live="polite">FR1 candidate · physical fit unverified</div>
+  <details class="fr1-details">
+    <summary>Parts and section view</summary>
+    <div class="viz-controls">
+      <label class="form-label">Part <select class="form-select" data-part aria-label="Identify a part"><option value="">All parts</option></select></label>
+      <label class="form-check"><input class="form-check-input" data-isolate type="checkbox"><span class="form-check-label">Show selected part only</span></label>
+      <label class="form-label">Section <select class="form-select" data-section aria-label="Cutaway plane">
+        <option value="none">Off</option><option value="y">Lengthwise</option><option value="x">Cross section</option><option value="z">Horizontal</option>
+      </select></label>
+      <label class="form-label" data-section-label hidden>Position <span data-section-value class="tabular-nums"></span>
+        <input class="form-range" data-section-position type="range" min="0" max="100" value="50" step="0.2" aria-label="Section position">
+      </label>
+    </div>
+  </details>
+  <div class="text-small fr1-caption" data-caption>FR1 · 11 printed pieces · 4 body screws · purchased parts are proxies</div>
+  <span class="sr-only">A Nizo-inspired pistol camera with lens at the front, EVF at the rear, exposure and frame-rate knobs on the side, record control on the grip, and a removable battery cap. This is the separate fastener-reduction candidate, not the adopted release. Exploded spacing illustrates part relationships, not an assembly sequence.</span>
+</div>
+<style>
+#fr1-camera-preview{width:100%;color:var(--foreground)}
+#fr1-camera-preview [hidden]{display:none!important}
+#fr1-camera-preview .fr1-stage{position:relative;width:100%;height:540px;min-width:0}
+#fr1-camera-preview canvas{width:100%;height:100%;display:block;touch-action:none}
+#fr1-camera-preview .fr1-loading,#fr1-camera-preview .fr1-error{position:absolute;left:16px;top:20px;color:var(--foreground)}
+#fr1-camera-preview .fr1-details{margin-top:12px}
+#fr1-camera-preview .fr1-details .viz-controls{margin-top:12px}
+#fr1-camera-preview .fr1-caption{margin-top:10px;color:var(--muted-foreground)}
+#fr1-camera-preview [data-selected]{min-height:1.5em}
+@media(max-width:520px){#fr1-camera-preview .fr1-stage{height:430px}}
+</style>
+<script type="application/octet-stream" id="fr1-mesh-payload">__COMPRESSED_DATA__</script>
+<script>
+(async function(){
+  'use strict';
+  const root=document.getElementById('fr1-camera-preview');
+  const el=s=>root.querySelector(s), canvas=el('[data-canvas]');
+  try {
+    const encoded=document.getElementById('fr1-mesh-payload').textContent.trim();
+    const bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));
+    const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    const data=JSON.parse(await new Response(stream).text());
+    const gl=canvas.getContext('webgl',{antialias:true,alpha:true,preserveDrawingBuffer:true});
+    if(!gl)throw new Error('WebGL is unavailable in this browser.');
+    const vs=`attribute vec3 P;attribute vec3 N;uniform mat4 M;uniform vec3 O;varying vec3 n;varying vec3 r;void main(){r=P;n=N;gl_Position=M*vec4(P+O,1.0);}`;
+    const fs=`precision highp float;varying vec3 n;varying vec3 r;uniform vec3 col;uniform vec3 light;uniform vec4 cut;uniform float cutOn;uniform float pickMode;uniform vec3 sectionColor;void main(){if(cutOn>0.5&&dot(r,cut.xyz)+cut.w<0.0)discard;if(pickMode>0.5){gl_FragColor=vec4(col,1.0);return;}vec3 normal=normalize(gl_FrontFacing?n:-n);float shade=0.44+0.52*max(dot(normal,light),0.0)+0.14*max(normal.z,0.0);vec3 c=(!gl_FrontFacing&&cutOn>0.5)?sectionColor:col;gl_FragColor=vec4(clamp(c*shade,0.0,1.0),1.0);}`;
+    function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+    const program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vs));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);
+    if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));
+    const loc={};for(const n of ['M','O','col','light','cut','cutOn','pickMode','sectionColor'])loc[n]=gl.getUniformLocation(program,n);
+    loc.P=gl.getAttribLocation(program,'P');loc.N=gl.getAttribLocation(program,'N');
+    const readable={tub:'Main body tub',hood:'Sliding hood',panel:'Two-screw side panel',base_grip:'Base and pistol grip',cap:'Battery cap',pi_keeper:'Keyed Pi keeper',plunger:'Power plunger',knob_exp:'Exposure knob',knob_fps:'18 / 24 fps knob',eyecup:'EVF eyecup',stick_sleeve:'Storage sleeve',pi5:'Raspberry Pi 5',cooler:'Active Cooler',x1203:'X1203 power board',x1203_kit:'UPS screws and standoffs',gs_camera:'Image sensor module',c_cs_adapter:'Lens adapter',lens:'Kowa 6 mm lens',pack:'Battery pack',evf_board:'EVF driver board',hmx039:'EVF OLED display',eyepiece:'EVF eyepiece',usb_stick:'Recording storage',encoder:'Exposure encoder',switch_1824:'18 / 24 fps switch',run_button:'Record button'};
+    const parts=[];
+    function colour(s){if(Array.isArray(s))return s.slice(0,3).map(x=>x>1?x/255:x);s=String(s||'#888888');return [1,3,5].map(i=>parseInt(s.slice(i,i+2),16)/255);}
+    for(const p of data.parts){
+      const vertices=p.vertices.flat(),faces=(p.triangles||p.faces).flat(),pos=new Float32Array(faces.length*3),norm=new Float32Array(faces.length*3);
+      const bounds=[Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];
+      for(let t=0;t<faces.length;t+=3){const ai=faces[t]*3,bi=faces[t+1]*3,ci=faces[t+2]*3;
+        const a=[vertices[ai],vertices[ai+1],vertices[ai+2]],b=[vertices[bi],vertices[bi+1],vertices[bi+2]],c=[vertices[ci],vertices[ci+1],vertices[ci+2]];
+        const u=b.map((x,i)=>x-a[i]),v=c.map((x,i)=>x-a[i]);let n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],length=Math.hypot(...n)||1;n=n.map(x=>x/length);
+        for(let j=0;j<3;j++)for(let k=0;k<3;k++){const value=vertices[faces[t+j]*3+k];pos[(t+j)*3+k]=value;norm[(t+j)*3+k]=n[k];bounds[k]=Math.min(bounds[k],value);bounds[k+3]=Math.max(bounds[k+3],value);}
+      }
+      function buffer(values){const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,values,gl.STATIC_DRAW);return b;}
+      const id=p.name||p.id;parts.push({id,label:readable[id]||p.label||id.replaceAll('_',' '),p,pb:buffer(pos),nb:buffer(norm),n:faces.length,bounds,col:colour(p.color),pick:parts.length+1,offset:[0,0,0],visible:true});
+    }
+    const modes=new Set(['assembled','interior','exploded','evf']),views={perspective:[0.8,0.30],side:[Math.PI/2,0],front:[0,0],rear:[Math.PI,0],top:[Math.PI/2,1.55]};
+    let mode='assembled',view='perspective',yaw=.8,pitch=.30,dist=400,target=[0,0,0],separation=.7,section='none',sectionPercent=50,selected='',isolate=false,cut=[0,1,0,0],accent=[.7,.4,.15],dark=false;
+    const evfIDs=new Set(['eyecup','eyepiece','hmx039','evf_board']);
+    const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+    const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+    const unit=a=>{const l=Math.hypot(...a)||1;return a.map(x=>x/l);};
+    function basis(){const z=[Math.cos(pitch)*Math.cos(yaw),Math.cos(pitch)*Math.sin(yaw),Math.sin(pitch)],x=unit(cross(Math.abs(z[2])>.999?[0,1,0]:[0,0,1],z)),y=cross(z,x);return {x,y,z};}
+    function bounds(){const b=[Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];for(const q of parts)if(q.visible)for(let k=0;k<3;k++){b[k]=Math.min(b[k],q.bounds[k]+q.offset[k]);b[k+3]=Math.max(b[k+3],q.bounds[k+3]+q.offset[k]);}return b.every(Number.isFinite)?b:[-100,-40,-90,80,40,100];}
+    function fit(){const b=bounds();target=[0,1,2].map(k=>(b[k]+b[k+3])/2);const axes=basis(),asp=Math.max(.3,canvas.clientWidth/canvas.clientHeight),t=Math.tan(16*Math.PI/180);let needed=0;
+      for(let i=0;i<8;i++){const p=[0,1,2].map(k=>b[k+((i>>k)&1)*3]-target[k]);needed=Math.max(needed,dot(p,axes.z)+Math.max(Math.abs(dot(p,axes.x))/(t*asp),Math.abs(dot(p,axes.y))/t));}dist=Math.max(30,needed*1.11);mark();}
+    function multiply(a,b){const r=new Float32Array(16);for(let i=0;i<4;i++)for(let j=0;j<4;j++)for(let k=0;k<4;k++)r[i*4+j]+=a[k*4+j]*b[i*4+k];return r;}
+    function camera(){const {x,y,z}=basis(),eye=target.map((v,i)=>v+z[i]*dist),asp=canvas.width/canvas.height,f=1/Math.tan(16*Math.PI/180),near=.5,far=5000;
+      const p=new Float32Array([f/asp,0,0,0,0,f,0,0,0,0,(far+near)/(near-far),-1,0,0,2*far*near/(near-far),0]);
+      const v=new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,eye),-dot(y,eye),-dot(z,eye),1]);return {M:multiply(p,v),x,y,z};}
+    function draw(picking=false){const dpr=Math.min(devicePixelRatio||1,2),w=Math.round(canvas.clientWidth*dpr),h=Math.round(canvas.clientHeight*dpr);if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}if(!w||!h)return;
+      gl.viewport(0,0,w,h);gl.clearColor(0,0,0,picking?1:0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.disable(gl.BLEND);gl.useProgram(program);
+      const cam=camera();gl.uniformMatrix4fv(loc.M,false,cam.M);gl.uniform3fv(loc.light,unit(cam.z.map((v,k)=>v*.65+cam.y[k]*.65-cam.x[k]*.25)));gl.uniform4fv(loc.cut,cut);gl.uniform1f(loc.cutOn,section==='none'?0:1);gl.uniform1f(loc.pickMode,picking?1:0);gl.uniform3fv(loc.sectionColor,accent);
+      gl.enableVertexAttribArray(loc.P);gl.enableVertexAttribArray(loc.N);
+      for(const q of parts){if(!q.visible)continue;let col=q.col;if(dark)col=col.map(c=>Math.min(1,c*.86+.13));if(selected===q.id)col=col.map((v,k)=>v*.5+accent[k]*.5);
+        gl.uniform3fv(loc.col,picking?[(q.pick&255)/255,((q.pick>>8)&255)/255,0]:col);gl.uniform3fv(loc.O,q.offset);
+        gl.bindBuffer(gl.ARRAY_BUFFER,q.pb);gl.vertexAttribPointer(loc.P,3,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ARRAY_BUFFER,q.nb);gl.vertexAttribPointer(loc.N,3,gl.FLOAT,false,0,0);gl.drawArrays(gl.TRIANGLES,0,q.n);}
+    }
+    let scheduled=false;function mark(){if(!scheduled){scheduled=true;requestAnimationFrame(()=>{scheduled=false;draw();});}}
+    function updateSection(){const b=bounds(),axis={x:0,y:1,z:2}[section]??1;const value=b[axis]+(b[axis+3]-b[axis])*sectionPercent/100;cut=[0,0,0,value];cut[axis]=-1;el('[data-section-value]').textContent=value.toFixed(1)+' mm';el('[data-section-label]').hidden=section==='none';}
+    function update(doFit=true){for(const q of parts){q.offset=mode==='exploded'?(q.p.explode||[0,0,0]).map(v=>v*separation):[0,0,0];q.visible=(!isolate||!selected||q.id===selected)&&(mode!=='interior'||!['hood','panel'].includes(q.id))&&(mode!=='evf'||evfIDs.has(q.id));}
+      el('[data-explode-label]').hidden=mode!=='exploded';el('[data-explode-value]').textContent=Math.round(separation*100)+'%';
+      const q=parts.find(q=>q.id===selected);el('[data-selected]').textContent=q?q.label+' · '+(q.p.kind==='printed'?'printed CAD geometry':'purchased component proxy')+(q.visible?'':' · hidden in this view'):'FR1 candidate · physical fit unverified';
+      el('[data-caption]').textContent=mode==='exploded'?'Illustrative separation · not an assembly sequence':mode==='interior'?'Hood and side panel hidden · wiring paths not shown':mode==='evf'?'EVF display, driver and eyepiece · optical fit unverified':'FR1 · 11 printed pieces · 4 body screws · purchased parts are proxies';
+      updateSection();if(doFit)fit();else mark();}
+    for(const q of [...parts].sort((a,b)=>a.label.localeCompare(b.label))){const option=document.createElement('option');option.value=q.id;option.textContent=q.label;el('[data-part]').appendChild(option);}
+    function save(){if(window.openai?.setWidgetState)window.openai.setWidgetState({modelContent:{assembly:'D2 FR1 candidate',display:mode,selectedPart:selected||null,section},privateContent:{mode,view,yaw,pitch,dist,target,separation,section,sectionPercent,selected,isolate}}).catch(()=>{});}
+    function sync(){el('[data-mode]').value=mode;el('[data-view]').value=view;el('[data-explode]').value=Math.round(separation*100);el('[data-part]').value=selected;el('[data-isolate]').checked=isolate;el('[data-section]').value=section;el('[data-section-position]').value=sectionPercent;}
+    function restore(state){const s=state?.privateContent;if(!s)return false;if(modes.has(s.mode))mode=s.mode;if(views[s.view])view=s.view;if(parts.some(q=>q.id===s.selected))selected=s.selected;isolate=!!s.isolate;
+      if(['none','x','y','z'].includes(s.section))section=s.section;if(Number.isFinite(s.sectionPercent))sectionPercent=Math.max(0,Math.min(100,s.sectionPercent));if(Number.isFinite(s.separation))separation=Math.max(0,Math.min(1,s.separation));
+      if(Number.isFinite(s.yaw))yaw=s.yaw;if(Number.isFinite(s.pitch))pitch=Math.max(-1.55,Math.min(1.55,s.pitch));sync();update();
+      if(Number.isFinite(s.dist)&&Array.isArray(s.target)&&s.target.length===3&&s.target.every(Number.isFinite)){dist=s.dist;target=s.target;mark();}return true;}
+    el('[data-mode]').onchange=e=>{mode=e.target.value;isolate=false;selected='';section='none';sync();update();save();};
+    el('[data-view]').onchange=e=>{view=e.target.value;[yaw,pitch]=views[view];fit();save();};
+    el('[data-explode]').oninput=e=>{separation=+e.target.value/100;update();};el('[data-explode]').onchange=save;
+    el('[data-part]').onchange=e=>{selected=e.target.value;update(isolate);save();};
+    el('[data-isolate]').onchange=e=>{isolate=e.target.checked;if(isolate&&selected){mode='assembled';section='none';sync();}update();save();};
+    el('[data-section]').onchange=e=>{section=e.target.value;updateSection();mark();save();};
+    el('[data-section-position]').oninput=e=>{sectionPercent=+e.target.value;updateSection();mark();};el('[data-section-position]').onchange=save;
+    let drag=null;canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,initialX:e.clientX,initialY:e.clientY,pan:e.shiftKey||e.button===2};canvas.setPointerCapture(e.pointerId);});
+    canvas.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.x=e.clientX;drag.y=e.clientY;if(drag.pan){const b=basis(),scale=2*dist*Math.tan(16*Math.PI/180)/canvas.clientHeight;target=target.map((v,k)=>v+(-dx*b.x[k]+dy*b.y[k])*scale);}else{yaw-=dx*.007;pitch=Math.max(-1.55,Math.min(1.55,pitch+dy*.007));}mark();});
+    canvas.addEventListener('pointerup',e=>{if(drag&&Math.hypot(e.clientX-drag.initialX,e.clientY-drag.initialY)<4){draw(true);const r=canvas.getBoundingClientRect(),px=new Uint8Array(4);gl.readPixels(Math.floor((e.clientX-r.left)*canvas.width/r.width),canvas.height-1-Math.floor((e.clientY-r.top)*canvas.height/r.height),1,1,gl.RGBA,gl.UNSIGNED_BYTE,px);const q=parts.find(q=>q.pick===px[0]+(px[1]<<8));selected=q?.id||'';el('[data-part]').value=selected;update(false);}drag=null;mark();save();});
+    canvas.addEventListener('pointercancel',()=>{drag=null;});canvas.addEventListener('contextmenu',e=>e.preventDefault());
+    let wheelSave;canvas.addEventListener('wheel',e=>{e.preventDefault();dist=Math.max(15,Math.min(3000,dist*Math.exp(e.deltaY*.001)));mark();clearTimeout(wheelSave);wheelSave=setTimeout(save,200);},{passive:false});
+    function theme(){const probe=document.createElement('span');probe.style.color='var(--viz-series-1)';root.appendChild(probe);const c=getComputedStyle(probe).color.match(/[\d.]+/g);probe.remove();if(c&&c.length>=3)accent=c.slice(0,3).map(Number).map(v=>v/255);dark=matchMedia('(prefers-color-scheme: dark)').matches;mark();}
+    new ResizeObserver(()=>{fit();}).observe(canvas);new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);
+    window.addEventListener('openai:set_globals',e=>{if(e.detail?.globals?.widgetState)restore(e.detail.globals.widgetState);});
+    theme();if(!restore(window.openai?.widgetState)){sync();update();}el('[data-loading]').hidden=true;
+    window.__fr1Preview={parts:parts.map(q=>({id:q.id,kind:q.p.kind,triangles:q.n/3})),getState:()=>({mode,view,selected,section,dist,visible:parts.filter(q=>q.visible).map(q=>q.id)}),draw:()=>draw(),bounds};
+  } catch(error){el('[data-loading]').hidden=true;el('[data-error]').hidden=false;el('[data-error]').textContent='The 3D preview could not load: '+error.message;console.error(error);}
+})();
+</script>

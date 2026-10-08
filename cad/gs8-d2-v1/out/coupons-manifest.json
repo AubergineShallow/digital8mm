@@ -1,0 +1,423 @@
+{
+ "revision": "GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)",
+ "producer": {
+  "script": "make_coupons.py",
+  "source_hashes": {
+   "layout.py": "a48df6678f8911eff62d855ed493cb6b3c65899b4b7518f352e348bc3efec439",
+   "d2_common.py": "6b3aeb4ef41c51d959be87820fd4b811d57bd5ad6d67370fc297103d168c6d05",
+   "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
+   "checks.py": "81e80adfdda93a5ef92b268deed2aa7b149d7caeea526e9eb5816ac0d3da2788",
+   "build_d2.py": "54e67f655b81c603be627a411b354191cf9b02a13b3630321b987fcd409fb233",
+   "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
+   "make_tables.py": "8cdebebca33a1d7a1b86f1a9b3a686bbb30f2f9a4bd8228448338b707ba164fa",
+   "SPEC.md": "189f5f006c47ad4d697440cc27c524eecc258effb8faff78b7b8d12ff5379c7c",
+   "FASTENER-POLICY.md": "fe2f4bbecb428f75ca032382babb3470e22699ba70f0b2f38a73cbb253e9ddde",
+   "printed_collar.py": "92fac260510ac00ff7937916b45d07f171ff5428d05e34014d3ec5768ca94c01",
+   "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
+   "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+   "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+   "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
+   "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+   "printed_tub.py": "8766c93f447e8e459c611a6290dbe695c2aa92a2e4c9a48824c723e43bf3ba5b",
+   "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
+   "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
+   "fonts/DejaVuSans-Bold.ttf": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890",
+   "fonts/LICENSE-DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
+  },
+  "generated_at": 1791335142.3296034
+ },
+ "note": "cut from the built parts; nothing printed or measured",
+ "coupons": [
+  {
+   "id": "pt_boss_post",
+   "face_down": "+Y",
+   "qty": 3,
+   "gate": "G-PT-1",
+   "note": "s_r post: pilot along print-up (strong case) (cut from panel)",
+   "valid": true,
+   "bbox": [
+    8.0,
+    8.0,
+    13.4
+   ],
+   "volume_mm3": 802.9,
+   "mass_g": 0.9,
+   "stl": "stl/coupons/pt_boss_post.stl",
+   "stl_sha256": "f594701a1b769c56eccba06da0b06999ce00bc4f73bb17ef2107b40f3a5e3a4f"
+  },
+  {
+   "id": "pt_boss_bottom",
+   "face_down": "+Y",
+   "qty": 3,
+   "gate": "G-PT-1",
+   "note": "s_b boss with its panel-wall patch: pilot horizontal in print (weak case) (cut from panel)",
+   "valid": true,
+   "bbox": [
+    9.0,
+    12.0,
+    10.9
+   ],
+   "volume_mm3": 889.2,
+   "mass_g": 1.0,
+   "stl": "stl/coupons/pt_boss_bottom.stl",
+   "stl_sha256": "6b17b9cf06526684946b22d05fc1a4bf3e01798891dba9bfbb23d3ac404f9d94"
+  },
+  {
+   "id": "board_edge_plate",
+   "face_down": "-Z",
+   "qty": 2,
+   "gate": "G-SNAP-2",
+   "note": "30 x 14 x 1.6 plate standing in for the encoder PCB edge",
+   "valid": true,
+   "bbox": [
+    30.0,
+    14.0,
+    1.6
+   ],
+   "volume_mm3": 672.0,
+   "mass_g": 0.7,
+   "stl": "stl/coupons/board_edge_plate.stl",
+   "stl_sha256": "bed6d4dad033621cc7aa05e3259d3ff2023c98f10c22cc2a9710e6ddd5f94c4f"
+  },
+  {
+   "id": "hood_hook",
+   "face_down": "+Z",
+   "qty": 1,
+   "gate": "G-SNAP-2",
+   "note": "hk1 with its band patch (cut from hood)",
+   "valid": true,
+   "bbox": [
+    14.0,
+    4.9,
+    13.2
+   ],
+   "volume_mm3": 332.4,
+   "mass_g": 0.4,
+   "stl": "stl/coupons/hood_hook.stl",
+   "stl_sha256": "91c43282e77a907ee58e9f804ea25929f672cda5b69e640e4116f8d3420951cb"
+  },
+  {
+   "id": "hood_ledge",
+   "face_down": "-Y",
+   "qty": 1,
+   "gate": "G-SNAP-2",
+   "note": "hk1 catch ledge with its right-wall patch and the dia 1.6 release hole (pin hold-open test) (cut from tub)",
+   "valid": true,
+   "bbox": [
+    14.0,
+    14.8,
+    3.3
+   ],
+   "volume_mm3": 519.1,
+   "mass_g": 0.6,
+   "stl": "stl/coupons/hood_ledge.stl",
+   "stl_sha256": "828f5415fcffe35e212b530c8a9d9ec20c79463183c111abbb72dc8cfe582875"
+  },
+  {
+   "id": "hood_hook_ret",
+   "face_down": "+Z",
+   "qty": 1,
+   "gate": "G-SNAP-2",
+   "note": "hk3 (45 deg return catch) with its band patch (cut from hood)",
+   "valid": true,
+   "bbox": [
+    5.5,
+    14.0,
+    13.2
+   ],
+   "volume_mm3": 351.6,
+   "mass_g": 0.4,
+   "stl": "stl/coupons/hood_hook_ret.stl",
+   "stl_sha256": "eb303c381b41da77fea8d10a697dd925a4ac85ce127d256562f769b0ae7190ed"
+  },
+  {
+   "id": "hood_ledge_ret",
+   "face_down": "-Y",
+   "qty": 1,
+   "gate": "G-SNAP-2",
+   "note": "hk3 sloped catch ledge with its front-wall patch (cut from tub)",
+   "valid": true,
+   "bbox": [
+    3.3,
+    14.8,
+    14.0
+   ],
+   "volume_mm3": 526.0,
+   "mass_g": 0.6,
+   "stl": "stl/coupons/hood_ledge_ret.stl",
+   "stl_sha256": "29a37dd4a4cb2925e51fe323b4b5462d72b76f895ba88a8a338c3214ba671d9d"
+  },
+  {
+   "id": "encoder_cradle_hook",
+   "face_down": "+Y",
+   "qty": 1,
+   "gate": "G-SNAP-2",
+   "note": "top cradle hook with its panel-wall patch; test on the 1.6 plate (cut from panel)",
+   "valid": true,
+   "bbox": [
+    12.0,
+    4.6,
+    12.7
+   ],
+   "volume_mm3": 287.0,
+   "mass_g": 0.3,
+   "stl": "stl/coupons/encoder_cradle_hook.stl",
+   "stl_sha256": "51b17b74d70d99d4b1e868a8612a466640a9ffa96837b693267c63a58b60a44d"
+  },
+  {
+   "id": "tongue",
+   "face_down": "-Y",
+   "qty": 1,
+   "gate": "J4 record",
+   "note": "tongue_f, 20 mm incl. the -Y wing (needs its paint-on support, as in the tub) (cut from tub)",
+   "valid": true,
+   "bbox": [
+    12.0,
+    6.2,
+    23.0
+   ],
+   "volume_mm3": 1200.0,
+   "mass_g": 1.3,
+   "stl": "stl/coupons/tongue.stl",
+   "stl_sha256": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631"
+  },
+  {
+   "id": "keyhole_slot",
+   "face_down": "+Z",
+   "qty": 1,
+   "gate": "J4 record",
+   "note": "base window + pocket for tongue_f, 20 mm: drop in, slide 10, no rock (cut from base_grip)",
+   "valid": true,
+   "bbox": [
+    26.0,
+    23.0,
+    6.0
+   ],
+   "volume_mm3": 2086.9,
+   "mass_g": 2.2,
+   "stl": "stl/coupons/keyhole_slot.stl",
+   "stl_sha256": "088a71ae94cd2842c0e0f7c49f5ba82739a83e821de5929a0d83572ee2733dc6"
+  },
+  {
+   "id": "base_edge_base",
+   "face_down": "+Z",
+   "qty": 1,
+   "gate": "G-PANEL-1",
+   "note": "base edge at s_b1 (counterbore, plain side face); stack with base_edge_tub + base_edge_panel (cut from base_grip)",
+   "valid": true,
+   "bbox": [
+    16.0,
+    17.2,
+    8.0
+   ],
+   "volume_mm3": 1949.7,
+   "mass_g": 2.1,
+   "stl": "stl/coupons/base_edge_base.stl",
+   "stl_sha256": "097c1a8307ce52fafdd991a0aeed91f0727bbfd8b002a44ebb68c33c43818a6e"
+  },
+  {
+   "id": "base_edge_tub",
+   "face_down": "-Y",
+   "qty": 1,
+   "gate": "G-PANEL-1",
+   "note": "tub floor + lip with the boss_b1 notch; the panel coupon sits on its end face (cut from tub)",
+   "valid": true,
+   "bbox": [
+    16.0,
+    8.0,
+    17.0
+   ],
+   "volume_mm3": 903.4,
+   "mass_g": 1.0,
+   "stl": "stl/coupons/base_edge_tub.stl",
+   "stl_sha256": "efa444108fb49d8aa4d1205a175f11062cde3baf36ee73931086dad1ad60250e"
+  },
+  {
+   "id": "base_edge_panel",
+   "face_down": "+Y",
+   "qty": 1,
+   "gate": "G-PANEL-1, G-PT-1",
+   "note": "boss_b1 + notch tab + wall patch: one PT 3.0 x 12 through the 3 coupons; tab flush in the notch (seam 0.3), 5 open/close cycles with the PH1 only (cut from panel)",
+   "valid": true,
+   "bbox": [
+    16.0,
+    13.4,
+    10.9
+   ],
+   "volume_mm3": 1076.1,
+   "mass_g": 1.2,
+   "stl": "stl/coupons/base_edge_panel.stl",
+   "stl_sha256": "981d5ee76f0ff26676490610a1446f3b5fc66e1b6a7877cf7237c1620590133e"
+  },
+  {
+   "id": "cap_retention_grip",
+   "face_down": "+Z",
+   "qty": 1,
+   "gate": "G-CAP-1",
+   "note": "grip foot: cap grooves, 45 deg lips, detent dimples, heel strap bar (cut from base_grip)",
+   "valid": true,
+   "bbox": [
+    48.0,
+    30.1,
+    10.0
+   ],
+   "volume_mm3": 2878.7,
+   "mass_g": 3.1,
+   "stl": "stl/coupons/cap_retention_grip.stl",
+   "stl_sha256": "8c24c025bd2af8bda0c06fd801fc988c13c02d2c5eb20dfe94b244ea19bd4312"
+  },
+  {
+   "id": "cap_retention_cap",
+   "face_down": "-Z",
+   "qty": 1,
+   "gate": "G-CAP-1",
+   "note": "the whole cap: 20 slide cycles, detent click and hold, pull-down 20 N on the keys (cut from cap)",
+   "valid": true,
+   "bbox": [
+    48.0,
+    30.0,
+    10.2
+   ],
+   "volume_mm3": 6739.3,
+   "mass_g": 7.2,
+   "stl": "stl/coupons/cap_retention_cap.stl",
+   "stl_sha256": "a79d99513c6a5929ed37b7f51d5e5aa15c5153d1df6890273aca1673df65b326"
+  },
+  {
+   "id": "evf_stop_tub",
+   "face_down": "-Y",
+   "qty": 1,
+   "gate": "G-EVF-2, G-EVF-1",
+   "note": "rear-right corner: rear wall, EVF board rails, OLED cell; its rear-wall end face registers the panel coupon (cut from tub)",
+   "valid": true,
+   "bbox": [
+    20.0,
+    36.0,
+    67.2
+   ],
+   "volume_mm3": 10553.9,
+   "mass_g": 11.3,
+   "stl": "stl/coupons/evf_stop_tub.stl",
+   "stl_sha256": "e8ff7144c47547a18b1484e1795958db1356f4b0262d708637ff3574e8bde161"
+  },
+  {
+   "id": "evf_stop_panel",
+   "face_down": "+Y",
+   "qty": 1,
+   "gate": "G-EVF-2, G-EVF-1",
+   "note": "rear end land + EVF cap clamp + board +Y stop rib: with the real board, gap 0.1-0.5 at the stop, no shuttle on the HDMI plug; spigot clamp on the real eyepiece (cut from panel)",
+   "valid": true,
+   "bbox": [
+    18.7,
+    36.0,
+    7.5
+   ],
+   "volume_mm3": 2786.7,
+   "mass_g": 3.0,
+   "stl": "stl/coupons/evf_stop_panel.stl",
+   "stl_sha256": "44fab08048b72c65614809f91931987a0a98cb14f7133cc85e7e12422d72c48e"
+  },
+  {
+   "id": "collar_tub_front",
+   "face_down": "-Y",
+   "qty": 1,
+   "gate": "G-COL-1",
+   "note": "tub front wall: lip, BFAR counterbore, the 3 M3 insert bosses (TL, TR, LL) and the LR foot land; press 3 short inserts (D2-35) as in the build (cut from tub)",
+   "valid": true,
+   "bbox": [
+    5.5,
+    67.3,
+    56.2
+   ],
+   "volume_mm3": 7116.0,
+   "mass_g": 7.6,
+   "stl": "stl/coupons/collar_tub_front.stl",
+   "stl_sha256": "afc3dff4f1089f0221fcf8d3c0b6c471961066955bc2e3e2824de6e556bc9eae"
+  },
+  {
+   "id": "collar_hood_plate",
+   "face_down": "+Z",
+   "qty": 1,
+   "gate": "G-COL-1",
+   "note": "hood front plate with the 4 dia 8.6 foot holes and the lens bore: stack it on the tub coupon, the collar feet pass through it (>= 0.3) onto the tub face (cut from hood)",
+   "valid": true,
+   "bbox": [
+    2.5,
+    57.0,
+    67.0
+   ],
+   "volume_mm3": 6212.1,
+   "mass_g": 6.6,
+   "stl": "stl/coupons/collar_hood_plate.stl",
+   "stl_sha256": "0778c8f6e73d781dd057fe1ade9bca948ca8076f6d2e08a7a48b6c9916471cf0"
+  },
+  {
+   "id": "collar_part",
+   "face_down": "+X",
+   "qty": 1,
+   "gate": "G-COL-1",
+   "note": "the whole lens collar (default lens): band slides in with s_c4 loose; 0.2 N m pinch, then roll 1.0 N m, 50 N axial, 3x lens mass at the CoM, 24 h at 50 C, 20 pinch cycles (MEASURED-PARTS G-COL-1); Clear the three anchor holes to 3.4 mm by hand after printing; remove loose debris; do not alter washer seat planes, cone or foot datums. Confirm flat washers at G-COL-1. (cut from lens_collar)",
+   "valid": true,
+   "bbox": [
+    65.5,
+    68.0,
+    11.3
+   ],
+   "volume_mm3": 15714.5,
+   "mass_g": 16.8,
+   "stl": "stl/coupons/collar_part.stl",
+   "stl_sha256": "db2ca3501ab69101976abb68b4b6eeeda53a65f422179080f35936ecc240914f"
+  },
+  {
+   "id": "knob_bore_ladder_enc",
+   "face_down": "-Z",
+   "qty": 1,
+   "gate": "G-KNOB (sets FDM KNOB_BORE_OFFSET)",
+   "note": "D 6.00/4.50; offsets -0.05, 0, +0.05, +0.10, +0.15 radial = 1..5 rim notches",
+   "valid": true,
+   "bbox": [
+    82.0,
+    14.1,
+    6.1
+   ],
+   "volume_mm3": 3897.3,
+   "mass_g": 4.2,
+   "stl": "stl/coupons/knob_bore_ladder_enc.stl",
+   "stl_sha256": "78504dd0cf4a90f9e6bf25b3d70f36137585fb47fc7f0e40987fb5df336fa524"
+  },
+  {
+   "id": "knob_bore_ladder_sw",
+   "face_down": "-Z",
+   "qty": 1,
+   "gate": "G-KNOB (sets FDM KNOB_BORE_OFFSET)",
+   "note": "D 6.35/4.80; offsets -0.05, 0, +0.05, +0.10, +0.15 radial = 1..5 rim notches",
+   "valid": true,
+   "bbox": [
+    82.0,
+    14.1,
+    6.1
+   ],
+   "volume_mm3": 3807.6,
+   "mass_g": 4.1,
+   "stl": "stl/coupons/knob_bore_ladder_sw.stl",
+   "stl_sha256": "8402eb4725b6dde9f1f2e2ffca24efb7a82fc2324a5365ac85ce6d5a968c3059"
+  },
+  {
+   "id": "clearance_comb",
+   "face_down": "-Z",
+   "qty": 1,
+   "gate": "profile tuning",
+   "note": "pegs 5 x 5 and holes +0.15 / +0.25 / +0.30 per side (1-3 marks)",
+   "valid": true,
+   "bbox": [
+    30.0,
+    20.0,
+    8.0
+   ],
+   "volume_mm3": 1375.5,
+   "mass_g": 1.5,
+   "stl": "stl/coupons/clearance_comb.stl",
+   "stl_sha256": "6670764c927f639e51ffa3c7b7c21cb046dbf7cec8dd1363717382cd1f10bd92"
+  }
+ ]
+}

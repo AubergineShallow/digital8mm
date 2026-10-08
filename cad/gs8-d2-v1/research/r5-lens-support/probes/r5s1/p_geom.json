@@ -1,0 +1,429 @@
+{
+ "revision": "r5 step 1",
+ "s": {
+  "nom": 1.25,
+  "range": [
+   0.0,
+   3.0
+  ]
+ },
+ "insert_bosses": {
+  "pi_in_sweep": {
+   "max_mm3": 0.0,
+   "at": null
+  },
+  "cots_boxes": {
+   "pi5": {
+    "TL": 0.0,
+    "TR": 0.0,
+    "LL": 0.0
+   },
+   "cooler": {
+    "TL": 0.0,
+    "TR": 0.0,
+    "LL": 0.0
+   },
+   "x1203": {
+    "TL": 0.0,
+    "TR": 0.0,
+    "LL": 0.0
+   },
+   "x1203_kit": {
+    "TL": 0.0,
+    "TR": 0.0,
+    "LL": 0.0
+   }
+  },
+  "cots_box_gap": {
+   "pi5": {
+    "TL": 50.4,
+    "TR": 50.4,
+    "LL": 0.3
+   },
+   "cooler": {
+    "TL": 50.236,
+    "TR": 50.236,
+    "LL": 7.302
+   },
+   "x1203": {
+    "TL": 70.5,
+    "TR": 70.5,
+    "LL": 16.457
+   },
+   "x1203_kit": {
+    "TL": 64.65,
+    "TR": 64.65,
+    "LL": 11.11
+   }
+  },
+  "hood_on_sweep": {
+   "max_mm3": 0.0,
+   "at": null
+  },
+  "hood_gap_final": 2.4,
+  "camera_in_sweep": {
+   "0.0": {
+    "max_mm3": 0.0,
+    "at": null
+   },
+   "1.25": {
+    "max_mm3": 0.0,
+    "at": null
+   },
+   "3.0": {
+    "max_mm3": 0.0,
+    "at": null
+   }
+  }
+ },
+ "hood_hole_rings": {
+  "TL": {
+   "min_mm": 2.35,
+   "at_x_deg_r": [
+    -0.1,
+    90,
+    4.3
+   ]
+  },
+  "TR": {
+   "min_mm": 2.35,
+   "at_x_deg_r": [
+    -0.1,
+    90,
+    4.3
+   ]
+  },
+  "LL": {
+   "min_mm": 1.85,
+   "at_x_deg_r": [
+    -0.1,
+    0,
+    4.3
+   ]
+  },
+  "LR": {
+   "min_mm": 2.3,
+   "at_x_deg_r": [
+    -2.4,
+    38,
+    4.3
+   ]
+  }
+ },
+ "collar_vs_thumb_keepouts": {
+  "ko_lens_thumb_focus": {
+   "overlap": 0.0,
+   "gap": 4.5
+  },
+  "ko_lens_thumb_iris": {
+   "overlap": 0.0,
+   "gap": 23.1
+  }
+ },
+ "camera_float": {
+  "0.0": {
+   "body": {
+    "tub": {
+     "ov": 0.0,
+     "gap": 0.4
+    },
+    "hood": {
+     "ov": 0.0,
+     "gap": 0.8
+    },
+    "panel": {
+     "ov": 0.0,
+     "gap": 3.5
+    },
+    "collar_kowa_lm6hc": {
+     "ov": 0.0,
+     "gap": 4.385
+    },
+    "pi5": {
+     "ov": 0.0,
+     "gap": 13.828
+    },
+    "cooler": {
+     "ov": 0.0,
+     "gap": 9.75
+    }
+   },
+   "bfar": {
+    "tub": {
+     "ov": 0.0,
+     "gap": 0.5
+    },
+    "hood": {
+     "ov": 0.0,
+     "gap": 1.916
+    },
+    "panel": {
+     "ov": 0.0,
+     "gap": 6.0
+    },
+    "collar_kowa_lm6hc": {
+     "ov": 0.0,
+     "gap": 3.483
+    },
+    "pi5": {
+     "ov": 0.0,
+     "gap": 19.792
+    },
+    "cooler": {
+     "ov": 0.0,
+     "gap": 12.147
+    }
+   }
+  },
+  "1.25": {
+   "body": {
+    "tub": {
+     "ov": 0.0,
+     "gap": 1.65
+    },
+    "hood": {
+     "ov": 0.0,
+     "gap": 0.8
+    },
+    "panel": {
+     "ov": 0.0,
+     "gap": 2.25
+    },
+    "collar_kowa_lm6hc": {
+     "ov": 0.0,
+     "gap": 5.296
+    },
+    "pi5": {
+     "ov": 0.0,
+     "gap": 13.828
+    },
+    "cooler": {
+     "ov": 0.0,
+     "gap": 9.75
+    }
+   },
+   "bfar": {
+    "tub": {
+     "ov": 0.0,
+     "gap": 0.5
+    },
+    "hood": {
+     "ov": 0.0,
+     "gap": 1.916
+    },
+    "panel": {
+     "ov": 0.0,
+     "gap": 6.0
+    },
+    "collar_kowa_lm6hc": {
+     "ov": 0.0,
+     "gap": 3.483
+    },
+    "pi5": {
+     "ov": 0.0,
+     "gap": 19.792
+    },
+    "cooler": {
+     "ov": 0.0,
+     "gap": 12.147
+    }
+   }
+  },
+  "3.0": {
+   "body": {
+    "tub": {
+     "ov": 0.0,
+     "gap": 3.4
+    },
+    "hood": {
+     "ov": 0.0,
+     "gap": 0.8
+    },
+    "panel": {
+     "ov": 0.0,
+     "gap": 0.5
+    },
+    "collar_kowa_lm6hc": {
+     "ov": 0.0,
+     "gap": 6.755
+    },
+    "pi5": {
+     "ov": 0.0,
+     "gap": 13.828
+    },
+    "cooler": {
+     "ov": 0.0,
+     "gap": 9.75
+    }
+   },
+   "bfar": {
+    "tub": {
+     "ov": 0.0,
+     "gap": 0.5
+    },
+    "hood": {
+     "ov": 0.0,
+     "gap": 1.916
+    },
+    "panel": {
+     "ov": 0.0,
+     "gap": 6.0
+    },
+    "collar_kowa_lm6hc": {
+     "ov": 0.0,
+     "gap": 3.483
+    },
+    "pi5": {
+     "ov": 0.0,
+     "gap": 19.792
+    },
+    "cooler": {
+     "ov": 0.0,
+     "gap": 12.147
+    }
+   }
+  }
+ },
+ "adapter": {
+  "tub": {
+   "ov": 0.0,
+   "gap": 0.825
+  },
+  "hood": {
+   "ov": 0.0,
+   "gap": 2.875
+  },
+  "panel": {
+   "ov": 0.0,
+   "gap": 8.677
+  },
+  "collar_kowa_lm6hc": {
+   "ov": 0.0,
+   "gap": 3.325
+  },
+  "collar_fujinon_hf6xa": {
+   "ov": 0.0,
+   "gap": 1.925
+  },
+  "pi5": {
+   "ov": 0.0,
+   "gap": 22.446
+  },
+  "cooler": {
+   "ov": 0.0,
+   "gap": 15.021
+  }
+ },
+ "lens": {
+  "kowa_lm6hc": {
+   "tub": {
+    "ov": 0.0,
+    "gap": 3.331
+   },
+   "hood": {
+    "ov": 0.0,
+    "gap": 2.571
+   },
+   "panel": {
+    "ov": 0.0,
+    "gap": 8.793
+   },
+   "collar_kowa_lm6hc": {
+    "ov": 0.0,
+    "gap": 0.0
+   },
+   "pi5": {
+    "ov": 0.0,
+    "gap": 18.889
+   },
+   "cooler": {
+    "ov": 0.0,
+    "gap": 15.126
+   }
+  },
+  "fujinon_hf6xa": {
+   "tub": {
+    "ov": 0.0,
+    "gap": 3.3
+   },
+   "hood": {
+    "ov": 0.0,
+    "gap": 1.387
+   },
+   "panel": {
+    "ov": 0.0,
+    "gap": 9.187
+   },
+   "collar_fujinon_hf6xa": {
+    "ov": 0.0,
+    "gap": 0.0
+   },
+   "pi5": {
+    "ov": 0.0,
+    "gap": 20.149
+   },
+   "cooler": {
+    "ov": 0.0,
+    "gap": 15.892
+   }
+  }
+ },
+ "lens_vs_camera_nom": {
+  "kowa_lm6hc": {
+   "ov": 0.0
+  },
+  "fujinon_hf6xa": {
+   "ov": 0.0
+  }
+ },
+ "stack": {
+  "bfar_face": -4.4,
+  "adapter_x": [
+   -4.4,
+   0.6
+  ],
+  "c_flange": 0.5999999999999996,
+  "c_minus_bfar": 5.0,
+  "collars": {
+   "kowa_lm6hc": {
+    "lens": "kowa_lm6hc",
+    "seat_x": 2.8,
+    "seat_r": 20.7,
+    "bore_r": 21.15,
+    "cone_x0": 0.8,
+    "cone_r0": 18.7,
+    "cone_x1": 3.25,
+    "rear_x": 0.3,
+    "front_x": 8.6,
+    "band": [
+     2.8,
+     8.2
+    ],
+    "band_d": 42.0,
+    "status": "drawing",
+    "first_moving_x": 11.2,
+    "rear_step_r": 15.75
+   },
+   "fujinon_hf6xa": {
+    "lens": "fujinon_hf6xa",
+    "seat_x": 2.6,
+    "seat_r": 19.2,
+    "bore_r": 19.65,
+    "cone_x0": 0.7,
+    "cone_r0": 17.3,
+    "cone_x1": 3.05,
+    "rear_x": 0.3,
+    "front_x": 8.6,
+    "band": [
+     2.6,
+     8.4
+    ],
+    "band_d": 39.0,
+    "status": "assumed",
+    "first_moving_x": 10.6,
+    "rear_step_r": 17.0
+   }
+  }
+ },
+ "seconds": 525.1
+}
