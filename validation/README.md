@@ -2,6 +2,15 @@
 
 These records describe computational/host checks only. All 53 physical gates remain open.
 
+**r6 (2026-10-08).** `rebuilt-cad-integrity.json` is the final-release audit of the r6 build (Kowa 16:05:33 +0800 with
+the Fujinon alternate): pass; sources 20/20, outputs 86/86, gate docs 4/4; 28 categories (27 pass + `mass_com`
+report-only). Tests after that build:
+- 82 custom regression cases (65 + 17 r6 planted-fault cases);
+- 73 focused unittest cases, OK with 4 POSIX-only skips;
+- `test_collar.py` both lenses, PASS in 151.8 s.
+
+The records below describe the cloud-polish run that r6 builds on.
+
 - `cad-kowa-integrity.json`: final Kowa source/output/gate-doc, mesh, STEP and producer-evidence audit.
 - `cad-fujinon-integrity.json`: final Fujinon audit.
 - `software-verification.json`: package source/test hashes, 256 EVF tests, post/recorder/model checks and wheel/source-package hashes. Its `sources_sha256` paths are relative to `software/gs8-camera-evf/`; `navigation_docs_sha256` paths are relative to the project root.

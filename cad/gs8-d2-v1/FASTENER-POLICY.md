@@ -183,13 +183,22 @@ insert in the normal build. Everywhere else the PT rules of A-E stand unchanged.
 - s_c4 sits at x 4.7 (r5 step 2: at x 4.8 the collar's 0.6 bed chamfer left 1.585 of wall next to the lug insert;
   at 4.7 the walls are 1.70 and 1.685).
 - **Setting the inserts** (ASSEMBLY B1, before step 3 for the tub, any time before step 7 for the collar): the
-  soldering iron with an M3 heat-set tip (BOM D2-74), pressed straight along the bore axis until the insert stands
-  0.1 below the face; let it cool before any load. The tub bosses are reached from the front with the tub empty; the
-  lug insert goes in from below the lower lug.
+  soldering iron with an M3 heat-set tip for that iron's tip system (BOM D2-74; r6, audit B-12), pressed straight
+  along the bore axis until the insert stands 0.1 below the face; let it cool before any load. The tub bosses are
+  reached from the front with the tub empty. r6 (audit B-14): back each boss with a block through the open left side,
+  because it hangs behind a 2.5 mm wall. The lug insert goes in from below the lower lug.
+- **Torque tool (r6, audit B-6 / X5):** every M3 here and every PT screw is set with the adjustable torque
+  screwdriver (BOM D2-77, ASSEMBLY tool 13), never by feel. A firm hand on a plain PH1 gives 0.4-0.6 N m, which is
+  2.7-4 times the 0.15 anchor cap: about 450-1000 N of preload on a short insert in ASA (T / (K d), K 0.2-0.3).
+- **Bore and tip (r6, audit B-3):** the tub insert bores run to x -7.0 (depth 4.3, was 4.2). The LL boss face lies
+  partly on the tub's 5 mm corner radius, so one probe line read 4.184 against the 4.2 need. The 3.4 clearance
+  continues through each boss end (x -7.6), so an M3 x 10 at the long end of its ISO 4759-1 js15 tolerance (+0.29)
+  ends in air: it cannot bottom, and no length check at B1 is needed.
 - **Computed measurements** (`checks.check_inserts`, release build): bore dia 4.0 +-0.1, open at one end; depth from
-  the boss face >= insert + 0.2 (s_c1 / s_c2 / s_c3 4.2; s_c4 6.0); wall >= 1.6 (s_c1 / s_c2 2.0, s_c3 1.706, s_c4
-  1.685); engagement >= 3.0 (3.9 / 5.3); the tip and tip + 0.2 in a void (no bottoming); >= 1.6 of material under
-  each washer.
+  the boss face >= insert + 0.2 on every probe line (r6: the per-line depth was compared with insert + flush only;
+  s_c1 / s_c2 / s_c3 4.3; s_c4 6.0); wall >= 1.6 (s_c1 / s_c2 2.0, s_c3 1.706, s_c4 1.685); engagement >= 3.0
+  (3.9 / 5.3); the tip, tip + 0.2 and (r6) tip + the screw's length tolerance in a void (no bottoming); >= 1.6 of
+  material under each washer.
 - **Provisional anchor torque:** s_c1..s_c3 are capped at 0.15 N m in this fork, reduced from r5's 0.25. The simple T/(K d) estimate with K = 0.2..0.3 gives 167..250 N preload, not measured insert capacity. The nominal 100 N relaxed anchor allowance remains an assumption until G-COL-1 tests the actual short insert, print orientation and material. Never interpret the computed service-load screen as a pull-out test.
 - **Not measured:** the pull-out and torque-out of a short insert in printed ASA, the pinch force at 0.2 N m and its
   relaxation, and the anchor preload. G-COL-1 (SPEC s10) measures them on the collar coupons and replaces the

@@ -385,6 +385,30 @@ FACE_DOWN_ROT = {'-Z': (0, 0, 0), '+Z': (180, 0, 0), '+Y': (-90, 0, 0), '-Y': (9
                  '+X': (0, 90, 0), '-X': (0, -90, 0)}     # (rx, ry, rz) deg applied in x, y, z order
 
 
+def print_pose_transform(shape, face_down):
+    """r6 (print_overhang zones): (R 3x3 nested lists, t) with p_print = R p + t, the map to_print_pose applies. The
+    rotations are quarter turns, so a box maps to a box (map_box)."""
+    R = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+    for ang, ax in zip(FACE_DOWN_ROT[face_down], range(3)):
+        if ang:
+            c, s = round(math.cos(math.radians(ang))), round(math.sin(math.radians(ang)))
+            M = {0: [[1, 0, 0], [0, c, -s], [0, s, c]], 1: [[c, 0, s], [0, 1, 0], [-s, 0, c]],
+                 2: [[c, -s, 0], [s, c, 0], [0, 0, 1]]}[ax]
+            R = [[sum(M[i][k] * R[k][j] for k in range(3)) for j in range(3)] for i in range(3)]
+    bb = shape.BoundingBox()
+    corners = [(x, y, z) for x in (bb.xmin, bb.xmax) for y in (bb.ymin, bb.ymax) for z in (bb.zmin, bb.zmax)]
+    rot = [[sum(R[i][k] * p[k] for k in range(3)) for i in range(3)] for p in corners]
+    t = [-min(p[i] for p in rot) for i in range(3)]
+    return R, t
+
+
+def map_box(box, R, t):
+    """An assembly-frame box (B dict) in the print frame as (x0, x1, y0, y1, z0, z1)."""
+    pts = [[sum(R[i][k] * p[k] for k in range(3)) + t[i] for i in range(3)]
+           for p in [(x, y, z) for x in box['x'] for y in box['y'] for z in box['z']]]
+    return tuple(v for i in range(3) for v in (min(p[i] for p in pts), max(p[i] for p in pts)))
+
+
 def to_print_pose(shape, face_down):
     """Rotate a solid so `face_down` points -Z, then move it onto z = 0 at the origin (for STL / bed checks)."""
     rx, ry, rz = FACE_DOWN_ROT[face_down]

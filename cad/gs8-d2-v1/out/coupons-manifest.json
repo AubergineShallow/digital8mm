@@ -1,30 +1,30 @@
 {
- "revision": "GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)",
+ "revision": "GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, minor findings)",
  "producer": {
   "script": "make_coupons.py",
   "source_hashes": {
-   "layout.py": "a48df6678f8911eff62d855ed493cb6b3c65899b4b7518f352e348bc3efec439",
-   "d2_common.py": "6b3aeb4ef41c51d959be87820fd4b811d57bd5ad6d67370fc297103d168c6d05",
+   "layout.py": "3a64c39944b959010a81046a942731a6c3813005e32091e4676a43e46a796f4e",
+   "d2_common.py": "69727dbd58cf0c0fbce48a0b44083a7ba4ba386b025a1dc132b1d4d431cf4a8e",
    "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
-   "checks.py": "81e80adfdda93a5ef92b268deed2aa7b149d7caeea526e9eb5816ac0d3da2788",
-   "build_d2.py": "54e67f655b81c603be627a411b354191cf9b02a13b3630321b987fcd409fb233",
+   "checks.py": "3dcda60e6a0303a88290b224634203b4511f8e4cda846b7a01ad2a3ca74725bf",
+   "build_d2.py": "bfb40ffe76253305e7d40a82b84ad3b197d792fd0897e1ffe09869bc59e43203",
    "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
-   "make_tables.py": "8cdebebca33a1d7a1b86f1a9b3a686bbb30f2f9a4bd8228448338b707ba164fa",
-   "SPEC.md": "189f5f006c47ad4d697440cc27c524eecc258effb8faff78b7b8d12ff5379c7c",
-   "FASTENER-POLICY.md": "fe2f4bbecb428f75ca032382babb3470e22699ba70f0b2f38a73cbb253e9ddde",
-   "printed_collar.py": "92fac260510ac00ff7937916b45d07f171ff5428d05e34014d3ec5768ca94c01",
+   "make_tables.py": "9b4b075e5395ffc8b692ffd69651aa909314cd592da3bbb61bd4590f4580bd1b",
+   "SPEC.md": "1e4f643e062c81263ffde801e05e2be877a7c1273608ae3a4160583ce7acd369",
+   "FASTENER-POLICY.md": "407d67703fd2c7305b5e742d5ad844cce406e73e3382d0955572eb3e1db96163",
+   "printed_collar.py": "fbb8a356db82cd10a496b4864baa95930374ffc519578e373f38e4019af7afe0",
    "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
    "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
    "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
    "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
    "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
-   "printed_tub.py": "8766c93f447e8e459c611a6290dbe695c2aa92a2e4c9a48824c723e43bf3ba5b",
+   "printed_tub.py": "c14268a803dbc5463f841cfd0e5df928ee844bc4f7a1b5e90590247da305963e",
    "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
    "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
    "fonts/DejaVuSans-Bold.ttf": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890",
    "fonts/LICENSE-DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
   },
-  "generated_at": 1791335142.3296034
+  "generated_at": 1791445387.4324281
  },
  "note": "cut from the built parts; nothing printed or measured",
  "coupons": [
@@ -329,10 +329,10 @@
     67.3,
     56.2
    ],
-   "volume_mm3": 7116.0,
+   "volume_mm3": 7115.0,
    "mass_g": 7.6,
    "stl": "stl/coupons/collar_tub_front.stl",
-   "stl_sha256": "afc3dff4f1089f0221fcf8d3c0b6c471961066955bc2e3e2824de6e556bc9eae"
+   "stl_sha256": "5697ee6556417d135c2100da492a37df1334922922ec96e5e9cc438e3f8d7e57"
   },
   {
    "id": "collar_hood_plate",
@@ -359,14 +359,14 @@
    "note": "the whole lens collar (default lens): band slides in with s_c4 loose; 0.2 N m pinch, then roll 1.0 N m, 50 N axial, 3x lens mass at the CoM, 24 h at 50 C, 20 pinch cycles (MEASURED-PARTS G-COL-1); Clear the three anchor holes to 3.4 mm by hand after printing; remove loose debris; do not alter washer seat planes, cone or foot datums. Confirm flat washers at G-COL-1. (cut from lens_collar)",
    "valid": true,
    "bbox": [
-    65.5,
-    68.0,
+    66.1,
+    68.6,
     11.3
    ],
-   "volume_mm3": 15714.5,
-   "mass_g": 16.8,
+   "volume_mm3": 16148.3,
+   "mass_g": 17.3,
    "stl": "stl/coupons/collar_part.stl",
-   "stl_sha256": "db2ca3501ab69101976abb68b4b6eeeda53a65f422179080f35936ecc240914f"
+   "stl_sha256": "0aa42112a4d4fa198b84e6a5e254b5e013ccc6359d8a7ce403f9db4393300d34"
   },
   {
    "id": "knob_bore_ladder_enc",

@@ -402,6 +402,59 @@ def blk_beds():
     return '\n'.join(rows)
 
 
+CHECKSJSON_CANDIDATES = ['exports/checks.json', 'out/checks.json']
+
+
+def blk_order():
+    """r6 (audit 2026-10-06 M2): PRINT-GUIDE s7 from layout.PRINT_PREREQS / COUPON_PREREQS / PRINT_SEQUENCE and the
+    build receipt's print_release (which parts the recorded evidence releases now)."""
+    _, rec = _find(CHECKS_CANDIDATES)
+    rel = (rec or {}).get('print_release') or {}
+    prel, crel = rel.get('parts') or {}, rel.get('coupon_gates') or {}
+
+    def state(v):
+        if not v:
+            return 'not built'
+        return 'released' if v.get('status') == 'released' else 'blocked (%d of %d open)' % (
+            len(v.get('missing') or []), len(v.get('print_after') or []))
+    rows = ['| Order | What | Print only after a current recorded pass of | Now |', '|---|---|---|---|',
+            '| 1 | Calibration and fit coupons (s6, all except the 3 G-COL-1 coupons) | nothing: print them first, in '
+            'parallel with the bench measurements | released |',
+            '| 2 | Bench measurements, no printing (ASSEMBLY B0, MEASURED-PARTS): MP-CAM with the lens (G-CAM-1, '
+            'G-LENS), MP-PACK, MP-RUN, MP-X1203, MP-HDMI, MP-EVF, MP-ENC, MP-SW, MP-STICK, MP-FPC | update `layout.py` '
+            'with any measured difference, rebuild and rerun the release sequence before order 3 | - |']
+    for g, gates in L.COUPON_PREREQS.items():
+        rows.append('| 3 | %s coupons (`collar_tub_front`, `collar_hood_plate`, `collar_part`) and the centring '
+                    'gauge (`stl/tools/collar_gauge.stl`) | %s | %s |' % (g, ', '.join(gates), state(crel.get(g))))
+    for n, pid in enumerate(L.PRINT_SEQUENCE, 4):
+        rows.append('| %d | `%s` | %s | %s |' % (n, pid, ', '.join(L.PRINT_PREREQS.get(pid, ())) or 'nothing',
+                                                state(prel.get(pid))))
+    gates = sorted({g for v in list(L.PRINT_PREREQS.values()) + list(L.COUPON_PREREQS.values()) for g in v})
+    rows += ['', '| Gate | What it fixes before printing |', '|---|---|']
+    rows += ['| %s | %s |' % (g, L.PRINT_PREREQ_WHY.get(g, '')) for g in gates]
+    return '\n'.join(rows)
+
+
+def blk_orientation():
+    """r6: PRINT-GUIDE s3 head: the settled orientation of every part (layout.PRINT_ORIENTATION_WHY) with the computed
+    print_overhang result of the last build (checks.json)."""
+    _, ck = _find(CHECKSJSON_CANDIDATES)
+    res = {r.get('part'): r for r in ((ck or {}).get('results') or {}).get('print_overhang') or []}
+    rows = ['| Part | Face down | Why this face | Computed (print_overhang) | Bridges: longest span (mm) | Declared supports |',
+            '|---|---|---|---|---|---|']
+    for pid in list(L.PARTS) + ['collar_gauge']:
+        r = res.get(pid) or {}
+        fd = L.PARTS[pid]['face_down'] if pid in L.PARTS else L.COLLAR['gauge']['face_down']
+        why = L.PRINT_ORIENTATION_WHY.get(pid, 'assembly tool: rear end down, both cones widen upward at 45 deg')
+        sup = ', '.join('`%s`' % z for z in sorted(r.get('supports_used') or {})) or 'none'
+        span = r.get('longest_bridge_mm')
+        hole = r.get('hole_edge_bridges')
+        rows.append('| `%s` | %s | %s | %s | %s | %s |' % (
+            pid, fd, why, r.get('status', 'not built'),
+            '-' if not span else ('%.1f%s' % (span, ' (%d around a hole)' % hole if hole else '')), sup))
+    return '\n'.join(rows)
+
+
 def _kind_of(s):
     """r5: (kind label, drive, torque text) per SCREWS row: PT (thread-forming, FASTENER-POLICY C) or M3 (ISO 7045 into
     a heat-set insert, FASTENER-POLICY I, its own torque)."""
@@ -799,7 +852,9 @@ def lint_selftest():
     return miss
 
 
-BLOCKS = {'wiring': {'cables': blk_cables, 'plugs': blk_plugs, 'header': blk_header}, 'print': {'print': blk_print, 'beds': blk_beds, 'engrave': blk_engrave},
+BLOCKS = {'wiring': {'cables': blk_cables, 'plugs': blk_plugs, 'header': blk_header},
+          'print': {'print': blk_print, 'beds': blk_beds, 'engrave': blk_engrave, 'orientation': blk_orientation,
+                    'order': blk_order},
           'assembly': {'steps': blk_steps, 'screws': blk_screws},
           'design': {'parts': blk_parts, 'cots': blk_cots, 'checks': blk_checks, 'counts': blk_counts}}
 

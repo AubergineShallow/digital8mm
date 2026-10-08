@@ -38,7 +38,7 @@ screws (s_k1, s_k2, step 4, same PH1; no new tool), see `NOTES.md` "r2 R1 option
 screw s_j (step 3, same PH1) and the MP-FPC record; r5 adds the lens collar (1 printed piece) and its 4 M3 screws in
 heat-set inserts (same PH1; the iron's heat-set tip). **r5 totals before any option (generated: DESIGN.md s1 `counts`):
 12 printed pieces, 7 PT screws + 4 M3 collar screws, 10 harnesses, 12 solder joints (r4: 10 + the 2 pigtail fuse-splice joints; +2 if the pack lacks an XT30; +15 joints, +5 parts with the TLV75801P or +11 joints, +3 parts with the XC6220B45
-under EVF-feed option C, WIRING s4.8), 12 tools.** The current counts are generated in `electronics/gs8-d2-v1/BOM.md`
+under EVF-feed option C, WIRING s4.8), 14 tools (r6: + the torque screwdriver and the collar centring gauge).** The current counts are generated in `electronics/gs8-d2-v1/BOM.md`
 ("Build counts").
 
 ## (a) 18/24 selection moved into the push-encoder EVF menu (DECLINED by the user 2026-10-05: keep the switch)

@@ -422,7 +422,9 @@ def _j7_rows(lip_gap=None, keeper_gap=None):
     k = C['keeper']
     x1 = k['x'][1] if keeper_gap is None else L.cam_cover_rear(L.S_MAX) - keeper_gap
     keeper = cq.Solid.makeBox(3.33, k['y'][1] - k['y'][0], k['z'][1] - k['z'][0], cq.Vector(x1 - 3.33, k['y'][0], k['z'][0]))
-    return L, {'tub': dict(shape=lip, kind='printed'), 'panel': dict(shape=keeper, kind='printed')}
+    import cots                 # r6 (audit 2026-10-06 L3): the lens is part of the check; a missing lens now FAILs
+    return L, {'tub': dict(shape=lip, kind='printed'), 'panel': dict(shape=keeper, kind='printed'),
+               'lens': dict(shape=cots.lens_proxy(L, L.LENS)[0], kind='cots')}
 
 
 def _bad(rows):
@@ -858,6 +860,228 @@ def test_j7_joint_requires_its_checks():
     for bad in (dict(ok, j7_float=[dict(status='pass'), dict(status='fail')]), dict(ok, inserts=[]),
                 dict(ok, lens_clamp=[dict(status='info', warn='w')])):
         assert next(r for r in CK.check_joint_checks(L, bad) if r['id'] == 'J7_camera')['status'] == 'fail'
+
+
+# ------------------------------------------------------------------------------------------- r6 (audit 2026-10-06)
+# Each case plants the fault the audit found (logic-audit.json P2/P3/P7/P10/P11/P21/P25e/P29, B-3, X2, M2) and asserts
+# the corrected behaviour; positive controls show the real layout passes.
+def test_r6_j7_float_samples_the_whole_range():
+    import layout as L
+    sv = CK.j7_s_values(L)
+    lo, hi = L.CAM['s_range']
+    assert sv[0] == lo and sv[-1] == hi and L.CAM['s_nom'] in sv, sv
+    assert max(b - a for a, b in zip(sv, sv[1:])) <= CK.J7_S_STEP + 1e-9, sv
+
+
+def test_r6_j7_float_clash_between_old_samples_fails():
+    import cots
+    L, rows = _j7_rows()
+    ly, lz = L.LENS_AXIS
+
+    def parts_of(L_, s):      # planted (P7): the body meets the tub only near s 2.0, between the old 0 / 1.25 / 3 samples
+        p = dict(cots.gs_camera_parts(L_, s))
+        if abs(s - 2.0) < 0.1:  # 3 mm below the cover's lower edge: no real camera part comes near it
+            p['body'] = p['body'].fuse(_box(-6.0, -5.5, ly - 2.0, ly + 2.0, lz - 24.0, lz - 23.0))
+        return p
+    rows['tub_bump'] = dict(shape=_box(-5.9, -5.6, ly - 2.0, ly + 2.0, lz - 24.0, lz - 23.0), kind='printed')
+    old = CK.check_j7_float(L, rows, s_values=(0.0, L.CAM['s_nom'], L.S_MAX), parts_of=parts_of)
+    new = CK.check_j7_float(L, rows, parts_of=parts_of)
+    assert not [r for r in old if r['mover'] == 'body' and r['status'] != 'pass'], 'old sampling should miss it'
+    assert any(r['mover'] == 'body' and r['s'] == 2.0 and r['status'] == 'fail' for r in new), _bad(new)
+
+
+def test_r6_j7_float_missing_lens_fails():
+    L, rows = _j7_rows()
+    del rows['lens']
+    r = [x for x in CK.check_j7_float(L, rows, s_values=(L.CAM['s_nom'],)) if x['mover'] == 'lens']
+    assert len(r) == 1 and r[0]['status'] == 'fail' and 'not measured' in r[0]['error'], r
+
+
+def test_r6_j7_float_lens_zero_gap_contact_fails():
+    L, rows = _j7_rows()
+    ly, lz = L.LENS_AXIS
+    r, x0, x1, _ = max(L.lens_spec(L.LENS)['segments_abs'], key=lambda sg: sg[0])
+    xm = (x0 + x1) / 2        # a plate touching the widest ring (gap 0, no overlap): a second support path (P11)
+    rows['hood'] = dict(shape=_box(xm - 0.5, xm + 0.5, ly - 3.0, ly + 3.0, lz + r, lz + r + 1.0), kind='printed')
+    gap = next(r for r in CK.check_j7_float(L, rows, s_values=(L.CAM['s_nom'],))
+               if r['mover'] == 'lens' and r.get('item') == 'min_gap')
+    assert gap['status'] == 'fail' and gap['gaps']['hood'] < CK.J7_LENS_GAP and 'hood' in gap['error'], gap
+
+
+def test_r6_j7_float_centring_stack_rows():
+    L, rows = _j7_rows()
+    out = CK.check_j7_float(L, rows, s_values=(L.CAM['s_nom'],))
+    cen = [r for r in out if r['mover'] == 'centring']
+    assert cen and all(r['status'] == 'pass' for r in cen), cen
+    bf = next(r for r in cen if r['of'] == 'bfar')
+    assert abs(bf['remaining_mm'] - (0.75 - L.COLLAR['gauge']['centring_worst_mm'])) < 2e-3, bf
+    assert bf['remaining_without_gauge_mm'] < bf['remaining_mm'], bf
+
+
+def test_r6_lens_support_missing_collar_fails():
+    import layout as L
+    rows = CK.check_lens_support(L, require_collars={'kowa_lm6hc'})
+    r = [x for x in rows if x['lens'] == 'kowa_lm6hc' and x['item'] == 'collar_solid']
+    assert len(r) == 1 and r[0]['status'] == 'fail' and 'not measured' in r[0]['error'], r
+    assert not [x for x in CK.check_lens_support(L) if x['item'] == 'collar_solid']     # spec-only call: no geometry
+
+
+def test_r6_band_measured_needs_a_g_lens_record():
+    import layout as L
+    sp = L.LENSES['kowa_lm6hc']['support']
+    old = sp['status']
+    try:
+        sp['status'] = 'measured'       # planted (P3): the string alone must not clear the WARN
+        no = next(r for r in CK.check_lens_support(L) if r['lens'] == 'kowa_lm6hc' and r['item'] == 'status')
+        yes = next(r for r in CK.check_lens_support(L, measured={'G-LENS': True})
+                   if r['lens'] == 'kowa_lm6hc' and r['item'] == 'status')
+    finally:
+        sp['status'] = old
+    assert no['status'] == 'fail' and 'G-LENS' in no['error'] and yes['status'] == 'pass', (no, yes)
+
+
+def test_r6_duplicate_feature_id_fails():
+    import layout as L
+    assert CK.duplicate_ids(L) == {}, CK.duplicate_ids(L)
+    lay = SimpleNamespace(CRITICAL_FEATURES=[dict(id='a'), dict(id='b'), dict(id='a')], REMOVALS=[], SECTIONS=[],
+                          CRITICAL_JOINTS=[])
+    assert CK.duplicate_ids(lay) == {'CRITICAL_FEATURES': ['a']}
+    probes = [f for f in L.CRITICAL_FEATURES if f['id'] in ('tub_front_wall_seat', 'tub_front_wall_lr_foot')]
+    assert len(probes) == 2 and probes[0].get('replaces'), probes
+
+
+def test_r6_coupon_gate_without_coupons_rejects_every_record():
+    st, _ = ev({'coupons/g-col-1.json': rec('G-COL-1', 'coupon_validation', {'SPEC.md': '0' * 64})},
+               'coupon_validation', ['G-COL-1'])
+    assert st['items']['G-COL-1']['outcome'] in ('rejected', 'stale'), st['items']
+    r = B.evaluate_item('coupon_validation', 'G-COL-1', [dict(file='x.json', index=0, errors=[],
+                        rec=rec('G-COL-1', 'coupon_validation', {'SPEC.md': '0' * 64}))], {}, None)
+    assert r['outcome'] == 'rejected' and 'no coupon STL' in r['rejected'][0]['why'], r
+    rows = B.release_input_rows({'coupon_validation': ['G-COL-1'], 'measured_fit': []}, {})
+    assert any(x['kind'] == 'coupon_gate' and x['status'] == 'fail' for x in rows), rows
+
+
+def test_r6_record_dates_must_be_iso():
+    good = rec('G-CAP-1', 'coupon_validation', CAP_OK)
+    assert not B.validate_record(good)
+    for bad in ('not a date', '2026-13-01', '08/10/2026'):
+        assert any('ISO 8601' in e for e in B.validate_record(dict(good, date=bad))), bad
+    assert not B.validate_record(dict(good, date='2026-10-08 14:30'))
+
+
+def test_r6_print_order_rejects_records_before_their_gates():
+    import layout as L
+    doc = 'doc/gates.md'
+    cur = {'stl/tub.stl': H['panel'], 'stl/base_grip.stl': H['cap1'], doc: H['old']}
+    gates = L.PRINT_PREREQS['tub']
+    meas = [g for g in gates if g != 'G-COMB-1']
+    sitems = dict(measured_fit=meas, coupon_validation=['G-COMB-1'], slicer_review=['tub', 'base_grip'],
+                  assembly_operation=[])
+
+    def required_of(state):
+        return (lambda it: ['stl/%s.stl' % it]) if state == 'slicer_review' else (lambda it: [doc])
+    recs = [dict(file='m.json', index=i, errors=[], rec=rec(g, 'measured_fit', {doc: H['old']}, date='2026-10-10'))
+            for i, g in enumerate(meas)]
+    recs.append(dict(file='c.json', index=0, errors=[], rec=rec('G-COMB-1', 'coupon_validation', {doc: H['old']},
+                                                                date='2026-10-10')))
+    early = dict(file='s.json', index=0, errors=[], rec=rec('tub', 'slicer_review', {'stl/tub.stl': H['panel']},
+                                                            date='2026-10-09'))
+    late = dict(file='s.json', index=1, errors=[], rec=rec('tub', 'slicer_review', {'stl/tub.stl': H['panel']},
+                                                           date='2026-10-11'))
+    grip = dict(file='s.json', index=2, errors=[], rec=rec('base_grip', 'slicer_review',
+                                                           {'stl/base_grip.stl': H['cap1']}, date='2026-10-11'))
+    ev1 = B.evidence_states_ordered(sitems, recs + [early, grip], cur, required_of)
+    tub, gr = ev1['slicer_review']['items']['tub'], ev1['slicer_review']['items']['base_grip']
+    assert tub['outcome'] == 'rejected' and 'before' in tub['rejected'][0]['why'], tub
+    assert gr['outcome'] == 'rejected' and 'G-MP-PACK' in gr['rejected'][0]['why'], gr
+    ev2 = B.evidence_states_ordered(sitems, recs + [late], cur, required_of)
+    assert ev2['slicer_review']['items']['tub']['outcome'] == 'pass', ev2['slicer_review']['items']['tub']
+    rel = B.print_release_report(ev2)
+    assert rel['parts']['tub']['status'] == 'released' and rel['parts']['base_grip']['status'] == 'blocked', rel
+
+
+def test_r6_print_prereqs_are_live_gate_ids():
+    import re
+    import layout as L
+    assert set(L.PRINT_PREREQS) == set(L.PARTS) == set(L.PRINT_SEQUENCE), 'every printed part needs one entry'
+    pats = [re.compile(p) for st, p in B.STATE_GATES if st in ('measured_fit', 'coupon_validation')]
+    for g in {g for v in list(L.PRINT_PREREQS.values()) + list(L.COUPON_PREREQS.values()) for g in v}:
+        assert any(p.search(g) for p in pats) or g in B.CALIBRATION_ITEMS, g
+        assert g in L.PRINT_PREREQ_WHY, g
+    assert set(L.PRINT_PREREQS['lens_collar']) >= {'G-CAM-1', 'G-LENS', 'G-COL-1'}
+    assert all(set(L.PRINT_PREREQS[p]) >= {'G-CAM-1', 'G-LENS'} for p in ('tub', 'hood', 'panel'))
+
+
+def _overhang(parts, zones=()):
+    import manifold3d as m3
+    import layout as L
+    man = None
+    for lo, hi in parts:
+        c = m3.Manifold.cube([hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]]).translate(list(lo))
+        man = c if man is None else man + c
+    return CK.check_print_overhang(L, 'tub', man, zones)
+
+
+def test_r6_print_overhang_bridge_island_zone():
+    piers = [((0, 0, 0), (2, 10, 10)), ((12, 0, 0), (14, 10, 10))]
+    roof = [((0, 0, 10), (14, 10, 12))]
+    r = _overhang(piers + roof)                                    # a 10 mm bridge between two piers
+    assert r['status'] == 'pass' and 9.0 <= r['longest_bridge_mm'] <= 11.0, r
+    island = [((30, 0, 0), (34, 4, 2)), ((40, 0, 5), (44, 4, 7))]  # a block floating 3 mm above the bed (P: support)
+    r = _overhang(island)
+    assert r['status'] == 'fail' and r['unsupported'], r
+    zone = dict(id='z', box=(39.0, 45.0, -1.0, 5.0, 4.0, 6.0), why='test')
+    r = _overhang(island, [zone])
+    assert r['status'] == 'pass' and 'z' in r['supports_used'], r
+    r = _overhang(piers + roof, [zone])                            # a declared zone nothing needs is stale
+    assert r['status'] == 'fail' and 'stale' in r['error'], r
+    ledge = [((0, 0, 0), (2, 10, 10)), ((0, 0, 10), (2.3, 10, 11))]   # 0.3 lip: within the 1.0 cantilever
+    assert _overhang(ledge)['status'] == 'pass'
+    long_ledge = [((0, 0, 0), (2, 10, 10)), ((0, 0, 10), (6, 10, 11))]   # a 4 mm cantilever needs support
+    assert _overhang(long_ledge)['status'] == 'fail'
+
+
+def test_r6_inserts_tip_length_tolerance():
+    _, s, boss, _ = _insert_fixture()
+    y, z = s['head_point'][1:]
+    tip = s['tip'][0]
+    # planted (B-3): material 0.25 past the tip passes the old tip + 0.2 probe but not the js15 length tolerance
+    r = _insert_row(boss=boss.fuse(_cylx(1.6, -7.6, tip - 0.25, y, z)))
+    assert r['status'] == 'fail' and not r['tip_in_void'] and 'length tolerance' in r['error'], r
+    assert abs(CK.screw_length_tol(10.0) - 0.29) < 1e-9 and abs(CK.screw_length_tol(16.0) - 0.35) < 1e-9
+
+
+def test_r6_centring_gauge_seats_and_shifted_gauge_fails():
+    import cadquery as cq
+    import layout as L
+    import printed_collar as PC
+    col, _ = _collar_fixture()
+    L_, rows = _j7_rows()
+    ly, lz = L.LENS_AXIS
+    hood = cq.Solid.makeBox(2.5, 70.0, 70.0, cq.Vector(*L.HOOD['plate_x'][:1], ly - 35.0, lz - 35.0)).cut(
+        cq.Solid.makeCylinder(L.HOOD['bore_d'] / 2, 3.0, cq.Vector(L.HOOD['plate_x'][0] - 0.25, ly, lz),
+                              cq.Vector(1, 0, 0)))
+    rows = dict(tub=rows['tub'], lens_collar=dict(shape=col, kind='printed'), hood=dict(shape=hood, kind='printed'))
+    g = PC.centring_gauge(L, 'kowa_lm6hc').val()
+    ok = {r['part']: r for r in CK.check_collar_gauge(L, rows, g)}
+    assert ok['tub']['status'] == ok['lens_collar']['status'] == ok['hood']['status'] == 'pass', ok
+    assert ok['insertion']['status'] == ok['driver']['status'] == 'pass', ok
+    bad = {r['part']: r for r in CK.check_collar_gauge(L, rows, g.translate(cq.Vector(0, 0.2, 0)))}
+    assert bad['tub']['status'] == 'fail' or bad['lens_collar']['status'] == 'fail', bad
+
+
+def test_r6_bolted_only_anchor_margin_warns():
+    import layout as L
+    r = next(x for x in CK.check_lens_clamp(L) if x.get('item') == 'anchor_polygon_bolted')
+    assert r['status'] == 'info' and r['margin_mm'] < 0 and 'compression foot' in r['warn'], r
+
+
+def test_r6_service_driver_covers_s_c4_and_s_j():
+    import layout as L
+    screws = {s for d in L.SERVICE_DRIVER for s in d['unscrew']}
+    assert screws == {'s_c4', 's_j'}, screws
+    closed = next(d for d in L.SERVICE_DRIVER if 's_c4' in d['unscrew'])['context']
+    assert {'panel', 'lens', 'cap', 'knob_exp'} <= set(closed), closed
 
 
 def main(argv):

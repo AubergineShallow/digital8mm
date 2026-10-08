@@ -1,3 +1,61 @@
+# GS8 D2 handoff, r6 (2026-10-08): print order and orientation settled, audit 2026-10-06 minor findings fixed
+
+Read this section first; the sections below it are history (cloud polish, then r5 and earlier). The user asked:
+"Settle the print order and orientation. Fix the minor findings as well." The point-by-point answer to the audit is
+`audit/d2-readiness-2026-10-06/RESPONSE.md`. Revision label: `GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + ...)`.
+Working copy: the `digital8mm` repository. As before, nothing was printed, sliced, bought, measured, assembled or
+powered.
+
+**Release state:** Kowa receipt `out/build-receipt.json`, built **2026-10-08 16:05:33 +0800** (`--skip-renders --sweep-step 1.0`, 522.6 s): **28 categories = 27 pass + `mass_com` report-only (info); 852 rows = 833 pass + 19 info + 0 fail**, no stubs, `cad_release_candidate` true; checks.json `c215f4c7...`. Fujinon `out/_fujinon-cloud-polish-20261007/` (15:56:46): 28 categories, 849 rows = 830 pass + 19 info + 0 fail, candidate true; its checks are carried as `out/checks-fujinon-sweep1mm.json` and match the release sources (`carried_checks`). `audit_cloud_release.py --final-release`: pass, sources 20/20, outputs 86/86, gate docs 4/4, 28 categories, 55 gates (53 open, 2 withdrawn) (`validation/rebuilt-cad-integrity.json`). `make_tables --check`: stale none, lint 0. Balance unchanged: Kowa 895.3 g, +1.5 mm; Fujinon 781.9 g, -9.7 mm. Printed set 297.5 g / 16.0 h (estimates); collar 17.3 g (ears r 5.6); centring gauge 22.0 g. Every part's `print_release` is blocked: no bench record exists yet.
+
+**What r6 changed:**
+- **Print order (audit M2): one table, enforced.**
+  - `layout.PRINT_PREREQS` names, for every printed part, the gates whose measurements set its geometry. They are
+    the MEASURED-PARTS "Blocks" column, plus G-COMB-1, and G-KNOB-1 or G-COL-1 where they apply.
+  - `COUPON_PREREQS` holds the G-COL-1 coupons to G-CAM-1 and G-LENS. `PRINT_SEQUENCE` is the order within a stage.
+  - A slicer record, or a G-COL-1 coupon record, filed or dated before its gates passed is rejected.
+  - The receipt's `print_release` shows what each part still waits for. PRINT-GUIDE s7 is generated from these
+    tables.
+- **Orientation: settled and computed.** Every face-down is unchanged. The new category `print_overhang` checks every
+  production STL and the centring gauge layer by layer (rules in SPEC s6 item 4p).
+  - It confirmed every bridge the guide lists.
+  - It found two unlisted overhangs, the s_k2 keeper-boss chin and the LL collar-insert-boss chin. Each now has a
+    declared paint-on support: the tub has 4 supports, not 2.
+  - The collar ears are r 5.6 (review A3).
+- **Centring (X2):**
+  - A printed centring gauge per lens (`stl/tools/collar_gauge.stl`).
+  - Step 7 now fits and centres the collar before the camera goes in.
+  - j7_float subtracts the declared centring stack from every lateral gap.
+- **Checks:**
+  - j7_float sweeps the back-focus range every 0.25 mm (L2). A missing lens or collar FAILs (L3). The lens keeps
+    0.5 mm from every other part (L4). A duplicate probe ID FAILs, and there is a new LR-foot wall probe (L5).
+  - "measured" needs a G-LENS record (L6). The bolted-only anchor margin gets a WARN (L7). An empty coupon map is
+    rejected (L10). The coupons and the carried Fujinon checks are source-linked (L11). Record dates must be ISO,
+    and the support files are hashed (L12).
+  - mass_com is report-only (L9). Insert depth and screw-length tolerance (B-3). Service driver audits for s_c4 and
+    s_j (B-11).
+- **Documents:**
+  - Adapter mark at B0 and at every lens change (B-2). Hold the metal lens mount, not the cover (B-7).
+  - Collar in ASA, with a G-W11 thermocouple at the collar foot (B-8). Stale counts fixed (B-9, B-10).
+  - Torque screwdriver in the BOM (D2-77) and as tool 13 (B-6). Heat-set tip system named (B-12).
+  - Coupon dry fit (B-13). Back the boss while heat-setting (B-14). Keep s inside its range (X4).
+
+**Still open:**
+- **M1:** the collar clamp has no spring and no thermal term. It was not part of this request, and it is the one open
+  design defect. Fix it before the collar is printed; the print order already puts the collar last.
+- Every physical gate (53 open, 2 withdrawn).
+- G-W12 power.
+- The paused airflow study.
+- Plan B, if G-LENS shows the band moves.
+
+**What the user must do first (bench, in this order):**
+1. Print the calibration coupons; they need no measurement.
+2. In parallel, do the bench measurements of PRINT-GUIDE s7, order 2, starting with B0: MP-CAM with the lens,
+   including the adapter mark and the BFAR travel.
+3. Update `layout.py` with any difference, and rerun the release sequence (`CLOUD-START-HERE.md`).
+4. Then print the G-COL-1 coupons and the gauge, and run G-COL-1. Fix M1 first.
+5. Finally print the parts as PRINT-GUIDE s7 releases them.
+
 # Cloud-polish fork: r5-cloud-polish-20261007
 
 ## Adopted as the desktop baseline (2026-10-07, main desktop session)

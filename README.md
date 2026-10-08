@@ -9,11 +9,16 @@ GS8 D2 is a pistol-grip digital "Super 8" cine camera in the spirit of the Nizo:
 
 This repository holds **only the D2 fork** of the wider GS8 project, plus the few shared files its build needs.
 
-**Status:** a computed CAD release candidate, **not a qualified design**.
+**Status:** a computed CAD release candidate (r6, 2026-10-08), **not a qualified design**.
 - Every result here is a computed check on built solids and purchased-part proxies, desk research, or a document.
 - Nothing has been printed, sliced, bought, measured, assembled or powered.
 - 53 physical bench gates are open.
-- Measure the camera and lens (MP-CAM, G-LENS) before printing any production part.
+- **Print order (r6).** It is settled and enforced: [`PRINT-GUIDE.md`](cad/gs8-d2-v1/PRINT-GUIDE.md) section 7 says
+  which measurements each part waits for. Start with the calibration coupons and the bench measurements (camera and
+  lens first).
+- **Print orientation (r6).** It is settled and checked layer by layer (`print_overhang`).
+- **Open design defect.** The lens collar's clamp has no spring (audit 2026-10-06 M1); fix it before the collar is
+  printed.
 
 ## Start here
 
@@ -34,7 +39,7 @@ This repository holds **only the D2 fork** of the wider GS8 project, plus the fe
 | Path | Contents |
 |---|---|
 | `cad/gs8-d2-v1/` | CadQuery sources (`layout.py` is the single geometry source), checks, tests, docs, research notes |
-| `cad/gs8-d2-v1/out/` | Current release outputs: production STLs, modifier and coupon meshes, STEP, manifests, `checks.json`, `build-receipt.json`; Fujinon variant in `out/_fujinon-cloud-polish-20261007/` |
+| `cad/gs8-d2-v1/out/` | Current release outputs: production STLs, modifier and coupon meshes, the collar centring gauge (`stl/tools/`), STEP, manifests, `checks.json`, `build-receipt.json`; Fujinon variant in `out/_fujinon-cloud-polish-20261007/` |
 | `electronics/gs8-d2-v1/` | Wiring, BOM generator and BOM, power and fuse research, second-hand sourcing notes |
 | `software/gs8-camera-evf/` | Camera software package, including the D2 integration (`d2_*.py`, `D2-INTEGRATION.md`) |
 | `audit/d2-readiness-*` | Independent readiness audits of D2 and their responses |

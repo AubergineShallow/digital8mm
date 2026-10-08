@@ -343,8 +343,8 @@ now merges its fork joint into CRITICAL_JOINTS (as the real fork does). The fork
 ### R4-4. Builder-facing corrections (FR1) and test definitions: **accepted** (documents changed)
 HANDOFF hood removal: 2.5 mm toward the open left side (+Y), then lift. `candidate-fr1/coupons_fr_keeper.py` gate text:
 tip gap 0.15 (pocket y0 -29.9, tongue y0 -29.75), keeper coupon manifest regenerated, 24 FR coupon meshes still
-watertight. `fr1_counts.py`: the keyword column is labelled a subset and the full ASSEMBLY s1.1 count is stated (12
-tools, 11 without the hood pins). WIRING G-W13 (e): a defined off rail (the real VBUS with a 100 ohm stand-in), VOUT
+watertight. `fr1_counts.py`: the keyword column is labelled a subset and the full ASSEMBLY s1.1 count is stated (a
+12-tool set at r4, 11 without the hood pins). WIRING G-W13 (e): a defined off rail (the real VBUS with a 100 ohm stand-in), VOUT
 bias within the device ratings, logged through shutdown. Row C of the option table and the recommendation no longer
 say "met by design". The FR1 receipt still records the old `coupons_fr_keeper.py` hash (a text-only change; the FR1
 package is consolidated on adoption, as the audit asks).

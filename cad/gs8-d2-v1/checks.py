@@ -837,16 +837,34 @@ def check_bosses(L, rows):
 # =========================================================================================== r2 (R3) rectification
 # Finding 2: CRITICAL_FEATURES (deterministic B-rep sections), finding 6: EVF board restraint, findings 1/3: service
 # (removal) sweeps + service-state driver audit, section views. Registries: layout.py section 9b (NOTES "r2 R3 API").
+REGISTRIES_BY_ID = ('CRITICAL_FEATURES', 'REMOVALS', 'SECTIONS', 'CRITICAL_JOINTS')
+
+
 def registry(L, name):
     """A layout registry list; CRITICAL_FEATURES / REMOVALS / SECTIONS / CRITICAL_JOINTS entries are de-duplicated by id (last wins,
-    first position kept)."""
+    first position kept). r6 (audit 2026-10-06 L5): a duplicate id is never silent: duplicate_ids() lists it and
+    check_critical_features FAILs it (owners move a probe with layout.replace_feature, in place)."""
     items = list(getattr(L, name, []) or [])
-    if name in ('CRITICAL_FEATURES', 'REMOVALS', 'SECTIONS', 'CRITICAL_JOINTS'):
+    if name in REGISTRIES_BY_ID:
         d = {}
         for it in items:
             d[it['id']] = it
         return list(d.values())
     return items
+
+
+def duplicate_ids(L):
+    """r6 (L5): {registry: [ids defined more than once]} over REGISTRIES_BY_ID (empty when every id is unique)."""
+    out = {}
+    for name in REGISTRIES_BY_ID:
+        seen, dup = set(), []
+        for it in getattr(L, name, []) or []:
+            if it['id'] in seen and it['id'] not in dup:
+                dup.append(it['id'])
+            seen.add(it['id'])
+        if dup:
+            out[name] = dup
+    return out
 
 
 def _solids(shape):
@@ -926,6 +944,10 @@ def check_critical_features(L, rows):
     check_joint_coverage (CRITICAL_JOINTS: every required feature of every load-carrying joint) and, as a secondary
     rule, >= 1 structural entry per LOAD_BEARING_PARTS member."""
     out = []
+    for reg, ids in duplicate_ids(L).items():     # r6 (L5): an id overwritten by a later entry hides the earlier probe
+        out.append(dict(kind='registry', id='duplicate_ids', registry=reg, duplicates=ids, status='fail',
+                        error='%s defines id(s) %s more than once (last wins would silently drop a probe); move a '
+                              'probe with layout.replace_feature' % (reg, ', '.join(ids))))
     feats = registry(L, 'CRITICAL_FEATURES')
     gates_of = getattr(L, 'FEATURE_GATES', {}) or {}
     for f in feats:
@@ -1333,6 +1355,10 @@ def check_removals(L, rows, step_mm=2.0):
             if geo_only:
                 for x in drv[d0:]:
                     x['scope'] = geo_only
+    for sd in getattr(L, 'SERVICE_DRIVER', []) or []:      # r6 (B-11): screws turned without a REMOVALS move
+        ctx = [i for i in sd['context'] if i in rows]
+        drv += check_driver(L, rows, screw_ids=set(sd['unscrew']), audit_set_of=lambda _s, c=ctx: c,
+                            context='service: ' + sd['id'])
     return out, drv
 
 
@@ -1712,15 +1738,68 @@ def _float_row(name, s, m, obstacles, rule):
     return row
 
 
+J7_S_STEP = 0.25         # r6 (audit 2026-10-06 L2): back-focus samples <= 0.25 apart over the whole s_range (+ s_nom)
+J7_LENS_GAP = 0.5        # r6 (L4): lens to every part but its collar, the adapter and the camera (the hanging unit)
+J7_RUNNING = 0.1         # r6 (X2): least lateral running clearance left after the declared centring stack
+
+
+def j7_s_values(L, step=J7_S_STEP):
+    """r6 (L2): s_range sampled at <= step (both ends included) plus s_nom. A clash between two samples of the old
+    0 / nominal / max set passed (planted at s 2.0); the BFAR head is only 1.2 long against 3.0 of travel."""
+    lo, hi = (float(v) for v in L.CAM['s_range'])
+    n = max(1, int(math.ceil((hi - lo) / step - 1e-9)))
+    vals = {round(lo + (hi - lo) * i / n, 6) for i in range(n + 1)}
+    vals.add(round(float(L.CAM['s_nom']), 6))
+    return tuple(sorted(vals))
+
+
+def _centring_rows(L, out):
+    """r6 (audit 2026-10-06 X2): the float gaps are measured with the collar bore exactly on the lip axis. Subtract the
+    declared lateral centring stack (COLLAR['gauge'], with the centring gauge) and, for obstacles on the hood, the
+    hood-to-tub location (HOOD_TO_TUB_LATERAL); FAIL below J7_RUNNING. The stack without the gauge is reported."""
+    g = L.COLLAR.get('gauge') or {}
+    hood_tol = getattr(L, 'HOOD_TO_TUB_LATERAL', 0.25)
+    worst = {}
+    for r in out:
+        if r.get('mover') not in ('body', 'bfar', 'adapter'):
+            continue
+        for oid, gp in (r.get('per_obstacle') or {}).items():
+            if gp.get('lateral') is None:
+                continue
+            k = (r['mover'], oid)
+            if k not in worst or gp['lateral'] < worst[k][0]:
+                worst[k] = (gp['lateral'], r.get('s'))
+    stack = g.get('centring_worst_mm')
+    bare = (g.get('stack_without_gauge') or {}).get('worst_mm')
+    rows = []
+    for (mv, oid), (gap, s) in sorted(worst.items()):
+        extra = hood_tol if oid == 'hood' else 0.0
+        left = None if stack is None else gap - stack - extra
+        ok = left is not None and left >= J7_RUNNING - J7_TOL
+        rows.append(dict(kind='j7_float', mover='centring', item='lateral_stack', of=mv, obstacle=oid, s=s,
+                         lateral_gap=_r(gap), stack_mm=stack, hood_to_tub_mm=extra or None,
+                         remaining_mm=None if left is None else _r(left),
+                         remaining_without_gauge_mm=None if bare is None else _r(gap - bare - extra),
+                         rule='remaining >= %.2f' % J7_RUNNING, status='pass' if ok else 'fail',
+                         **({} if ok else {'error': 'centring stack %s leaves %s mm lateral to %s (need >= %.2f)'
+                                                    % (stack, None if left is None else _r(left), oid, J7_RUNNING)})))
+    if not rows:
+        rows.append(dict(kind='j7_float', mover='centring', item='lateral_stack', status='fail',
+                         error='no lateral gap measured (the float is not measured): the centring stack cannot be '
+                               'checked'))
+    return rows
+
+
 def check_j7_float(L, rows, s_values=None, parts_of=None):
-    """r5 (J7-R, judge 3 s6.9; a J7 required check): at BFAR screw-out s 0 / nominal / max the camera body and BFAR
-    (cots.gs_camera_parts at s) and the C-CS adapter keep the J7_FLOAT_RULES gaps to every printed part, COTS proxy and
-    screw of the final state except the hanging unit itself (J7_FLOAT_EXCLUDE); the lens overlaps nothing but the
-    collar, and not the camera at any s. parts_of(L, s) replaces cots.gs_camera_parts (tests). Per-s minima are rows."""
+    """r5 (J7-R, judge 3 s6.9; a J7 required check): over the BFAR screw-out range (r6, L2: every J7_S_STEP plus s_nom)
+    the camera body and BFAR (cots.gs_camera_parts at s) and the C-CS adapter keep the J7_FLOAT_RULES gaps to every
+    printed part, COTS proxy and screw of the final state except the hanging unit itself (J7_FLOAT_EXCLUDE). The lens
+    overlaps nothing but the collar, keeps >= J7_LENS_GAP to every other part (r6, L4) and never overlaps the camera.
+    A missing lens solid is a FAIL row, never a skipped one (r6, L3). r6 (X2): the lateral gaps less the declared
+    centring stack keep >= J7_RUNNING. parts_of(L, s) replaces cots.gs_camera_parts (tests). Per-s minima are rows."""
     import cots
     parts_of = parts_of or cots.gs_camera_parts
-    C = L.CAM
-    s_values = tuple(s_values if s_values is not None else (C['s_range'][0], C['s_nom'], C['s_range'][1]))
+    s_values = tuple(s_values if s_values is not None else j7_s_values(L))
     cams = {s: parts_of(L, s) for s in s_values}
     ad = rows.get('c_cs_adapter', {}).get('shape') or cots.c_cs_adapter(L, None)
     mv = [bb_tuple(cams[s][k]) for s in s_values for k in ('body', 'bfar')] + [bb_tuple(ad)]
@@ -1731,19 +1810,39 @@ def check_j7_float(L, rows, s_values=None, parts_of=None):
            if i not in J7_FLOAT_EXCLUDE and r.get('shape') is not None and bb_overlap(bb_tuple(r['shape']), zone)}
     out = [_float_row(nm, s, cams[s][nm], obs, J7_FLOAT_RULES[nm]) for s in s_values for nm in ('body', 'bfar')]
     out.append(_float_row('adapter', None, ad, obs, J7_FLOAT_RULES['adapter']))
+    out += _centring_rows(L, out)
     lens = rows.get('lens', {}).get('shape')
-    if lens is not None:      # the lens overlaps nothing but the collar (judge 3 s6.9)
-        hits = {}
+    if lens is None:          # r6 (L3): the lens rows are part of the check; their absence is a fault
+        out.append(dict(kind='j7_float', mover='lens', s=None,
+                        status='stub' if rows.get('lens', {}).get('stub') else 'fail',
+                        error='lens solid not provided: lens overlap, lens gap and lens-vs-camera rows not measured'))
+    else:                     # the lens overlaps nothing but the collar (judge 3 s6.9)
+        hits, gaps = {}, {}
+        lb = bb_tuple(lens)
         for i, r in rows.items():
             if i in ('lens', 'lens_collar', 'gs_camera', 'c_cs_adapter') or r.get('shape') is None:
                 continue
-            if bb_overlap(bb_tuple(lens), bb_tuple(r['shape'])):
-                v, _ = common(lens, r['shape'])
-                if v != v or v > VOL_TOL:
-                    hits[i] = _r(v, 4)
+            if not bb_overlap(lb, bb_tuple(r['shape']), J7_LENS_GAP + 0.5):
+                continue
+            v, _ = common(lens, r['shape'])
+            if v != v or v > VOL_TOL:
+                hits[i] = _r(v, 4)
+                gaps[i] = 0.0
+                continue
+            # r6 (L4): a 0-gap contact is a second support path for the floating unit, not a pass
+            lo2 = tuple(lb[2 * k] - J7_LENS_GAP - 1.0 for k in range(3))
+            hi2 = tuple(lb[2 * k + 1] + J7_LENS_GAP + 1.0 for k in range(3))
+            piece = _crop(r['shape'], lo2, hi2)
+            if piece is not None:
+                gaps[i] = _r(float(lens.distance(piece)), 4)
         out.append(dict(kind='j7_float', mover='lens', s=None, overlaps=hits, status='fail' if hits else 'pass',
                         rule='lens overlaps nothing but lens_collar (<= %.2f mm3)' % VOL_TOL,
                         **({'error': 'lens overlaps %s' % sorted(hits)} if hits else {})))
+        near = {i: g for i, g in gaps.items() if g < J7_LENS_GAP - J7_TOL}
+        out.append(dict(kind='j7_float', mover='lens', item='min_gap', s=None, gaps=gaps,
+                        rule='lens >= %.2f to every part but lens_collar, c_cs_adapter and gs_camera' % J7_LENS_GAP,
+                        status='fail' if near else 'pass', offending_obstacles=sorted(near),
+                        **({'error': 'lens within %.2f of %s' % (J7_LENS_GAP, near)} if near else {})))
         for s in s_values:    # one hanging unit, but the lens rear cell must not clash with the camera at any s
             v = max(common(lens, cams[s][k])[0] for k in ('body', 'bfar'))
             ok = v == v and v <= VOL_TOL
@@ -1795,16 +1894,21 @@ def _clamped(cs):
     return max(0.0, min(cs['band'][1], cs['front_x']) - max(cs['band'][0], cs['seat_x']))
 
 
-def check_lens_support(L, rows=None, collars=None, lens_shapes=None):
+def check_lens_support(L, rows=None, collars=None, lens_shapes=None, measured=None, require_collars=None):
     """r5 (J7-R, integrity review F1), every LENSES and LENSES_DATA_ONLY entry: any lens without a `support` band
     FAILs, regardless of mass, because the collar is the only anchor; the band is fixed (no moving segment over it); the
     clamped length >= band_min (a zoom: zoom_band_min); bore - band 0.2..0.4 diametral; collar front <= first moving
     segment - front_gap_min; the band lies in the collar (>= 0.2 behind the front unless the front sits at the moving-
     ring limit) and its rear edge on the cone (seat x = C_FLANGE_X + x0). Built collars (collars {lens: shape}, the
     build's lens_collar for L.LENS) are measured: lens seated on the cone (0 mm3, gap <= 0.01), bore and seat radii by
-    exact rays, 0 mm3 against that lens's ko_lens_thumb boxes. WARN (info) unless the band status is 'measured'."""
+    exact rays, 0 mm3 against that lens's ko_lens_thumb boxes. WARN (info) unless the band status is 'measured'.
+    r6 (audit 2026-10-06 L3): every lens in require_collars (the build passes all of LENSES) whose collar solid is
+    absent is a FAIL row ('stub' if the collar module is a stub), never silently unmeasured; a call without geometry
+    (require_collars None) checks the specification only. r6 (L6): 'measured' clears the WARN only with a current passing G-LENS
+    record (measured={'G-LENS': True} from the build's evidence); 'measured' without one FAILs."""
     import cots
     LM, rows = L.LOAD_MODEL, rows or {}
+    collar_stub = bool((rows.get('lens_collar') or {}).get('stub'))
     collars, lens_shapes = dict(collars or {}), dict(lens_shapes or {})
     if L.LENS not in collars and (rows.get('lens_collar') or {}).get('shape') is not None:
         collars[L.LENS] = rows['lens_collar']['shape']
@@ -1857,6 +1961,10 @@ def check_lens_support(L, rows=None, collars=None, lens_shapes=None):
                 warn='%s is data-only: its rear band position needs a separate entry design; no printable collar is approved' % name,
                 available_to_seat_mm=_r(cs['seat_x'] - cs['rear_x']), required_land_mm=entry_need))
         col = collars.get(name)
+        if col is None and name in (require_collars or ()) and cs['rear_entry_feasible']:
+            out.append(dict(base, item='collar_solid', status='stub' if collar_stub else 'fail',
+                            error='%s: no collar solid was provided, so lens_seated, bore_measured, seat_measured, '
+                                  'rear_entry_measured and thumb_keepouts are not measured' % name))
         if col is not None and name in L.LENSES:
             lens = lens_shapes.get(name) or cots.lens_proxy(L, name)[0]
             v, _ = common(lens, col)
@@ -1904,11 +2012,69 @@ def check_lens_support(L, rows=None, collars=None, lens_shapes=None):
             else:
                 out.append(dict(base, item='thumb_keepouts', status='info',
                                 note='no thumb screws listed for this lens ([unconfirmed], G-LENS)'))
-        if sp.get('status') == 'measured':
-            row('status', True, band_status=sp['status'])
+        if sp.get('status') == 'measured':      # r6 (L6): the evidence record, not the string, clears the WARN
+            g_lens = bool((measured or {}).get('G-LENS'))
+            row('status', g_lens, band_status=sp['status'], g_lens_record='current pass' if g_lens else 'none',
+                **({} if g_lens else {'error': '%s band status is measured, but G-LENS has no current recorded '
+                                               'pass (evidence/README.md)' % name}))
         else:
             out.append(dict(base, item='status', status='info', band_status=sp.get('status'),
                             warn='%s support band is %r, not measured: G-LENS' % (name, sp.get('status'))))
+    return out
+
+
+def check_collar_gauge(L, rows, gauge, travel=40.0, step_mm=1.0):
+    """r6 (audit 2026-10-06 X2): the collar centring gauge (printed_collar.centring_gauge) at step 7, camera not yet in.
+    Seated, it touches the tub only on the lip edge and the collar only on its bore-entry chamfer (<= VOL_TOL, gap
+    <= 0.01 to both) and keeps >= 0.5 from the hood; its -X insertion from +travel meets nothing on the way (manifold
+    boolean <= SWEEP_TOL); the straight driver (DRIVER bit and handle) for every s_c1..s_c3 clears it (<= VOL_TOL).
+    Rows join the lens_support category (item 'centring_gauge')."""
+    import manifold3d as m3
+    base = dict(kind='lens_support', item='centring_gauge', lens=L.LENS)
+    if gauge is None:
+        return [dict(base, status='fail', error='no centring gauge solid was built')]
+    out = []
+    for pid, need in (('tub', None), ('lens_collar', None), ('hood', 0.5)):
+        r = rows.get(pid) or {}
+        sh = r.get('shape')
+        if sh is None:
+            out.append(dict(base, part=pid, status='stub' if r.get('stub') else 'fail', error='%s not built' % pid))
+            continue
+        v, _ = common(gauge, sh)
+        gap = float(gauge.distance(sh)) if v == v and v <= VOL_TOL else 0.0
+        ok = v == v and v <= VOL_TOL and (gap <= 0.01 if need is None else gap >= need - J7_TOL)
+        out.append(dict(base, part=pid, overlap_mm3=_r(v, 4), gap=_r(gap, 4),
+                        rule='seated on it (contact, no overlap)' if need is None else 'gap >= %.1f' % need,
+                        status='pass' if ok else 'fail',
+                        **({} if ok else {'error': 'gauge vs %s: overlap %s mm3, gap %s' % (pid, _r(v, 4), _r(gap, 4))})))
+    mg = manifold_of(gauge)
+    hits = {}
+    for pid in ('tub', 'hood', 'lens_collar'):
+        sh = (rows.get(pid) or {}).get('shape')
+        mo = manifold_of(sh) if sh is not None else None
+        if mo is None or mg is None:
+            continue
+        for k in range(1, int(round(travel / step_mm)) + 1):
+            v = (mg.translate([k * step_mm, 0.0, 0.0]) ^ mo).volume()
+            if v > SWEEP_TOL:
+                hits[pid] = max(hits.get(pid, 0.0), _r(v, 2))
+    ok = mg is not None and not hits
+    out.append(dict(base, part='insertion', path='-X %.0f to the seated pose in %.1f steps' % (travel, step_mm),
+                    hits=hits, status='pass' if ok else 'fail',
+                    **({} if ok else {'error': 'gauge insertion meets %s' % (hits or 'nothing measurable (no mesh)')})))
+    D = L.DRIVER
+    drv = {}
+    for s in L.SCREWS:
+        if s['id'] not in ('s_c1', 's_c2', 's_c3'):
+            continue
+        hp = V(*s['head_point'])
+        up = V(*[-a for a in s['axis']])                       # the driver stands opposite the driving direction
+        bit = cq.Solid.makeCylinder(D['bit_d'] / 2, D['bit_len'], hp, up)
+        handle = cq.Solid.makeCylinder(D['handle_d'] / 2, D['handle_len'], hp + up * D['bit_len'], up)
+        drv[s['id']] = _r(max(common(gauge, bit)[0], common(gauge, handle)[0]), 4)
+    ok = len(drv) == 3 and all(v == v and v <= VOL_TOL for v in drv.values())
+    out.append(dict(base, part='driver', overlap_mm3=drv, rule='the s_c1..s_c3 driver (bit + handle) clears the gauge',
+                    status='pass' if ok else 'fail', **({} if ok else {'error': 'driver meets the gauge: %s' % drv})))
     return out
 
 
@@ -1940,6 +2106,17 @@ def check_lens_clamp(L, rows=None, collars=None):
                 **({} if margin >= LM['polygon_edge_min'] - 1e-6 else
                    {'error': 'lens axis %.2f from the anchor polygon edge (need >= %.1f inside)'
                              % (margin, LM['polygon_edge_min'])}))]
+    # r6 (audit 2026-10-06 L7): the polygon closes only through the compression-only LR foot. While the bolt preload
+    #     holds, prying is screened by the three-bolt anchor_model below (LR inactive); if the preload relaxes (M1: no
+    #     spring, ASA creep), the bolted triangle alone must hold the axis. Report it as a WARN row, never a silent pass.
+    if len(bolted) >= 3:
+        bm = _inside_margin(bolted, (ly, lz))
+        out.append(dict(kind='lens_clamp', item='anchor_polygon_bolted', bolted=list(C['bolted']), margin_mm=_r(bm),
+                        status='info' if bm < 0.0 else 'pass',
+                        **({'warn': 'the bolted anchors %s alone leave the lens axis %.1f mm outside their triangle: '
+                                    'the axis is enclosed only through the compression foot LR, so preload loss '
+                                    '(audit 2026-10-06 M1, G-COL-1 creep) lets the collar pry'
+                                    % ('/'.join(C['bolted']), -bm)} if bm < 0.0 else {})))
     factor = LM.get('anchor_prying_factor')
     anchor_model = dict(kind='lens_clamp', item='anchor_model', bolted=list(C['bolted']),
                         compression_foot_active=False, prying_factor=factor,
@@ -2049,11 +2226,21 @@ def _void_interval(ws, t):
     return max((w for w in ws if w < t), default=None), min((w for w in ws if w > t), default=None)
 
 
+def screw_length_tol(length):
+    """r6 (B-3): ISO 4759-1 product grade A screw length tolerance js15 (half of IT15) for nominal length l, mm."""
+    for upper, it15 in ((3.0, 0.40), (6.0, 0.48), (10.0, 0.58), (18.0, 0.70), (30.0, 0.84), (50.0, 1.00)):
+        if length <= upper:
+            return it15 / 2
+    return 1.20 / 2
+
+
 def check_inserts(L, rows):
     """r5 (brief choice 8, judge 3 s6.9): kind M3 screws into heat-set inserts, measured on the solids by exact rays:
     insert bore dia = insert bore_d +-0.1; bore open at one end and deep >= insert length + 0.2; wall round the bore
     >= MIN_WALL_LOADED over the insert span; insert span engaged >= M3 engage_min; the tip in a void (no bottoming,
-    tip + 0.2 clear); under the washer >= MIN_WALL_LOADED; the head part's clearance hole >= clear_d - 0.05."""
+    tip + 0.2 clear); under the washer >= MIN_WALL_LOADED; the head part's clearance hole >= clear_d - 0.05.
+    r6 (audit 2026-10-06 B-3): the per-line local depth must meet the same insert + 0.2 need as the face depth (it was
+    compared with insert + flush only), and the tip stays in a void at its ISO 4759-1 js15 length tolerance."""
     M3, out = L.M3, []
     for s in L.SCREWS:
         if s.get('kind') != 'M3':
@@ -2123,7 +2310,8 @@ def check_inserts(L, rows):
             def solid_at(p):
                 return any(BRepClass3d_SolidClassifier(so.wrapped, gp_Pnt(*map(float, p)), 1e-6).State() == TopAbs_IN
                            for so in _solids(Pc))
-            tip_void = not solid_at(tp) and not solid_at(tp + ax * 0.2)
+            len_tol = screw_length_tol(s.get('length', 0.0))
+            tip_void = not solid_at(tp) and not solid_at(tp + ax * 0.2) and not solid_at(tp + ax * len_tol)
             Hh = _Hits(_crop(rows[s['head_part']]['shape'], tuple(lo), tuple(hi)))
             rh = (M3['clear_d'] / 2 + M3['washer']['d'] / 2) / 2
             seats, unders = [], []
@@ -2141,16 +2329,17 @@ def check_inserts(L, rows):
             if not ok_lines:
                 probs.append('bore not open at exactly one end on every probe line (ends %s, faces %s, open %s)'
                              % (ends, entries, opens))
-            elif depth < need_d - 1e-3 or local < ins['length'] + ins['flush'] - 1e-3:
-                probs.append('bore depth %.3f from the face (need >= %.2f), %.3f locally (need >= insert + flush %.2f)'
-                             % (depth, need_d, local, ins['length'] + ins['flush']))
+            elif depth < need_d - 1e-3 or local < need_d - 1e-3:
+                probs.append('bore depth %.3f from the face, %.3f locally on one probe line (need >= insert + 0.2 = '
+                             '%.2f on every line)' % (depth, local, need_d))
             if min(walls) < L.FDM['MIN_WALL_LOADED'] - 1e-3:
                 probs.append('wall %.3f round the insert at %s toward %s < %.1f' % (wmin[0], wmin[1], wmin[2],
                                                                                     L.FDM['MIN_WALL_LOADED']))
             if engage < M3['engage_min'] - 1e-6:
                 probs.append('engage %.2f < %.1f' % (engage, M3['engage_min']))
             if not tip_void:
-                probs.append('tip (or tip + 0.2) in material: the screw bottoms')
+                probs.append('tip (or tip + 0.2, or tip + its %.2f length tolerance) in material: the screw bottoms'
+                             % len_tol)
             if not unders or min(unders) < L.FDM['MIN_WALL_LOADED'] - 1e-3:
                 probs.append('under the washer %s < %.1f' % (_r(min(unders)) if unders else None,
                                                               L.FDM['MIN_WALL_LOADED']))
@@ -2162,7 +2351,7 @@ def check_inserts(L, rows):
             row.update(bore_dia=_r(np.mean(dias)) if dias else None, bore_depth=_r(depth), bore_depth_local_min=_r(local),
                        bore_depth_need=_r(need_d), open_end=sorted(set(opens)), insert_span_from_head=[_r(t0), _r(t1)],
                        wall_min=_r(min(walls)), wall_min_at=dict(point=wmin[1], toward=wmin[2]), engage=_r(engage),
-                       tip_from_head=_r(t_tip), tip_in_void=tip_void,
+                       tip_from_head=_r(t_tip), tip_in_void=tip_void, length_tol=len_tol,
                        washer_seat=_r(min(seats)) if seats else None,
                        under_washer_min=_r(min(unders)) if unders else None,
                        head_clear_r=_r(min(clr)) if clr else None, status='fail' if probs else 'pass')
@@ -2198,3 +2387,237 @@ def check_joint_checks(L, R):
         out.append(dict(kind='joint_check', id=j['id'], part=(j.get('parts') or [None])[0], required_checks=req,
                         checks=seen, status='fail' if probs else 'pass', **({'error': '; '.join(probs)} if probs else {})))
     return out
+
+
+# ------------------------------------------------------------------------------------------- r6: print orientation
+# User 2026-10-08 "settle the print order and orientation". The per-part face_down is a computed, regression-protected
+# claim: print_overhang slices every production STL in its print pose, layer by layer, and classifies all new area that
+# lies beyond the 45 deg allowance of the layer below. Each pixel of it must be a short overhang (<= cantilever_max from
+# supported material), part of an anchored bridge (a straight run in one of 8 directions whose two ends both meet
+# supported material, <= bridge_max long), within edge_tol of one of those, or inside a declared support zone
+# (layout.PRINT_SUPPORT_ZONES). Anything else FAILs, and a declared zone that no region needs FAILs as stale.
+def _cs_polys(cs):
+    return [np.asarray(p, float) for p in cs.to_polygons() if len(p) >= 3]
+
+
+def _signed_area(p):
+    x, y = p[:, 0], p[:, 1]
+    return 0.5 * float(np.dot(x, np.roll(y, -1)) - np.dot(y, np.roll(x, -1)))
+
+
+def _raster(cs, x0, y0, nx, ny, px):
+    """Boolean mask [ny, nx] of a CrossSection on a px grid starting at (x0, y0); outer contours fill, holes erase
+    (drawn largest first, so nested islands come back)."""
+    from PIL import Image, ImageDraw
+    img = Image.new('L', (nx, ny), 0)
+    d = ImageDraw.Draw(img)
+    for p in sorted(_cs_polys(cs), key=lambda q: -abs(_signed_area(q))):
+        d.polygon([((x - x0) / px - 0.5, (y - y0) / px - 0.5) for x, y in p], fill=255 if _signed_area(p) > 0 else 0)
+    return np.asarray(img) > 127
+
+
+def _grow(M, step):
+    """One dilation step; 4- and 8-neighbourhood alternate, so n steps approximate a Euclidean n-pixel distance."""
+    P = np.pad(M, 1)
+    D = P[1:-1, 1:-1] | P[:-2, 1:-1] | P[2:, 1:-1] | P[1:-1, :-2] | P[1:-1, 2:]
+    if step % 2:
+        D |= P[:-2, :-2] | P[:-2, 2:] | P[2:, :-2] | P[2:, 2:]
+    return D
+
+
+def _reach(seed, within, n):
+    """Pixels of `within` reached from seed in n growth steps without leaving seed | within."""
+    G, allowed = seed.copy(), seed | within
+    for i in range(n):
+        G = _grow(G, i) & allowed
+    return G & within
+
+
+def _rot(M, deg):
+    from PIL import Image
+    if abs(deg) < 1e-9:
+        return M
+    return np.asarray(Image.fromarray(M.astype(np.uint8) * 255).rotate(deg, resample=Image.NEAREST, expand=True)) > 127
+
+
+def _unrot(M, deg, shape):
+    if abs(deg) < 1e-9:
+        return M
+    B = _rot(M, -deg)
+    h, w = shape
+    y0, x0 = (B.shape[0] - h) // 2, (B.shape[1] - w) // 2
+    return B[y0:y0 + h, x0:x0 + w]
+
+
+def _enclosed(V):
+    """Pixels of the void mask V not connected (4-neighbourhood) to the window border: holes inside the region."""
+    G = np.zeros_like(V)
+    G[0, :], G[-1, :], G[:, 0], G[:, -1] = V[0, :], V[-1, :], V[:, 0], V[:, -1]
+    while True:
+        N = _grow(G, 0) & V
+        if np.array_equal(N, G):
+            return V & ~G
+        G = N
+
+
+def _bridged_runs(R, A, H, max_px):
+    """Row runs of R no longer than max_px -> int32 masks of run length (0 = none): runs with both neighbours in A
+    (bridges), runs with one neighbour in A and the other in H (a hole inside the region: its perimeter loop prints in
+    the same layer, held by the runs beside it)."""
+    h, w = R.shape
+    P = np.zeros((h, w + 2), bool)
+    P[:, 1:-1] = R
+    d = np.diff(P.astype(np.int8), axis=1)
+    rs, a_ = np.nonzero(d == 1)
+    _, b_ = np.nonzero(d == -1)
+    Ap, Hp = np.zeros((h, w + 2), bool), np.zeros((h, w + 2), bool)
+    Ap[:, 1:-1], Hp[:, 1:-1] = A, H
+    B, E = np.zeros(R.shape, np.int32), np.zeros(R.shape, np.int32)
+    for r, a, b in zip(rs, a_, b_):
+        if b - a > max_px:
+            continue
+        left, right = (Ap[r, a], Hp[r, a]), (Ap[r, b + 1], Hp[r, b + 1])
+        if left[0] and right[0]:
+            B[r, a:b] = b - a
+        elif (left[0] and right[1]) or (left[1] and right[0]):
+            E[r, a:b] = b - a
+    return B, E
+
+
+def _rot_i(M, deg):
+    from PIL import Image
+    if abs(deg) < 1e-9:
+        return M
+    return np.asarray(Image.fromarray(M.astype(np.int32), mode='I').rotate(deg, resample=Image.NEAREST, expand=True))
+
+
+def _unrot_i(M, deg, shape):
+    if abs(deg) < 1e-9:
+        return M
+    B = _rot_i(M, -deg)
+    h, w = shape
+    y0, x0 = (B.shape[0] - h) // 2, (B.shape[1] - w) // 2
+    return B[y0:y0 + h, x0:x0 + w]
+
+
+def _classify(region, anchor, opts):
+    """Raster classification of one unsupported region -> (bad mask, its pixel centres x / y, area, longest bridge)."""
+    px = opts['px']
+    m = 2 * px + opts['edge_tol']
+    bx0, by0, bx1, by1 = region.bounds()
+    x0, y0 = bx0 - m, by0 - m
+    nx, ny = int(math.ceil((bx1 - bx0 + 2 * m) / px)), int(math.ceil((by1 - by0 + 2 * m) / px))
+    import manifold3d as m3
+    win = m3.CrossSection.square([nx * px, ny * px]).translate([x0, y0])
+    R = _raster(region, x0, y0, nx, ny, px)
+    A = _grow(_raster(anchor ^ win, x0, y0, nx, ny, px), 1) & ~R
+    H = _enclosed(~R & ~A)
+    near = _reach(A, R, int(math.ceil(opts['cantilever_max'] / px)))
+    max_px, big = int(opts['bridge_max'] / px), np.iinfo(np.int32).max
+    span_b, span_e = np.full(R.shape, big, np.int32), np.full(R.shape, big, np.int32)
+    for k in range(opts['directions']):
+        deg = 180.0 * k / opts['directions']
+        Br, Er = _bridged_runs(_rot(R, deg), _rot(A, deg), _rot(H, deg), max_px)
+        for src, dst in ((Br, span_b), (Er, span_e)):
+            if src.any():
+                back = _unrot_i(src, deg, R.shape)
+                np.minimum(dst, np.where(back > 0, back, big), out=dst)
+    bridged = R & ~near & (span_b < big)
+    hole_edge = R & ~near & ~bridged & (span_e < big)
+    acc = near | bridged | hole_edge
+    acc = _reach(acc, R, int(math.ceil(opts['edge_tol'] / px))) | acc
+    bad = R & ~acc
+    # a teardrop apex or a sliver thinner than one extrusion width (0.4) prints as a single line: not a region
+    half = max(1, int(round(0.5 * dc.FDM['NOZZLE'] / px)))
+    core = bad.copy()
+    for i in range(half):
+        core = ~_grow(~core, 0)
+    thick = _reach(core, bad, half) | core
+    apex = float((bad & ~thick).sum()) * px * px
+    bad = thick
+    need = np.where(bridged, span_b, 0).max() if bridged.any() else 0
+    need_e = np.where(hole_edge, span_e, 0).max() if hole_edge.any() else 0
+    jj, ii = np.nonzero(bad)
+    return dict(bad_x=x0 + (ii + 0.5) * px, bad_y=y0 + (jj + 0.5) * px, area=float(R.sum()) * px * px,
+                span=float(max(need, need_e)) * px, hole_edge=float(hole_edge.sum()) * px * px, apex=apex)
+
+
+def check_print_overhang(L, pid, man, zones=(), opts=None, face_down=None):
+    """r6: one production part. man = manifold3d Manifold in print pose (Z0 = bed); zones = [dict(id, box (print
+    frame), why)] from layout.PRINT_SUPPORT_ZONES mapped by the build. -> one row (pass / fail) with the bridges, the
+    zone use and every unsupported region outside a zone."""
+    import manifold3d as m3
+    o = dict(getattr(L, 'PRINT_OVERHANG', {}) or {}, **(opts or {}))
+    h, allow = o['layer'], o['layer'] * math.tan(math.radians(o['overhang_deg']))
+    row = dict(kind='print_overhang', part=pid, face_down=face_down or L.PARTS[pid]['face_down'], rule=dict(
+        layer=h, overhang_deg=o['overhang_deg'], cantilever_max=o['cantilever_max'], bridge_max=o['bridge_max'],
+        edge_tol=o['edge_tol'], directions=o['directions'], px=o['px']))
+    if man is None or man.is_empty():
+        row.update(status='fail', error='no print-pose mesh')
+        return row
+    zmax = man.bounding_box()[5] if hasattr(man, 'bounding_box') else None
+    if zmax is None:
+        bb = man.to_mesh().vert_properties
+        zmax = float(np.max(np.asarray(bb)[:, 2]))
+    n = int(math.floor(zmax / h + 1e-9))
+    bridges, unsupported, used, regions, short, apex = [], [], {}, 0, 0, 0.0
+    prev = man.slice(0.5 * h)
+    for k in range(1, n):
+        z = (k + 0.5) * h
+        S = man.slice(z)
+        supp = prev.offset(allow, m3.JoinType.Round)
+        U = S - supp
+        prev = S
+        if U.area() < o['min_area']:
+            continue
+        anchor = S ^ supp
+        near = anchor.offset(o['cantilever_max'], m3.JoinType.Round)
+        for comp in U.decompose():
+            if comp.area() < o['min_area']:
+                continue
+            regions += 1
+            if (comp - near).area() < o['min_area']:
+                short += 1
+                continue
+            c = _classify(comp, anchor, o)
+            xs, ys = c['bad_x'], c['bad_y']
+            zb = k * h
+            apex += c['apex']
+            if c['span'] > 0.0:
+                bridges.append(dict(z=_r(zb, 2), span_mm=_r(c['span'], 2), area_mm2=_r(c['area'], 2),
+                                    hole_edge_mm2=_r(c['hole_edge'], 2), bbox=[_r(v, 1) for v in comp.bounds()]))
+            if not len(xs):
+                continue
+            inside = np.zeros(len(xs), bool)
+            for zn in zones:
+                x0, x1, y0, y1, z0, z1 = zn['box']
+                if z0 - h <= zb <= z1 + h:
+                    sel = (xs >= x0) & (xs <= x1) & (ys >= y0) & (ys <= y1) & ~inside
+                    if sel.any():
+                        used[zn['id']] = used.get(zn['id'], 0.0) + float(sel.sum()) * o['px'] ** 2
+                        inside |= sel
+            if (~inside).any():
+                out_x, out_y = xs[~inside], ys[~inside]
+                unsupported.append(dict(z=_r(zb, 2), area_mm2=_r(float((~inside).sum()) * o['px'] ** 2, 2),
+                                        bbox=[_r(float(out_x.min()), 1), _r(float(out_y.min()), 1),
+                                              _r(float(out_x.max()), 1), _r(float(out_y.max()), 1)]))
+    stale = sorted(zn['id'] for zn in zones if zn['id'] not in used)
+    bridges.sort(key=lambda b: -b['span_mm'])
+    probs = []
+    if unsupported:
+        probs.append('%d unsupported region(s) outside the declared support zones, largest %.1f mm2 at z %.2f'
+                     % (len(unsupported), max(u['area_mm2'] for u in unsupported),
+                        max(unsupported, key=lambda u: u['area_mm2'])['z']))
+    if stale:
+        probs.append('declared support zone(s) %s are never needed (stale declaration)' % ', '.join(stale))
+    row.update(layers=n, regions=regions, short_overhangs=short, bridge_regions=len(bridges),
+               longest_bridge_mm=max((b['span_mm'] for b in bridges), default=0.0), apex_line_mm2=_r(apex, 2),
+               hole_edge_bridges=sum(1 for b in bridges if b['hole_edge_mm2'] > 0.0),
+               hole_edge_mm2=_r(sum(b['hole_edge_mm2'] for b in bridges), 2), bridges=bridges[:12],
+               supports_used={k: _r(v, 2) for k, v in sorted(used.items())},
+               declared_zones=[dict(id=zn['id'], why=zn.get('why', '')) for zn in zones],
+               unsupported=sorted(unsupported, key=lambda u: -u['area_mm2'])[:20],
+               status='fail' if probs else 'pass')
+    if probs:
+        row['error'] = '; '.join(probs)
+    return row

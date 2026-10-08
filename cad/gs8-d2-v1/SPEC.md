@@ -202,6 +202,19 @@ Expected clearances:
    - J10 nib to button.
 3. Printed solids against `KEEPOUTS`: overlap 0.05 mm3 or less.
 4. Bed fit in print orientation on both beds (STL bounding box).
+4p. **r6 `print_overhang` (the settled print orientation).** Each production STL is sliced in its print pose every 0.2 mm
+   (manifold3d). The new area of each layer beyond the 45 deg allowance of the layer below is rasterised at 0.1 mm.
+   Each pixel must be one of these, or the category FAILs:
+   - a short overhang, within 1.0 of supported material in the same layer;
+   - on an anchored bridge: a straight run in one of 8 directions, both ends on supported material, <= FDM
+     MAX_BRIDGE (30);
+   - on a run from supported material into a hole inside the region, reported as a bridge "around a hole" (head
+     bearing faces);
+   - within 0.3 of one of these;
+   - thinner than one extrusion width (a teardrop apex line);
+   - inside a declared support zone (`layout.PRINT_SUPPORT_ZONES`).
+
+   A declared zone that no region needs FAILs as stale. The collar centring gauge (a tool) is checked the same way.
 5. Thin-wall screen (secondary since r2): 1500 area-weighted surface samples per part, wall = max over a 30 deg cone
    of inward rays; share rule as amended 2026-10-04 (area share under 1.2 <= 2 %, under 0.8 <= 0.5 %, loaded zones under
    1.6 <= 2 %). **A fail still blocks; a pass proves nothing by itself** (review finding 2). Samples under the wall
@@ -266,10 +279,14 @@ Expected clearances:
    `research/cloud-polish/PANEL-THIN-SPOT-REVIEW.md`. No physical gate is closed by this correction.
 5h. **r5 (J7-R) lens support** (`checks.py`, last section; R5-BRIEF choice 9; all four are J7 `required_checks`, so
    their rows gate `critical_features` through the J7 joint row):
-   - `j7_float`: at s 0, 1.25 and 3.0 the camera body, the BFAR and the adapter are measured against every part of the
+   - `j7_float`: r6 (audit 2026-10-06 L2): over the whole `CAM['s_range']` at <= 0.25 steps plus s_nom (was s 0, 1.25 and 3.0), the camera body, the BFAR and the adapter are measured against every part of the
      final state except the hanging unit itself (camera, adapter, lens): overlap <= 0.05 mm3, lateral and axial gaps
      >= body 0.5 / 0.4, BFAR 0.6 (radial) / 0.4, adapter 0.6 (radial), and the plain minimum >= the smaller rule.
-     The lens may touch only the collar, and never the camera at any s. A row downgrades to stub only if every actual offending obstacle is a stub; an unrelated stub cannot relabel a real failure. Per-s minima in `checks.json` and the receipt
+     The lens may touch only the collar, and never the camera at any s. r6 (L4): the lens also keeps >= 0.5 to every
+     part except its collar, the adapter and the camera (a 0-gap contact is a second support path), and (L3) a
+     missing lens solid is a FAIL row. r6 (X2): each lateral gap, less the declared collar-centring stack (0.30 with
+     the centring gauge; 0.60 without it is reported) and, for obstacles on the hood, the hood-to-tub location 0.25,
+     keeps >= 0.1. A row downgrades to stub only if every actual offending obstacle is a stub; an unrelated stub cannot relabel a real failure. Per-s minima in `checks.json` and the receipt
      (`j7_float_min`).
    - `lens_support`, every lens incl. the data-only Computar: FAIL without a support band at any mass (the collar is the only J7-R anchor); the band is
      fixed (no moving segment over it), its clamped length >= 5 (a zoom >= 15), bore - band 0.2..0.4 diametral, the
@@ -279,7 +296,11 @@ Expected clearances:
      actual measured rear bore edge (not just the nominal corrected radius). This truncates the unused cone
      feather without changing the band seat. A production lens with insufficient room FAILs; the data-only
      Computar is explicitly unbuilt/unsupported pending a separate entry design and cannot export a collar.
-     A band status other than `'measured'` is a WARN (an info row with a `warn` text).
+     A band status other than `'measured'` is a WARN (an info row with a `warn` text). r6 (audit L6): `'measured'`
+     clears it only with a current passing G-LENS record; `'measured'` without one FAILs. r6 (L3): every production
+     lens (LENSES) must have its collar solid in the build, else a FAIL row. r6 (X2): the collar centring gauge seats
+     on the tub lip edge and the collar bore chamfer (0 mm3, gap <= 0.01), keeps >= 0.5 from the hood, inserts along
+     -X without a hit, and clears the s_c1..s_c3 driver (rows `centring_gauge`).
    - `lens_clamp` (`layout.LOAD_MODEL`, estimates until G-COL-1 / G-CAM-2): FAIL if the lens axis is less than 10 inside
      the anchor polygon TL-TR-LR-LL, or if the slip moment M_sep = (pi / 6) F L (F = pinch 120 N x relaxation 0.5,
      L = clamped band length) is below 1.5 x the static moment of lens + camera + adapter about the band. WARN if
@@ -302,7 +323,9 @@ Expected clearances:
    forward. **r5:** each lens is weighed with its own collar, and the real camera model puts the lens 10 mm further
    rearward (C flange x +0.6): Kowa 895 g, +1.5 (r4 +3.73); Fujinon 782 g, -9.8 (r4 -8.89). The mass_com rules are
    unchanged (R5-BRIEF choice 10); judge 3's proposed WARN band outside 0..+8 is **not** added (the Fujinon would
-   WARN at -9.8).
+   WARN at -9.8). r6 (audit 2026-10-06 L9): since no balance rule is enforced, `mass_com` is a report-only category.
+   Its summary reads `info`, never `pass`, so it is no longer counted among the passing categories; a non-positive
+   mass still FAILs.
 9. `layout.self_check()` passes. `cad_release_candidate` (r2 name; was `release_candidate`) is true only if every
    check passes, `critical_features` passes and no printed part is a stub. It is a computed CAD state only: the receipt
    carries `status_states` (`cad_checks` computed; `slicer_review`, `coupon_validation`, `measured_fit`,
@@ -325,6 +348,15 @@ Expected clearances:
    bound to every production STL; `build_d2.STATE_GATES`). A state stays
    in `open_evidence` until every item has a current pass; failed, conflicting and stale item ids are named there.
    The build reports person-recorded verdicts; it never judges them, and it never closes a hardware gate.
+   **r6 (audit 2026-10-06):**
+   - **Print order (M2).** A slicer_review record for a part counts only if every gate of
+     `layout.PRINT_PREREQS[part]` has a current recorded pass dated on or before it. The same holds for a G-COL-1
+     coupon record and `COUPON_PREREQS`. Otherwise the record is rejected and the item stays open.
+   - **Evaluation order.** The states are evaluated measured_fit, then coupon_validation, then slicer_review. The
+     receipt's `print_release` names each part's open prerequisites.
+   - **Dates (L12b).** A record's `date` must be ISO 8601 (`YYYY-MM-DD`, optionally with a time).
+   - **Coupon gates (L10).** A coupon gate with no coupon STL in the manifests rejects every record. The contract
+     category also FAILs it, along with a coupon manifest cut from other sources than the build.
    **r3 fix-baseline (verifier review of the r3 baseline):** a measured_fit record must name its gate's acceptance doc
    (repo-root path from `build_d2.gate_doc`: EVF-G* -> `electronics/gs8-evf-v1/EVF-SELECTION.md`, G-W* ->
    `electronics/gs8-d2-v1/WIRING.md`, else `cad/gs8-d2-v1/MEASURED-PARTS.md` or `SPEC.md`); an assembly_operation
@@ -449,7 +481,10 @@ The 2 exterior keep-outs are the tripod clamp and the driver model.
   Record the exact short/lug insert part and measured OD/length, filament, print orientation/settings and torque tool.
   Clear the collar's three print-only 0.2 mm membranes to 3.4 mm by hand; washer seat planes must remain flat.
   Assemble the actual coupon stack: tub front with inserts, hood plate, collar. The feet clear the dia 8.6 holes by
-  >= 0.3. Torque s_c1..s_c3 first, at no more than the provisional 0.15 N m cap, then apply the s_c4 pinch at 0.2 N m.
+  >= 0.3. r6 (audit X2): with the collar loose on the coupon, push the centring gauge home; it must seat on both
+  cones and centre the collar (feeler: equal gap round the lip within 0.1). Torque s_c1..s_c3 first, with the gauge
+  held home and the torque screwdriver, at no more than the provisional 0.15 N m cap; pull the gauge; then apply the
+  s_c4 pinch at 0.2 N m.
   The order matches assembly; a freely deforming unbolted collar is not an equivalent clamp test. Record full washer
   contact, no cracked boss/ear/lug, and insert migration before and after a 100 N added axial proof load at each anchor
   for 60 s. This validates only that tested coupon/part/material, not a universal insert rating.
@@ -465,7 +500,9 @@ The 2 exterior keep-outs are the tripod clamp and the driver model.
   10 min; (b) a 15 N side push at the focus ring; (c) 50 g hung on the camera cover; (d) 1 h at 50 C with (a). Pass:
   the corner-vs-centre focus difference changes by <= 4 um (1/3 of the depth of focus, about 0.1 deg) in every case;
   the aim shift is recorded (target <= 0.3 deg under (a)). Repeat once with the BFAR lock screw loose, to show that the
-  camera carries no lens load.
+  camera carries no lens load. r6 (audit B-7): repeat the centre/corner record after 5 lens swaps, made as ASSEMBLY s7
+  (fingertip thread torque, the panel on). Every swap reacts its torque through the roll fin and the housing-to-PCB
+  joint, so the swaps must not creep sensor tilt in: change <= 4 um.
 - **Plan B (r5, documented only, not built).** If G-LENS shows that the Kowa band moves, judge 2's housing clamp is
   used instead (`research/r5-lens-support/design_2.md`, `judge_2.md` s2.2): a printed cradle in the tripod-block seat
   and a clip over the lock tab, 3 PT screws from the front, clamp the camera housing to the tub. It bypasses the

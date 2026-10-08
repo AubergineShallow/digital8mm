@@ -40,15 +40,18 @@ SQ2 = math.sqrt(2.0)
 PRINT = {
     'tub': dict(
         face_down='-Y',
-        supports='2 small paint-on supports under the -Y wings of the 2 keyhole T-tongue heads (each about 7.8 x 1.6, about 17 mm above the bed, '
-                 'the T undercut cannot face the bed); nothing else',
+        supports='4 small paint-on supports, each declared in layout.PRINT_SUPPORT_ZONES and checked by print_overhang: '
+                 'under the -Y wings of the 2 keyhole T-tongue heads (each about 7.8 x 1.6, about 17 mm above the bed, '
+                 'the T undercut cannot face the bed) and (r6) under the 2 flat chins: the s_k2 keeper boss (2.9 x 7.3 '
+                 'off the floor wall, 59 mm up) and the LL collar-insert boss (3.3 x 2.4 off the front wall, 59 mm up); '
+                 'nothing else',
         notes='Right wall on the bed; 4 perimeters, 25 % gyroid; 40 % infill modifier meshes (r4: load all 7, r5: 10 with s_c1..s_c3 round the insert bosses; '
               'out/stl/modifiers/tub__mod_*.stl at their exported position: 8 mm round every PT pilot, including the 2 s_r '
               'counterbore pads where the screw heads bear). Brim 5 mm (ASA warp on a 151 x 101 footprint). Bridges: window/slot tops <= 20 mm, the '
               'Ø7 counterbore shoulders, the cell -Y wall (13.9), the scoop roof (20). Teardrop bores 29.3, r5 lip 32.4 and BFAR counterbore 37.5 '
               'open toward +Y (print up). r5: 3 M3 heat-set inserts (bench, before step 3) flush -0.1 from the front face; '
-              '3 insert bosses grow -X from the front wall with 45 deg undersides (LL: 3.3 x 2.4 flat chin, bridged). R1 r2: the 2 Pi-keeper bosses are teardrop prisms with the chin down '
-              '(s_k2 has a 1.0 flat at its apex); their 40 % modifiers are tub__mod_s_k1/s_k2.'),
+              '3 insert bosses grow -X from the front wall with 45 deg undersides (LL: a 3.3 x 2.4 flat chin, supported since r6). R1 r2: the 2 Pi-keeper bosses are teardrop prisms with the chin down '
+              '(s_k2: the chin cut 0.25 off the X1203 edge leaves a 2.9 wide flat, supported since r6); their 40 % modifiers are tub__mod_s_k1/s_k2.'),
 }
 
 PLANES = {'xy': ((0, 0, 1), (1, 0, 0), (0, 0, 1)), 'yz': ((1, 0, 0), (0, 1, 0), (1, 0, 0)),

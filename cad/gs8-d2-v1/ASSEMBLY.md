@@ -18,9 +18,9 @@ floor underside. "Travels +Z" means the screw moves upward (driven from below).
 | Item | Requirement |
 |---|---|
 | Driver | **One PH1 screwdriver, straight**, shank dia 6.5 or less, blade 40 mm or longer, handle dia 28-30 (`layout.DRIVER`). It is the only tool for the **enclosure closure** (the PT screws) and (r5) for the 4 lens-collar M3 screws; the whole build needs the toolset of s1.1. No L-keys, hex keys, angled or ball-end drivers (user rule). The X1203 kit M2.5 screws take the same PH1 if they are cross-recess; if the kit ships hex screws, use M2.5 x 5 ISO 7045 PH1 instead (FASTENER-POLICY F) |
-| PT torque | **0.35-0.5 N m by hand, stop at head contact** (FASTENER-POLICY C, provisional until G-PT-1). No threadlocker on ASA. Do not re-torque later |
-| M3 torque (r5) | lens collar: s_c1, s_c2, s_c3 **0.15 N m provisional maximum**, the pinch s_c4 **0.2 N m**, by hand, stop at head contact (FASTENER-POLICY I). Machine thread into brass heat-set inserts: no drive tally, no threadlocker |
-| Lens rule (r5) | **never thread the lens into an unsupported camera.** At step 8 a finger holds the camera cover through the open left side; with the panel on (lens swap, s7), the camera rests in its cage (tub lip ahead, panel keeper behind, hood roll fin beside it) and one hand carries the lens. s_c4 is always the last operation on the lens |
+| PT torque | **0.35-0.5 N m, stop at head contact** (FASTENER-POLICY C, provisional until G-PT-1). r6 (audit B-6): set it on the torque screwdriver (tool 13, BOM D2-77); a firm hand on a plain PH1 already gives 0.4-0.6 N m. No threadlocker on ASA. Do not re-torque later |
+| M3 torque (r5) | lens collar: s_c1, s_c2, s_c3 **0.15 N m provisional maximum**, the pinch s_c4 **0.2 N m**, stop at head contact (FASTENER-POLICY I). r6 (audit B-6, X5): **always with the torque screwdriver** (tool 13, BOM D2-77). By hand these become 2-3 times the value and can pull a short insert or crush the washer seat. Machine thread into brass heat-set inserts: no drive tally, no threadlocker |
+| Lens rule (r5, r6) | **never thread the lens into an unsupported camera.** r6 (audit B-7): never react the thread torque through the cover or the PCB. Those are joined to the lens mount only by the compliant housing-to-PCB joint (2 M2 screws, nylon washers, gasket). At step 8 (panel off) finger and thumb hold the camera's **metal lens mount (housing)** through the open left side. With the panel on (lens swap, s7) the camera rests in its cage (tub lip ahead, panel keeper behind, hood roll fin beside it): one hand carries the lens, and the thread is turned with **fingertips only**, so the roll fin never becomes a wrench. **Check the adapter mark at every lens change** (B0, item 3). s_c4 is always the last operation on the lens |
 | Re-assembly | 5 or fewer drives per boss; tally them on the build sheet. Then the M3 insert fallback (FASTENER-POLICY D-E) |
 | Kit screws | X1203 kit M2.5: 0.2 N m, metal to PCB only, at the bench (step 1) |
 | Switch nut | finger-tight + 1/8 turn (about 0.3 N m) on a 1/2 in socket; the anti-rotation tab carries the switching torque |
@@ -34,7 +34,8 @@ floor underside. "Travels +Z" means the screw moves upward (driven from below).
 
 ### 1.1 Full toolset (r2, audit finding 7)
 
-"One PH1" is true of the enclosure closure only. Building the whole camera takes the 12 tools below. The column
+"One PH1" is true of the enclosure closure only. Building the whole camera takes the 14 tools below (r6: + the torque
+screwdriver and the collar centring gauge, audit 2026-10-06 B-6 and X2). The column
 "Removed by" shows which optional simplification of `OPTIONS.md` would remove a tool: (a) 18/24 moved into the
 encoder menu (declined by the user 2026-10-05: the 18/24 stays a switch, so tools 6 and 7 stay), (b) a 150 mm camera
 FPC (open). Neither option is applied.
@@ -53,6 +54,8 @@ FPC (open). Neither option is applied.
 | 10 | Flat bar (any steel rule) | press the tripod nut into its pocket (3) | - | - |
 | 11 | Paint pen | engraving fill (2) | D2-44 | - |
 | 12 | ESD mat + wrist strap | steps 1, 4, 6, 7; B0 | D2-70 | - |
+| 13 | Adjustable torque screwdriver 0.1-0.6 N m, straight, PH1 bit (shank <= 6.5 over >= 40, handle dia <= 30: the driver audit envelope) (r6) | every M3 lens-collar screw (s_c1..s_c3 0.15, s_c4 0.2 N m) and every PT screw (0.35-0.5 N m) (3, 4, 7, 8, 10, service) | D2-77 | - |
+| 14 | Collar centring gauge, printed, one per lens (`stl/tools/collar_gauge.stl`) (r6) | centre the collar on the tub lip while s_c1..s_c3 are tightened (7; every collar refit, s7 item 6c) | printed (PRINT-GUIDE s3) | - |
 
 Not counted above:
 - **Bench and gate equipment**: bench DC supply with current limit (>= 10 A), official 27 W PSU, inline USB-C power
@@ -76,21 +79,33 @@ Not counted above:
      component dimensions. A nominal 1.25 mm CAD pose is a geometry sample, not a measured infinity setting.
   2. Keep the tripod block fitted and secure it to a bench tripod/clamp; independently support the lens barrel in
      a padded V-block if needed. Never thread the heavy lens into an unsupported camera or hold it by the PCB/cover.
-     Fit the C-CS adapter hand-tight, then the selected lens.
-  3. For live view use the bench Pi/camera setup: connect the correct FPC to CAM1 only while power is off; use the
+  3. r6 (audit B-2): seat the C-CS adapter firmly in the BFAR and draw one paint-pen line across adapter and BFAR.
+     The adapter and the lens use the same 1"-32 thread, both hand-tight, so either joint can break loose first at a
+     lens change. If the adapter ever comes out with the lens, the next C lens screws 5 mm deeper into the CS thread
+     and its rear (C - 6.7) can reach the camera's filter. **At every lens change the mark must still line up.** If it
+     does not, unscrew the adapter from the lens, take the camera out (s7 item 6b) and refit the adapter here before
+     any lens goes in. Then fit the selected lens.
+  4. For live view use the bench Pi/camera setup: connect the correct FPC to CAM1 only while power is off; use the
      official Pi supply and the already-verified preview route (an external monitor is sufficient). The pack and
      X1203 are not needed for this optical measurement. Shut down and remove bench power before moving the FPC.
-  4. Set back focus with the selected lens at infinity (or a target more than 50 m away), lock the BFAR split-tab
+  5. Set back focus with the selected lens at infinity (or a target more than 50 m away), lock the BFAR split-tab
      screw, and record s, lock-screw side and the direct C-flange-to-cover-rear distance. Do not infer sensor die
      height or filter shift from an illustrative CAD value. Record the lens thread length and verify rear-cell/filter
-     clearance. Remove the lens while the camera remains supported.
-  5. Only now remove the tripod block and bag its two screws (drive unconfirmed until MP-CAM). Confirm that it comes
+     clearance. r6 (audit X4): s must lie inside the CAD travel `CAM['s_range']` (0..3.0), the range the float
+     check sweeps every 0.25 mm. The panel keeper sits 0.5 behind the cover at s 3.0, so **never screw the BFAR
+     out past 3.0** in service (no macro by back focus). If infinity needs more, stop: record the BFAR's full
+     travel at both stops for MP-CAM, then update `CAM` and rebuild. Remove the lens while the camera remains
+     supported.
+  6. Only now remove the tripod block and bag its two screws (drive unconfirmed until MP-CAM). Confirm that it comes
      off without disturbing the camera body and leaves nothing below r 18. Otherwise stop. Update CAM and the
      selected LENSES band/segment/CoM values, rebuild every affected part and rerun the full checks before printing.
      G-LENS and G-COL-1 precede the production print set; G-CAM-2 follows final assembly.
-- **B1. Heat-set inserts (FASTENER-POLICY I; iron with an M3 heat-set tip, BOM D2-74).** Before step 3, with the tub
-  empty: 3 short inserts (D2-35) into the 3 front-wall bosses TL, TR, LL from the front, square to the face, 0.1 below
-  it. Any time before step 7: 1 insert L 5.7 (D2-36) into the lens collar's lower lug from below. Let them cool; check
+- **B1. Heat-set inserts (FASTENER-POLICY I; iron with an M3 heat-set tip for that iron's tip system, BOM D2-74).**
+  Before step 3, with the tub empty: 3 short inserts (D2-35) into the 3 front-wall bosses TL, TR, LL from the front,
+  square to the face, 0.1 below it. r6 (audit B-14): the bosses hang behind a 2.5 mm wall, so back each one with a
+  block through the open left side, go slowly and check that the insert goes in square. A crooked insert is the
+  usual failure in a small ASA boss. (The 3.4 clearance runs on through each boss end, so a screw at the long end of
+  its length tolerance cannot bottom; audit B-3.) Any time before step 7: 1 insert L 5.7 (D2-36) into the lens collar's lower lug from below. Let them cool; check
   that an M3 screw turns in by hand. Record the actual insert maker/part, OD and length; update M3 and rerun the insert checks if they differ. Clear the collar STL's three sacrificial 0.2 mm membranes with a 3.4 mm hand tool; remove debris and verify flat washers without changing the seat, cone or foot datums.
 
 <!-- BEGIN:steps -->
@@ -177,25 +192,25 @@ Push the eyepiece spigot +X into the rear-wall bore through the housing, flange 
 | Cables | `hdmi` Pi 5 HDMI0 -> EVF board lower edge; `usb_5v` Pi 5 upper USB 2 port -> EVF board 5 V; `oled_flex` HMX039 -> EVF board ZIF |
 | In the body after this step | 20 ids (`layout.present_at(6)`) |
 
-### Step 7. Camera + adapter + lens collar
+### Step 7. Lens collar (centred) + camera + adapter
 
-Bench B0 done: tripod block off (2 screws bagged), C-CS adapter hand-tight, back focus set with the Kowa at infinity and the lock screw tight (s recorded), lens off again. Plug the FPC into the camera. Bring the camera in from the left, 11 mm behind its place, then push it +X 11.1 until the adapter has passed the tub lip (path: in at 2 mm high, lower 2 mm, then +X 11.1); it rests in its cage (BFAR in the counterbore, tab near the wall) until the lens carries it. Fold the FPC slack into its loop. Lens collar: feet through the 4 hood holes onto the tub face; s_c1, s_c2, s_c3 with washers from the front into the tub inserts, 0.15 N m provisional cap, stop at head contact.
+Bench B0 done: tripod block off (2 screws bagged), C-CS adapter seated and marked across adapter and BFAR, back focus set with the Kowa at infinity and the lock screw tight (s recorded), lens off again. Lens collar first, camera still out: feet through the 4 hood holes onto the tub face; start s_c1, s_c2, s_c3 with washers 2 turns. Push the centring gauge for this lens through the collar until its rear cone seats in the tub lip and its front cone in the collar bore chamfer; hold it home with a thumb and tighten s_c1, s_c2, s_c3 from the front, 0.15 N m provisional cap, stop at head contact; pull the gauge out. Camera: plug the FPC into it, bring it in from the left, 11 mm behind its place, then push it +X 11.1 until the adapter has passed the tub lip (path: in at 2 mm high, lower 2 mm, then +X 11.1); it rests in its cage (BFAR in the counterbore, tab near the wall) until the lens carries it. Fold the FPC slack into its loop.
 
 | Item | Detail |
 |---|---|
-| Parts added to the body | `gs_camera` (Raspberry Pi Global Shutter Camera (tripod block removed at B0)); `c_cs_adapter` (C-CS adapter ring 5 mm (with the camera)); `lens_collar` (printed, ASA black) |
+| Parts added to the body | `lens_collar` (printed, ASA black); `gs_camera` (Raspberry Pi Global Shutter Camera (tripod block removed at B0)); `c_cs_adapter` (C-CS adapter ring 5 mm (with the camera)) |
 | Fasteners | `s_c1` M3 x 10 PH1 + washer; `s_c2` M3 x 10 PH1 + washer; `s_c3` M3 x 10 PH1 + washer |
 | Driving | `s_c1` travels -X (rearward, from the front), 3.9 mm engagement into tub insert TL; `s_c2` travels -X (rearward, from the front), 3.9 mm engagement into tub insert TR; `s_c3` travels -X (rearward, from the front), 3.9 mm engagement into tub insert LL |
 | Torque | `s_c1` 0.15 N m (FASTENER-POLICY I, M3 into a heat-set insert); `s_c2` 0.15 N m (FASTENER-POLICY I, M3 into a heat-set insert); `s_c3` 0.15 N m (FASTENER-POLICY I, M3 into a heat-set insert); no threadlocker |
-| Tool | straight PH1 screwdriver (the step 8 driver); hands |
-| Motion | `camera_in` (gs_camera, c_cs_adapter): start at offset (-11.1, 60, 2), then -Y 60, then -Z 2, then +X 11.1; `collar_on` (lens_collar): start at offset (30, 0, 0), then -X 30 |
+| Tool | straight PH1 torque screwdriver (the step 8 driver); collar centring gauge; hands |
+| Motion | `collar_on` (lens_collar): start at offset (30, 0, 0), then -X 30; `camera_in` (gs_camera, c_cs_adapter): start at offset (-11.1, 60, 2), then -Y 60, then -Z 2, then +X 11.1 |
 | Harness (WIRING s7) | FPC -> GS camera: 15-pin end, latch closed (**fold the slack into `ko_fpc_loop`**) |
 | Cables | `fpc` Pi 5 CAM/DISP 1 (port edge) -> GS camera (lower rear) |
 | In the body after this step | 26 ids (`layout.present_at(7)`) |
 
 ### Step 8. Lens + panel + 5 screws
 
-Lens, panel still off: fit s_c4 loosely; pass the lens through the collar and screw it into the adapter while a finger through the open left side presses the cover forward (+X) onto the temporary lip catch (the hood roll fin also stops it turning); set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the knurl seats on the collar cone; the camera now hangs on the lens (it touches neither the tub lip, the counterbore nor the fin); snug s_c4 straight down from above, 0.2 N m. Panel: hold it beside the body; plug the QT lead into the encoder (JST-SH) and mate the 18/24 PH junction (header ends went on at step 4). Push the panel on along -Y (tongue into the hood groove, boss tabs into the lip notches, flush; the keeper finger is the camera's rear catch). Drive s_b1, s_b2 up from below and s_r1, s_r2 from the right: 0.35-0.5 N m, stop at head contact.
+Lens, panel still off: fit s_c4 loosely; pass the lens through the collar and screw it into the adapter while finger and thumb through the open left side hold the camera by its metal lens mount (housing, never the cover or the PCB) forward (+X) on the temporary lip catch, so the thread torque never passes the housing-to-PCB joint; set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the knurl seats on the collar cone; the camera now hangs on the lens (it touches neither the tub lip, the counterbore nor the fin); snug s_c4 straight down from above, 0.2 N m. Panel: hold it beside the body; plug the QT lead into the encoder (JST-SH) and mate the 18/24 PH junction (header ends went on at step 4). Push the panel on along -Y (tongue into the hood groove, boss tabs into the lip notches, flush; the keeper finger is the camera's rear catch). Drive s_b1, s_b2 up from below and s_r1, s_r2 from the right: 0.35-0.5 N m, stop at head contact.
 
 | Item | Detail |
 |---|---|
@@ -247,7 +262,7 @@ Plug the pack XT30 into the pigtail at the grip mouth, push the junction and the
 | 4 | Run lead in its channel, pigtail round the port edge and down its hole, nothing under the stack. Stack flat on its 4 bosses (no rock); keeper fingers over the X1203 at all 4 stations (look under the Pi at the USB end), keeper flat on its 2 bosses, s_k1 and s_k2 at head contact (tally 1 drive each). HDMI, FPC and 5 V lead plugged at the Pi. **Header: QT red on pin 1 (3V3, the corner pin by the cooler end), 18/24 on 33/34, run on 37/39; count the pins, photograph the header.** QT and 18/24 leads along the right wall and across behind the blower inlet; run lead over the cooler shroud, below z 40 |
 | 5 | Hood level on the wall tops all round; 4 hooks clicked; plate 0.2 off the front wall. Plunger moves in and returns on the Pi button spring (0.6 travel, presses 0.35). microSD latched (tip about 2.5 mm proud of the Pi edge, inside the slot) |
 | 6 | Spigot flange flat on the rear face. OLED in its cell, foam behind it, board fully home in its slot; flex in the ZIF, latch closed (mated outside, pair slid in together). HDMI coil over the stick guide (`ko_hdmi_coil`), clear of the cooler inlet; PH junction tucked in `ko_5v_end` |
-| 7 | (r5) Camera in its cage: the adapter past the tub lip, the BFAR in the counterbore, the camera resting, not wedged (it lifts and turns slightly by hand). FPC folded into the loop space, not touching the blower inlet. Collar: 4 feet flat on the tub face through the hood holes, s_c1..s_c3 at head contact (0.15 N m provisional maximum), washers under every head |
+| 7 | (r6) Collar first: 4 feet flat on the tub face through the hood holes; the centring gauge seated on both cones (no rock) while s_c1..s_c3 went to head contact at 0.15 N m on the torque screwdriver; washers under every head; gauge out. (r5) Then the camera in its cage: the adapter past the tub lip, the BFAR in the counterbore, the camera resting, not wedged (it lifts and turns slightly by hand); the adapter mark lines up. FPC folded into the loop space, not touching the blower inlet |
 | 8 | (r5) Lens: thumb screws set; the knurl seated on the collar cone (push it gently rearward: no axial play); the camera hangs on the lens: look through the open left side, it touches neither the lip, the counterbore nor the roll fin; s_c4 at 0.2 N m. Panel flush with the hood band and the tub. 4 screws at head contact, none stripped. The dials turn; nothing rubs inside |
 | 9 | Knobs fully on; the eyecup sleeve over the eye-end body. Stick in, sleeve flush with the rear face (r5: the lens was checked at step 8) |
 | 10 | Cap detent clicked. Power on with the plunger; (r5) level check on live view: if the horizon is off, s_c4 half a turn, turn lens and camera together (window +-1.4 deg), push the lens back onto the cone, s_c4 0.2 N m; the EVF shows the boot screen (there are no LED indicators: user decision 2026-10-05). Then WIRING G-W8 to G-W12 in the closed body (G-W12: full-workload power test). G-W4 to G-W7 and G-W13 (option C) are bench gates that ran before assembly (s1 Gates before assembly) |
@@ -358,15 +373,18 @@ then the pack in and the XT30 mated last (section 2 step 10), as in the initial 
    comes away (the header ends stay on). To close: reverse step 8 (panel on along -Y, boss tabs into the notches, 4
    screws at 0.35-0.5 N m); only then the pack and cap (step 10).
 6. Camera, lens and collar (r5; pack out, item 1; panel off, items 3-4):
-   a. Lens: loosen s_c4 one turn (straight PH1 from above). Hold the camera cover with a finger through the open
-      left side and unscrew the lens by hand; lift it out forward (+X 40). The camera now rests in its cage.
+   a. Lens: loosen s_c4 one turn (straight PH1 from above). Hold the camera by its metal lens mount (housing)
+      with finger and thumb through the open left side, never by the cover (r6, audit B-7), and unscrew the lens by
+      hand; lift it out forward (+X 40). The camera now rests in its cage. Check the adapter mark (B0 item 3).
    b. Camera (reverse `camera_in`, CAD record `camera_out`): unfold the FPC, pull the camera and its adapter -X 11.1
       back through the tub lip, lift 2, take it out along +Y 60; unplug the FPC at the camera. The collar may stay.
    c. Collar (CAD record `collar_off`; only for a collar swap or the hood / Pi routes): s_c1, s_c2, s_c3 out from the
       front (PH1 along -X), then the collar +X 30 off the tub face and out of the hood holes. The inserts stay in the
-      tub; no drive tally (machine thread in brass).
-   To close: step 7 (camera, collar, s_c1..s_c3 0.15 N m (provisional cap; G-COL-1)), step 8 (the lens through the collar with the camera held,
-   s_c4 0.2 N m, then the panel), and the step 10 level check.
+      tub; no drive tally (machine thread in brass). r6 (audit X2): a collar always goes back on with the camera
+      out (item b) and the centring gauge of that collar's lens, as step 7.
+   To close: step 7 (collar with the centring gauge, s_c1..s_c3 0.15 N m on the torque screwdriver (provisional cap;
+   G-COL-1), gauge out, then the camera), step 8 (the lens through the collar with the camera held by its metal
+   mount, s_c4 0.2 N m, then the panel), and the step 10 level check.
 7. EVF (reverse `evf_pair_in`, `eyepiece_in`; pack out, item 1): slide the OLED and the board out together along +Y 45; outside the body
    part the PH junction, the HDMI and the flex. Pull the eyepiece out -X 30 through the housing.
 8. microSD (pack out, item 1): pull it out through the front slot with tweezers (it must be out before the stack moves).
@@ -406,11 +424,14 @@ then the pack in and the XT30 mated last (section 2 step 10), as in the initial 
 
 **Lens swap (r5; no isolation needed, nothing electrical is touched).** With the panel on, the camera rests in its
 cage: the tub lip ahead, the panel keeper behind, the hood roll fin beside the cover. Loosen s_c4 one turn (straight
-PH1 from above); carry the lens with one hand and unscrew it: the camera turns with it until its cover meets the roll
-fin, which then holds it. Fit the new lens the same way, carrying its weight so that the camera only sees the thread
-torque. Tip the isolated body nose-down so the camera comes forward onto its lip catch before starting the thread; never force a thread that will not start. Push the lens rearward until its band seats on the collar cone; s_c4 0.2 N m; then the step 10 level check. A lens
-with a different band needs its own collar (a Fujinon collar for the Fujinon): panel off, item 6a, the collar swap of
-item 6c, then step 8. The back focus was set for the Kowa at B0: check infinity on live view with the new lens and, if
+PH1 from above); carry the lens with one hand and unscrew it **with fingertips only**: the camera turns with it until
+its cover meets the roll fin, which then holds it. r6 (audit B-7): that reaction passes through the housing-to-PCB
+joint, so a stuck thread is never forced against the fin. Take the panel off instead (s7 items 1-4) and hold the
+metal mount. G-CAM-2 repeats its corner check after 5 swaps. Then check the adapter mark (B0 item 3; audit B-2):
+if the adapter came out with the lens, refit it before anything else. Fit the new lens the same way, carrying its
+weight so that the camera only sees the thread torque. Tip the isolated body nose-down so the camera comes forward onto its lip catch before starting the thread; never force a thread that will not start. Push the lens rearward until its band seats on the collar cone; s_c4 0.2 N m; then the step 10 level check. A lens
+with a different band needs its own collar (a Fujinon collar for the Fujinon): panel off, items 6a-6c (camera out),
+then step 7 with that collar's centring gauge, then step 8. The back focus was set for the Kowa at B0: check infinity on live view with the new lens and, if
 it is off, reset s with the camera out (B0) and record it.
 
 Re-assemble from section 2. Replace any hood hook that has whitened. Use the insert fallback on any boss that spins.

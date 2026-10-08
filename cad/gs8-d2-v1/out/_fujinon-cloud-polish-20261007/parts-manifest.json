@@ -1,5 +1,5 @@
 {
- "revision": "GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)",
+ "revision": "GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, minor findings)",
  "parts": [
   {
    "id": "pi5",
@@ -787,14 +787,14 @@
    "pn": null,
    "src": null,
    "step": 7,
-   "mass_g": 18.4,
+   "mass_g": 18.9,
    "bbox": [
     -2.7,
     8.64,
     -35.0,
-    33.01,
-    29.98,
-    95.51
+    33.61,
+    29.97,
+    96.12
    ]
   }
  ],

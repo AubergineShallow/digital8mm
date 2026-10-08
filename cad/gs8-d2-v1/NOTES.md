@@ -1490,3 +1490,18 @@ names both LEDs; G-W8 records light at the plunger/vents also in the halted stan
 - Balance: Kowa 895 g +1.5; Fujinon 782 g -9.8 (mass_com rules unchanged). Collar Kowa 17.0 g / Fujinon 18.6 g.
 - 2026-10-06: r5 heavy-lens support (user: "Fix the sagging issue for the heavy lens first"). Design workflow (2 dossiers, 3 designs, 3 judges) found the GS mount is aluminium and the r4 camera model ~10 mm wrong; adopted J7-R float + per-lens lens_collar (R5-BRIEF.md). Implemented + released 16:32 (27/27, 732 pass / 17 info / 0 fail; Fujinon 27/27). Time-boxed review 17:02: 0 blocker / 0 major, 10 minor + 13 notes, fix list in HANDOFF s0. User asked to wind down by 18:00; no build after 16:32.
 - 2026-10-07: cloud-polish package (4 zips, fork r5-cloud-polish-20261007) verified and ADOPTED as the desktop baseline. Package = desktop r5 at 22:04 SGT 10-06 + 81-file patch; local rerun reproduces it (87 STLs geometrically identical, check outcomes identical); final desktop Kowa receipt 13:34:26, 27/27, 748 pass + 18 info, audit 20/85/4 all match; software 256/256 after a Windows test-path fix. Pre-adoption: out/_r5-2026-10-06, baseline-r5-2026-10-06.zip. Audit 10-06 M1-M3 still unanswered.
+
+## r6 print order, orientation and audit 2026-10-06 minor findings (2026-10-08, main session; user: "Settle the print order and orientation. Fix the minor findings as well.")
+- Work in the `digital8mm` repository (the D2-only GitHub copy). Response to the audit:
+  `audit/d2-readiness-2026-10-06/RESPONSE.md`. HANDOFF has the r6 section at the top.
+- Orientation trial first, on the 10-07 STLs (scratch scan, then the final layer-slice method): every face-down
+  confirmed. Two undeclared overhangs were found: the s_k2 boss chin (2.9 x 7.3 off the floor wall) and the LL insert
+  boss chin (3.3 x 2.4 off the front wall). Both are now declared supports in `PRINT_SUPPORT_ZONES`.
+- B-3 re-checked on the code: the 3.4 clearance runs through each boss end, so bottoming was impossible. The 4.184
+  local depth was the LL face on the RV 5 corner. Bore deepened 0.1 anyway; the check is tightened.
+- X2 options weighed: locating feet (no room beside the screws), an LR pin (about a 0.1 gain), a two-cone gauge with
+  the collar fitted before the camera (adopted: no fit clearance in the chain).
+- Tests: test_r3_regressions 65 -> 82 cases (17 r6 planted-fault cases); focused unittests 73; test_collar.
+- Release sequence (CLOUD-START-HERE), 15:41-16:11 SGT: test_common, make_coupons, coupons_r1, Kowa build 15:50 (321 s), make_tables, make_bom (a quoting slip fixed: make_bom is not a hashed source), Fujinon 15:56:46, copy, Kowa final 16:05:33 (522.6 s; 28 categories, 833 pass + 19 info + 0 fail), make_tables design + print, check (one historical '12 tools' phrase in RECTIFICATION reworded), audit_cloud_release --final-release pass 20/86/4, then test_r3 82/82, focused 73 OK (4 skips), test_collar PASS 151.8 s.
+- New numbers: collar 17.3 g (was 17.0); centring gauge 22.0 g (44.5 x 44.5 x 24.5); tub insert bores 4.3 deep. Centring rows: roll fin 0.25 left with the gauge (-0.05 without it), BFAR 0.45 (0.15), adapter 0.525 (0.225). Lens gaps: tub 3.33, hood 2.57.
+- Still open: M1 (collar clamp spring and thermal term), every physical gate, G-W12. Nothing committed yet.

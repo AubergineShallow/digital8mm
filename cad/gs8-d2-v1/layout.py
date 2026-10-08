@@ -18,7 +18,8 @@ BOX convention: B(x0, x1, y0, y1, z0, z1) -> {'x': (x0, x1), 'y': (y0, y1), 'z':
 """
 import math
 
-REVISION = 'GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)'
+REVISION = ('GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, '
+            'minor findings)')
 SHIFT = -77.0                      # concept x -> D2 x
 
 
@@ -345,7 +346,10 @@ COLLAR = dict(
     bolted=('TL', 'TR', 'LL'), compression=('LR',),
     foot_d=7.6, hole_d=3.4, hood_hole_d=8.6, foot_x=(XT1, X_FRONT + 0.3),       # feet x -2.7..+0.3 (datum: tub face)
     flange_x=(X_FRONT + 0.3, 2.8),        # body rear face 0.3 ahead of the hood plate; washer seat x 2.8
-    body_r=30.0, ear_r=5.0, cbore_d=7.5,   # r5: ear r 4.4 (judge 3) left 0.65 round the dia 7.5 counterbore -> 5.0 (1.25)
+    body_r=30.0, ear_r=5.6, cbore_d=7.5,   # r5: ear r 4.4 (judge 3) left 0.65 round the dia 7.5 counterbore -> 5.0 (1.25);
+    #   r6 (review A3, orientation): 5.0 -> 5.6. The bed face (+X) is the counterbore face, and the 0.6 outer bed
+    #   chamfer (it propagates along the tangent outer wire) left 0.65-0.8 of ear wall in the first layers; 5.6 keeps
+    #   1.25 (>= MIN_WALL 1.2) at the bed and 1.85 above the chamfer
     bore_clear=0.3, cone_deg=45.0, cone_drop=2.0, rear_bore_land_min=1.6, front_gap_min=2.0,
     band_end_margin=0.4,                  # collar front >= band front + 0.4 where the moving-ring rule allows it
     slit=dict(w=2.0, side='-y'),          # z 59..61 on the -Y side, bore to the lug tips, full length
@@ -357,6 +361,18 @@ COLLAR = dict(
     #   walls are 1.7 (-X, to the lug face x 1.0) and 1.9 / 1.69 at the chamfer (+X)
     bridge_membrane_t=0.2,              # one 0.2 mm print-only layer; remove from 3.4 holes before assembly
     mass_est_g=18.0,
+    # r6 (audit 2026-10-06 X2): centring gauge, a printed assembly tool per lens (printed_collar.centring_gauge).
+    #   Nothing else centres the collar on the tub lip: 3 screws in 3.4 clearance over hand-set inserts left a worst-
+    #   case 0.60 mm (RSS 0.31) lateral offset against the 0.75-0.825 float gaps. The gauge has two 45 deg cones: the
+    #   rear one seats on the lip's front edge (x -2.7, r 16.2), the front one in the collar's 0.6 x 45 deg bore-entry
+    #   chamfer. Pressed home while s_c1..s_c3 are tightened (camera not yet in, step 7), it puts the bore axis on the
+    #   lip axis with no fit clearance in the chain (an axial size error only lifts one cone, about 1:1 in radius).
+    gauge=dict(cone_deg=45.0, rear_back=0.7, body_r=17.5, front_over=0.4, grip=(0.4, 12.0), grip_r=20.0, bore_r=10.0,
+               face_down='-X', centring_worst_mm=0.30, centring_rss_mm=0.17,
+               stack_without_gauge=dict(worst_mm=0.60, rss_mm=0.31,
+                                        terms='screw clearance 0.2, insert position 0.15, bore pinch offset 0.15, '
+                                              'printed hole/bore error 0.1 (audit 2026-10-06 X2)'),
+               stack_with_gauge='cone seats 0.05 + 0.05, gauge print concentricity 0.05, bore pinch offset 0.15'),
 )
 M3 = dict(spec='ISO 7045 M3 pan head cross recess PH1, A2 stainless', d=3.0, head_d=5.6, head_h=2.4, drive='PH1',
           clear_d=3.4, cbore_d=COLLAR['cbore_d'], engage_min=3.0,
@@ -368,7 +384,10 @@ M3 = dict(spec='ISO 7045 M3 pan head cross recess PH1, A2 stainless', d=3.0, hea
           mass_per_mm=0.055, head_mass=0.12,                     # A2 pan head screw: ~0.67 g at 10, ~1.0 g at 16
           torque_Nm={'s_c1': 0.15, 's_c2': 0.15, 's_c3': 0.15, 's_c4': 0.2}, reuse='unlimited (machine thread in brass)')
 # r5: 3 short tub bosses for the collar inserts (Pi-drop rule: nothing behind x -7.6 at the top, judge 3 probe 0 mm3)
-TUB_INSERT_BOSSES = {k: dict(c=COLLAR['feet'][k], od=8.0, x=(-7.6, X_FW_IN), bore_x=(XT1, -6.9), clear_x=(-6.9, -7.6),
+# r6 (audit 2026-10-06 B-3): the insert bore runs to x -7.0 (was -6.9). The LL boss face lies partly on the RV 5 corner
+#     (the face recedes 0.016 on one probe line), so its local depth was 4.184 against the 4.2 need; now 4.28. The
+#     dia 3.4 clearance continues through the boss end (x -7.6): an M3 x 10 at its +0.29 length tolerance cannot bottom.
+TUB_INSERT_BOSSES = {k: dict(c=COLLAR['feet'][k], od=8.0, x=(-7.6, X_FW_IN), bore_x=(XT1, -7.0), clear_x=(-7.0, -7.6),
                              chin_y=24.0 if k == 'LL' else None)    # LL: teardrop chin cut flat 0.3 off the pi5 box
                      for k in COLLAR['bolted']}
 # 2 load ribs (tub): rib_l x -13..-5.2, y 24.1..27.4, z 2.5..41 (CHANGED top 45 -> 41: the camera ring passes over it);
@@ -905,8 +924,8 @@ EXTERIOR_KEEPOUTS = {
 # face_down: the assembly-frame face that lies on the bed ('-Z' = as assembled). envelope: owners stay inside it.
 PARTS = {
     'tub': dict(module='printed_tub.py', material='ASA', colour='satin silver', face_down='-Y', owner='tub',
-                infill='shell', envelope=TUB_BOX, supports='2 paint-on supports under the T-tongue -Y wings (about 7.8 x 1.6 '
-                'each, about 17 mm above the bed); nothing else'),   # FIXER P3
+                infill='shell', envelope=TUB_BOX, supports='4 paint-on supports: the 2 T-tongue -Y wings (about 7.8 x 1.6 '
+                'each, about 17 mm above the bed) and (r6) the s_k2 and LL boss chins; nothing else (PRINT_SUPPORT_ZONES)'),
     'hood': dict(module='printed_hood.py', material='ASA', colour='black', face_down='+Z', owner='hood_panel',
                  infill='shell', envelope=HOOD_BOX, supports='tree, 1 place: the eyepiece housing +Y strip under its '
                  'window; nothing else (the housing ceiling bridges; r5: the lens turret and its supports are gone)'),
@@ -1012,19 +1031,26 @@ STEPS = [
     #     the lens through the collar with a finger on the camera through the open left side, then s_c4, then the panel
     #     (step 8). The collar screws come before the lens because the s_c1..s_c3 driver handle (dia 30) would hit
     #     the lens front barrel; s_c4 and the 4 panel screws audit clean with the lens present.
-    dict(step=7, name='Camera + adapter + lens collar', tool='straight PH1 screwdriver (the step 8 driver); hands',
-         action='Bench B0 done: tripod block off (2 screws bagged), C-CS adapter hand-tight, back focus set with the '
-                'Kowa at infinity and the lock screw tight (s recorded), lens off again. Plug the FPC into the camera. '
-                'Bring the camera in from the left, 11 mm behind its place, then push it +X 11.1 until the adapter has '
-                'passed the tub lip (path: in at 2 mm high, lower 2 mm, then +X 11.1); it rests in its cage (BFAR in '
-                'the counterbore, tab near the wall) until the lens carries it. Fold the FPC slack into its loop. '
-                'Lens collar: feet through the 4 hood holes onto the tub face; s_c1, s_c2, s_c3 with washers from the '
-                'front into the tub inserts, 0.15 N m provisional cap, stop at head contact.',
-         adds=['gs_camera', 'c_cs_adapter', 'lens_collar', 's_c1', 's_c2', 's_c3']),
+    # r6 (audit 2026-10-06 X2): the collar now goes on BEFORE the camera, centred on the empty tub lip by the printed
+    #     centring gauge (COLLAR['gauge']); the camera follows (`camera_out` already passed with the collar fitted).
+    dict(step=7, name='Lens collar (centred) + camera + adapter',
+         tool='straight PH1 torque screwdriver (the step 8 driver); collar centring gauge; hands',
+         action='Bench B0 done: tripod block off (2 screws bagged), C-CS adapter seated and marked across adapter and '
+                'BFAR, back focus set with the Kowa at infinity and the lock screw tight (s recorded), lens off again. '
+                'Lens collar first, camera still out: feet through the 4 hood holes onto the tub face; start s_c1, '
+                's_c2, s_c3 with washers 2 turns. Push the centring gauge for this lens through the collar until its '
+                'rear cone seats in the tub lip and its front cone in the collar bore chamfer; hold it home with a '
+                'thumb and tighten s_c1, s_c2, s_c3 from the front, 0.15 N m provisional cap, stop at head contact; '
+                'pull the gauge out. Camera: plug the FPC into it, bring it in from the left, 11 mm behind its place, '
+                'then push it +X 11.1 until the adapter has passed the tub lip (path: in at 2 mm high, lower 2 mm, '
+                'then +X 11.1); it rests in its cage (BFAR in the counterbore, tab near the wall) until the lens '
+                'carries it. Fold the FPC slack into its loop.',
+         adds=['lens_collar', 's_c1', 's_c2', 's_c3', 'gs_camera', 'c_cs_adapter']),
     dict(step=8, name='Lens + panel + 5 screws', tool='PH1 screwdriver, 40 mm+ blade, dia <= 6.5 shank (hand only)',
          action='Lens, panel still off: fit s_c4 loosely; pass the lens through the collar and screw it into the adapter '
-                'while a finger through the open left side presses the cover forward (+X) onto the temporary lip catch (the hood roll fin also stops it '
-                'turning); set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the '
+                'while finger and thumb through the open left side hold the camera by its metal lens mount (housing, '
+                'never the cover or the PCB) forward (+X) on the temporary lip catch, so the thread torque never '
+                'passes the housing-to-PCB joint; set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the '
                 'knurl seats on the collar cone; the camera now hangs on the lens (it touches neither the tub lip, '
                 'the counterbore nor the fin); snug s_c4 straight down from above, 0.2 N m. '
                 'Panel: hold it beside the body; plug the QT lead into the encoder (JST-SH) and mate the 18/24 PH '
@@ -1053,10 +1079,11 @@ INSERTIONS = [   # displacement waypoints of the moving set relative to its fina
     dict(id='eyepiece_in', step=6, moving=['eyepiece'], path=[(-30.0, 0, 0), (0, 0, 0)]),
     dict(id='sd_in', step=5, moving=['microsd'], path=[(30.0, 0, 0), (0, 0, 0)]),                      # FIXER A-F2
     dict(id='evf_pair_in', step=6, moving=['hmx039', 'evf_board'], path=[(0, 45.0, 0), (0, 0, 0)]),   # FIXER A-F10
-    dict(id='camera_in', step=7, moving=['gs_camera', 'c_cs_adapter'],    # r5: the adapter rides with the camera
-         path=[(-11.1, 60.0, 2.0), (-11.1, 0, 2.0), (-11.1, 0, 0), (0, 0, 0)], ignore=['ko_fpc_loop', 'ko_fpc_cam']),
+    # r6 (X2): collar_on before camera_in (the gauge centres the collar on the empty lip); the camera sweep sees the collar
     dict(id='collar_on', step=7, moving=['lens_collar'], path=[(30.0, 0, 0), (0, 0, 0)]),       # r5: feet -X through
     #                                                                                           the hood holes
+    dict(id='camera_in', step=7, moving=['gs_camera', 'c_cs_adapter'],    # r5: the adapter rides with the camera
+         path=[(-11.1, 60.0, 2.0), (-11.1, 0, 2.0), (-11.1, 0, 0), (0, 0, 0)], ignore=['ko_fpc_loop', 'ko_fpc_cam']),
     dict(id='lens_in', step=8, moving=['lens'], path=[(40.0, 0, 0), (0, 0, 0)]),   # r5: before panel_on (same step)
     dict(id='panel_on', step=8, moving=['panel', 'encoder', 'switch_1824'], path=[(0, 70.0, 0), (0, 0, 0)]),
     dict(id='stick_in', step=9, moving=['usb_stick', 'stick_sleeve'], path=[(-70.0, 0, 0), (0, 0, 0)]),
@@ -1162,6 +1189,19 @@ CRITICAL_FEATURES = [   # R3 seeds on the r1 geometry (owners replace by id when
          structural=True, note='bridge between the upper strap slots (strap load)'),
 ]
 del _X, _Z
+
+
+def replace_feature(new, why):
+    """r6 (audit 2026-10-06 L5): replace a CRITICAL_FEATURES entry by id, in place, and record what it replaced. Owners
+    move a probe only through this call; a second plain entry with an existing id is a duplicate, and
+    check_critical_features FAILs it (r5 had relocated the r4 front-wall probe by a silent last-wins override)."""
+    for i, it in enumerate(CRITICAL_FEATURES):
+        if it['id'] == new['id']:
+            CRITICAL_FEATURES[i] = dict(new, replaces=dict(origin=it.get('origin'), why=why))
+            return CRITICAL_FEATURES[i]
+    raise KeyError('replace_feature: no CRITICAL_FEATURES entry %r to replace' % new['id'])
+
+
 NONSTRUCTURAL_EXCEPTIONS = []    # dict(part, id, measured_mm, why, at=(x,y,z) optional): named nonstructural details only
 # Not in LOAD_BEARING_PARTS (thin_wall screen only): knob_exp / knob_fps (finger torque on a D-shaft), plunger (button
 # press < 5 N, compression), eyecup (TPU), stick_sleeve (THIN_OK, slider cover). R1/R2 add any new load-bearing part.
@@ -1234,7 +1274,8 @@ CRITICAL_JOINTS = [
     dict(id='J7_camera', parts=['tub', 'panel', 'hood', 'lens_collar'],
          note='r5 J7-R float: lens collar on the lens fixed band (3 M3 + inserts, LR foot, pinch lugs); camera hangs on '
               'the lens; tub lip, hood roll fin and panel keeper are catches with gaps',
-         required=['tub_front_wall_seat', 'tub_lip', 'tub_insert_boss_tl', 'tub_insert_boss_tr', 'tub_insert_boss_ll',
+         required=['tub_front_wall_seat', 'tub_front_wall_lr_foot', 'tub_lip', 'tub_insert_boss_tl',
+                   'tub_insert_boss_tr', 'tub_insert_boss_ll',
                    'collar_foot_tl', 'collar_foot_tr', 'collar_foot_ll', 'collar_foot_lr', 'collar_lug_upper',
                    'collar_lug_lower', 'collar_wall_min', 'hood_foot_hole_tl', 'hood_foot_hole_tr',
                    'hood_foot_hole_ll', 'hood_foot_hole_lr', 'hood_cam_roll_fin', 'panel_cam_keeper',
@@ -1351,12 +1392,15 @@ LOAD_BEARING_PARTS = [p for p in LOAD_BEARING_PARTS if p not in ('skirt_l', 'ski
 EVF_STOP = dict(part='panel', box=B(-138.9, -136.3, EVF['board']['y'][1] + 0.3, SPLIT, 70.0, 86.0), gap=0.3,
                 gate='G-EVF-2: with the real board, feeler 0.1-0.5 at the stop; board cannot shuttle on the HDMI plug')
 _FW, _RE = XT1 - RV, X_REAR + RV                      # R5 end-corner centres (panel end land, printed_panel.END_LAND)
+replace_feature(dict(id='panel_end_land_front', part='panel', origin=(_FW + 3.566, 32.8, 50.0), direction=(0, 1, 0),
+                     span=(5, 10.0, (0, 0, 1)), min_mm=1.2, structural=True,
+                     note='front R5 end: 1.2 land square to the inner face (replaces the R3 seed)'),
+                why='R2: the R5 end corners moved the land')
+replace_feature(dict(id='panel_end_land_rear', part='panel', origin=(_RE - 3.566, 32.8, 50.0), direction=(0, 1, 0),
+                     span=(5, 10.0, (0, 0, 1)), min_mm=1.2, structural=True, note='rear R5 end land (eyepiece side)'),
+                why='R2: the R5 end corners moved the land')
 CRITICAL_FEATURES += [
     # panel
-    dict(id='panel_end_land_front', part='panel', origin=(_FW + 3.566, 32.8, 50.0), direction=(0, 1, 0),
-         span=(5, 10.0, (0, 0, 1)), min_mm=1.2, structural=True, note='front R5 end: 1.2 land square to the inner face (replaces the R3 seed)'),
-    dict(id='panel_end_land_rear', part='panel', origin=(_RE - 3.566, 32.8, 50.0), direction=(0, 1, 0),
-         span=(5, 10.0, (0, 0, 1)), min_mm=1.2, structural=True, note='rear R5 end land (eyepiece side)'),
     dict(id='panel_tongue_tooth', part='panel', origin=(-121.0, 29.0, 93.3), direction=(0, 0, 1),
          span=(5, 4.0, (1, 0, 0)), min_mm=1.2, structural=True, note='J2 top tongue tooth: holds the panel top in z'),
     dict(id='panel_boss_b1_wall', part='panel', origin=(-91.0, 25.3, 7.0), direction=(0, 1, 0), min_mm=1.6,
@@ -1687,10 +1731,20 @@ COTS['m3_hw'] = dict(name='lens collar M3 hardware: 3 x M3 x 10 + 1 x M3 x 16 IS
                           'washers, 3 x M3 short heat-set inserts (tub) + 1 x M3 L 5.7 insert (collar lug)',
                      pn='ISO 7045 / ISO 7089 / heat-set insert class', src='standard class (FASTENER-POLICY s I, r5)',
                      mass=round(sum(screw_mass(s) for s in _m3), 2), step=7, box=None)
+replace_feature(dict(id='tub_front_wall_seat', part='tub', origin=(-3.95, _fe['TL'][0], _fe['TL'][1] - 4.5),
+                     direction=(1, 0, 0), min_mm=1.6, structural=True,
+                     note='r5: front wall at the TL insert-boss root (collar anchor load)'),
+                why='r5 (J7-R): the r4 camera-seat probe sat 30 below the axis on the plain wall; its coverage now comes '
+                    'from tub_front_wall_lr_foot (audit 2026-10-06 L5)')
+replace_feature(dict(id='panel_cam_keeper', part='panel', origin=(CAM['keeper']['x'][0] + 1.67, 15.0, 71.0),
+                     direction=(1, 0, 0), min_mm=1.2, structural=True,
+                     note='r5: keeper finger = rear catch, 0.5 behind the cover at s_max'),
+                why='r5 (J7-R): the keeper moved with the real camera model')
 CRITICAL_FEATURES += [
-    dict(id='tub_front_wall_seat', part='tub', origin=(-3.95, _fe['TL'][0], _fe['TL'][1] - 4.5), direction=(1, 0, 0),
-         min_mm=1.6, structural=True, note='r5: front wall at the TL insert-boss root (collar anchor load); the r4 '
-                                           'probe sat 30 below the axis on the plain wall'),
+    # r6 (audit 2026-10-06 L5): the plain front wall under the compression-only LR foot carries the collar's LR
+    #     reaction; r5's silent override had left no probe there
+    dict(id='tub_front_wall_lr_foot', part='tub', origin=(X_FW_IN + T / 2, *_fe['LR']), direction=(1, 0, 0),
+         min_mm=1.6, structural=True, note='r6: front wall under the LR compression foot (collar reaction)'),
     dict(id='tub_lip', part='tub', origin=(-3.3, 0.0, LENS_AXIS[1] - 17.5), direction=(1, 0, 0), min_mm=1.2,
          structural=True, note='r5: lip land x -3.9..-2.7 under the adapter (a catch: the BFAR face stands 0.5 behind)'),
     *[dict(id='tub_insert_boss_%s' % k.lower(), part='tub', structural=True, min_mm=1.6,
@@ -1717,10 +1771,9 @@ CRITICAL_FEATURES += [
                                 note='r5: plate between the lens bore and the LR hole')))],
     dict(id='hood_cam_roll_fin', part='hood', origin=(-21.5, -21.675, 60.0), direction=(0, 1, 0), min_mm=1.6,
          structural=True, note='r5: camera roll catch (0.8 off the cover -Y face; contact only while a lens is fitted)'),
-    dict(id='panel_cam_keeper', part='panel', origin=(CAM['keeper']['x'][0] + 1.67, 15.0, 71.0), direction=(1, 0, 0),
-         min_mm=1.2, structural=True, note='r5: keeper finger = rear catch, 0.5 behind the cover at s_max'),
 ]
-FEATURE_CLASS_RULES += [(r'^tub_lip$', 'land'), (r'^tub_insert_boss_', 'boss'), (r'^collar_foot_', 'pin'),
+FEATURE_CLASS_RULES += [(r'^tub_front_wall_lr_foot$', 'wall'),
+                        (r'^tub_lip$', 'land'), (r'^tub_insert_boss_', 'boss'), (r'^collar_foot_', 'pin'),
                         (r'^collar_lug_', 'lug'), (r'^collar_wall_min$', 'wall'), (r'^hood_foot_hole_', 'land'),
                         (r'^hood_cam_roll_fin$', 'wing')]
 _COLLAR_SET = ['lens_collar', 's_c1', 's_c2', 's_c3', 's_c4']
@@ -1751,6 +1804,119 @@ LOAD_MODEL = dict(g=9.81, shock_g=5.0, pinch_N=120.0, pinch_relax=0.5, sep_safet
                   src='judge 3 s6.9 + design 3 plate FE (wall coefficients); estimates until G-COL-1 / G-CAM-2')
 del _CS, _fe, _er, _XW, _ins, _lug, _LUG_HP, _m3, _COLLAR_SET, _r
 # --- r5 registry end
+
+# =============================================================================== 9b. r6: print order and orientation
+# Audit 2026-10-06 M2 and the user's "settle the print order and orientation" (2026-10-08). ONE source for the order:
+# a production part may be sliced and printed only after every gate listed for it has a current recorded pass. The
+# measured gates are the MEASURED-PARTS.md summary "Blocks" column (the purchased-part values that set the part's
+# geometry; the camera and its lens are measured together at bench step B0). G-COMB-1 confirms LOCATE / SLIDE / SEAM
+# on the printer and ASA profile, G-KNOB-1 sets FDM KNOB_BORE_OFFSET, and G-COL-1 qualifies the collar on its coupons.
+# build_d2 rejects a slicer_review record (or a G-COL-1 coupon record) dated before its prerequisites passed and reports
+# each part's print release; make_tables writes PRINT-GUIDE s7 from these tables.
+_ASA_PROFILE = ('G-COMB-1',)
+_EVF_FREEZE = ('EVF-G1', 'EVF-G7', 'EVF-G8', 'G-MP-EVF')          # MP-EVF: the EVF carrier freeze
+_CAMERA = ('G-CAM-1', 'G-LENS')                                   # MP-CAM with its lens line, one B0 session
+PRINT_PREREQS = {
+    'base_grip': _ASA_PROFILE + ('G-MP-PACK', 'G-RUN-1'),
+    'tub': _ASA_PROFILE + ('G-PI-1', 'G-MP-X1203') + _CAMERA + ('G-HDMI',) + _EVF_FREEZE + ('G-MP-STICK', 'G-MP-FPC'),
+    'hood': _ASA_PROFILE + ('G-MP-X1203',) + _CAMERA + _EVF_FREEZE + ('G-MP-FPC',),
+    'panel': _ASA_PROFILE + _CAMERA + ('G-HDMI',) + _EVF_FREEZE + ('G-ENC-1', 'G-MP-ENC', 'G-MP-SW'),
+    'pi_keeper': _ASA_PROFILE + ('G-PI-1', 'G-MP-X1203'),
+    'cap': _ASA_PROFILE + ('G-MP-PACK',),
+    'plunger': _ASA_PROFILE,
+    'knob_exp': _ASA_PROFILE + ('G-MP-ENC', 'G-KNOB-1'),
+    'knob_fps': _ASA_PROFILE + ('G-MP-SW', 'G-KNOB-1'),
+    'stick_sleeve': _ASA_PROFILE + ('G-MP-STICK',),
+    'lens_collar': _ASA_PROFILE + _CAMERA + ('G-COL-1',),
+    'eyecup': ('G-MP-EVF',),                                      # TPU: G-COMB-1 qualifies the ASA profile only
+}
+PRINT_PREREQ_WHY = {
+    'G-COMB-1': 'LOCATE / SLIDE / SEAM confirmed on this printer and ASA profile (clearance comb)',
+    'G-KNOB-1': 'KNOB_BORE_OFFSET chosen on the D-bore ladders, then the knobs rebuilt',
+    'G-COL-1': 'collar coupons: fit, centring gauge, pinch, slip, pull-out and creep',
+    'G-CAM-1': 'MP-CAM: camera stack, back focus s, tripod-block removal (tub lip and counterbore, hood roll fin, panel '
+               'keeper, collar C-flange datum)',
+    'G-LENS': 'MP-CAM lens line: band OD, edge, position, rings and CoM (collar bore and cone; lens rows of j7_float)',
+    'G-MP-PACK': 'pack envelope and lead exit (grip bay, cap)', 'G-RUN-1': 'run button and cap (grip cradle and hole)',
+    'G-PI-1': 'X1203 edge parts and standoffs (keeper fingers, Pi bosses)',
+    'G-MP-X1203': 'X1203 board and Active Cooler height (Pi bosses, keeper, hood and FPC clearances)',
+    'G-HDMI': 'micro-HDMI plugs and the 18/24 switch bushing (EVF board slot, panel)',
+    'EVF-G1': 'EVF board revision (5 V lead end)', 'EVF-G7': 'EVF panel release (EVF-A usable at all)',
+    'EVF-G8': 'OLED flex length', 'G-MP-EVF': 'EVF bench assembly: optics, board stop, eyecup barrel',
+    'G-ENC-1': 'encoder back parts against the cradle hooks', 'G-MP-ENC': 'encoder board, bushing and shaft',
+    'G-MP-SW': '18/24 switch tab, nut and shaft', 'G-MP-STICK': 'stick width and thickness (guide, sleeve)',
+    'G-MP-FPC': 'camera FPC length and fold (tub and hood keep-outs)',
+}
+COUPON_PREREQS = {'G-COL-1': _ASA_PROFILE + _CAMERA}   # its coupons carry CAM and LENSES geometry; the rest go first
+# Suggested sequence once each part's gates have passed (the longest and least-coupled first; TPU last).
+PRINT_SEQUENCE = ['base_grip', 'tub', 'hood', 'panel', 'pi_keeper', 'cap', 'plunger', 'knob_exp', 'knob_fps',
+                  'stick_sleeve', 'lens_collar', 'eyecup']
+# Orientation is settled per part: why this face is on the bed. The computed check print_overhang (checks.py) slices
+# every production STL in its print pose: new area beyond the 45 deg allowance in each 0.2 layer must be a short
+# overhang (<= 1.0 from supported material), an anchored bridge (<= FDM MAX_BRIDGE) or inside a declared zone below.
+PRINT_OVERHANG = dict(layer=FDM['LAYER'], overhang_deg=FDM['MAX_OVERHANG_DEG'], cantilever_max=1.0,
+                      bridge_max=FDM['MAX_BRIDGE'], edge_tol=0.3, px=0.1, directions=8, min_area=0.05)
+PRINT_ORIENTATION_WHY = {
+    'tub': 'Right wall down: the open left side faces up, so every rib, boss, catch and cell grows from the bed wall or '
+           'stands at 45 deg; front and rear walls print vertical with their bores as teardrops (apex up). The '
+           'keyhole T-tongues under the floor are the only undercut (2 paint-on supports).',
+    'hood': 'Roof down: the visible top is the bed face and the band, plate and housing walls rise from it; the '
+            'housing interior is 45 deg flanks under a bridge and the J2 groove lip bridges between piers. The '
+            'eyepiece window sill is the only support.',
+    'panel': 'Outer face down: the engraving prints into a smooth bed face and every post, boss, rib, tongue and hook '
+             'grows upward from it.',
+    'base_grip': 'Base top down (upside down): the keyhole lips are the first layers and the grip column rises from '
+                 'the base; pockets, shelf and strap slots bridge the short way.',
+    'cap': 'Bottom face down: the keys and detent bumps print as vertical faces.',
+    'plunger': 'Finger face down: flat, unmarked finger face; stem and nib rise from the flange.',
+    'knob_exp': 'Top face down: the knurl prints vertical and the D-bore stands upright (round, accurate).',
+    'knob_fps': 'Top face down: the knurl prints vertical and the D-bore stands upright (round, accurate).',
+    'eyecup': 'Base ring down: the 15 deg flare and 45 deg lip need no support in TPU.',
+    'stick_sleeve': 'End face down: the 0.8 walls print vertical (full height, no bridges).',
+    'pi_keeper': 'Top face down: the fingers grow from it with 45 deg backs; the finger tips stay sharp.',
+    'lens_collar': 'Front face down: the bore, cone and hoop lie in the layer plane, so the pinch hoop tension runs '
+                   'along the perimeters and the bore prints round; the ear screw axes are vertical; only the three '
+                   'washer seats face down (bridges with a 0.2 membrane).',
+}
+_tw = [dict(id='tongue_%s_minus_y_wing' % t['id'][-1], kind='support',
+            box=B(t['x'] - TONGUE['length'] / 2 - 0.5, t['x'] + TONGUE['length'] / 2 + 0.5,
+                  -TONGUE['head_w'] / 2 - 0.5, -TONGUE['neck_w'] / 2 + 0.5, TUB_BOX['z'][0] - 0.2, 0.2),
+            why='J4 keyhole T-head and neck -Y faces (the T undercut cannot face the bed): paint-on support from the bed')
+       for t in TONGUES]
+_hw = HOOD['housing_window']
+_k2, _ll = PI_KEEPER['bosses']['s_k2'], TUB_INSERT_BOSSES['LL']
+# r6 (found by print_overhang): two chin flats cut into teardrop bosses to clear a board print as horizontal ledges
+#     hanging off a wall, and they droop toward the very board they clear, so each gets a small paint-on support
+_tw += [dict(id='s_k2_boss_chin', kind='support',
+             box=B(_k2['c'][0] - _k2['r'] - _k2['obround'], _k2['c'][0] + _k2['r'] + _k2['obround'],
+                   _k2['chin_y'] - 0.3, _k2['chin_y'] + 0.4, T - 0.2, PI_KEEPER['boss_top'] + 0.2),
+             why='keeper boss s_k2: its chin flat (y 23.95, 0.25 off the X1203 edge) is a 2.9 x 7.3 ledge off the floor '
+                 'wall in print; unsupported it droops toward the X1203 edge it clears'),
+        dict(id='ll_insert_boss_chin', kind='support',
+             box=B(_ll['x'][0] - 0.2, _ll['x'][1] + 0.2, _ll['chin_y'] - 0.3, _ll['chin_y'] + 0.4,
+                   _ll['c'][1] - _ll['od'] / 2 - 0.5, _ll['c'][1] + _ll['od'] / 2 + 0.5),
+             why='collar insert boss LL: its chin flat (y 24.0, 0.3 off the pi5 box) is a 2.4 mm ledge off the front '
+                 'wall in print; unsupported it droops toward the Pi header')]
+PRINT_SUPPORT_ZONES = {
+    'tub': _tw,
+    'hood': [dict(id='eyepiece_window_sill', kind='support',
+                  box=B(_hw['x'][0] - 0.5, _hw['x'][1] + 0.5, YL - HOOD['housing_wall'] - 0.6, YL + 0.6,
+                        _hw['z'][0] - 0.5, _hw['z'][0] + 0.5),
+                  why='the +Y strip under the eyepiece window starts mid-air (the window runs the full housing '
+                      'length): tree support from outside, y > 35')],
+}
+del _tw, _hw, _k2, _ll, _ASA_PROFILE, _EVF_FREEZE, _CAMERA
+# r6 (audit 2026-10-06 X2): lateral location of the hood on the tub (right-wall LOCATE 0.15 + 0.1 print error); the
+#     hood roll fin's gap to the camera cover carries it on top of the collar centring stack (checks._centring_rows)
+HOOD_TO_TUB_LATERAL = 0.25
+# r6 (audit 2026-10-06 B-11): service-state driver audits for screws that are turned without a REMOVALS move. s_c4 is
+#     loosened and re-snugged in the CLOSED body at every lens swap and level check; s_j comes out at service item 11.
+SERVICE_DRIVER = [
+    dict(id='lens_swap_closed_body', unscrew=['s_c4'], context=[i for i in present_at(10) if not i.startswith('s_')],
+         note='lens swap / step 10 level check: s_c4 loosened one turn from above with every part fitted'),
+    dict(id='base_off', unscrew=['s_j'], context=['tub', 'base_grip', 'tripod_nut', 'run_button', 'strap'],
+         note='service item 11: s_j out from below with the tub empty on its base'),
+]
 
 # =============================================================================== 10. MODULE CONTRACT (binding)
 MODULE_CONTRACT = """

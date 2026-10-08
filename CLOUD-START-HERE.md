@@ -6,6 +6,15 @@ history. Extract into a new folder; do not overwrite or blindly merge into the a
 
 ## Current result
 
+**r6 (2026-10-08)** settles the print order and orientation and fixes the minor findings of the 2026-10-06 audit
+(`cad/gs8-d2-v1/HANDOFF.md`, top section; `audit/d2-readiness-2026-10-06/RESPONSE.md`):
+- **Kowa:** 28 categories, 27 passing plus `mass_com`, which is now report-only. 833 pass + 19 information rows, no
+  failures, stubs or unclassified thin spots.
+- **Fujinon:** 28 categories, 830 pass + 19 information rows.
+- The new `print_overhang` category passes for all 12 parts and the centring gauge.
+- The release audit passes 20 / 86 / 4.
+
+The cloud-polish result it builds on, kept for the record:
 - **Kowa:** 27 passing CAD categories; 748 pass + 18 information rows, no failures, stubs or unclassified thin spots.
 - **Fujinon:** 27 passing categories; 745 pass + 18 information rows, no failures, stubs or unclassified thin spots.
 - Independent audits verify every required source/output/gate-document hash, actual STL meshes, fresh STEP,

@@ -20,7 +20,7 @@ nothing to the build.
 | `artifacts` | `{path: sha256}` of every artifact actually tested: `stl/<part>.stl` (production STL), `stl/coupons/<coupon>.stl`, or a source/doc path relative to `cad/gs8-d2-v1/` or the repo root |
 | `profile` | printer, nozzle, material, slicer + version + profile (or the measuring tool / variant) |
 | `verdict` | `pass` or `fail` (nothing else) |
-| `date`, `by` | when and who |
+| `date`, `by` | when and who. r6 (audit 2026-10-06 L12b): `date` is ISO 8601, `YYYY-MM-DD`, optionally with a time (`2026-10-20 14:30`); anything else is rejected, because the print order compares dates |
 | `notes` | optional: settings, values, observations, attachment names |
 
 sha256 of a file: `python -c "import hashlib,sys;print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())" out/stl/panel.stl`
@@ -42,7 +42,7 @@ sha256 of a file: `python -c "import hashlib,sys;print(hashlib.sha256(open(sys.a
 - Required artifacts (artifact keys: production / coupon STLs as `stl/...`; docs and sources as repo-root paths, e.g.
   `cad/gs8-d2-v1/MEASURED-PARTS.md`; a path relative to `cad/gs8-d2-v1/` is accepted and converted):
   - `slicer_review`: `stl/<item>.stl` and (r4) every modifier mesh of that part,
-    `stl/modifiers/<item>__mod_<id>.stl` (tub 7, panel 4, base_grip 4; the slice must load them);
+    `stl/modifiers/<item>__mod_<id>.stl` (r5: tub 10, panel 4, base_grip 4; the slice must load them);
   - `coupon_validation`: every coupon STL of its gate (from `out/coupons-manifest.json`, `coupons-r1-manifest.json`)
     or calibration;
   - `measured_fit`: the gate's acceptance doc (`electronics/gs8-evf-v1/EVF-SELECTION.md` for EVF-G*,
@@ -56,11 +56,20 @@ sha256 of a file: `python -c "import hashlib,sys;print(hashlib.sha256(open(sys.a
 
 ## Required items
 
-- `slicer_review`: the 11 printed parts (`base_grip`, `cap`, `eyecup`, `hood`, `knob_exp`, `knob_fps`, `panel`,
-  `pi_keeper`, `plunger`, `stick_sleeve`, `tub`).
-- `coupon_validation`: G-PT-1, G-KEEP-1, G-PANEL-1, G-CAP-1, G-EVF-2, G-SNAP-2 and the PRINT-GUIDE s6 calibrations
-  **G-KNOB-1** (`knob_bore_ladder_enc` + `knob_bore_ladder_sw`), **G-COMB-1** (`clearance_comb`), **G-J4-1** (`tongue`
-  + `keyhole_slot`).
+- `slicer_review`: the 12 printed parts (`base_grip`, `cap`, `eyecup`, `hood`, `knob_exp`, `knob_fps`, `lens_collar`,
+  `panel`, `pi_keeper`, `plunger`, `stick_sleeve`, `tub`; r5 added the lens collar, audit 2026-10-06 B-9).
+- `coupon_validation`: G-PT-1, G-KEEP-1, G-PANEL-1, G-CAP-1, G-EVF-2, G-SNAP-2, (r5) **G-COL-1** (`collar_tub_front`
+  + `collar_hood_plate` + `collar_part`, and since r6 the centring gauge `stl/tools/collar_gauge.stl`) and the
+  PRINT-GUIDE s6 calibrations **G-KNOB-1** (`knob_bore_ladder_enc` +
+  `knob_bore_ladder_sw`), **G-COMB-1** (`clearance_comb`), **G-J4-1** (`tongue` + `keyhole_slot`).
+- **Names (audit L12c):** MEASURED-PARTS record ids (`MP-CAM`, `MP-PACK`, ...) are not items. File the record under
+  its gate id: MP-CAM is `G-CAM-1` (the camera stack) and `G-LENS` (its lens line). A record filed as `MP-CAM` is
+  unmatched and keeps `measured_fit` open.
+- **Print order (r6, audit 2026-10-06 M2):** a `slicer_review` record for a part counts only after every gate of
+  `layout.PRINT_PREREQS[part]` (PRINT-GUIDE s7) has a current recorded pass dated on or before it. The same holds for
+  a G-COL-1 coupon record and `COUPON_PREREQS`. Otherwise the record is **rejected** with the missing gate named, and
+  the part stays open. File the measured and calibration records first, then slice. The receipt's `print_release`
+  says which parts that releases.
 - `measured_fit`, `assembly_operation`: every other gate id named in MEASURED-PARTS.md, SPEC.md, WIRING.md and the
   EVF-SELECTION gate table (the receipt lists them in `hardware_gates`).
 - **r4 split items** (`assembly_operation`): `G-SNAP-2/whole` (5 remove/refit cycles of the whole hood on the tub),

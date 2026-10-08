@@ -9,6 +9,30 @@ wall x feature factor) instead of the solid. Re-run `python cad/gs8-d2-v1/make_t
 
 Nothing here has been printed. Times and filament are estimates; re-slice to get real figures.
 
+## r6 (2026-10-08): the print order and orientation are settled
+
+- **Order (section 7, generated).** One table in `layout.py` (`PRINT_PREREQS`, `COUPON_PREREQS`, `PRINT_SEQUENCE`)
+  says which recorded gates must pass before each part or coupon set is printed. They are the measurements that set
+  the part's geometry (the MEASURED-PARTS "Blocks" column) plus the profile, knob and collar calibrations.
+  - The build enforces it. A slicer record for a part is rejected if it was filed before those gates passed, and the
+    same goes for a G-COL-1 coupon record. The receipt's `print_release` lists the parts the records release now.
+  - The tub, hood and panel wait for MP-CAM with its lens line (audit 2026-10-06 M2); so do the EVF, Pi and stick
+    measurements that also shape them. The collar also waits for G-COL-1.
+- **Orientation (section 3, generated).** Every part keeps its face-down. The new computed check `print_overhang`
+  slices each production STL in its print pose every 0.2 mm and accounts for all new area beyond the 45° allowance.
+  Each patch must be one of these, or the build fails:
+  - a short overhang, no more than 1.0 mm from supported material;
+  - an anchored bridge of 30 mm or less;
+  - a bridge that ends at a screw hole, which is reported;
+  - inside a declared support zone.
+
+  It confirmed the bridges this guide lists and found two chins nobody had listed. The s_k2 keeper boss and the LL
+  collar-insert boss each print as a flat ledge off a wall, so the tub now has 4 small paint-on supports instead of 2.
+- **The collar ears are r 5.6** (review A3). The 0.6 bed chamfer had left 0.65 mm of ear wall in the first layers; it
+  is now 1.25.
+- **New printed tool:** the collar centring gauge `stl/tools/collar_gauge.stl` (audit X2), printed with the G-COL-1
+  coupons and used at assembly step 7.
+
 ## Cloud-polish print stock and finish datums
 
 This document in the copied `r5-cloud-polish-20261007` fork does not supersede any later desktop work. For the lens
@@ -34,16 +58,16 @@ The included DejaVu Sans Bold font file is hash-pinned, so the printed lettering
 
 | Setting | Value |
 |---|---|
-| Material | ASA for every rigid part (satin silver: tub, panel, stick sleeve; black: hood, base + grip, cap, knobs, pi_keeper, plunger, lens collar (r5; PC instead of ASA if G-W11 finds the camera zone above 50 C)). TPU 95A for the eyecup. One colour per part, no painting except the engraving fill |
+| Material | ASA for every rigid part (satin silver: tub, panel, stick sleeve; black: hood, base + grip, cap, knobs, pi_keeper, plunger, lens collar, collar centring gauge). TPU 95A for the eyecup. One colour per part, no painting except the engraving fill. r6 (audit B-8): print the lens collar in ASA. G-W11 now logs a thermocouple on the collar's LR foot at the tub front wall; if it reads above 50 C, reprint the collar in PC and repeat G-COL-1 on PC coupons |
 | Drying | ASA 4 h at 65-80 C; TPU 4-6 h at 50-55 C; print from a dry box |
 | Nozzle / layer | 0.4 mm / 0.2 mm (the first layer 0.2 too: the panel engraving is cut 0.4 = 2 layers into its bed face) |
 | Temperatures (ASA) | nozzle 250-260 C, bed 100-110 C, enclosed chamber 45 C or warmer, part fan 0-20 %; no draft |
-| Bridges (ASA) | bridge fan 60-100 %, bridge flow 0.85-0.9, bridge speed about 20 mm/s; the enclosure stays closed. Functional bridged faces: the hood J2 groove lip (5 x 20 mm between piers), the base run-button shelf and rear stop (24.2), the tub and base counterbore shoulders (head bearing faces of s_r1/s_r2, s_b1/s_b2). Check them in section 5 |
+| Bridges (ASA) | bridge fan 60-100 %, bridge flow 0.85-0.9, bridge speed about 20 mm/s; the enclosure stays closed. Functional bridged faces: the hood J2 groove lip (5 x 20 mm between piers), the base run-button shelf and rear stop (24.2), the tub and base counterbore shoulders (head bearing faces of s_r1/s_r2, s_b1/s_b2), the pi_keeper s_k1 counterbore and s_k2 spot-face, the collar washer seats (membranes). r6: `print_overhang` measures every bridge span per part (section 3); the longest is 24.7 (base shelf), all within FDM MAX_BRIDGE 30. Bridges that end at a screw hole are listed there as "around a hole": check those head bearing faces flat in section 5 |
 | Temperatures (TPU) | nozzle 220-230 C, bed 50 C, 20-25 mm/s, retraction short or off |
 | Shrink | XY shrink compensation in the slicer profile (measure it once on a 100 mm coupon). Never scale the models |
 | Bed faces | 0.2-0.3 mm elephant-foot compensation. The **outer** bed-face edges carry 0.6 x 45 deg chamfers (`FDM['BED_CHAMFER']`); never a round on the bed. Inner bed-face openings (base keyhole windows 18.5 x 36.5, tripod-nut pocket, s_b holes, tub s_r counterbores) are sharp and rely on the elephant-foot compensation; deburr them (section 5) |
 | Clearances built in | SLIDE 0.25, LOCATE 0.15, SEAM 0.3 per side (`layout.FDM`). Do not add slicer hole or XY offsets on top; if a coupon (section 6) shows a tight fit, change the profile, not the model |
-| Supports | **tub:** 2 paint-on supports under the T-tongue -Y wings (each about 7.8 x 1.6, towers about 17 mm from the bed; they carry the grip joint J4, never skip them). **hood:** tree supports in 1 place since r5 (the lens turret and its support are gone): the eyepiece housing +Y strip under its window. Nothing else (the hood housing ceiling is a self-supporting 15.2 bridge). r2 fixer: the hood's stack-stop fin and post (17.5 x 3.7 fin, then a 4.2 x 3.7 post, about 75 mm tall from the roof) print straight up from the roof without supports; check that the post tip is not stringy (it sits 0.15 over the kit screw head) |
+| Supports | Every support is a declared zone (`layout.PRINT_SUPPORT_ZONES`) that `print_overhang` checks; no other region needs one. **tub:** 4 paint-on supports: 2 under the T-tongue -Y wings (each about 7.8 x 1.6, towers about 17 mm from the bed; they carry the grip joint J4, never skip them) and (r6) 2 under the flat boss chins: the s_k2 keeper boss (2.9 x 7.3, about 59 mm up, beside the X1203 edge) and the LL collar-insert boss (3.3 x 2.4, about 59 mm up, at the front wall). Both chins clear a board by 0.25-0.3 in the camera and would droop toward it unsupported; paint the support on the right wall's inner face under each chin and remove it through the open left side. **hood:** tree supports in 1 place since r5 (the lens turret and its support are gone): the eyepiece housing +Y strip under its window. Nothing else (the hood housing ceiling is a self-supporting 15.2 bridge). r2 fixer: the hood's stack-stop fin and post (17.5 x 3.7 fin, then a 4.2 x 3.7 post, about 75 mm tall from the roof) print straight up from the roof without supports; check that the post tip is not stringy (it sits 0.15 over the kit screw head) |
 | Brim | 5 mm on the tub, the base + grip, the hood (roof) and the panel (face); none on the small parts |
 | Beds | 250 x 210 x 220 (Prusa MK4 / Core One) and 256 x 256 x 256 (Bambu X1/P1). Section 2b |
 | Seams | aligned rear, on an inside corner where the part has one (never on the panel face or the hood plate) |
@@ -63,8 +87,9 @@ overlaps its part), so nobody draws them by hand:
 
 Import the part STL, then add each modifier as a modifier/part-modifier mesh **without moving it** (same bed frame;
 if the slicer auto-centres imports, turn that off or move part and modifiers together). Set the modifier to 40 %
-gyroid infill and 4 perimeters. The other 9 parts print at 100 % (or as a declared thin part) and have none (r5: the
-lens collar is a small part at 100 %; its lug insert sits in solid material). A
+gyroid infill and 4 perimeters. The other 9 parts have no modifier meshes: the hood is a shell at 25 % gyroid like the
+tub and panel, the small parts print at 100 % (or as a declared thin part); r5: the lens collar is a small part at
+100 %, and its lug insert sits in solid material (audit 2026-10-06 B-10). A
 slicer-review record names the part STL and all its modifier files (evidence/README.md).
 
 ## 2. Per part
@@ -72,7 +97,7 @@ slicer-review record names the part STL and all its modifier files (evidence/REA
 <!-- BEGIN:print -->
 | # | Part | Material, colour | Face down | Build X x Y x Z (mm) | Perim. / top-bottom / infill | Supports | Volume (cm3) | Mass at 100 % (g) | Mass as printed (g) | Filament [est] (g) | Time [est] (h) | Basis |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | `tub` | ASA, satin silver | -Y | 151.3 x 101 x 70 | 4 / 5 / 25 % gyroid + 40 % modifier meshes x 10 (`stl/modifiers/tub__mod_*.stl`: s_b1, s_b2, s_r1, s_r2, s_k1, s_k2, s_j, s_c1, s_c2, s_c3) | 2 small paint-on supports under the -Y wings of the 2 keyhole T-tongue heads (each about 7.8 x 1.6, about 17 mm above the bed, the T undercut cannot face the bed); nothing else | 106.2 | 113.7 | 96.6 | 101.4 | 4.9 | manifest (out/print-manifest.json) |
+| 1 | `tub` | ASA, satin silver | -Y | 151.3 x 101 x 70 | 4 / 5 / 25 % gyroid + 40 % modifier meshes x 10 (`stl/modifiers/tub__mod_*.stl`: s_b1, s_b2, s_r1, s_r2, s_k1, s_k2, s_j, s_c1, s_c2, s_c3) | 4 small paint-on supports, each declared in layout.PRINT_SUPPORT_ZONES and checked by print_overhang: under the -Y wings of the 2 keyhole T-tongue heads (each about 7.8 x 1.6, about 17 mm above the bed, the T undercut cannot face the bed) and (r6) under the 2 flat chins: the s_k2 keeper boss (2.9 x 7.3 off the floor wall, 59 mm up) and the LL collar-insert boss (3.3 x 2.4 off the front wall, 59 mm up); nothing else | 106.2 | 113.7 | 96.6 | 101.4 | 4.9 | manifest (out/print-manifest.json) |
 | 2 | `hood` | ASA, black | +Z | 171.2 x 67.4 x 99.7 | 4 / 5 / 25 % gyroid | tree supports from the bed at 1 place only (r5: the lens turret is deleted): the +Y lower strip of the eyepiece housing under its window (the window runs the full housing length, so the strip starts mid-air; support from outside, y > 35). Everything else is self-supporting: housing interior = 45 deg flanks + 15.2 mm bridge; J2 groove lip = 21 mm bridges between 6 piers; all holes in the plate are bridged <= 14.2 mm; the lens bore is a truncated teardrop (13.1 mm flat); r5: the 4 collar foot holes (dia 8.6) are teardrops (apex -Z = print up); the camera roll fin + 2 webs hang from the band (webs bridge 4.8 to the stack fin). | 56.9 | 60.9 | 51.7 | 54.3 | 2.7 | manifest (out/print-manifest.json) |
 | 3 | `panel` | ASA, satin silver | +Y | 148.6 x 94.4 x 65.4 | 4 / 5 / 25 % gyroid + 40 % modifier meshes x 4 (`stl/modifiers/panel__mod_*.stl`: s_b1, s_b2, s_r1, s_r2) | none: every feature grows from the inner face (posts, bosses, tongue teeth, hooks, ribs, keeper, EVF cap); the R5 end corners have a 45 deg facet at the bed; holes are vertical in print. | 51.2 | 54.8 | 46.5 | 48.9 | 2.4 | manifest (out/print-manifest.json) |
 | 4 | `base_grip` | ASA, black | +Z | 116.5 x 70.4 x 110 | 4 / 5 / 25 % gyroid + 40 % modifier meshes x 4 (`stl/modifiers/base_grip__mod_*.stl`: s_b1, s_b2, s_j, tripod_nut) | none. Prints upside down (base top on the bed): keyhole lips are the first 1.6 mm, the head pockets bridge 18.5 (x), the nut-pocket ceiling bridges 11.4 round the dia 6.6 hole, the run-button shelf and rear stop bridge 25 between the bay walls, the heel strap slots bridge 13, the dia 13.6 run hole has a 45 deg teardrop roof, the cap grooves have 45 deg faces. | 91.0 | 97.4 | 58.4 | 61.4 | 3.0 | manifest (out/print-manifest.json) |
@@ -83,8 +108,8 @@ slicer-review record names the part STL and all its modifier files (evidence/REA
 | 9 | `eyecup` | TPU 95A, black | +X | 45.7 x 45.7 x 16.4 | 3 / 4 / 100 % (TPU 95A, 20-25 mm/s) | none (sleeve end on the bed; 15 deg flare, 45 deg inner lip) | 4.4 | 5.3 | 5.3 | 5.6 | 0.3 | manifest (out/print-manifest.json) |
 | 10 | `stick_sleeve` | ASA, satin silver | -X | 13 x 22.9 x 16 | 2 / 4 / 0 % (0.8 walls, declared MIN_WALL exception THIN_OK) | none (end face on the bed, walls vertical) | 1.1 | 1.2 | 1.2 | 1.2 | 0.2 | manifest (out/print-manifest.json) |
 | 11 | `pi_keeper` | ASA, black | +Z | 64 x 54.9 x 7.9 | 4 / 6 / 100 % | none | 6.2 | 6.6 | 6.6 | 7.0 | 0.4 | manifest (out/print-manifest.json) |
-| 12 | `lens_collar` | ASA (PC if G-W11 shows > 50 C at the camera), black | +X | 65.5 x 68 x 11.3 | 4 / 6 / 100 % | none | 15.7 | 16.8 | 16.8 | 17.7 | 0.9 | manifest (out/print-manifest.json) |
-| | **total** | | | | | | | **371** | **297** | **312** | **16.0** | |
+| 12 | `lens_collar` | ASA (PC if G-W11 shows > 50 C at the camera), black | +X | 66.2 x 68.6 x 11.3 | 4 / 6 / 100 % | none | 16.1 | 17.3 | 17.3 | 18.1 | 1.0 | manifest (out/print-manifest.json) |
+| | **total** | | | | | | | **371** | **298** | **313** | **16.0** | |
 <!-- END:print -->
 
 "Mass at 100 %" is the solid volume x ASA 1.07 g/cm3 (TPU 1.21). "Mass as printed" applies the layout infill factor
@@ -106,16 +131,40 @@ slicer-review record names the part STL and all its modifier files (evidence/REA
 | `eyecup` | 45.7 x 45.7 x 16.4 | fits (STL) | fits (STL) |
 | `stick_sleeve` | 13 x 22.9 x 16 | fits (STL) | fits (STL) |
 | `pi_keeper` | 64 x 54.9 x 7.9 | fits (STL) | fits (STL) |
-| `lens_collar` | 65.5 x 68 x 11.3 | fits (STL) | fits (STL) |
+| `lens_collar` | 66.2 x 68.6 x 11.3 | fits (STL) | fits (STL) |
 <!-- END:beds -->
 
 The build's `stl + bed fit` check repeats this on the STL bounding boxes; only that check may say "pass".
 
 ## 3. Orientation, supports and part notes
 
+**Settled (r6).** The orientation table below is generated from `layout.PRINT_ORIENTATION_WHY` and the last build's
+`print_overhang` rows in `checks.json`. A part reads `pass` only when every downward patch in every 0.2 mm layer is
+accounted for: a short overhang, an anchored bridge, a bridge that ends at a screw hole, or a declared support zone.
+"Around a hole" counts bridges whose lines end at a screw hole: their head bearing faces get the flatness check of
+section 5 item 3. The hand-written table after it keeps the per-part detail.
+
+<!-- BEGIN:orientation -->
+| Part | Face down | Why this face | Computed (print_overhang) | Bridges: longest span (mm) | Declared supports |
+|---|---|---|---|---|---|
+| `tub` | -Y | Right wall down: the open left side faces up, so every rib, boss, catch and cell grows from the bed wall or stands at 45 deg; front and rear walls print vertical with their bores as teardrops (apex up). The keyhole T-tongues under the floor are the only undercut (2 paint-on supports). | pass | 19.7 (2 around a hole) | `ll_insert_boss_chin`, `s_k2_boss_chin`, `tongue_f_minus_y_wing`, `tongue_r_minus_y_wing` |
+| `hood` | +Z | Roof down: the visible top is the bed face and the band, plate and housing walls rise from it; the housing interior is 45 deg flanks under a bridge and the J2 groove lip bridges between piers. The eyepiece window sill is the only support. | pass | 20.7 | `eyepiece_window_sill` |
+| `panel` | +Y | Outer face down: the engraving prints into a smooth bed face and every post, boss, rib, tongue and hook grows upward from it. | pass | - | none |
+| `base_grip` | +Z | Base top down (upside down): the keyhole lips are the first layers and the grip column rises from the base; pockets, shelf and strap slots bridge the short way. | pass | 24.7 (1 around a hole) | none |
+| `cap` | -Z | Bottom face down: the keys and detent bumps print as vertical faces. | pass | 3.4 | none |
+| `plunger` | +X | Finger face down: flat, unmarked finger face; stem and nib rise from the flange. | pass | - | none |
+| `knob_exp` | +Y | Top face down: the knurl prints vertical and the D-bore stands upright (round, accurate). | pass | - | none |
+| `knob_fps` | +Y | Top face down: the knurl prints vertical and the D-bore stands upright (round, accurate). | pass | - | none |
+| `eyecup` | +X | Base ring down: the 15 deg flare and 45 deg lip need no support in TPU. | pass | - | none |
+| `stick_sleeve` | -X | End face down: the 0.8 walls print vertical (full height, no bridges). | pass | - | none |
+| `pi_keeper` | +Z | Top face down: the fingers grow from it with 45 deg backs; the finger tips stay sharp. | pass | 7.3 (2 around a hole) | none |
+| `lens_collar` | +X | Front face down: the bore, cone and hoop lie in the layer plane, so the pinch hoop tension runs along the perimeters and the bore prints round; the ear screw axes are vertical; only the three washer seats face down (bridges with a 0.2 membrane). | pass | 7.2 | none |
+| `collar_gauge` | -X | assembly tool: rear end down, both cones widen upward at 45 deg | pass | - | none |
+<!-- END:orientation -->
+
 | Part | Face down (on the bed) | Supports | Notes |
 |---|---|---|---|
-| `tub` | -Y: the right wall (print-up is +Y, toward the open left side) | 2 small paint-on supports under the -Y wings of the 2 keyhole T-tongue heads (each about 7.8 x 1.6, starting about 17 mm above the bed); nothing else | Every other internal feature grows from the right wall or has its -Y faces at 45 deg or steeper: rib_l gusset, Pi bosses and the 2 keeper bosses (r2: the floor hooks are gone), catch ledges, EVF half-collar, OLED cell, board rails, stick guide. Bridges: window and slot tops <= 20 mm, the dia 7 counterbore shoulders, the cell -Y wall (13.9), the scoop roof (20). The camera lip (dia 32.4) and BFAR counterbore (dia 37.5; r5, they replace the dia 36.5 bore and its 2 pins) and the EVF bore (dia 29.3) are in X-normal walls, so they carry teardrops pointing +Y. r5: the 3 lens-collar insert bosses (OD 8, x -7.6..-5.2) are teardrop prisms with the apex -Y; their 4.0 insert bores run along X, horizontal in this print. 4 perimeters, 25 % gyroid, 40 % modifier round the 2 s_r pads, the 2 keeper bosses s_k1/s_k2 (r2; their pilots are horizontal in this print, the weak case, FASTENER-POLICY B) and (r5) the 3 insert bosses. Brim 5 mm. 70 mm tall as printed |
+| `tub` | -Y: the right wall (print-up is +Y, toward the open left side) | 4 small paint-on supports: under the -Y wings of the 2 keyhole T-tongue heads (each about 7.8 x 1.6, starting about 17 mm above the bed) and (r6) under the flat chins of the s_k2 keeper boss and the LL collar-insert boss (each about 59 mm above the bed, on the right wall's inner face); nothing else | Every other internal feature grows from the right wall or has its -Y faces at 45 deg or steeper: rib_l gusset, Pi bosses and the 2 keeper bosses (r2: the floor hooks are gone), catch ledges, EVF half-collar, OLED cell, board rails, stick guide. Bridges: window and slot tops <= 20 mm, the dia 7 counterbore shoulders, the cell -Y wall (13.9), the scoop roof (20). The camera lip (dia 32.4) and BFAR counterbore (dia 37.5; r5, they replace the dia 36.5 bore and its 2 pins) and the EVF bore (dia 29.3) are in X-normal walls, so they carry teardrops pointing +Y. r5: the 3 lens-collar insert bosses (OD 8, x -7.6..-5.2) are teardrop prisms with the apex -Y; their 4.0 insert bores run along X, horizontal in this print. 4 perimeters, 25 % gyroid, 40 % modifier round the 2 s_r pads, the 2 keeper bosses s_k1/s_k2 (r2; their pilots are horizontal in this print, the weak case, FASTENER-POLICY B) and (r5) the 3 insert bosses. Brim 5 mm. 70 mm tall as printed |
 | `hood` | +Z: the roof (the part prints upside down) | tree, from the bed, 1 place only (r5: the lens turret and its support are gone): the +Y lower strip of the eyepiece housing under its window (support from outside, y > 35) | Housing interior = 45 deg flanks + a 15.2 bridge; the J2 groove lip prints as 21 mm bridges between 6 piers; plate holes are bridged <= 14.2; the lens bore is a truncated teardrop. r5: the 4 collar foot holes (dia 8.6) are teardrops with the apex -Z, each with a full ring >= 1.2 (measured 1.85-2.35); the camera roll fin and its 2 webs grow straight up from the roof. The 4 hooks, rail block and roof rib grow upward. Remove the tree support with flush cutters; deburr the hook teeth and the groove mouth. 5 mm brim on the roof |
 | `panel` | +Y: the outer face (engraving on the bed) | none | Engraving 0.4 deep in the bed face, text at least 3.0 high; glyph outlines grow 0.15 per side (`FDM['ENGRAVE_TEXT_GROW']`) so the bold strokes are about 0.9, and the computed `engrave_groove` check passes when no glyph has more than 20 % of its area narrower than 0.6 (`checks.json`). Posts, bosses, tongue, encoder cradle, EVF cap and camera keeper finger all grow upward. Use a smooth PEI sheet for a uniform face; no ironing on the bed face |
 | `base_grip` | +Z: the base top (the part prints upside down; the grip column rises 102 mm) | none | The first 1.6 mm are the keyhole lips; the head pocket ceilings bridge 18.5 mm the short way. The tripod-nut pocket opens on the bed. The cap rails are at the top of the column. Brim 5 mm; slow the column above 60 mm if it wobbles. Longest print of the set |
@@ -125,7 +174,8 @@ The build's `stl + bed fit` check repeats this on the STL bounding boxes; only t
 | `knob_exp`, `knob_fps` | +Y: the top face | none | Knurl vertical. D bores 6.0/4.5 (exposure) and 6.35/4.8 (18/24) are modelled +0.10 radial over the shaft (`FDM['KNOB_BORE_OFFSET']`); the D-bore ladder coupon (section 6) sets that value before the knobs are printed |
 | `eyecup` | +X: the base ring | none (15 deg flare) | TPU 95A, 3 perimeters, 100 %. The sleeve grips the eyepiece eye-end body with 0.3 interference |
 | `stick_sleeve` | -X: its end face | none | 0.8 wall, a declared MIN_WALL (1.2) deviation (`layout.THIN_OK`: non-structural slider cover; DESIGN s3): 2 perimeters at 0.4, 4 top/bottom, no infill; check it slides in the guide |
-| `lens_collar` (r5) | +X: the front face (one collar per lens) | none | Ring body r 30 round the lens bore, 4 feet, 2 pinch lugs on -Y. The ears, lugs and feet grow -X; the 45 deg cone that seats the lens band prints as an inward step; a 0.6 bed chamfer runs round the outer edge of the front face. Downward faces: only the 3 washer-seat bridges and the s_c4 holes. Small-part class, 100 %; ASA black (PC if G-W11 > 50 C). Before printing: G-LENS (the band measured) and G-COL-1 on the coupons. After printing: set the L 5.7 insert in the lower lug (s4); check the band slides into the bore with s_c4 loose |
+| `lens_collar` (r5) | +X: the front face (one collar per lens) | none | Ring body r 30 round the lens bore, 4 feet, 2 pinch lugs on -Y; r6: ear lobes r 5.6 (1.25 of wall round the counterbores even at the 0.6 bed chamfer). The ears, lugs and feet grow -X; the 45 deg cone that seats the lens band prints as an inward step; a 0.6 bed chamfer runs round the outer edge of the front face, including the bore entry (the centring gauge seats on it: keep it clean, never re-cut it). Downward faces: only the 3 washer-seat bridges (with membranes) and the s_c4 holes. Small-part class, 100 %; ASA black (PC only if G-W11 finds > 50 C at the collar foot). Before printing: section 7 (MP-CAM with G-LENS, then G-COL-1 on the coupons). After printing: set the L 5.7 insert in the lower lug (s4); check the band slides into the bore with s_c4 loose |
+| `collar_gauge` (r6 tool) | -X: the rear end (both cones widen upward at 45 deg) | none | Centring gauge for one lens (it matches that collar's bore chamfer), from `stl/tools/collar_gauge.stl`; 100 %, 4 perimeters, about 22 g. Not part of the camera. Print it with the G-COL-1 coupons and check it there first: with the collar coupon held loosely on the tub-front coupon, the gauge must seat on both cones and centre the collar (feeler: equal gap all round the lip). Used at assembly step 7 and for every collar refit (ASSEMBLY s2, s7) |
 
 ## 4. Hardware fitted to printed parts
 
@@ -178,8 +228,11 @@ The build's `stl + bed fit` check repeats this on the STL bounding boxes; only t
 <!-- END:engrave -->
 
 6. (r5; replaces r4's camera-pin fit: the pins are deleted) Set the 4 heat-set inserts (s4; ASSEMBLY B1): 3 short ones
-   in the tub front-wall bosses, 1 L 5.7 in the collar's lower lug. Then dry-fit the collar on the tub with the hood
-   on: the 4 feet pass the hood holes and sit flat on the tub face; s_c1..s_c3 reach their inserts by hand.
+   in the tub front-wall bosses, 1 L 5.7 in the collar's lower lug. r6 (audit B-13): do the collar dry fit on the
+   G-COL-1 coupons, not on the production tub with the hood on. That fit would cost one of the hood's counted hook
+   cycles, because the hood must come off again for step 4. On the coupons: the 4 feet pass the `collar_hood_plate`
+   holes and sit flat on `collar_tub_front`; s_c1..s_c3 reach their inserts by hand; the centring gauge seats on both
+   cones.
 
 ## 6. Coupons to print first (about 4 h in total; 27 coupon STLs (r5: 23 + 4), see below; generated count: DESIGN.md s1 `counts`)
 
@@ -191,7 +244,7 @@ The build's `stl + bed fit` check repeats this on the STL bounding boxes; only t
 | Cap retention (r2): grip bay end with the 2 grooves + detent arm, and the cap | SPEC J6 | 20 slides, detent hold, 20 N pull-down | **G-CAP-1** |
 | EVF stop (r2): tub board slot section, panel rib section | SPEC J8 | the real EVF board: feeler 0.1-0.5 at the +Y stop; no shuttle on the HDMI plug | **G-EVF-2** |
 | Hood hook hk1 + ledge with its release hole, hook hk3 + sloped ledge (45 deg return; r2 fixer), and one encoder cradle hook on a 1.6 board edge | SPEC J1, J12 | 5 click/release cycles (pin release for hk1, straight pull for hk3), no whitening, no set; then 5 remove/refit cycles of the whole hood | **G-SNAP-2** |
-| Lens collar (r5): tub front wall with the lip, counterbore, 3 insert bosses and the LR foot land; hood front plate with the 4 foot holes; the whole collar (default lens). Set 3 short inserts in the tub coupon and the lug insert in the collar first. **Only after MP-CAM / G-LENS** | SPEC J7 (r5), FASTENER-POLICY I | feet pass the holes (>= 0.3); the band slides in with s_c4 loose; at 0.2 N m no slip under 1.0 N m roll or 50 N axial; 3x lens mass at the CoM: dial at the lens front <= 0.02, returns; 24 h at 50 C, re-torque check; 20 pinch cycles, no lug crack | **G-COL-1** |
+| Lens collar (r5): tub front wall with the lip, counterbore, 3 insert bosses and the LR foot land; hood front plate with the 4 foot holes; the whole collar (default lens); r6: the centring gauge (`stl/tools/collar_gauge.stl`). Set 3 short inserts in the tub coupon and the lug insert in the collar first. **Only after G-COMB-1, MP-CAM (G-CAM-1) and G-LENS (section 7)** | SPEC J7 (r5), FASTENER-POLICY I | feet pass the holes (>= 0.3); r6: the gauge seats on both cones and centres the collar (equal feeler gap round the lip, within 0.1); the band slides in with s_c4 loose; at 0.15 / 0.2 N m (torque driver) no slip under 1.0 N m roll or 50 N axial; 3x lens mass at the CoM: dial at the lens front <= 0.02, returns; 24 h at 50 C, re-torque check; 20 pinch cycles, no lug crack | **G-COL-1** |
 | Keyhole tongue + base slot (one tongue, 20 mm of base) | SPEC J4 | drop in, slide 10 mm, no rock; keyhole fit | **G-J4-1** (fit record, s6.1) |
 | Knob D-bore ladder, 5 steps of `KNOB_BORE_OFFSET` -0.05..+0.15 radial, both shafts | SPEC J12 | push fit on the encoder and switch shafts | **G-KNOB-1** (calibration record, s6.1); then set `FDM['KNOB_BORE_OFFSET']`, rebuild, print the knobs |
 | Clearance comb 0.15 / 0.25 / 0.30 | layout FDM | confirms LOCATE / SLIDE / SEAM on this printer and profile | **G-COMB-1** (calibration record, s6.1); profile tuning |
@@ -236,13 +289,64 @@ item id and the hashes it lists: a record for an older STL (different hash) is s
 visible until a newer passing record for the current hashes is filed. Nothing has been printed or recorded on this
 machine; all three are **not run**.
 
-## 7. Suggested print order
+## 7. Print order (settled, r6; audit 2026-10-06 M2)
 
-1. Coupons (section 6). Tune the profile until the 0.25 slide and the D-bores fit. r5: the G-COL-1 collar coupons
-   only after MP-CAM and G-LENS (the collar's bore and cone come from the measured lens band).
-2. `base_grip` (longest; the pack bay and keyholes can be checked against the pack and the tub tongue coupon).
-3. `tub`, then `hood` (check the hood on the tub at once: hooks, plate gap 0.2, wall-top seat).
-4. `panel` (silver, face down on a clean sheet).
-5. One plate of small parts: pi_keeper, cap, knobs, plunger (black); stick sleeve (silver). The lens collar (black,
-   front face down) only after G-LENS and G-COL-1; it is per lens (a `--lens` build exports that lens's collar).
-6. `eyecup` in TPU last (change the material and the profile).
+The order is a rule, not a suggestion. Print a part only after **every gate listed for it** has a current recorded
+pass (evidence/README.md). The table is generated from `layout.PRINT_PREREQS`, `COUPON_PREREQS` and
+`PRINT_SEQUENCE`, and its "Now" column comes from the last build receipt's `print_release`.
+- The build enforces the rule. A `slicer_review` record for a part, or a G-COL-1 coupon record, is **rejected** if it
+  was filed before those gates passed or is dated before them. The part's evidence then stays open.
+- **Any measured difference** at order 2 means: update `layout.py`, rebuild and rerun the release sequence (HANDOFF),
+  then slice the new STL. A record for an older STL is stale by hash anyway.
+- The collar is per lens. A `--lens` build exports that lens's collar and its own centring gauge.
+
+Within a stage, the sequence follows the old advice:
+- `base_grip` first: it is the longest print, and its pack bay and keyholes can be checked against the pack and the
+  tongue coupon.
+- Then `tub` and `hood`: check the hood on the tub at once (hooks, plate gap 0.2, wall-top seat).
+- `panel` face down on a clean sheet.
+- One plate of the small parts.
+- The collar after G-COL-1.
+- The TPU `eyecup` last (change the material and the profile).
+
+<!-- BEGIN:order -->
+| Order | What | Print only after a current recorded pass of | Now |
+|---|---|---|---|
+| 1 | Calibration and fit coupons (s6, all except the 3 G-COL-1 coupons) | nothing: print them first, in parallel with the bench measurements | released |
+| 2 | Bench measurements, no printing (ASSEMBLY B0, MEASURED-PARTS): MP-CAM with the lens (G-CAM-1, G-LENS), MP-PACK, MP-RUN, MP-X1203, MP-HDMI, MP-EVF, MP-ENC, MP-SW, MP-STICK, MP-FPC | update `layout.py` with any measured difference, rebuild and rerun the release sequence before order 3 | - |
+| 3 | G-COL-1 coupons (`collar_tub_front`, `collar_hood_plate`, `collar_part`) and the centring gauge (`stl/tools/collar_gauge.stl`) | G-COMB-1, G-CAM-1, G-LENS | blocked (3 of 3 open) |
+| 4 | `base_grip` | G-COMB-1, G-MP-PACK, G-RUN-1 | blocked (3 of 3 open) |
+| 5 | `tub` | G-COMB-1, G-PI-1, G-MP-X1203, G-CAM-1, G-LENS, G-HDMI, EVF-G1, EVF-G7, EVF-G8, G-MP-EVF, G-MP-STICK, G-MP-FPC | blocked (12 of 12 open) |
+| 6 | `hood` | G-COMB-1, G-MP-X1203, G-CAM-1, G-LENS, EVF-G1, EVF-G7, EVF-G8, G-MP-EVF, G-MP-FPC | blocked (9 of 9 open) |
+| 7 | `panel` | G-COMB-1, G-CAM-1, G-LENS, G-HDMI, EVF-G1, EVF-G7, EVF-G8, G-MP-EVF, G-ENC-1, G-MP-ENC, G-MP-SW | blocked (11 of 11 open) |
+| 8 | `pi_keeper` | G-COMB-1, G-PI-1, G-MP-X1203 | blocked (3 of 3 open) |
+| 9 | `cap` | G-COMB-1, G-MP-PACK | blocked (2 of 2 open) |
+| 10 | `plunger` | G-COMB-1 | blocked (1 of 1 open) |
+| 11 | `knob_exp` | G-COMB-1, G-MP-ENC, G-KNOB-1 | blocked (3 of 3 open) |
+| 12 | `knob_fps` | G-COMB-1, G-MP-SW, G-KNOB-1 | blocked (3 of 3 open) |
+| 13 | `stick_sleeve` | G-COMB-1, G-MP-STICK | blocked (2 of 2 open) |
+| 14 | `lens_collar` | G-COMB-1, G-CAM-1, G-LENS, G-COL-1 | blocked (4 of 4 open) |
+| 15 | `eyecup` | G-MP-EVF | blocked (1 of 1 open) |
+
+| Gate | What it fixes before printing |
+|---|---|
+| EVF-G1 | EVF board revision (5 V lead end) |
+| EVF-G7 | EVF panel release (EVF-A usable at all) |
+| EVF-G8 | OLED flex length |
+| G-CAM-1 | MP-CAM: camera stack, back focus s, tripod-block removal (tub lip and counterbore, hood roll fin, panel keeper, collar C-flange datum) |
+| G-COL-1 | collar coupons: fit, centring gauge, pinch, slip, pull-out and creep |
+| G-COMB-1 | LOCATE / SLIDE / SEAM confirmed on this printer and ASA profile (clearance comb) |
+| G-ENC-1 | encoder back parts against the cradle hooks |
+| G-HDMI | micro-HDMI plugs and the 18/24 switch bushing (EVF board slot, panel) |
+| G-KNOB-1 | KNOB_BORE_OFFSET chosen on the D-bore ladders, then the knobs rebuilt |
+| G-LENS | MP-CAM lens line: band OD, edge, position, rings and CoM (collar bore and cone; lens rows of j7_float) |
+| G-MP-ENC | encoder board, bushing and shaft |
+| G-MP-EVF | EVF bench assembly: optics, board stop, eyecup barrel |
+| G-MP-FPC | camera FPC length and fold (tub and hood keep-outs) |
+| G-MP-PACK | pack envelope and lead exit (grip bay, cap) |
+| G-MP-STICK | stick width and thickness (guide, sleeve) |
+| G-MP-SW | 18/24 switch tab, nut and shaft |
+| G-MP-X1203 | X1203 board and Active Cooler height (Pi bosses, keeper, hood and FPC clearances) |
+| G-PI-1 | X1203 edge parts and standoffs (keeper fingers, Pi bosses) |
+| G-RUN-1 | run button and cap (grip cradle and hole) |
+<!-- END:order -->

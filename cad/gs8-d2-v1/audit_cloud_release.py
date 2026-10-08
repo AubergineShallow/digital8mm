@@ -21,11 +21,13 @@ import numpy as np
 
 EXPECTED_CATEGORIES = {
     'contract', 'cots_containment', 'interference', 'mate_overlap', 'clearance', 'keepouts',
-    'cable_routes', 'bed_fit', 'stl_mesh', 'print_modifiers', 'thin_wall', 'critical_features',
+    'cable_routes', 'bed_fit', 'stl_mesh', 'print_modifiers', 'print_overhang', 'thin_wall', 'critical_features',
     'evf_restraint', 'driver', 'engrave_groove', 'boss_geometry', 'inserts', 'j7_float',
     'lens_support', 'lens_clamp', 'sweeps', 'removals', 'service_driver', 'release_access',
     'stack_retention', 'layout_self_check', 'mass_com',
 }
+# r6 (audit 2026-10-06 L9): report-only categories; their summary status is 'info', never 'pass'.
+INFO_CATEGORIES = {'mass_com'}
 
 # Fixed independently from the verified r5 input, not inferred from a supplied receipt.
 EXPECTED_SOURCES = set(['FASTENER-POLICY.md', 'SPEC.md', 'build_d2.py', 'checks.py', 'cots.py', 'coupons_r1.py', 'd2_common.py', 'layout.py', 'make_coupons.py', 'make_tables.py', 'printed_collar.py', 'printed_grip.py', 'printed_hood.py', 'printed_keeper.py', 'printed_panel.py', 'printed_small.py', 'printed_tub.py'])
@@ -33,7 +35,8 @@ FONT_SOURCES = set(['run_locked.py', 'fonts/DejaVuSans-Bold.ttf', 'fonts/LICENSE
 EXPECTED_GATE_DOCS = set(['cad/gs8-d2-v1/MEASURED-PARTS.md', 'cad/gs8-d2-v1/SPEC.md', 'electronics/gs8-d2-v1/WIRING.md', 'electronics/gs8-evf-v1/EVF-SELECTION.md'])
 EXPECTED_GATE_IDS = set(['EVF-G1', 'EVF-G2', 'EVF-G3', 'EVF-G4', 'EVF-G4b', 'EVF-G5', 'EVF-G6', 'EVF-G7', 'EVF-G8', 'EVF-G9', 'G-CAM-1', 'G-CAM-2', 'G-CAP-1', 'G-COL-1', 'G-COMB-1', 'G-ENC-1', 'G-EVF-1', 'G-EVF-2', 'G-FPC-1', 'G-HDMI', 'G-J4-1', 'G-KEEP-1', 'G-KEEP-1/whole', 'G-KNOB-1', 'G-LENS', 'G-MP-ENC', 'G-MP-EVF', 'G-MP-FPC', 'G-MP-PACK', 'G-MP-STICK', 'G-MP-SW', 'G-MP-X1203', 'G-PANEL-1', 'G-PANEL-1/whole', 'G-PI-1', 'G-PLG-1', 'G-PT-1', 'G-RUN-1', 'G-SKIRT-1', 'G-SNAP-1', 'G-SNAP-2', 'G-SNAP-2/whole', 'G-W1', 'G-W10', 'G-W11', 'G-W12', 'G-W13', 'G-W2', 'G-W3', 'G-W4', 'G-W5', 'G-W6', 'G-W7', 'G-W8', 'G-W9'])
 EXPECTED_PARTS = set(['base_grip', 'cap', 'eyecup', 'hood', 'knob_exp', 'knob_fps', 'lens_collar', 'panel', 'pi_keeper', 'plunger', 'stick_sleeve', 'tub'])
-EXPECTED_BASE_OUTPUTS = set(['checks.json', 'parts-manifest.json', 'print-manifest.json', 'renders/section-base-edge-x91.png', 'renders/section-evf-board-x137.png', 'renders/section-evf-board-z78.png', 'renders/section-j7-y0.png', 'renders/section-j7-z90.png', 'renders/section-pi-keeper-x80.png', 'renders/section-pi-keeper-y-20.png', 'renders/section-pi-keeper-y12.png', 'stl/base_grip.stl', 'stl/cap.stl', 'stl/eyecup.stl', 'stl/hood.stl', 'stl/knob_exp.stl', 'stl/knob_fps.stl', 'stl/lens_collar.stl', 'stl/modifiers/base_grip__mod_s_b1.stl', 'stl/modifiers/base_grip__mod_s_b2.stl', 'stl/modifiers/base_grip__mod_s_j.stl', 'stl/modifiers/base_grip__mod_tripod_nut.stl', 'stl/modifiers/panel__mod_s_b1.stl', 'stl/modifiers/panel__mod_s_b2.stl', 'stl/modifiers/panel__mod_s_r1.stl', 'stl/modifiers/panel__mod_s_r2.stl', 'stl/modifiers/tub__mod_s_b1.stl', 'stl/modifiers/tub__mod_s_b2.stl', 'stl/modifiers/tub__mod_s_c1.stl', 'stl/modifiers/tub__mod_s_c2.stl', 'stl/modifiers/tub__mod_s_c3.stl', 'stl/modifiers/tub__mod_s_j.stl', 'stl/modifiers/tub__mod_s_k1.stl', 'stl/modifiers/tub__mod_s_k2.stl', 'stl/modifiers/tub__mod_s_r1.stl', 'stl/modifiers/tub__mod_s_r2.stl', 'stl/panel.stl', 'stl/pi_keeper.stl', 'stl/plunger.stl', 'stl/stick_sleeve.stl', 'stl/tub.stl'])
+EXPECTED_BASE_OUTPUTS = set(['checks.json', 'parts-manifest.json', 'print-manifest.json', 'renders/section-base-edge-x91.png', 'renders/section-evf-board-x137.png', 'renders/section-evf-board-z78.png', 'renders/section-j7-y0.png', 'renders/section-j7-z90.png', 'renders/section-pi-keeper-x80.png', 'renders/section-pi-keeper-y-20.png', 'renders/section-pi-keeper-y12.png', 'stl/base_grip.stl', 'stl/cap.stl', 'stl/eyecup.stl', 'stl/hood.stl', 'stl/knob_exp.stl', 'stl/knob_fps.stl', 'stl/lens_collar.stl', 'stl/modifiers/base_grip__mod_s_b1.stl', 'stl/modifiers/base_grip__mod_s_b2.stl', 'stl/modifiers/base_grip__mod_s_j.stl', 'stl/modifiers/base_grip__mod_tripod_nut.stl', 'stl/modifiers/panel__mod_s_b1.stl', 'stl/modifiers/panel__mod_s_b2.stl', 'stl/modifiers/panel__mod_s_r1.stl', 'stl/modifiers/panel__mod_s_r2.stl', 'stl/modifiers/tub__mod_s_b1.stl', 'stl/modifiers/tub__mod_s_b2.stl', 'stl/modifiers/tub__mod_s_c1.stl', 'stl/modifiers/tub__mod_s_c2.stl', 'stl/modifiers/tub__mod_s_c3.stl', 'stl/modifiers/tub__mod_s_j.stl', 'stl/modifiers/tub__mod_s_k1.stl', 'stl/modifiers/tub__mod_s_k2.stl', 'stl/modifiers/tub__mod_s_r1.stl', 'stl/modifiers/tub__mod_s_r2.stl', 'stl/panel.stl', 'stl/pi_keeper.stl', 'stl/plunger.stl', 'stl/stick_sleeve.stl', 'stl/tub.stl',
+                            'stl/tools/collar_gauge.stl'])      # r6 (X2): the collar centring gauge
 EXPECTED_COUPON_OUTPUTS = set(['stl/coupons/base_edge_base.stl', 'stl/coupons/base_edge_panel.stl', 'stl/coupons/base_edge_tub.stl', 'stl/coupons/board_edge_plate.stl', 'stl/coupons/cap_retention_cap.stl', 'stl/coupons/cap_retention_grip.stl', 'stl/coupons/clearance_comb.stl', 'stl/coupons/collar_hood_plate.stl', 'stl/coupons/collar_part.stl', 'stl/coupons/collar_tub_front.stl', 'stl/coupons/coupon-pi-keeper-part.stl', 'stl/coupons/coupon-pi-keeper-pi.stl', 'stl/coupons/coupon-pi-keeper-tub.stl', 'stl/coupons/coupon-pi-keeper-x1203.stl', 'stl/coupons/encoder_cradle_hook.stl', 'stl/coupons/evf_stop_panel.stl', 'stl/coupons/evf_stop_tub.stl', 'stl/coupons/hood_hook.stl', 'stl/coupons/hood_hook_ret.stl', 'stl/coupons/hood_ledge.stl', 'stl/coupons/hood_ledge_ret.stl', 'stl/coupons/keyhole_slot.stl', 'stl/coupons/knob_bore_ladder_enc.stl', 'stl/coupons/knob_bore_ladder_sw.stl', 'stl/coupons/pt_boss_bottom.stl', 'stl/coupons/pt_boss_post.stl', 'stl/coupons/tongue.stl'])
 EXPECTED_PINS = {'PyYAML': '6.0.3', 'aiohappyeyeballs': '2.7.1', 'aiohttp': '3.14.3', 'aiosignal': '1.4.0', 'attrs': '26.1.0', 'cadquery': '2.6.1', 'cadquery-ocp': '7.8.1.1.post1', 'casadi': '3.8.1', 'charset-normalizer': '3.5.1', 'contourpy': '1.4.0', 'cycler': '0.12.1', 'ezdxf': '1.4.4', 'fonttools': '4.65.0', 'frozenlist': '1.8.0', 'idna': '3.20', 'kiwisolver': '1.5.1', 'manifold3d': '3.5.4', 'matplotlib': '3.11.2', 'more-itertools': '11.1.0', 'msgpack': '1.2.2', 'multidict': '6.9.0', 'multimethod': '1.12', 'nlopt': '2.11.0', 'numpy': '2.5.3', 'packaging': '26.3', 'path': '17.1.1', 'pillow': '12.3.0', 'propcache': '0.5.4', 'pymupdf': '1.28.2', 'pyparsing': '3.3.2', 'python-dateutil': '2.9.0.post0', 'reportlab': '5.0.1', 'six': '1.17.0', 'trame': '4.0.0', 'trame-client': '4.1.0', 'trame-common': '1.2.7', 'trame-server': '4.0.0', 'trame-vtk': '2.8.13', 'typing_extensions': '4.16.0', 'typish': '1.9.3', 'vtk': '9.3.1', 'wslink': '2.5.7', 'yarl': '1.25.1'}
 EXPECTED_COMMON_HELPERS = set(['box_solid', 'cyl_solid(tube)', 'pt_boss', 'counterbore', 'snap_hook(hood hk1)', 'snap_strain', 'keyhole_tongue', 'keyhole_slot', 'dovetail(rail)', 'dovetail(groove)', 'vent_slots(out_band)', 'vent_slots(inlet_roof)', 'engrave(all items)', 'teardrop', 'bed_chamfer', 'safe_fillet(bad r falls back)', 'safe_fillet(ok)', 'to_print_pose(-Y)'])
@@ -186,7 +189,7 @@ def _audit(project, out, require_step=False, final_release=False, alternate_out=
     if require_step or final_release:
         required_outputs |= {'step/gs8-d2-assembly.step'} | {'step/parts/%s.step' % p for p in EXPECTED_PARTS}
     if final_release:
-        require(cloud, 'Final release must declare the separate r5-cloud-polish-20261007 fork')
+        require(cloud, 'Final release must declare its r5-cloud-polish-20261007 lineage')
         required_outputs |= EXPECTED_COUPON_OUTPUTS | {'coupons-manifest.json', 'coupons-r1-manifest.json',
                                                       'checks-fujinon-sweep1mm.json', 'test_common.json'}
     require(required_outputs <= set(receipt['files']),
@@ -210,7 +213,8 @@ def _audit(project, out, require_step=False, final_release=False, alternate_out=
     categories = {row['check'] for row in receipt['summary']}
     require(categories == EXPECTED_CATEGORIES and len(receipt['summary']) == len(EXPECTED_CATEGORIES),
             'Required category set was changed, omitted, or duplicated')
-    require(all(row['status'] == 'pass' for row in receipt['summary']), 'A CAD category is not passing')
+    require(all(row['status'] == ('info' if row['check'] in INFO_CATEGORIES else 'pass') for row in receipt['summary']),
+            'A CAD category is not passing (report-only categories must read info)')
     require(not receipt['stubs'] and receipt['cad_release_candidate'], 'CAD has stubs or is not a computed candidate')
     require(not receipt['blocking'], 'Receipt reports blocking checks')
     require(not receipt.get('unclassified_thin_spots'), 'Unclassified thin spots remain')
@@ -300,6 +304,9 @@ def _audit(project, out, require_step=False, final_release=False, alternate_out=
             require(sha(copied) == sha(alternate_out / 'checks.json'), 'Copied Fujinon checks do not match alternate output')
             alternate_checks = load_json(alternate_out / 'checks.json', {'lens_default'})
             require(alternate_checks['lens_default'] == 'fujinon_hf6xa', 'Alternate output is not the Fujinon lens')
+            carried_alt = (receipt.get('carried_checks') or {}).get('checks-fujinon-sweep1mm.json') or {}
+            require(carried_alt.get('sources_match') is True and alternate_checks.get('sources') == receipt['sources'],
+                    'Carried Fujinon checks were not built from the release sources (audit 2026-10-06 L11)')
             require(checks['lens_default'] == 'kowa_lm6hc', 'Final primary output is not the Kowa lens')
 
     return dict(status='pass' if not failures else 'fail', revision=receipt['revision'],

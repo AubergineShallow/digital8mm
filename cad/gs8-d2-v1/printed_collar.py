@@ -9,7 +9,7 @@ camera (housing, BFAR, adapter, PCB, cover) hangs on the lens and touches no pri
   - rear bore: a >= 1.6 mm axial cylindrical land removes the unused thin cone feather; its 45 deg seat datum is unchanged;
   - bore = band d + 0.3 (diametral) from the cone to the front; 45 deg cone from (cone_x0, cone_r0) to (cone_x1,
     bore_r): the band's chamfered rear edge seats at C_FLANGE_X + x0 (Kowa x 2.8, r 20.7);
-  - 3 ear lobes (TL, TR, LL; r 5.0 hulled to the body) with a dia 7.5 counterbore from the front to the washer seat
+  - 3 ear lobes (TL, TR, LL; r 5.6 since r6, hulled to the body) with a dia 7.5 counterbore from the front to the washer seat
     x 2.8, M3 clearance 3.4 through the ear and its foot; 4 feet dia 7.6 x -2.7..+0.3 through the hood holes (dia 8.6)
     onto the tub outer face (datum x -2.7); LR is a solid compression foot;
   - slit 2.0 (z 59..61) on the -Y side, bore to the lug tips, full length; external pinch lugs x 1.0..front inside
@@ -180,6 +180,39 @@ def prepare_print(layout, part_id, finished_shape):
                 postprocess='Clear the three anchor holes to 3.4 mm by hand after printing; remove loose debris; '
                             'do not alter washer seat planes, cone or foot datums. Confirm flat washers at G-COL-1.',
                 assembled_geometry='STEP and every assembly/clearance check use the finished shape after clearing')
+
+
+def centring_gauge(layout, lens=None):
+    """r6 (audit 2026-10-06 X2): the collar centring gauge for `lens` (an assembly tool, not a production part),
+    assembly frame, seated pose. A hollow solid of revolution on the lens axis:
+      - rear 45 deg cone through the tub lip's front edge (x XT1, r lip_d / 2): it seats on that edge;
+      - body r body_r: passes the hood plate bore and the collar's rear land and cone with clearance;
+      - front 45 deg cone through the collar's bore-entry chamfer (x front_x - BED_CHAMFER .. front_x, r bore_r ..
+        bore_r + BED_CHAMFER): it seats on that chamfer;
+      - grip ring in front of the collar, inside every s_c1..s_c3 driver line.
+    Pressed home while s_c1..s_c3 are tightened (step 7, camera not yet in), it puts the collar bore on the lip axis
+    without any fit clearance in the chain; an axial size error only lifts one cone off its seat (about 1:1 radially).
+    Print: rear end down (face_down '-X'): both cones widen upward at 45 deg, no supports."""
+    L = layout
+    cs = L.collar_spec(lens or L.LENS)
+    if cs is None or not cs['rear_entry_feasible']:
+        raise ValueError('lens %s has no buildable collar: no gauge' % (lens or L.LENS))
+    g = L.COLLAR['gauge']
+    ly, lz = L.LENS_AXIS
+    t = math.tan(math.radians(g['cone_deg']))
+    r_lip, x_lip = L.CAM['lip_d'] / 2, L.XT1
+    xr0, rr0 = x_lip - g['rear_back'], r_lip - g['rear_back'] * t
+    xb0 = x_lip + (g['body_r'] - r_lip) / t                   # rear cone meets the body
+    xc0 = cs['front_x'] - L.FDM['BED_CHAMFER']                # chamfer start at the bore radius
+    xf0 = xc0 - (cs['bore_r'] - g['body_r']) / t              # front cone leaves the body
+    xf1 = cs['front_x'] + g['front_over']
+    rf1 = cs['bore_r'] + (xf1 - xc0) * t
+    xg0, xg1 = xf1 + g['grip'][0], xf1 + g['grip'][1]
+    pts = [(xr0, g['bore_r']), (xr0, rr0), (xb0, g['body_r']), (xf0, g['body_r']), (xf1, rf1), (xg0, rf1),
+           (xg0, g['grip_r']), (xg1, g['grip_r']), (xg1, g['bore_r'])]
+    if not (xr0 < xb0 < xf0 < xc0 < xf1 < xg0 < xg1):
+        raise ValueError('gauge profile is not monotone for lens %s: %s' % (lens or L.LENS, pts))
+    return cq.Workplane('XY').newObject([dc.one_solid(_rev_x(pts, ly, lz))])
 
 
 def build(layout):

@@ -126,9 +126,10 @@ LINES = [
     (S_TO, 'D2-71', '2 x dia 1.5 steel pins, ISO 8734 1.5 x 16 dowel class (hood release hold-open; r2 fixer: replaces the 3 mm release blade)', 2, 'ea', 'class', 'any', None, 0.5, None, 'ASSEMBLY s1.1 tool 9; s7 item 9 (or the shanks of 2 x 1.5 mm drills)'),
     (S_TO, 'D2-72', 'Digital calipers, 0.01 mm', 1, 'ea', 'class', 'any', None, 15.0, None, 'MEASURED-PARTS records (r2)'),
     (S_TO, 'D2-73', 'Oscilloscope >= 20 MHz + inline USB-C power meter (logging)', 1, 'set', 'class', 'any', None, None, None, 'gate G-W12 (workload power, WIRING s9); unpriced'),
-    (S_TO, 'D2-74', 'M3 heat-set tip for the iron + insert fallback set (pin vise or hand drill, 3.2 + 4.0 mm drills)', 1, 'set', 'class', 'any', None, 12.0, None, 'r5: the tip is needed in every build (the 4 lens-collar inserts, ASSEMBLY B1, FASTENER-POLICY I); the drills only for a stripped boss (FASTENER-POLICY E)'),
+    (S_TO, 'D2-74', 'M3 heat-set tip in the tip system of the D2-63 iron (900M class for a YIHUA 928D or Hakko 936-type station, the T12 or TS100 range for those irons) + insert fallback set (pin vise or hand drill, 3.2 + 4.0 mm drills)', 1, 'set', 'class', 'any', None, 12.0, None, 'r5: the tip is needed in every build (the 4 lens-collar inserts, ASSEMBLY B1, FASTENER-POLICY I); the drills only for a stripped boss (FASTENER-POLICY E). r6 (audit B-12): buy the tip for the chosen iron; tips do not cross between systems'),
     (S_TO, 'D2-75', 'DC electronic load >= 10 A / 30 W, constant-current mode (r3 fix-baseline)', 1, 'ea', 'class', 'any', None, None, None, 'gates G-W5 (b) (8.6 A on the pigtail end) and G-W13 (option C); unpriced'),
     (S_TO, 'D2-76', 'G-W13 (c) bench stand-ins: 100 uF electrolytic + power resistor for a 0.30 A load at 4.5 V (about 15 ohm, >= 3 W) (r3 fix-baseline)', 1, 'set', 'class', 'any', None, None, None, 'only with EVF-feed option C; bench consumables; unpriced'),
+    (S_TO, 'D2-77', 'Adjustable torque screwdriver 0.1-0.6 N m, straight, PH1 bit: shank dia <= 6.5 over >= 40 mm, handle dia <= 30 (the DRIVER audit envelope)', 1, 'ea', 'class', 'any', None, None, None, 'r6 (audit 2026-10-06 B-6 / X5): sets s_c1..s_c3 0.15 N m, s_c4 0.2 N m and the PT screws 0.35-0.5 N m; a firm hand on a plain PH1 gives 0.4-0.6 N m, 2-3x the M3 values; also used for G-PT-1 and G-COL-1; unpriced'),
 ]
 
 

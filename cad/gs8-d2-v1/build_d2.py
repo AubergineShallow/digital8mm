@@ -244,7 +244,22 @@ def export_modifiers(pid, r, fd):
     return rows
 
 
-def export_part(pid, r, bed_rows, thin_rows, mesh_rows):
+def print_overhang(pid, r, pose, fd):
+    """r6 (settled orientation): the computed print_overhang row of one part in its print pose; the declared support
+    zones (layout.PRINT_SUPPORT_ZONES, assembly frame) are mapped with the same transform as the STL."""
+    if r.get('stub'):
+        return dict(kind='print_overhang', part=pid, face_down=fd, status='stub')
+    try:
+        src = r.get('print_shape', r['shape'])
+        rot, t = dc.print_pose_transform(src, fd)
+        zones = [dict(z, box=dc.map_box(z['box'], rot, t)) for z in (L.PRINT_SUPPORT_ZONES.get(pid) or [])]
+        return CK.check_print_overhang(L, pid, CK.manifold_of_tol(pose, 0.03, 0.2), zones)
+    except Exception as e:  # noqa: BLE001 - a failed check is a FAIL row, never a skipped one
+        return dict(kind='print_overhang', part=pid, face_down=fd, status='fail',
+                    error='%s: %s' % (type(e).__name__, str(e)[:200]))
+
+
+def export_part(pid, r, bed_rows, thin_rows, mesh_rows, overhang_rows=None):
     """Print-pose STL + manifest row for one printed part."""
     p = L.PARTS[pid]
     fd = p['face_down']
@@ -268,8 +283,15 @@ def export_part(pid, r, bed_rows, thin_rows, mesh_rows):
     hours = (vol * L.INFILL_FACTOR[p['infill']] / PRINT_RATE) / 3600 * 1.15 + 0.1
     pr = r.get('print') or {}
     th = next((t for t in thin_rows if t['part'] == pid), None)
-    ov = overhang_screen(pose)
-    return dict(overhang_screen=ov, modifiers=export_modifiers(pid, r, fd),
+    ov = print_overhang(pid, r, pose, fd)
+    if overhang_rows is not None:
+        overhang_rows.append(ov)
+    ov_summary = dict(status=ov['status'], longest_bridge_mm=ov.get('longest_bridge_mm'),
+                      bridge_regions=ov.get('bridge_regions'), hole_edge_bridges=ov.get('hole_edge_bridges'),
+                      supports=sorted(ov.get('supports_used') or {}), unsupported=len(ov.get('unsupported') or []),
+                      check='checks.json print_overhang (r6)')
+    return dict(print_overhang=ov_summary, print_after=list(L.PRINT_PREREQS.get(pid, ())),
+                orientation_why=L.PRINT_ORIENTATION_WHY.get(pid), modifiers=export_modifiers(pid, r, fd),
                 id=pid, module=p['module'], material=p['material'], colour=p['colour'], face_down=fd,
                 supports=pr.get('supports', p['supports']), notes=pr.get('notes', ''), infill_class=p['infill'],
                 print_preparation=r.get('print_preparation'), finished_volume_mm3=round(finished_vol, 3),
@@ -298,29 +320,6 @@ def stl_mesh_check(pid, pose, r):
                     volume_mesh=round(man.volume(), 1), volume_dev=round(dv, 5))
     except Exception as e:  # noqa: BLE001
         return dict(part=pid, status='fail', error=str(e))
-
-
-def overhang_screen(pose):
-    """Info only: downward faces steeper than 45 deg from vertical in print pose, above the bed (z > 0.05).
-    Bridges (<= 30 mm) and listed supports are allowed, so this is not a pass/fail check."""
-    import numpy as np
-    Vm, Fm = CK.mesh_of(pose, tol=0.1, ang=0.3)
-    if len(Fm) == 0:
-        return None
-    a, b, c = Vm[Fm[:, 0]], Vm[Fm[:, 1]], Vm[Fm[:, 2]]
-    cr = np.cross(b - a, c - a)
-    area = np.linalg.norm(cr, axis=1) / 2
-    if np.einsum('ij,ij->i', a, cr).sum() < 0:
-        cr = -cr
-    nz = cr[:, 2] / np.maximum(1e-12, 2 * area)
-    zc = (a[:, 2] + b[:, 2] + c[:, 2]) / 3
-    m = (nz < -math.sin(math.radians(45.0)) + 1e-6) & (zc > 0.05)
-    lo = m & (zc <= 0.6)
-    bed = (nz < -0.999) & (zc <= 0.02)
-    return dict(bed_contact_mm2=round(float(area[bed].sum()), 1), area_mm2=round(float(area[m].sum()), 1), share=round(float(area[m].sum() / area.sum()), 4),
-                lowest_z=round(float(zc[m].min()), 2) if m.any() else None,
-                near_bed_area_mm2=round(float(area[lo].sum()), 1),
-                note='downward faces > 45 deg from vertical above the bed: bridges, supports or chamfer candidates')
 
 
 COLOURS = {'satin silver': '#c9cac6', 'black': '#2b2c2f', 'clear/natural': '#e6e0cc'}
@@ -795,6 +794,20 @@ def _key(x):
     return x if isinstance(x, str) else None
 
 
+def _iso_date(s):
+    """'YYYY-MM-DD' (a real calendar date), optionally followed by 'T' or ' ' and a time; -> the date part or None."""
+    import datetime
+    import re
+    m = re.fullmatch(r'(\d{4}-\d{2}-\d{2})([T ][0-9:.+\-Z ]+)?', s.strip())
+    if not m:
+        return None
+    try:
+        datetime.date.fromisoformat(m.group(1))
+    except ValueError:
+        return None
+    return m.group(1)
+
+
 def validate_record(rec):
     """List of format errors of one record (empty = structurally valid). r4: field types are checked before any
     lookup, so a syntactically valid record with a wrong field type is rejected and kept visible, never a crash."""
@@ -808,6 +821,9 @@ def validate_record(rec):
         err.append('unknown state %r' % (rec.get('state'),))
     if str(rec.get('verdict', '')).lower() not in VERDICTS:
         err.append('verdict must be pass or fail, not %r' % rec.get('verdict'))
+    date = rec.get('date')          # r6 (audit 2026-10-06 L12b): the print order compares dates, so they must parse
+    if isinstance(date, str) and date and not _iso_date(date):
+        err.append('date must be ISO 8601 (YYYY-MM-DD, optionally with a time), not %r' % date)
     art = rec.get('artifacts')
     if not isinstance(art, dict) or not art:
         err.append('artifacts must be a non-empty {path: sha256} object')
@@ -852,6 +868,9 @@ def _first_existing(*paths):
     return next((p for p in paths if os.path.isfile(p)), None)
 
 
+GAUGE_STL = 'stl/tools/collar_gauge.stl'    # r6 (X2): the collar centring gauge, exported by export_gauge
+
+
 def coupon_artifacts(out_dir):
     """({canonical coupon STL path: sha256}, {gate id: [coupon STL paths]}, where the coupons were read). Coupons come
     from this build's out dir, else from the release out/stl/coupons (make_coupons.py output)."""
@@ -874,6 +893,8 @@ def coupon_artifacts(out_dir):
                 gm.setdefault(g, []).append(c['stl'])
     for g, v in CALIBRATION_ITEMS.items():
         gm[g] = ['stl/coupons/%s.stl' % c for c in v['coupons']]
+    if 'G-COL-1' in gm:     # r6 (X2): the centring gauge is tested in G-COL-1, so a changed gauge makes the record stale
+        gm['G-COL-1'].append(GAUGE_STL)   # its current hash comes from this build's files (export_gauge), not cur
     return cur, {g: sorted(set(v)) for g, v in gm.items()}, _rel_root(cdir)
 
 
@@ -900,12 +921,14 @@ def resolve_artifact(key, cur):
     return k, None
 
 
-def evaluate_item(state, item, recs, cur, required):
+def evaluate_item(state, item, recs, cur, required, prereq=None):
     """One required item. required = canonical artifact paths every record must name (the production STL for a
-    slicer item, the gate's coupon STLs for a coupon item); [] = any current artifact. A record is: rejected (format,
-    a coupon artifact on a production item, a required artifact not named), stale (an artifact hash differs from the
-    current one or the artifact no longer exists) or current. outcome: pass / fail / conflict (current records
-    disagree) / stale (only stale records) / not run."""
+    slicer item, the gate's coupon STLs for a coupon item); [] = any current artifact; r6 (audit 2026-10-06 L10): None
+    = nothing can satisfy the item (a coupon gate with no coupon STL), so every record is rejected. A record is:
+    rejected (format, a coupon artifact on a production item, a required artifact not named, r6: printed before its
+    prerequisites passed, see prereq), stale (an artifact hash differs from the current one or the artifact no longer
+    exists) or current. prereq(rec) -> None or the reason a current record is premature (r6, M2: the print order).
+    outcome: pass / fail / conflict (current records disagree) / stale (only stale records) / not run."""
     current, stale, rejected = [], [], []
     for r in recs:
         rec = r['rec']
@@ -919,6 +942,10 @@ def evaluate_item(state, item, recs, cur, required):
         art = {_canon_key(k): str(v) for k, v in rec['artifacts'].items()}
         if state == 'slicer_review' and any(k.startswith('stl/coupons/') for k in art):
             rejected.append(dict(record=tag, why='a coupon artifact cannot satisfy a production-part item'))
+            continue
+        if required is None:
+            rejected.append(dict(record=tag, why='no coupon STL is registered for this gate in the coupon manifests; '
+                                                 'no record can close it'))
             continue
         miss = [k for k in required if k not in art]
         if miss:
@@ -935,21 +962,54 @@ def evaluate_item(state, item, recs, cur, required):
                    profile=rec.get('profile'))
         if diffs:
             stale.append(dict(row, stale=diffs))
+            continue
+        why = prereq(rec) if prereq is not None else None
+        if why:
+            rejected.append(dict(record=tag, why=why))
         else:
             current.append(row)
     verdicts = sorted({c['verdict'] for c in current})
     outcome = (('conflict' if len(verdicts) > 1 else verdicts[0]) if verdicts else ('stale' if stale else 'not run'))
     if rejected and outcome not in ('fail', 'conflict'):     # V-M1: a rejected record never lets an item close
         outcome = 'rejected'
-    return dict(evidence_complete=bool(current), outcome=outcome, required_artifacts=list(required),
+    return dict(evidence_complete=bool(current), outcome=outcome, required_artifacts=list(required or []),
                 current=current, stale=stale, rejected=rejected)
 
 
-def evidence_state(state, sub, what, items, recs, cur, required_of):
+def pass_dates(state_result):
+    """r6 (M2): {item: earliest date of its current passing records} for every item whose outcome is pass."""
+    out = {}
+    for it, v in ((state_result or {}).get('items') or {}).items():
+        if v['outcome'] == 'pass':
+            ds = [_iso_date(str(c.get('date') or '')) for c in v['current'] if c['verdict'] == 'pass']
+            ds = [d for d in ds if d]
+            if ds:
+                out[it] = min(ds)
+    return out
+
+
+def prereq_check(gates, dates, what):
+    """r6 (audit 2026-10-06 M2): callable(record) -> None, or why the record came too early: a part or coupon may be
+    sliced, printed and recorded only after every gate in `gates` has a current recorded pass, dated on or before it."""
+    def check(rec):
+        d = _iso_date(str(rec.get('date') or '')) or ''
+        for g in gates:
+            if g not in dates:
+                return ('%s recorded before %s has a current recorded pass (print order: layout.PRINT_PREREQS, '
+                        'PRINT-GUIDE s7)' % (what, g))
+            if d < dates[g]:
+                return '%s dated %s, before %s passed on %s (print order)' % (what, d, g, dates[g])
+        return None
+    return check
+
+
+def evidence_state(state, sub, what, items, recs, cur, required_of, prereq_of=None):
     """One evidence state: per item completeness + outcome; the state is open unless EVERY required item has a
-    current pass. The build reports person-recorded verdicts bound to artifact hashes; it never judges them."""
+    current pass. The build reports person-recorded verdicts bound to artifact hashes; it never judges them.
+    r6 (M2): prereq_of(item) -> prereq callable or None (evaluate_item)."""
     items = list(items or [])
-    per = {it: evaluate_item(state, it, recs, cur, required_of(it)) for it in items}
+    per = {it: evaluate_item(state, it, recs, cur, required_of(it), prereq_of(it) if prereq_of else None)
+           for it in items}
     by = {o: sorted(i for i, v in per.items() if v['outcome'] == o) for o in OUTCOMES}
     mine = [r for r in recs if isinstance(r['rec'], dict) and r['rec'].get('state') == state]
     unmatched = sorted('%s#%d (item %r)' % (r['file'], r['index'], r['rec'].get('item')) for r in mine
@@ -1045,8 +1105,8 @@ def required_artifacts_of(state, cmap):
     if state == 'slicer_review':        # r4: the part STL and its modifier meshes (a changed modifier makes it stale)
         return lambda it: ['stl/%s.stl' % it] + ['stl/modifiers/%s__mod_%s.stl' % (it, m['id'])
                                                  for m in L.print_modifiers(it)] if it in L.PARTS else ['stl/%s.stl' % it]
-    if state == 'coupon_validation':
-        return lambda it: cmap.get(it, [])
+    if state == 'coupon_validation':     # r6 (L10): a gate with no coupon STL -> None (every record rejected)
+        return lambda it: cmap.get(it) or None
     if state == 'measured_fit':
         return lambda it: [d for d in [gate_doc(it)] if d]
     prod = ['stl/%s.stl' % p for p in sorted(L.PARTS)]
@@ -1108,6 +1168,7 @@ def apply_gate_outcomes(hg, status_states):
 
 # ------------------------------------------------------------------------------------------- main
 ROW_STATUSES = ('pass', 'fail', 'stub', 'info')
+INFO_CATEGORIES = ('mass_com',)   # r6 (L9): report-only summary categories (status 'info', never 'pass')
 
 
 def summarize(name, rows, info_neutral=False):
@@ -1141,6 +1202,108 @@ def source_hashes():
     names += sorted(f for f in os.listdir(HERE) if f.startswith('coupons') and f.endswith('.py'))   # r2: coupons_r1.py
     names += ['run_locked.py', 'fonts/DejaVuSans-Bold.ttf', 'fonts/LICENSE-DejaVu.txt']  # explicit cross-platform glyph source
     return {n: (sha(os.path.join(HERE, n)) if os.path.exists(os.path.join(HERE, n)) else 'missing') for n in names}
+
+
+def support_file_hashes():
+    """r6 (audit 2026-10-06 L12a): files that are not build inputs but carry its claims (the test suites, the evidence
+    rules, the release audit), hashed so a receipt shows which tests and rules stood beside it."""
+    names = sorted(f for f in os.listdir(HERE) if f.startswith('test_') and f.endswith('.py'))
+    names += ['audit_cloud_release.py', 'evidence/README.md']
+    return {n: (sha(os.path.join(HERE, n)) if os.path.exists(os.path.join(HERE, n)) else 'missing') for n in names}
+
+
+def carried_checks_report():
+    """r6 (audit 2026-10-06 L11): a carried alternate-lens checks file is current only if it was built from these
+    sources (checks.json records them since r6). Reported, not a CAD row: the first build of a release sequence runs
+    before the alternate lens; the final-release audit requires sources_match."""
+    out = {}
+    p = os.path.join(OUT, 'checks-fujinon-sweep1mm.json')
+    if os.path.exists(p):
+        try:
+            with open(p, encoding='utf-8') as f:
+                d = json.load(f)
+        except (OSError, ValueError):
+            d = {}
+        src = d.get('sources')
+        ok = src is not None and src == source_hashes()
+        out['checks-fujinon-sweep1mm.json'] = dict(sha256=sha(p), lens=d.get('lens_default'),
+                                                   sources_recorded=src is not None, sources_match=ok)
+        if not ok:
+            log('WARN carried checks-fujinon-sweep1mm.json was not built from the current sources: rebuild the '
+                'Fujinon variant and copy its checks before release')
+    return out
+
+
+def release_input_rows(sitems, cmap):
+    """r6: build-input consistency rows (contract category). L10: every live coupon gate names coupon STLs. M2: every
+    print prerequisite is a live measured or coupon gate, and every printed part has one print-order entry. L11: the
+    coupon manifests were cut from the current sources."""
+    out = []
+    for g in sitems.get('coupon_validation', []):
+        n = len(cmap.get(g) or [])
+        out.append(dict(kind='coupon_gate', item=g, coupon_stls=n, status='pass' if n else 'fail',
+                        **({} if n else {'error': 'coupon gate %s has no coupon STL in the coupon manifests: no '
+                                                  'record could close it' % g})))
+    live = set(sitems.get('measured_fit', [])) | set(sitems.get('coupon_validation', []))
+    for what, table in (('part', L.PRINT_PREREQS), ('coupon gate', L.COUPON_PREREQS)):
+        for k, gates in sorted(table.items()):
+            unknown = [g for g in gates if g not in live]
+            out.append(dict(kind='print_order', item='%s %s' % (what, k), print_after=list(gates),
+                            status='fail' if unknown else 'pass',
+                            **({'error': 'print prerequisite(s) %s are not live measured or coupon gates' % unknown}
+                               if unknown else {})))
+    odd = sorted(set(L.PARTS) ^ set(L.PRINT_PREREQS)) + sorted(set(L.PARTS) ^ set(L.PRINT_SEQUENCE))
+    dup = len(L.PRINT_SEQUENCE) != len(set(L.PRINT_SEQUENCE))
+    out.append(dict(kind='print_order', item='coverage', status='fail' if odd or dup else 'pass',
+                    **({'error': 'PRINT_PREREQS / PRINT_SEQUENCE do not list every printed part exactly once: %s'
+                                 % (odd or 'duplicate in PRINT_SEQUENCE')} if odd or dup else {})))
+    src = source_hashes()
+    for name in ('coupons-manifest.json', 'coupons-r1-manifest.json'):
+        p = _first_existing(os.path.join(OUT, name), os.path.join(HERE, 'out', name))
+        if not p:
+            continue
+        with open(p, encoding='utf-8') as f:
+            prod = json.load(f).get('producer') or {}
+        ok = prod.get('source_hashes') == src
+        out.append(dict(kind='coupon_producer', item=name, status='pass' if ok else 'fail',
+                        **({} if ok else {'error': '%s was cut from other sources than this build: rerun %s'
+                                                   % (name, prod.get('script', 'its coupon script'))})))
+    return out
+
+
+def evidence_states_ordered(sitems, recs, cur, required_of):
+    """r6 (audit 2026-10-06 M2): the evidence states in dependency order. measured_fit first; then coupon_validation,
+    where a gate in COUPON_PREREQS counts only after its gates (measured_fit, and the coupon calibrations evaluated
+    without prerequisites) passed on or before the record's date; then slicer_review, where each production part
+    counts only after every PRINT_PREREQS gate passed on or before the record's date; assembly_operation last."""
+    meta = {k: (sub, what) for k, sub, what in EVIDENCE_STATES}
+
+    def state(k, prereq_of=None):
+        return evidence_state(k, meta[k][0], meta[k][1], sitems.get(k), recs, cur, required_of(k), prereq_of)
+    out = {'measured_fit': state('measured_fit')}
+    dates = dict(pass_dates(out['measured_fit']), **pass_dates(state('coupon_validation')))
+    out['coupon_validation'] = state('coupon_validation', lambda it: prereq_check(
+        L.COUPON_PREREQS[it], dates, 'coupon record for ' + it) if it in L.COUPON_PREREQS else None)
+    dates = dict(pass_dates(out['measured_fit']), **pass_dates(out['coupon_validation']))
+    out['slicer_review'] = state('slicer_review', lambda it: prereq_check(
+        L.PRINT_PREREQS[it], dates, 'slicer record for ' + it) if L.PRINT_PREREQS.get(it) else None)
+    out['assembly_operation'] = state('assembly_operation')
+    return out
+
+
+def print_release_report(ev):
+    """r6 (M2): per production part (PRINT_SEQUENCE order) and per gated coupon set, whether the print order releases
+    it now: every prerequisite gate has a current recorded pass."""
+    dates = dict(pass_dates(ev['measured_fit']), **pass_dates(ev['coupon_validation']))
+
+    def one(gates):
+        missing = [g for g in gates if g not in dates]
+        return dict(print_after=list(gates), missing=missing, status='blocked' if missing else 'released')
+    parts = {pid: one(L.PRINT_PREREQS.get(pid, ())) for pid in L.PRINT_SEQUENCE}
+    return dict(rule='a part or gated coupon set is sliced and printed only after every listed gate has a current '
+                     'recorded pass (layout.PRINT_PREREQS / COUPON_PREREQS; PRINT-GUIDE s7)',
+                parts=parts, coupon_gates={g: one(v) for g, v in L.COUPON_PREREQS.items()},
+                released=[p for p, v in parts.items() if v['status'] == 'released'])
 
 
 def peak_mem_mb():
@@ -1205,9 +1368,10 @@ def run_part(pid, args):
         if not args.no_thin and not r.get('stub'):
             thin.append(CK.thin_wall(L, pid, r['shape'], loaded_boxes=CK.loaded_boxes(L, pid)))
         res['thin_wall'] = thin
-        mrow = []
-        res['manifest'] = export_part(pid, r, bed, thin, mrow)
+        mrow, ovh = [], []
+        res['manifest'] = export_part(pid, r, bed, thin, mrow, ovh)
         res['stl_mesh'] = mrow
+        res['print_overhang'] = ovh
         res['bed'] = bed
         res['keepouts'] = [k for k in CK.check_keepouts(L, {pid: r})]
         res['critical_features'] = [x for x in CK.check_critical_features(L, rows) if x.get('part') == pid]   # r2 R3
@@ -1226,7 +1390,7 @@ def run_part(pid, args):
         res['mass_est_g'] = res['manifest']['mass_est_g']
         bb = CK.bb_tuple(r['shape'])
         res['bbox_assembly'] = [round(x, 2) for x in bb]
-        bad = [x for x in res['contract'] + res['keepouts'] + res['interference_with_cots'] + bed + mrow +
+        bad = [x for x in res['contract'] + res['keepouts'] + res['interference_with_cots'] + bed + mrow + ovh +
                [c for c in res['critical_features'] if c.get('status') != 'info'] + thin +
                res['mate_overlap'] + [c for c in res['clearance'] if c['status'] != 'n/a'] + res['sweeps']
                if x.get('status') not in ('pass',)]
@@ -1305,6 +1469,37 @@ def export_presentation_outputs(rows, *, fast=False, skip_renders=False):
     return files
 
 
+def export_gauge(prow):
+    """r6 (audit 2026-10-06 X2): build the centring gauge for L.LENS, export it in its print pose to
+    out/stl/tools/collar_gauge.stl and check its print orientation. -> (manifest row or None, assembly-frame solid,
+    print_overhang row or None)."""
+    tdir = os.path.join(OUT, 'stl', 'tools')
+    path = os.path.join(tdir, 'collar_gauge.stl')
+    r = prow.get('lens_collar') or {}
+    if r.get('stub') or r.get('shape') is None:
+        if os.path.exists(path):
+            os.remove(path)
+        return None, None, None
+    mod, _ = load_module(L.PARTS['lens_collar']['module'])
+    gauge = as_shape(mod.centring_gauge(L, L.LENS))
+    fd = L.COLLAR['gauge']['face_down']
+    pose = dc.to_print_pose(gauge, fd)
+    os.makedirs(tdir, exist_ok=True)
+    pose.exportStl(path, 0.03, 0.2)
+    ov = CK.check_print_overhang(L, 'collar_gauge', CK.manifold_of_tol(pose, 0.03, 0.2), (), face_down=fd)
+    vol = gauge.Volume()
+    bb = pose.BoundingBox()
+    return dict(id='collar_gauge', lens=L.LENS, kind='assembly tool (not a production part)', material='ASA',
+                face_down=fd, infill='100 %, 4 perimeters', supports='none', stl='stl/tools/collar_gauge.stl',
+                stl_sha256=sha(path), volume_mm3=round(vol, 1), mass_g=round(vol * L.FDM['ASA_DENSITY'], 1),
+                print_bbox_mm=[round(bb.xlen, 1), round(bb.ylen, 1), round(bb.zlen, 1)],
+                print_overhang=dict(status=ov['status'], longest_bridge_mm=ov.get('longest_bridge_mm'),
+                                    error=ov.get('error')),
+                use='step 7, camera not yet in: push it through the collar until both cones seat (tub lip edge, collar '
+                    'bore chamfer), hold it home, tighten s_c1..s_c3, pull it out; one gauge per lens (collar bore)',
+                print_after=list(L.COUPON_PREREQS.get('G-COL-1', ()))), gauge, ov
+
+
 def run_full(args):
     os.makedirs(OUT, exist_ok=True)
     t0 = time.time()
@@ -1322,6 +1517,13 @@ def run_full(args):
     t0 = time.time()
     R['contract'] = contract_checks(prow)
     R['cots_containment'] = cots_containment(crow)
+    # r6: the evidence inputs are read before the checks (L6 needs G-LENS; M2/L10/L11 add contract rows)
+    hgates = hardware_gates()                          # r3 checks: structured records, per item and state
+    sitems = state_items(hgates)
+    recs, ev_ignored, ev_files = load_records(EVIDENCE)
+    ccur, cmap, csrc = coupon_artifacts(OUT)
+    R['contract'] += release_input_rows(sitems, cmap)
+    g_lens = evaluate_item('measured_fit', 'G-LENS', recs, {}, required_artifacts_of('measured_fit', cmap)('G-LENS'))
     lap('contract', t0)
     t0 = time.time()
     R['interference'] = CK.check_interference(L, rows)
@@ -1371,8 +1573,12 @@ def run_full(args):
     lap('sweeps', t0)
     t0 = time.time()
     collars = lens_collars(rows)     # r5: each built lens's own collar (mass_com, lens_support, lens_clamp)
-    R['j7_float'] = CK.check_j7_float(L, rows)                          # r5 (J7-R): s 0 / nominal / max
-    R['lens_support'] = CK.check_lens_support(L, rows, collars=collars)
+    R['j7_float'] = CK.check_j7_float(L, rows)                          # r6 (L2): s_range every 0.25 + s_nom
+    R['lens_support'] = CK.check_lens_support(L, rows, collars=collars,
+                                              measured={'G-LENS': g_lens['outcome'] == 'pass'},    # r6 (L6)
+                                              require_collars=set(L.LENSES))                         # r6 (L3)
+    gauge_row, gauge, gauge_ovh = export_gauge(prow)   # r6 (X2): the collar centring gauge for this lens (a tool)
+    R['lens_support'] += CK.check_collar_gauge(L, rows, gauge)
     R['lens_clamp'] = CK.check_lens_clamp(L, rows, collars=collars)
     lap('r5 J7-R checks', t0)
     t0 = time.time()
@@ -1385,11 +1591,12 @@ def run_full(args):
     lap('mass/CoM', t0)
     R['layout_self_check'] = [dict(x, status='pass' if x['ok'] else 'fail') for x in selfc]
     t0 = time.time()
-    bed, manifest, meshes = [], [], []
+    bed, manifest, meshes, ovh = [], [], [], []
     for pid, r in prow.items():
-        manifest.append(export_part(pid, r, bed, R['thin_wall'], meshes))
+        manifest.append(export_part(pid, r, bed, R['thin_wall'], meshes, ovh))
     R['bed_fit'] = bed
     R['stl_mesh'] = meshes
+    R['print_overhang'] = ovh + ([gauge_ovh] if gauge_ovh else [])   # r6: settled print orientation (+ the gauge)
     R['print_modifiers'] = [dict(m_, part=m['id']) for m in manifest for m_ in (m.get('modifiers') or [])]   # r4
     lap('stl + bed fit', t0)
     files = export_presentation_outputs(rows, fast=args.fast,
@@ -1405,7 +1612,7 @@ def run_full(args):
     R['critical_features'] += CK.check_joint_checks(L, R)
     R['critical_features'].append(unclassified_thin_spot_gate(R.get('unclassified_thin_spots')))
     # ---- summaries
-    order = ['contract', 'cots_containment', 'interference', 'mate_overlap', 'clearance', 'keepouts', 'cable_routes', 'bed_fit', 'stl_mesh', 'print_modifiers', 'thin_wall',
+    order = ['contract', 'cots_containment', 'interference', 'mate_overlap', 'clearance', 'keepouts', 'cable_routes', 'bed_fit', 'stl_mesh', 'print_modifiers', 'print_overhang', 'thin_wall',
              'critical_features', 'evf_restraint',
              'driver', 'engrave_groove', 'boss_geometry', 'inserts', 'j7_float', 'lens_support', 'lens_clamp',
              'sweeps', 'removals', 'service_driver', 'release_access', 'stack_retention', 'layout_self_check']
@@ -1428,17 +1635,26 @@ def run_full(args):
         summ[order.index('thin_wall')]['status'] = 'not run'
     summ[order.index('thin_wall')]['role'] = ('secondary share-based screen: cannot pass the build alone; the gate for '
                                               'local thickness is critical_features (finding 2)')
+    # r6 (audit 2026-10-06 L9): mass_com has no balance rule (SPEC s8: report only; R5-BRIEF choice 10 declined the
+    #     0..+8 band), so it is a report, never one of the passing categories. A non-positive mass is still a fault.
     mc_ok = all(m['total_g'] > 0 for m in R['mass_com'].values())
-    summ.append(dict(check='mass_com', status='pass' if mc_ok and not stubs else ('stub' if stubs else 'fail')))
-    rc = all(s['status'] == 'pass' for s in summ) and not stubs and         summ[order.index('critical_features')]['status'] == 'pass'      # explicit: the screen alone never passes
-    checks = dict(engineering_diagnostics=L.engineering_diagnostics(), revision=L.REVISION, variant=getattr(L, 'FR_STATE', None), lens_default=L.LENS, stubs=stubs, summary=summ, results=R,
+    summ.append(dict(check='mass_com', status='info' if mc_ok and not stubs else ('stub' if stubs else 'fail'),
+                     role='report only: no balance rule is enforced (SPEC s8, R5-BRIEF choice 10); not counted as '
+                          'a passing category'))
+    rc = all(s['status'] == 'pass' or (s['check'] in INFO_CATEGORIES and s['status'] == 'info') for s in summ)         and not stubs and summ[order.index('critical_features')]['status'] == 'pass'      # explicit: the screen alone never passes
+    checks = dict(sources=source_hashes(), engineering_diagnostics=L.engineering_diagnostics(), revision=L.REVISION, variant=getattr(L, 'FR_STATE', None), lens_default=L.LENS, stubs=stubs, summary=summ, results=R,
                   fit_language='Only computed checks say pass. Purchased parts are proxies; nothing is printed, '
                                'bought or measured.')
     write_json('checks.json', checks)
     write_json('print-manifest.json', dict(revision=L.REVISION, beds=L.PRINT_BEDS, fdm=L.FDM,
                                            time_model='%.1f mm3/s effective x 1.15 + 0.1 h (estimate, not a slicer result)' % PRINT_RATE,
                                            mass_model='volume x density x infill factor (estimate, not weighed)',
-                                           parts=manifest,
+                                           parts=manifest, tools=[gauge_row] if gauge_row else [],
+                                           print_order=dict(prereqs=L.PRINT_PREREQS, coupon_prereqs=L.COUPON_PREREQS,
+                                                            sequence=L.PRINT_SEQUENCE,
+                                                            note='a part is sliced and printed only after every listed '
+                                                                 'gate has a current recorded pass; the build receipt '
+                                                                 'print_release says which parts that releases now'),
                                            totals=dict(mass_est_g=round(sum(m['mass_est_g'] for m in manifest), 1),
                                                        mass_100pct_g=round(sum(m['mass_100pct_g'] for m in manifest), 1),
                                                        print_time_est_h=round(sum(m['print_time_est_h'] for m in manifest), 1))))
@@ -1462,6 +1678,8 @@ def run_full(args):
     if os.path.isdir(cdir):
         for f in sorted(os.listdir(cdir)):
             files['stl/coupons/' + f] = sha(os.path.join(cdir, f))
+    if gauge_row and gauge_row.get('stl'):                          # r6 (X2): the gauge STL is hash-linked too
+        files[gauge_row['stl']] = gauge_row['stl_sha256']
     for m in manifest:
         if m['stl']:
             files[m['stl']] = m['stl_sha256']
@@ -1481,21 +1699,21 @@ def run_full(args):
             mtime=time.strftime('%Y-%m-%d %H:%M:%S %z', time.localtime(os.path.getmtime(
                 os.path.join(OUT, 'test_common.json')))))
     n_pass = sum(1 for x in summ if x['status'] == 'pass')
-    hgates = hardware_gates()                          # r3 checks: structured records, per item and state
-    sitems = state_items(hgates)
-    recs, ev_ignored, ev_files = load_records(EVIDENCE)
-    ccur, cmap, csrc = coupon_artifacts(OUT)
+    n_info = sum(1 for x in summ if x['check'] in INFO_CATEGORIES and x['status'] == 'info')
     cur = dict(files, **ccur)        # the CURRENT artifacts: this build's production STL + manifests, the coupon STLs
 
     def required_of(state):
         return required_artifacts_of(state, cmap)
+    ev = evidence_states_ordered(sitems, recs, cur, required_of)     # r6 (M2): prerequisites before dependants
     status_states = dict(       # r2 R3 (finding 8): separate evidence states; only cad_checks is computed here
         cad_checks=dict(status='computed: ' + ('pass' if rc else 'fail'), checks_passed=n_pass,
-                        checks_not_passed=len(summ) - n_pass, failed=[x['check'] for x in summ if x['status'] == 'fail'],
+                        checks_not_passed=len(summ) - n_pass - n_info, checks_info=n_info,
+                        failed=[x['check'] for x in summ if x['status'] == 'fail'],
                         rows_passed=sum(x.get('passed', 0) for x in summ), rows_failed=sum(x.get('failed', 0) for x in summ),
                         checks_json_sha256=files['checks.json'],
                         note='CAD geometry checks on built solids and purchased-part proxies only'),
-        **{k: evidence_state(k, sub, what, sitems.get(k), recs, cur, required_of(k)) for k, sub, what in EVIDENCE_STATES})
+        **{k: ev[k] for k, _, _ in EVIDENCE_STATES})
+    print_release = print_release_report(ev)
     apply_gate_outcomes(hgates, status_states)
     ev_unassigned = unassigned_records(recs, sitems)      # r3 fix-baseline V-H1
     evidence_meta = dict(record_files=ev_files, ignored_files=ev_ignored, coupons_from=csrc,
@@ -1506,7 +1724,9 @@ def run_full(args):
                          format='evidence/README.md (structured JSON records bound to artifact sha256; no file-name '
                                 'matching)')
     receipt = dict(engineering_diagnostics=L.engineering_diagnostics(), revision=L.REVISION, variant=getattr(L, 'FR_STATE', None), built_at=time.strftime('%Y-%m-%d %H:%M:%S %z'), argv=sys.argv[1:],
-                   sources=source_hashes(), modules=mods, stubs=stubs, summary=summ, status_states=status_states,
+                   sources=source_hashes(), support_files=support_file_hashes(), modules=mods, stubs=stubs,
+                   summary=summ, status_states=status_states, print_release=print_release,
+                   carried_checks=carried_checks_report(),
                    totals=dict(printed=len(prow), cots=len([r for r in crow.values() if r['kind'] == 'cots']),
                                screws=len(L.SCREWS), screws_by_kind={k: sum(1 for s in L.SCREWS if s.get('kind', 'PT') == k)
                                                                      for k in sorted({s.get('kind', 'PT') for s in L.SCREWS})},
@@ -1524,7 +1744,8 @@ def run_full(args):
                                                                    for k in ('min_overall', 'min_lateral', 'min_axial')}
                                  for r in R['j7_float'] if r.get('mover') in ('body', 'bfar', 'adapter')},
                    files=files, carried_files=carried, timings_s=TIMES, total_s=round(time.time() - T0, 1), peak_mem_mb=peak_mem_mb(),
-                   cad_release_candidate=rc, blocking=[x['check'] for x in summ if x['status'] != 'pass'] + (
+                   cad_release_candidate=rc, blocking=[x['check'] for x in summ if x['status'] != 'pass' and not (
+                       x['check'] in INFO_CATEGORIES and x['status'] == 'info')] + (
                        ['stubs: ' + ', '.join(stubs)] if stubs else []),
                    open_evidence=open_evidence_list(status_states, ev_unassigned),
                    open_evidence_detail={k: dict(failed=v['failed'], conflict=v['conflict'], stale=v['stale'],

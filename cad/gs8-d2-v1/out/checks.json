@@ -1,4 +1,26 @@
 {
+ "sources": {
+  "layout.py": "3a64c39944b959010a81046a942731a6c3813005e32091e4676a43e46a796f4e",
+  "d2_common.py": "69727dbd58cf0c0fbce48a0b44083a7ba4ba386b025a1dc132b1d4d431cf4a8e",
+  "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
+  "checks.py": "3dcda60e6a0303a88290b224634203b4511f8e4cda846b7a01ad2a3ca74725bf",
+  "build_d2.py": "bfb40ffe76253305e7d40a82b84ad3b197d792fd0897e1ffe09869bc59e43203",
+  "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
+  "make_tables.py": "9b4b075e5395ffc8b692ffd69651aa909314cd592da3bbb61bd4590f4580bd1b",
+  "SPEC.md": "1e4f643e062c81263ffde801e05e2be877a7c1273608ae3a4160583ce7acd369",
+  "FASTENER-POLICY.md": "407d67703fd2c7305b5e742d5ad844cce406e73e3382d0955572eb3e1db96163",
+  "printed_collar.py": "fbb8a356db82cd10a496b4864baa95930374ffc519578e373f38e4019af7afe0",
+  "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
+  "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+  "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
+  "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
+  "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+  "printed_tub.py": "c14268a803dbc5463f841cfd0e5df928ee844bc4f7a1b5e90590247da305963e",
+  "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
+  "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
+  "fonts/DejaVuSans-Bold.ttf": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890",
+  "fonts/LICENSE-DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
+ },
  "engineering_diagnostics": {
   "camera_datum": {
    "s_mm": 1.25,
@@ -35,15 +57,15 @@
    "model": "three bolted feet only, LR inactive; simultaneous axial and all-direction bending; factor 2.0 is a conservative screening assumption, not measured capacity"
   }
  },
- "revision": "GS8 D2 r5-cloud-polish-20261007 (copied r5 snapshot; not an upstream release)",
+ "revision": "GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, minor findings)",
  "variant": null,
  "lens_default": "kowa_lm6hc",
  "stubs": [],
  "summary": [
   {
    "check": "contract",
-   "n": 12,
-   "passed": 12,
+   "n": 38,
+   "passed": 38,
    "failed": 0,
    "stub": 0,
    "info": 0,
@@ -131,6 +153,15 @@
    "status": "pass"
   },
   {
+   "check": "print_overhang",
+   "n": 13,
+   "passed": 13,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
    "check": "thin_wall",
    "n": 12,
    "passed": 12,
@@ -142,8 +173,8 @@
   },
   {
    "check": "critical_features",
-   "n": 139,
-   "passed": 129,
+   "n": 140,
+   "passed": 130,
    "failed": 0,
    "stub": 0,
    "info": 10,
@@ -196,8 +227,8 @@
   },
   {
    "check": "j7_float",
-   "n": 11,
-   "passed": 11,
+   "n": 49,
+   "passed": 49,
    "failed": 0,
    "stub": 0,
    "info": 0,
@@ -205,8 +236,8 @@
   },
   {
    "check": "lens_support",
-   "n": 37,
-   "passed": 32,
+   "n": 42,
+   "passed": 37,
    "failed": 0,
    "stub": 0,
    "info": 5,
@@ -220,13 +251,14 @@
   },
   {
    "check": "lens_clamp",
-   "n": 5,
+   "n": 6,
    "passed": 4,
    "failed": 0,
    "stub": 0,
-   "info": 1,
+   "info": 2,
    "status": "pass",
    "warnings": [
+    "the bolted anchors TL/TR/LL alone leave the lens axis 8.8 mm outside their triangle: the axis is enclosed only through the compression foot LR, so preload loss (audit 2026-10-06 M1, G-COL-1 creep) lets the collar pry",
     "M_sep 0.170 N m < the 5 g moment 0.286 N m (the lens rocks elastically in the collar at a knock; aim only, recovers)"
    ]
   },
@@ -250,8 +282,8 @@
   },
   {
    "check": "service_driver",
-   "n": 9,
-   "passed": 9,
+   "n": 11,
+   "passed": 11,
    "failed": 0,
    "stub": 0,
    "info": 0,
@@ -286,7 +318,8 @@
   },
   {
    "check": "mass_com",
-   "status": "pass"
+   "status": "info",
+   "role": "report only: no balance rule is enforced (SPEC s8, R5-BRIEF choice 10); not counted as a passing category"
   }
  ],
  "results": {
@@ -308,7 +341,7 @@
     ],
     "face_down_matches": true,
     "print_entry": true,
-    "volume_mm3": 106228.7
+    "volume_mm3": 106227.7
    },
    {
     "part": "hood",
@@ -517,7 +550,230 @@
     ],
     "face_down_matches": true,
     "print_entry": true,
-    "volume_mm3": 15709.1
+    "volume_mm3": 16142.8
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-CAP-1",
+    "coupon_stls": 2,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-COL-1",
+    "coupon_stls": 4,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-COMB-1",
+    "coupon_stls": 1,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-EVF-2",
+    "coupon_stls": 2,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-J4-1",
+    "coupon_stls": 2,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-KEEP-1",
+    "coupon_stls": 4,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-KNOB-1",
+    "coupon_stls": 2,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-PANEL-1",
+    "coupon_stls": 3,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-PT-1",
+    "coupon_stls": 3,
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_gate",
+    "item": "G-SNAP-2",
+    "coupon_stls": 6,
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part base_grip",
+    "print_after": [
+     "G-COMB-1",
+     "G-MP-PACK",
+     "G-RUN-1"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part cap",
+    "print_after": [
+     "G-COMB-1",
+     "G-MP-PACK"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part eyecup",
+    "print_after": [
+     "G-MP-EVF"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part hood",
+    "print_after": [
+     "G-COMB-1",
+     "G-MP-X1203",
+     "G-CAM-1",
+     "G-LENS",
+     "EVF-G1",
+     "EVF-G7",
+     "EVF-G8",
+     "G-MP-EVF",
+     "G-MP-FPC"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part knob_exp",
+    "print_after": [
+     "G-COMB-1",
+     "G-MP-ENC",
+     "G-KNOB-1"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part knob_fps",
+    "print_after": [
+     "G-COMB-1",
+     "G-MP-SW",
+     "G-KNOB-1"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part lens_collar",
+    "print_after": [
+     "G-COMB-1",
+     "G-CAM-1",
+     "G-LENS",
+     "G-COL-1"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part panel",
+    "print_after": [
+     "G-COMB-1",
+     "G-CAM-1",
+     "G-LENS",
+     "G-HDMI",
+     "EVF-G1",
+     "EVF-G7",
+     "EVF-G8",
+     "G-MP-EVF",
+     "G-ENC-1",
+     "G-MP-ENC",
+     "G-MP-SW"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part pi_keeper",
+    "print_after": [
+     "G-COMB-1",
+     "G-PI-1",
+     "G-MP-X1203"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part plunger",
+    "print_after": [
+     "G-COMB-1"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part stick_sleeve",
+    "print_after": [
+     "G-COMB-1",
+     "G-MP-STICK"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "part tub",
+    "print_after": [
+     "G-COMB-1",
+     "G-PI-1",
+     "G-MP-X1203",
+     "G-CAM-1",
+     "G-LENS",
+     "G-HDMI",
+     "EVF-G1",
+     "EVF-G7",
+     "EVF-G8",
+     "G-MP-EVF",
+     "G-MP-STICK",
+     "G-MP-FPC"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "coupon gate G-COL-1",
+    "print_after": [
+     "G-COMB-1",
+     "G-CAM-1",
+     "G-LENS"
+    ],
+    "status": "pass"
+   },
+   {
+    "kind": "print_order",
+    "item": "coverage",
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_producer",
+    "item": "coupons-manifest.json",
+    "status": "pass"
+   },
+   {
+    "kind": "coupon_producer",
+    "item": "coupons-r1-manifest.json",
+    "status": "pass"
    }
   ],
   "cots_containment": [
@@ -2529,7 +2785,7 @@
     "samples": 1500,
     "min": 0.487,
     "p1": 1.299,
-    "p5": 1.299,
+    "p5": 1.396,
     "share_below_min_wall": 0.0007,
     "share_below_min_feature": 0.0007,
     "loaded_samples": 53,
@@ -2543,14 +2799,6 @@
        -127.3,
        7.7,
        20.3
-      ]
-     },
-     {
-      "t": 1.199,
-      "at": [
-       -3.9,
-       -6.4,
-       43.6
       ]
      },
      {
@@ -2581,8 +2829,16 @@
       "t": 1.199,
       "at": [
        -3.9,
-       -7.9,
-       76.5
+       -4.0,
+       42.9
+      ]
+     },
+     {
+      "t": 1.199,
+      "at": [
+       -2.7,
+       8.6,
+       44.2
       ]
      }
     ],
@@ -3335,67 +3591,67 @@
     "declared_exception": null,
     "wall_threshold": 1.2,
     "normal_ray": {
-     "p1": 1.245,
-     "share_below_min_wall": 0.0013
+     "p1": 1.843,
+     "share_below_min_wall": 0.0
     },
     "part": "lens_collar",
     "samples": 1500,
-    "min": 1.248,
-    "p1": 1.259,
-    "p5": 2.741,
+    "min": 1.77,
+    "p1": 1.923,
+    "p5": 2.81,
     "share_below_min_wall": 0.0,
     "share_below_min_feature": 0.0,
-    "loaded_samples": 208,
+    "loaded_samples": 205,
     "share_loaded_below_1_6": 0.0,
     "loaded_zones": 5,
     "role": "secondary screen (share-based); local thickness is gated by critical_features",
     "thinnest": [
      {
-      "t": 1.248,
+      "t": 1.77,
       "at": [
-       7.5,
-       13.4,
+       2.7,
+       -31.0,
+       50.5
+      ]
+     },
+     {
+      "t": 1.844,
+      "at": [
+       2.9,
+       30.2,
+       33.0
+      ]
+     },
+     {
+      "t": 1.844,
+      "at": [
+       7.3,
+       -13.4,
        93.4
       ]
      },
      {
-      "t": 1.248,
-      "at": [
-       3.0,
-       -13.9,
-       92.8
-      ]
-     },
-     {
-      "t": 1.248,
-      "at": [
-       4.4,
-       -10.4,
-       94.2
-      ]
-     },
-     {
-      "t": 1.249,
-      "at": [
-       6.1,
-       29.5,
-       32.6
-      ]
-     },
-     {
-      "t": 1.249,
+      "t": 1.845,
       "at": [
        7.3,
-       31.7,
-       35.7
+       29.3,
+       32.5
       ]
      },
      {
-      "t": 1.251,
+      "t": 1.846,
       "at": [
-       4.7,
-       -10.5,
-       94.2
+       5.6,
+       -14.1,
+       92.6
+      ]
+     },
+     {
+      "t": 1.846,
+      "at": [
+       3.0,
+       -12.1,
+       94.1
       ]
      }
     ],
@@ -3454,9 +3710,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -3514,9 +3770,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -3571,9 +3827,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -3628,9 +3884,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -3818,9 +4074,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
-     "c_cs_adapter",
-     "lens_collar"
+     "c_cs_adapter"
     ],
     "hits": [],
     "status": "pass"
@@ -3871,9 +4127,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
-     "c_cs_adapter",
-     "lens_collar"
+     "c_cs_adapter"
     ],
     "hits": [],
     "status": "pass"
@@ -3924,9 +4180,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
-     "c_cs_adapter",
-     "lens_collar"
+     "c_cs_adapter"
     ],
     "hits": [],
     "status": "pass"
@@ -3980,9 +4236,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -4361,7 +4617,7 @@
      0,
      0
     ],
-    "note": "r5: front wall at the TL insert-boss root (collar anchor load); the r4 probe sat 30 below the axis on the plain wall",
+    "note": "r5: front wall at the TL insert-boss root (collar anchor load)",
     "cls": "wall",
     "entry_min_mm": 1.6,
     "rays": 1,
@@ -8283,6 +8539,48 @@
    },
    {
     "kind": "feature",
+    "id": "tub_front_wall_lr_foot",
+    "part": "tub",
+    "min_mm": 1.6,
+    "structural": true,
+    "origin": [
+     -3.95,
+     -19.0,
+     44.0
+    ],
+    "direction": [
+     1,
+     0,
+     0
+    ],
+    "note": "r6: front wall under the LR compression foot (collar reaction)",
+    "cls": "wall",
+    "entry_min_mm": 1.6,
+    "rays": 1,
+    "offsets": [
+     0.0
+    ],
+    "rays_outside": 0,
+    "expected_outside": [],
+    "values": [
+     2.5
+    ],
+    "measured_mm": 2.5,
+    "entry": [
+     -5.2,
+     -19.0,
+     44.0
+    ],
+    "exit": [
+     -2.7,
+     -19.0,
+     44.0
+    ],
+    "method": "OCP IntCurvesFace_ShapeIntersector chord through origin (B-rep, exact)",
+    "status": "pass"
+   },
+   {
+    "kind": "feature",
     "id": "tub_lip",
     "part": "tub",
     "min_mm": 1.2,
@@ -9092,6 +9390,7 @@
     ],
     "required": [
      "tub_front_wall_seat",
+     "tub_front_wall_lr_foot",
      "tub_lip",
      "tub_insert_boss_tl",
      "tub_insert_boss_tr",
@@ -9240,7 +9539,7 @@
    {
     "kind": "coverage",
     "part": "tub",
-    "structural_entries": 36,
+    "structural_entries": 37,
     "status": "pass",
     "error": null
    },
@@ -9428,25 +9727,25 @@
     ],
     "checks": {
      "j7_float": {
-      "n": 11,
-      "passed": 11,
+      "n": 49,
+      "passed": 49,
       "failed": 0,
       "stub": 0,
       "info": 0
      },
      "lens_support": {
-      "n": 37,
-      "passed": 32,
+      "n": 42,
+      "passed": 37,
       "failed": 0,
       "stub": 0,
       "info": 5
      },
      "lens_clamp": {
-      "n": 5,
+      "n": 6,
       "passed": 4,
       "failed": 0,
       "stub": 0,
-      "info": 1
+      "info": 2
      },
      "inserts": {
       "n": 4,
@@ -9811,12 +10110,12 @@
      "hmx039",
      "foam_pad",
      "evf_board",
-     "gs_camera",
-     "c_cs_adapter",
      "lens_collar",
      "s_c1",
      "s_c2",
      "s_c3",
+     "gs_camera",
+     "c_cs_adapter",
      "lens",
      "s_c4",
      "eyecup",
@@ -10000,12 +10299,12 @@
      "hmx039",
      "foam_pad",
      "evf_board",
-     "gs_camera",
-     "c_cs_adapter",
      "lens_collar",
      "s_c1",
      "s_c2",
      "s_c3",
+     "gs_camera",
+     "c_cs_adapter",
      "lens",
      "s_c4",
      "usb_stick",
@@ -10061,12 +10360,12 @@
      "plunger",
      "hood",
      "microsd",
-     "gs_camera",
-     "c_cs_adapter",
      "lens_collar",
      "s_c1",
      "s_c2",
      "s_c3",
+     "gs_camera",
+     "c_cs_adapter",
      "lens",
      "s_c4",
      "usb_stick",
@@ -10367,9 +10666,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "eyecup",
      "usb_stick",
@@ -10432,9 +10731,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "eyecup",
      "usb_stick",
@@ -10494,9 +10793,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "eyecup",
      "usb_stick",
@@ -10556,9 +10855,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "eyecup",
      "usb_stick",
@@ -10766,6 +11065,117 @@
     "status": "pass",
     "context": "service: collar_off",
     "scope": "clearance with the cap and pack fitted; geometry only: electronic service still requires shutdown, pack removal and XT30 disconnection first (ASSEMBLY s7 P1-P4)"
+   },
+   {
+    "nearest": {
+     "bit": {
+      "gap": 0.75,
+      "part": "lens_collar"
+     },
+     "handle": {
+      "gap": 6.5,
+      "part": "hood"
+     }
+    },
+    "screw": "s_c4",
+    "step": 8,
+    "axis": [
+     0,
+     0,
+     -1
+    ],
+    "head_point": [
+     4.7,
+     -31.0,
+     66.5
+    ],
+    "bit": [
+     6.5,
+     40.0
+    ],
+    "handle": [
+     30.0,
+     100.0
+    ],
+    "audit_set": [
+     "tub",
+     "base_grip",
+     "tripod_nut",
+     "run_button",
+     "strap",
+     "x1203",
+     "x1203_kit",
+     "pi5",
+     "cooler",
+     "pi_keeper",
+     "plunger",
+     "hood",
+     "microsd",
+     "eyepiece",
+     "hmx039",
+     "foam_pad",
+     "evf_board",
+     "lens_collar",
+     "gs_camera",
+     "c_cs_adapter",
+     "lens",
+     "panel",
+     "encoder",
+     "switch_1824",
+     "knob_exp",
+     "knob_fps",
+     "eyecup",
+     "usb_stick",
+     "stick_sleeve",
+     "xt30_pair",
+     "pack",
+     "cap"
+    ],
+    "hits": [],
+    "status": "pass",
+    "context": "service: lens_swap_closed_body"
+   },
+   {
+    "nearest": {
+     "bit": {
+      "gap": 0.25,
+      "part": "base_grip"
+     },
+     "handle": {
+      "gap": 2.35,
+      "part": "strap"
+     }
+    },
+    "screw": "s_j",
+    "step": 3,
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "head_point": [
+     -111.0,
+     -20.0,
+     -2.0
+    ],
+    "bit": [
+     6.5,
+     40.0
+    ],
+    "handle": [
+     30.0,
+     100.0
+    ],
+    "audit_set": [
+     "tub",
+     "base_grip",
+     "tripod_nut",
+     "run_button",
+     "strap"
+    ],
+    "hits": [],
+    "status": "pass",
+    "context": "service: base_off"
    }
   ],
   "release_access": [
@@ -11359,8 +11769,8 @@
     "head_part": "lens_collar",
     "spec": "M3 heat-set insert, brass, short (L 4.0, OD 4.6 class; procure, G-COL-1)",
     "bore_dia": 4.0,
-    "bore_depth": 4.2,
-    "bore_depth_local_min": 4.2,
+    "bore_depth": 4.3,
+    "bore_depth_local_min": 4.3,
     "bore_depth_need": 4.2,
     "open_end": [
      "head side"
@@ -11385,6 +11795,7 @@
     "engage": 3.9,
     "tip_from_head": 10.0,
     "tip_in_void": true,
+    "length_tol": 0.29,
     "washer_seat": 0.5,
     "under_washer_min": 5.5,
     "head_clear_r": 1.7,
@@ -11397,8 +11808,8 @@
     "head_part": "lens_collar",
     "spec": "M3 heat-set insert, brass, short (L 4.0, OD 4.6 class; procure, G-COL-1)",
     "bore_dia": 4.0,
-    "bore_depth": 4.2,
-    "bore_depth_local_min": 4.2,
+    "bore_depth": 4.3,
+    "bore_depth_local_min": 4.3,
     "bore_depth_need": 4.2,
     "open_end": [
      "head side"
@@ -11423,6 +11834,7 @@
     "engage": 3.9,
     "tip_from_head": 10.0,
     "tip_in_void": true,
+    "length_tol": 0.29,
     "washer_seat": 0.5,
     "under_washer_min": 5.5,
     "head_clear_r": 1.7,
@@ -11435,8 +11847,8 @@
     "head_part": "lens_collar",
     "spec": "M3 heat-set insert, brass, short (L 4.0, OD 4.6 class; procure, G-COL-1)",
     "bore_dia": 4.0,
-    "bore_depth": 4.2,
-    "bore_depth_local_min": 4.184,
+    "bore_depth": 4.3,
+    "bore_depth_local_min": 4.284,
     "bore_depth_need": 4.2,
     "open_end": [
      "head side"
@@ -11461,6 +11873,7 @@
     "engage": 3.9,
     "tip_from_head": 10.0,
     "tip_in_void": true,
+    "length_tol": 0.29,
     "washer_seat": 0.5,
     "under_washer_min": 5.5,
     "head_clear_r": 1.7,
@@ -11499,6 +11912,7 @@
     "engage": 5.3,
     "tip_from_head": 16.0,
     "tip_in_void": true,
+    "length_tol": 0.35,
     "washer_seat": 0.5,
     "under_washer_min": 5.0,
     "head_clear_r": 1.7,
@@ -11827,67 +12241,6 @@
     "method": "manifold3d mesh boolean, tessellation 0.05 mm, tol 0.5 mm3"
    },
    {
-    "insertion": "camera_in",
-    "step": 7,
-    "moving": [
-     "gs_camera",
-     "c_cs_adapter"
-    ],
-    "obstacles": [
-     "tub",
-     "base_grip",
-     "tripod_nut",
-     "run_button",
-     "strap",
-     "x1203",
-     "x1203_kit",
-     "pi5",
-     "cooler",
-     "pi_keeper",
-     "plunger",
-     "hood",
-     "microsd",
-     "eyepiece",
-     "hmx039",
-     "foam_pad",
-     "evf_board"
-    ],
-    "keepouts": [
-     "ko_5v_end",
-     "ko_5v_up",
-     "ko_fps_up",
-     "ko_hdmi_coil",
-     "ko_hdmi_evf",
-     "ko_hdmi_link",
-     "ko_hdmi_pi",
-     "ko_hdmi_run",
-     "ko_lead_cross",
-     "ko_lead_link",
-     "ko_lead_wall",
-     "ko_panel_link",
-     "ko_pig_drop",
-     "ko_pig_in",
-     "ko_pig_link",
-     "ko_pig_under",
-     "ko_pig_wrap",
-     "ko_qt_lead",
-     "ko_run_cross",
-     "ko_run_drop",
-     "ko_run_floor",
-     "ko_run_leads",
-     "ko_run_link",
-     "ko_run_rise",
-     "ko_usb_evf",
-     "ko_xt30"
-    ],
-    "snaps": [],
-    "positions": 76,
-    "hits": [],
-    "errors": [],
-    "status": "pass",
-    "method": "manifold3d mesh boolean, tessellation 0.05 mm, tol 0.5 mm3"
-   },
-   {
     "insertion": "collar_on",
     "step": 7,
     "moving": [
@@ -11910,9 +12263,7 @@
      "eyepiece",
      "hmx039",
      "foam_pad",
-     "evf_board",
-     "gs_camera",
-     "c_cs_adapter"
+     "evf_board"
     ],
     "keepouts": [
      "ko_5v_end",
@@ -11955,6 +12306,68 @@
     "method": "manifold3d mesh boolean, tessellation 0.05 mm, tol 0.5 mm3"
    },
    {
+    "insertion": "camera_in",
+    "step": 7,
+    "moving": [
+     "gs_camera",
+     "c_cs_adapter"
+    ],
+    "obstacles": [
+     "tub",
+     "base_grip",
+     "tripod_nut",
+     "run_button",
+     "strap",
+     "x1203",
+     "x1203_kit",
+     "pi5",
+     "cooler",
+     "pi_keeper",
+     "plunger",
+     "hood",
+     "microsd",
+     "eyepiece",
+     "hmx039",
+     "foam_pad",
+     "evf_board",
+     "lens_collar"
+    ],
+    "keepouts": [
+     "ko_5v_end",
+     "ko_5v_up",
+     "ko_fps_up",
+     "ko_hdmi_coil",
+     "ko_hdmi_evf",
+     "ko_hdmi_link",
+     "ko_hdmi_pi",
+     "ko_hdmi_run",
+     "ko_lead_cross",
+     "ko_lead_link",
+     "ko_lead_wall",
+     "ko_panel_link",
+     "ko_pig_drop",
+     "ko_pig_in",
+     "ko_pig_link",
+     "ko_pig_under",
+     "ko_pig_wrap",
+     "ko_qt_lead",
+     "ko_run_cross",
+     "ko_run_drop",
+     "ko_run_floor",
+     "ko_run_leads",
+     "ko_run_link",
+     "ko_run_rise",
+     "ko_usb_evf",
+     "ko_xt30"
+    ],
+    "snaps": [],
+    "positions": 76,
+    "hits": [],
+    "errors": [],
+    "status": "pass",
+    "method": "manifold3d mesh boolean, tessellation 0.05 mm, tol 0.5 mm3"
+   },
+   {
     "insertion": "lens_in",
     "step": 8,
     "moving": [
@@ -11978,9 +12391,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
-     "c_cs_adapter",
-     "lens_collar"
+     "c_cs_adapter"
     ],
     "keepouts": [
      "ko_5v_end",
@@ -12048,9 +12461,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens"
     ],
     "keepouts": [
@@ -12114,9 +12527,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -12190,9 +12603,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -12261,9 +12674,9 @@
      "hmx039",
      "foam_pad",
      "evf_board",
+     "lens_collar",
      "gs_camera",
      "c_cs_adapter",
-     "lens_collar",
      "lens",
      "panel",
      "encoder",
@@ -12421,6 +12834,430 @@
    {
     "kind": "j7_float",
     "mover": "body",
+    "s": 0.25,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 7.906,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.65,
+      "lateral": 5.943,
+      "axial": 0.65
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 3.35
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 3.25,
+      "lateral": 6.25,
+      "axial": 3.25
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 4.554,
+      "lateral": null,
+      "axial": 4.554
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.65,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 0.65,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 0.25,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 0.5,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 7.71,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.9,
+      "lateral": 5.97,
+      "axial": 0.9
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 3.6
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 3.0,
+      "lateral": 6.25,
+      "axial": 3.0
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 4.731,
+      "lateral": null,
+      "axial": 4.731
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 0.9,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 0.5,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 0.75,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 7.518,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 1.15,
+      "lateral": 6.004,
+      "axial": 1.15
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 3.85
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 2.75,
+      "lateral": 6.25,
+      "axial": 2.75
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 4.914,
+      "lateral": null,
+      "axial": 4.914
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 1.15,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 0.75,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 1.0,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 7.328,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 1.4,
+      "lateral": 6.046,
+      "axial": 1.4
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 4.1
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 2.5,
+      "lateral": null,
+      "axial": 2.5
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 5.102,
+      "lateral": null,
+      "axial": 5.102
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 1.4,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 1.0,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
     "s": 1.25,
     "rule": {
      "lateral": 0.5,
@@ -12478,6 +13315,642 @@
     "kind": "j7_float",
     "mover": "bfar",
     "s": 1.25,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 1.5,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 6.957,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 1.9,
+      "lateral": 6.152,
+      "axial": 1.9
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 4.6
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 2.0,
+      "lateral": null,
+      "axial": 2.0
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 5.494,
+      "lateral": null,
+      "axial": 5.494
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 1.9,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 1.5,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 1.75,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 6.777,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 2.15,
+      "lateral": 6.216,
+      "axial": 2.15
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 4.85
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 1.75,
+      "lateral": null,
+      "axial": 1.75
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 5.696,
+      "lateral": null,
+      "axial": 5.696
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 1.75,
+     "to": "panel"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 1.75,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 2.0,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 6.6,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 2.4,
+      "lateral": null,
+      "axial": 2.4
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 5.1
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 1.5,
+      "lateral": null,
+      "axial": 1.5
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 5.902,
+      "lateral": null,
+      "axial": 5.902
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 1.5,
+     "to": "panel"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 2.0,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 2.25,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 6.428,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 2.65,
+      "lateral": null,
+      "axial": 2.65
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 5.35
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 1.25,
+      "lateral": null,
+      "axial": 1.25
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 6.111,
+      "lateral": null,
+      "axial": 6.111
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 1.25,
+     "to": "panel"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 2.25,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 2.5,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 6.26,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 2.9,
+      "lateral": null,
+      "axial": 2.9
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 5.6
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 1.0,
+      "lateral": null,
+      "axial": 1.0
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 6.323,
+      "lateral": null,
+      "axial": 6.323
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 1.0,
+     "to": "panel"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 2.5,
+    "rule": {
+     "lateral": 0.6,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 0.5,
+      "lateral": 0.75,
+      "axial": 0.5
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 1.916,
+      "lateral": null,
+      "axial": 1.916
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 6.0,
+      "lateral": null,
+      "axial": null
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 3.483,
+      "lateral": null,
+      "axial": 3.483
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.5,
+     "to": "tub"
+    },
+    "min_lateral": {
+     "gap": 0.75,
+     "to": "tub"
+    },
+    "min_axial": {
+     "gap": 0.5,
+     "to": "tub"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "body",
+    "s": 2.75,
+    "rule": {
+     "lateral": 0.5,
+     "axial": 0.4,
+     "overall": 0.4
+    },
+    "per_obstacle": {
+     "s_r1": {
+      "overlap_mm3": 0.0,
+      "overall": 6.096,
+      "lateral": null,
+      "axial": null
+     },
+     "tub": {
+      "overlap_mm3": 0.0,
+      "overall": 3.15,
+      "lateral": null,
+      "axial": 3.15
+     },
+     "hood": {
+      "overlap_mm3": 0.0,
+      "overall": 0.8,
+      "lateral": 0.8,
+      "axial": 5.85
+     },
+     "panel": {
+      "overlap_mm3": 0.0,
+      "overall": 0.75,
+      "lateral": null,
+      "axial": 0.75
+     },
+     "lens_collar": {
+      "overlap_mm3": 0.0,
+      "overall": 6.538,
+      "lateral": null,
+      "axial": 6.538
+     }
+    },
+    "offending_obstacles": [],
+    "status": "pass",
+    "min_overall": {
+     "gap": 0.75,
+     "to": "panel"
+    },
+    "min_lateral": {
+     "gap": 0.8,
+     "to": "hood"
+    },
+    "min_axial": {
+     "gap": 0.75,
+     "to": "panel"
+    }
+   },
+   {
+    "kind": "j7_float",
+    "mover": "bfar",
+    "s": 2.75,
     "rule": {
      "lateral": 0.6,
      "axial": 0.4,
@@ -12682,11 +14155,134 @@
    },
    {
     "kind": "j7_float",
+    "mover": "centring",
+    "item": "lateral_stack",
+    "of": "adapter",
+    "obstacle": "hood",
+    "s": null,
+    "lateral_gap": 2.875,
+    "stack_mm": 0.3,
+    "hood_to_tub_mm": 0.25,
+    "remaining_mm": 2.325,
+    "remaining_without_gauge_mm": 2.025,
+    "rule": "remaining >= 0.10",
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "centring",
+    "item": "lateral_stack",
+    "of": "adapter",
+    "obstacle": "lens_collar",
+    "s": null,
+    "lateral_gap": 4.425,
+    "stack_mm": 0.3,
+    "hood_to_tub_mm": null,
+    "remaining_mm": 4.125,
+    "remaining_without_gauge_mm": 3.825,
+    "rule": "remaining >= 0.10",
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "centring",
+    "item": "lateral_stack",
+    "of": "adapter",
+    "obstacle": "tub",
+    "s": null,
+    "lateral_gap": 0.825,
+    "stack_mm": 0.3,
+    "hood_to_tub_mm": null,
+    "remaining_mm": 0.525,
+    "remaining_without_gauge_mm": 0.225,
+    "rule": "remaining >= 0.10",
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "centring",
+    "item": "lateral_stack",
+    "of": "bfar",
+    "obstacle": "tub",
+    "s": 0.0,
+    "lateral_gap": 0.75,
+    "stack_mm": 0.3,
+    "hood_to_tub_mm": null,
+    "remaining_mm": 0.45,
+    "remaining_without_gauge_mm": 0.15,
+    "rule": "remaining >= 0.10",
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "centring",
+    "item": "lateral_stack",
+    "of": "body",
+    "obstacle": "hood",
+    "s": 0.0,
+    "lateral_gap": 0.8,
+    "stack_mm": 0.3,
+    "hood_to_tub_mm": 0.25,
+    "remaining_mm": 0.25,
+    "remaining_without_gauge_mm": -0.05,
+    "rule": "remaining >= 0.10",
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "centring",
+    "item": "lateral_stack",
+    "of": "body",
+    "obstacle": "panel",
+    "s": 0.0,
+    "lateral_gap": 6.25,
+    "stack_mm": 0.3,
+    "hood_to_tub_mm": null,
+    "remaining_mm": 5.95,
+    "remaining_without_gauge_mm": 5.65,
+    "rule": "remaining >= 0.10",
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "centring",
+    "item": "lateral_stack",
+    "of": "body",
+    "obstacle": "tub",
+    "s": 0.0,
+    "lateral_gap": 5.924,
+    "stack_mm": 0.3,
+    "hood_to_tub_mm": null,
+    "remaining_mm": 5.624,
+    "remaining_without_gauge_mm": 5.324,
+    "rule": "remaining >= 0.10",
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
     "mover": "lens",
     "s": null,
     "overlaps": {},
     "status": "pass",
     "rule": "lens overlaps nothing but lens_collar (<= 0.05 mm3)"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens",
+    "item": "min_gap",
+    "s": null,
+    "gaps": {
+     "s_c1": 7.923,
+     "s_c2": 7.923,
+     "s_c3": 12.3782,
+     "s_c4": 7.1469,
+     "tub": 3.3305,
+     "hood": 2.571,
+     "panel": 8.7928
+    },
+    "rule": "lens >= 0.50 to every part but lens_collar, c_cs_adapter and gs_camera",
+    "status": "pass",
+    "offending_obstacles": []
    },
    {
     "kind": "j7_float",
@@ -12698,7 +14294,77 @@
    {
     "kind": "j7_float",
     "mover": "lens_vs_camera",
+    "s": 0.25,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 0.5,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 0.75,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 1.0,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
     "s": 1.25,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 1.5,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 1.75,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 2.0,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 2.25,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 2.5,
+    "overlap_mm3": 0.0,
+    "status": "pass"
+   },
+   {
+    "kind": "j7_float",
+    "mover": "lens_vs_camera",
+    "s": 2.75,
     "overlap_mm3": 0.0,
     "status": "pass"
    },
@@ -13185,6 +14851,58 @@
     "status": "info",
     "band_status": "drawing",
     "warn": "computar_h6z0812 support band is 'drawing', not measured: G-LENS"
+   },
+   {
+    "kind": "lens_support",
+    "item": "centring_gauge",
+    "lens": "kowa_lm6hc",
+    "part": "tub",
+    "overlap_mm3": 0.0,
+    "gap": 0.0,
+    "rule": "seated on it (contact, no overlap)",
+    "status": "pass"
+   },
+   {
+    "kind": "lens_support",
+    "item": "centring_gauge",
+    "lens": "kowa_lm6hc",
+    "part": "lens_collar",
+    "overlap_mm3": 0.0,
+    "gap": 0.0,
+    "rule": "seated on it (contact, no overlap)",
+    "status": "pass"
+   },
+   {
+    "kind": "lens_support",
+    "item": "centring_gauge",
+    "lens": "kowa_lm6hc",
+    "part": "hood",
+    "overlap_mm3": 0.0,
+    "gap": 0.75,
+    "rule": "gap >= 0.5",
+    "status": "pass"
+   },
+   {
+    "kind": "lens_support",
+    "item": "centring_gauge",
+    "lens": "kowa_lm6hc",
+    "part": "insertion",
+    "path": "-X 40 to the seated pose in 1.0 steps",
+    "hits": {},
+    "status": "pass"
+   },
+   {
+    "kind": "lens_support",
+    "item": "centring_gauge",
+    "lens": "kowa_lm6hc",
+    "part": "driver",
+    "overlap_mm3": {
+     "s_c1": 0.0,
+     "s_c2": 0.0,
+     "s_c3": 0.0
+    },
+    "rule": "the s_c1..s_c3 driver (bit + handle) clears the gauge",
+    "status": "pass"
    }
   ],
   "lens_clamp": [
@@ -13202,6 +14920,18 @@
     "bolted_only_margin_mm": -8.804,
     "note": "the 3 bolted anchors alone do not enclose the axis; the LR compression foot closes the polygon",
     "status": "pass"
+   },
+   {
+    "kind": "lens_clamp",
+    "item": "anchor_polygon_bolted",
+    "bolted": [
+     "TL",
+     "TR",
+     "LL"
+    ],
+    "margin_mm": -8.804,
+    "status": "info",
+    "warn": "the bolted anchors TL/TR/LL alone leave the lens axis 8.8 mm outside their triangle: the axis is enclosed only through the compression foot LR, so preload loss (audit 2026-10-06 M1, G-COL-1 creep) lets the collar pry"
    },
    {
     "kind": "lens_clamp",
@@ -13256,30 +14986,30 @@
     "M_static_Nm": 0.0572,
     "M_shock_Nm": 0.2858,
     "ratio_static": 2.97,
-    "M_wall_static_Nm": 0.063,
+    "M_wall_static_Nm": 0.0631,
     "aim_static_deg": [
      0.005,
      0.0092
     ],
     "aim_shock_deg": 0.046,
-    "anchor_tension_shock_N": 59.2,
+    "anchor_tension_shock_N": 59.3,
     "anchor_tension_nominal_shock_N": 5.8,
     "anchor_prying_factor": 2.0,
     "anchor_reactions_shock_N": {
-     "TL": 53.603,
-     "TR": 59.248,
-     "LL": 28.133
+     "TL": 53.644,
+     "TR": 59.306,
+     "LL": 28.165
     },
-    "anchor_axial_shock_N": 13.2341,
-    "anchor_bending_shock_bound_Nm": 0.363,
+    "anchor_axial_shock_N": 13.2569,
+    "anchor_bending_shock_bound_Nm": 0.3632,
     "anchor_compression_foot_active": false,
     "anchor_model_provisional": true,
-    "collar_g": 16.8,
+    "collar_g": 17.3,
     "masses": {
      "lens": 215.0,
      "camera": 34.0,
      "adapter": 4.0,
-     "collar": 16.8
+     "collar": 17.3
     },
     "status": "info",
     "src": "judge 3 s6.9 + design 3 plate FE (wall coefficients); estimates until G-COL-1 / G-CAM-2",
@@ -13298,7 +15028,7 @@
     "M_static_Nm": 0.0278,
     "M_shock_Nm": 0.1391,
     "ratio_static": 6.55,
-    "M_wall_static_Nm": 0.0245,
+    "M_wall_static_Nm": 0.0246,
     "aim_static_deg": [
      0.0019,
      0.0036
@@ -13308,20 +15038,20 @@
     "anchor_tension_nominal_shock_N": 2.3,
     "anchor_prying_factor": 2.0,
     "anchor_reactions_shock_N": {
-     "TL": 26.621,
-     "TR": 30.552,
-     "LL": 14.846
+     "TL": 26.661,
+     "TR": 30.61,
+     "LL": 14.878
     },
-    "anchor_axial_shock_N": 7.6709,
-    "anchor_bending_shock_bound_Nm": 0.1706,
+    "anchor_axial_shock_N": 7.6937,
+    "anchor_bending_shock_bound_Nm": 0.1708,
     "anchor_compression_foot_active": false,
     "anchor_model_provisional": true,
-    "collar_g": 18.4,
+    "collar_g": 18.9,
     "masses": {
      "lens": 100.0,
      "camera": 34.0,
      "adapter": 4.0,
-     "collar": 18.4
+     "collar": 18.9
     },
     "status": "pass",
     "src": "judge 3 s6.9 + design 3 plate FE (wall coefficients); estimates until G-COL-1 / G-CAM-2"
@@ -13370,15 +15100,15 @@
   ],
   "mass_com": {
    "kowa_lm6hc": {
-    "total_g": 894.8,
+    "total_g": 895.3,
     "com": [
-     -45.54,
+     -45.51,
      0.84,
-     26.9
+     26.92
     ],
     "lens": "Kowa LM6HC 6 mm f/1.8 1in C-mount",
-    "com_ahead_of_grip_axis": 1.46,
-    "com_above_grip_top": 34.9,
+    "com_ahead_of_grip_axis": 1.49,
+    "com_above_grip_top": 34.92,
     "items": [
      {
       "id": "pi5",
@@ -13682,7 +15412,7 @@
      },
      {
       "id": "tub",
-      "mass_g": 96.62,
+      "mass_g": 96.61,
       "com": [
        -85.1,
        -11.0,
@@ -13792,11 +15522,11 @@
      },
      {
       "id": "lens_collar",
-      "mass_g": 16.81,
+      "mass_g": 17.27,
       "com": [
        4.2,
-       2.0,
-       60.3
+       2.3,
+       60.5
       ],
       "stub": false
      },
@@ -13814,15 +15544,15 @@
     "note": "cables and solder not included; COTS masses are listing/estimate values at proxy centroids"
    },
    "fujinon_hf6xa": {
-    "total_g": 781.4,
+    "total_g": 781.9,
     "com": [
-     -56.77,
-     0.96,
-     22.1
+     -56.74,
+     0.97,
+     22.13
     ],
     "lens": "Fujinon HF6XA-5M 6 mm C-mount",
-    "com_ahead_of_grip_axis": -9.77,
-    "com_above_grip_top": 30.1,
+    "com_ahead_of_grip_axis": -9.74,
+    "com_above_grip_top": 30.13,
     "items": [
      {
       "id": "pi5",
@@ -14126,7 +15856,7 @@
      },
      {
       "id": "tub",
-      "mass_g": 96.62,
+      "mass_g": 96.61,
       "com": [
        -85.1,
        -11.0,
@@ -14236,11 +15966,11 @@
      },
      {
       "id": "lens_collar",
-      "mass_g": 18.39,
+      "mass_g": 18.85,
       "com": [
        4.2,
-       1.9,
-       60.3
+       2.1,
+       60.5
       ],
       "stub": false
      },
@@ -14711,8 +16441,8 @@
     "check": "bed envelope lens_collar 250x210x220",
     "ok": true,
     "detail": [
-     68.0,
-     65.5,
+     68.6,
+     66.1,
      11.3
     ],
     "status": "pass"
@@ -14721,8 +16451,8 @@
     "check": "bed envelope lens_collar 256x256x256",
     "ok": true,
     "detail": [
-     68.0,
-     65.5,
+     68.6,
+     66.1,
      11.3
     ],
     "status": "pass"
@@ -15097,18 +16827,6 @@
     "status": "pass"
    },
    {
-    "check": "step id known gs_camera",
-    "ok": true,
-    "detail": "",
-    "status": "pass"
-   },
-   {
-    "check": "step id known c_cs_adapter",
-    "ok": true,
-    "detail": "",
-    "status": "pass"
-   },
-   {
     "check": "step id known lens_collar",
     "ok": true,
     "detail": "",
@@ -15128,6 +16846,18 @@
    },
    {
     "check": "step id known s_c3",
+    "ok": true,
+    "detail": "",
+    "status": "pass"
+   },
+   {
+    "check": "step id known gs_camera",
+    "ok": true,
+    "detail": "",
+    "status": "pass"
+   },
+   {
+    "check": "step id known c_cs_adapter",
     "ok": true,
     "detail": "",
     "status": "pass"
@@ -15682,8 +17412,8 @@
    {
     "part": "lens_collar",
     "print_bbox": [
-     65.53,
-     68.01,
+     66.15,
+     68.61,
      11.34
     ],
     "beds": {
@@ -15699,8 +17429,8 @@
     "status": "pass",
     "watertight": true,
     "shells": 1,
-    "volume_brep": 106228.7,
-    "volume_mesh": 106228.5,
+    "volume_brep": 106227.7,
+    "volume_mesh": 106227.5,
     "volume_dev": 0.0
    },
    {
@@ -15798,9 +17528,853 @@
     "status": "pass",
     "watertight": true,
     "shells": 1,
-    "volume_brep": 15714.5,
-    "volume_mesh": 15723.8,
-    "volume_dev": 0.00059
+    "volume_brep": 16148.3,
+    "volume_mesh": 16157.7,
+    "volume_dev": 0.00058
+   }
+  ],
+  "print_overhang": [
+   {
+    "kind": "print_overhang",
+    "part": "tub",
+    "face_down": "-Y",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 350,
+    "regions": 165,
+    "short_overhangs": 138,
+    "bridge_regions": 17,
+    "longest_bridge_mm": 19.7,
+    "apex_line_mm2": 6.28,
+    "hole_edge_bridges": 2,
+    "hole_edge_mm2": 0.88,
+    "bridges": [
+     {
+      "z": 13.6,
+      "span_mm": 19.7,
+      "area_mm2": 232.98,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       4.2,
+       63.1,
+       16.0,
+       82.7
+      ]
+     },
+     {
+      "z": 41.4,
+      "span_mm": 13.6,
+      "area_mm2": 39.44,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       6.2,
+       12.6,
+       9.0,
+       26.0
+      ]
+     },
+     {
+      "z": 41.4,
+      "span_mm": 13.2,
+      "area_mm2": 77.88,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       10.0,
+       66.4,
+       15.8,
+       79.5
+      ]
+     },
+     {
+      "z": 67.2,
+      "span_mm": 12.5,
+      "area_mm2": 65.21,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       119.8,
+       89.4,
+       132.2,
+       94.6
+      ]
+     },
+     {
+      "z": 44.2,
+      "span_mm": 11.9,
+      "area_mm2": 117.81,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       0.0,
+       67.0,
+       9.8,
+       78.8
+      ]
+     },
+     {
+      "z": 17.4,
+      "span_mm": 11.6,
+      "area_mm2": 75.4,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       16.1,
+       67.1,
+       22.5,
+       78.6
+      ]
+     },
+     {
+      "z": 40.6,
+      "span_mm": 11.6,
+      "area_mm2": 76.56,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       16.0,
+       67.1,
+       22.5,
+       78.6
+      ]
+     },
+     {
+      "z": 31.0,
+      "span_mm": 10.7,
+      "area_mm2": 27.82,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       109.2,
+       94.8,
+       119.8,
+       97.3
+      ]
+     },
+     {
+      "z": 56.0,
+      "span_mm": 7.7,
+      "area_mm2": 11.55,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       4.6,
+       15.5,
+       6.0,
+       23.1
+      ]
+     },
+     {
+      "z": 49.8,
+      "span_mm": 6.3,
+      "area_mm2": 13.86,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       148.8,
+       73.7,
+       150.9,
+       79.9
+      ]
+     },
+     {
+      "z": 2.6,
+      "span_mm": 5.7,
+      "area_mm2": 25.42,
+      "hole_edge_mm2": 0.44,
+      "bbox": [
+       119.2,
+       8.5,
+       125.8,
+       15.1
+      ]
+     },
+     {
+      "z": 2.6,
+      "span_mm": 5.7,
+      "area_mm2": 25.42,
+      "hole_edge_mm2": 0.44,
+      "bbox": [
+       7.2,
+       46.5,
+       13.8,
+       53.1
+      ]
+     }
+    ],
+    "supports_used": {
+     "ll_insert_boss_chin": 3.42,
+     "s_k2_boss_chin": 10.82,
+     "tongue_f_minus_y_wing": 15.35,
+     "tongue_r_minus_y_wing": 15.35
+    },
+    "declared_zones": [
+     {
+      "id": "tongue_f_minus_y_wing",
+      "why": "J4 keyhole T-head and neck -Y faces (the T undercut cannot face the bed): paint-on support from the bed"
+     },
+     {
+      "id": "tongue_r_minus_y_wing",
+      "why": "J4 keyhole T-head and neck -Y faces (the T undercut cannot face the bed): paint-on support from the bed"
+     },
+     {
+      "id": "s_k2_boss_chin",
+      "why": "keeper boss s_k2: its chin flat (y 23.95, 0.25 off the X1203 edge) is a 2.9 x 7.3 ledge off the floor wall in print; unsupported it droops toward the X1203 edge it clears"
+     },
+     {
+      "id": "ll_insert_boss_chin",
+      "why": "collar insert boss LL: its chin flat (y 24.0, 0.3 off the pi5 box) is a 2.4 mm ledge off the front wall in print; unsupported it droops toward the Pi header"
+     }
+    ],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "hood",
+    "face_down": "+Z",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 498,
+    "regions": 37,
+    "short_overhangs": 25,
+    "bridge_regions": 11,
+    "longest_bridge_mm": 20.7,
+    "apex_line_mm2": 0.03,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [
+     {
+      "z": 8.4,
+      "span_mm": 20.7,
+      "area_mm2": 126.27,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       134.9,
+       3.0,
+       155.5,
+       9.0
+      ]
+     },
+     {
+      "z": 8.4,
+      "span_mm": 20.7,
+      "area_mm2": 126.27,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       110.9,
+       3.0,
+       131.5,
+       9.0
+      ]
+     },
+     {
+      "z": 8.4,
+      "span_mm": 20.7,
+      "area_mm2": 126.27,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       86.9,
+       3.0,
+       107.5,
+       9.0
+      ]
+     },
+     {
+      "z": 8.4,
+      "span_mm": 20.7,
+      "area_mm2": 126.27,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       62.9,
+       3.0,
+       83.5,
+       9.0
+      ]
+     },
+     {
+      "z": 8.4,
+      "span_mm": 20.7,
+      "area_mm2": 126.27,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       38.9,
+       3.0,
+       59.5,
+       9.0
+      ]
+     },
+     {
+      "z": 43.4,
+      "span_mm": 15.1,
+      "area_mm2": 243.11,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       0.0,
+       11.5,
+       16.0,
+       26.5
+      ]
+     },
+     {
+      "z": 59.2,
+      "span_mm": 13.1,
+      "area_mm2": 34.06,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       167.7,
+       28.5,
+       170.2,
+       41.5
+      ]
+     },
+     {
+      "z": 84.0,
+      "span_mm": 11.7,
+      "area_mm2": 30.42,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       167.7,
+       34.7,
+       170.2,
+       46.3
+      ]
+     },
+     {
+      "z": 82.8,
+      "span_mm": 11.3,
+      "area_mm2": 27.12,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       168.9,
+       20.4,
+       171.2,
+       31.6
+      ]
+     },
+     {
+      "z": 21.0,
+      "span_mm": 4.5,
+      "area_mm2": 18.45,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       146.7,
+       58.0,
+       150.7,
+       62.4
+      ]
+     },
+     {
+      "z": 51.4,
+      "span_mm": 4.5,
+      "area_mm2": 18.45,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       146.7,
+       58.0,
+       150.7,
+       62.4
+      ]
+     }
+    ],
+    "supports_used": {
+     "eyepiece_window_sill": 35.03
+    },
+    "declared_zones": [
+     {
+      "id": "eyepiece_window_sill",
+      "why": "the +Y strip under the eyepiece window starts mid-air (the window runs the full housing length): tree support from outside, y > 35"
+     }
+    ],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "panel",
+    "face_down": "+Y",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 327,
+    "regions": 29,
+    "short_overhangs": 29,
+    "bridge_regions": 0,
+    "longest_bridge_mm": 0.0,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "base_grip",
+    "face_down": "+Z",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 550,
+    "regions": 13,
+    "short_overhangs": 4,
+    "bridge_regions": 9,
+    "longest_bridge_mm": 24.7,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 1,
+    "hole_edge_mm2": 1.24,
+    "bridges": [
+     {
+      "z": 20.2,
+      "span_mm": 24.7,
+      "area_mm2": 41.99,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       80.2,
+       22.9,
+       81.8,
+       47.5
+      ]
+     },
+     {
+      "z": 27.4,
+      "span_mm": 21.7,
+      "area_mm2": 176.22,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       82.0,
+       22.9,
+       92.5,
+       47.5
+      ]
+     },
+     {
+      "z": 4.0,
+      "span_mm": 18.2,
+      "area_mm2": 658.84,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       95.0,
+       17.2,
+       113.0,
+       53.3
+      ]
+     },
+     {
+      "z": 4.0,
+      "span_mm": 18.2,
+      "area_mm2": 658.84,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       34.0,
+       17.2,
+       52.0,
+       53.3
+      ]
+     },
+     {
+      "z": 2.0,
+      "span_mm": 12.7,
+      "area_mm2": 26.67,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       36.8,
+       56.4,
+       38.8,
+       69.0
+      ]
+     },
+     {
+      "z": 98.8,
+      "span_mm": 12.7,
+      "area_mm2": 33.05,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       46.0,
+       30.9,
+       48.9,
+       43.5
+      ]
+     },
+     {
+      "z": 105.8,
+      "span_mm": 12.7,
+      "area_mm2": 33.04,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       46.0,
+       30.9,
+       48.9,
+       43.5
+      ]
+     },
+     {
+      "z": 35.0,
+      "span_mm": 11.7,
+      "area_mm2": 16.38,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       92.7,
+       29.4,
+       94.0,
+       41.0
+      ]
+     },
+     {
+      "z": 5.6,
+      "span_mm": 10.7,
+      "area_mm2": 71.27,
+      "hole_edge_mm2": 1.24,
+      "bbox": [
+       3.6,
+       29.7,
+       16.4,
+       40.7
+      ]
+     }
+    ],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "cap",
+    "face_down": "-Z",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 51,
+    "regions": 6,
+    "short_overhangs": 5,
+    "bridge_regions": 1,
+    "longest_bridge_mm": 3.4,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [
+     {
+      "z": 0.6,
+      "span_mm": 3.4,
+      "area_mm2": 15.33,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       21.2,
+       12.4,
+       30.2,
+       17.7
+      ]
+     }
+    ],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "plunger",
+    "face_down": "+X",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 20,
+    "regions": 2,
+    "short_overhangs": 2,
+    "bridge_regions": 0,
+    "longest_bridge_mm": 0.0,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "knob_exp",
+    "face_down": "+Y",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 45,
+    "regions": 61,
+    "short_overhangs": 61,
+    "bridge_regions": 0,
+    "longest_bridge_mm": 0.0,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "knob_fps",
+    "face_down": "+Y",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 35,
+    "regions": 33,
+    "short_overhangs": 33,
+    "bridge_regions": 0,
+    "longest_bridge_mm": 0.0,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "eyecup",
+    "face_down": "+X",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 81,
+    "regions": 0,
+    "short_overhangs": 0,
+    "bridge_regions": 0,
+    "longest_bridge_mm": 0.0,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "stick_sleeve",
+    "face_down": "-X",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 80,
+    "regions": 0,
+    "short_overhangs": 0,
+    "bridge_regions": 0,
+    "longest_bridge_mm": 0.0,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "pi_keeper",
+    "face_down": "+Z",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 39,
+    "regions": 2,
+    "short_overhangs": 0,
+    "bridge_regions": 2,
+    "longest_bridge_mm": 7.3,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 2,
+    "hole_edge_mm2": 4.38,
+    "bridges": [
+     {
+      "z": 1.2,
+      "span_mm": 7.3,
+      "area_mm2": 44.16,
+      "hole_edge_mm2": 3.95,
+      "bbox": [
+       37.7,
+       0.0,
+       44.3,
+       7.9
+      ]
+     },
+     {
+      "z": 1.2,
+      "span_mm": 5.7,
+      "area_mm2": 25.48,
+      "hole_edge_mm2": 0.43,
+      "bbox": [
+       2.2,
+       12.6,
+       8.8,
+       19.2
+      ]
+     }
+    ],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "lens_collar",
+    "face_down": "+X",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 56,
+    "regions": 19,
+    "short_overhangs": 16,
+    "bridge_regions": 3,
+    "longest_bridge_mm": 7.2,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [
+     {
+      "z": 5.8,
+      "span_mm": 7.2,
+      "area_mm2": 40.33,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       57.0,
+       20.5,
+       64.0,
+       27.5
+      ]
+     },
+     {
+      "z": 5.8,
+      "span_mm": 7.2,
+      "area_mm2": 40.33,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       57.0,
+       42.5,
+       64.0,
+       49.5
+      ]
+     },
+     {
+      "z": 5.8,
+      "span_mm": 7.2,
+      "area_mm2": 40.33,
+      "hole_edge_mm2": 0.0,
+      "bbox": [
+       2.5,
+       59.5,
+       9.5,
+       66.5
+      ]
+     }
+    ],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
+   },
+   {
+    "kind": "print_overhang",
+    "part": "collar_gauge",
+    "face_down": "-X",
+    "rule": {
+     "layer": 0.2,
+     "overhang_deg": 45.0,
+     "cantilever_max": 1.0,
+     "bridge_max": 30.0,
+     "edge_tol": 0.3,
+     "directions": 8,
+     "px": 0.1
+    },
+    "layers": 121,
+    "regions": 0,
+    "short_overhangs": 0,
+    "bridge_regions": 0,
+    "longest_bridge_mm": 0.0,
+    "apex_line_mm2": 0.0,
+    "hole_edge_bridges": 0,
+    "hole_edge_mm2": 0.0,
+    "bridges": [],
+    "supports_used": {},
+    "declared_zones": [],
+    "unsupported": [],
+    "status": "pass"
    }
   ],
   "print_modifiers": [
@@ -15895,7 +18469,7 @@
     "stl_sha256": "c451773f1b8125a69e04b79172a7c41cde85488cff2622ec6cb8261ef85dc4fa",
     "infill_pct": 40,
     "perimeters": 4,
-    "part_overlap_mm3": 556.9,
+    "part_overlap_mm3": 556.5,
     "status": "pass",
     "note": "load as a modifier mesh at its exported position (same bed frame as the part); translate together with the part, never alone",
     "part": "tub"
@@ -15907,7 +18481,7 @@
     "stl_sha256": "8ab89f69fc79600d5acacdb75926bb26b05c6829602bbc9f716649e8eed16891",
     "infill_pct": 40,
     "perimeters": 4,
-    "part_overlap_mm3": 555.3,
+    "part_overlap_mm3": 554.9,
     "status": "pass",
     "note": "load as a modifier mesh at its exported position (same bed frame as the part); translate together with the part, never alone",
     "part": "tub"
@@ -15919,7 +18493,7 @@
     "stl_sha256": "f4f547991a1738adf6e53ffa571562f88abe6aa926a77fb997319b9824f885ba",
     "infill_pct": 40,
     "perimeters": 4,
-    "part_overlap_mm3": 611.0,
+    "part_overlap_mm3": 610.7,
     "status": "pass",
     "note": "load as a modifier mesh at its exported position (same bed frame as the part); translate together with the part, never alone",
     "part": "tub"
