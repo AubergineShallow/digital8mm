@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: MIT
 """GS8 D2 release layer: the black ASA hood (owner hood_panel).
 
-One print: the roof band, the front plate (r5: no lens turret; 4 lens-collar foot holes and the camera roll fin), the
+One print: the roof band, the front plate (r5: no lens turret; 4 lens-collar foot holes; r7: the camera tab catch
+(2 tines) hangs from the band), the
 eyepiece housing behind the rear face,
 the plunger well (flange channel + pocket + opening + raised guard rim), the microSD slot, the front exhaust slots,
 the roof inlet slots over the blower, 4 snap hooks (J1), the J2 rail block (groove for the panel tongue) and a roof
@@ -28,7 +29,7 @@ PRINT = {
                  'y > 35). Everything else is self-supporting: housing interior = 45 deg flanks + 15.2 mm bridge; '
                  'J2 groove lip = 21 mm bridges between 6 piers; all holes in the plate are bridged <= 14.2 mm; '
                  'the lens bore is a truncated teardrop (13.1 mm flat); r5: the 4 collar foot holes (dia 8.6) are teardrops '
-                 '(apex -Z = print up); the camera roll fin + 2 webs hang from the band (webs bridge 4.8 to the stack fin).',
+                 '(apex -Z = print up); r7: the camera tab catch (2 tines) hangs from the band and grows straight up.',
         notes='ASA black, 0.4 nozzle / 0.2 layer, 4 walls, 25 % gyroid. Roof on the bed (0.6 x 45 deg bed chamfer, '
               '3.0 x 45 deg front-top chamfer). Hooks, rail block and rib grow upward. Remove the tree support (r5: 1, was 2); '
               'deburr the hook teeth and the groove mouth. Footprint 171.2 x 67.3 (r5: no turret), height 99.7. 5 mm brim on the roof '
@@ -207,13 +208,35 @@ def _collar_foot_holes(L):
     return [dc.teardrop(r, 0.0, x1 - x0, (x0, y, z), (1, 0, 0), up=(0, 0, -1)) for y, z in L.COLLAR['feet'].values()]
 
 
-def _roll_fin(L):
-    """r5 (J7-R, judge 3 s6.5): camera roll catch hanging from the band, 0.8 off the cover -Y face, tied by 2 webs to
-    the stack fin (HOOD_STACK_STOP). A catch only: the camera touches it while a lens is screwed in, never in service."""
-    H = L.HOOD
+def _tab_catch(L):
+    """r7 C4 (BX-4, SPEC-C4 3.2): the camera tab catch, 2 T-section tines hanging from the band (L.tab_catch_boxes():
+    web + rear flange per side), one each side of the camera's lock tab, HOOD tab_catch gap off the lock-screw head
+    envelopes. A catch only: metal lands on a tine while a lens is turned, never in service (checks.check_roll_catch).
+    Lead-in 1 x 45 on the rear inner vertical edge (tab entry at step 7); 2 x 45 root chamfers (solid gussets) on both
+    web faces at the band. Prints band-down: the tines grow straight up (no overhang, no support). Replaces the r5
+    roll fin + 2 webs."""
+    tc = L.HOOD['tab_catch']
+    bx = L.tab_catch_boxes(L)
     out = []
-    for b in [H['roll_fin']] + list(H['roll_webs']):
-        out.append(_box(b['x'][0], b['x'][1], b['y'][0], b['y'][1], b['z'][0], b['z'][1]))
+    li, rc, top = tc['lead_in'], tc['root_chamfer'], L.ZT1
+    for sg in (1, -1):
+        web = next(b for b in bx if b['side'] == sg and b['kind'] == 'web')
+        fl = next(b for b in bx if b['side'] == sg and b['kind'] == 'flange')
+        t = web['x'][0], web['x'][1]
+        s = _box(*web['x'], *web['y'], *web['z']).fuse(_box(*fl['x'], *fl['y'], *fl['z']))
+        y_in = sg * web['y_in']                   # inner face (toward the tab)
+        y_out = sg * (web['y_in'] + tc['t'])      # web outer face
+        z0, z1 = web['z']
+        # lead-in: remove the triangle (x0, y_in) - (x0 + li, y_in) - (x0, y_in + sg li) along z
+        pl_xy = cq.Plane(origin=V(0, 0, z0 - 0.1), xDir=V(1, 0, 0), normal=V(0, 0, 1))   # u = x, v = y, extrude +z
+        lead = _poly(pl_xy, [(t[0], y_in), (t[0] + li, y_in), (t[0], y_in + sg * li)], z1 - z0 + 0.2)
+        s = s.cut(lead)
+        # root gussets (2 x 45) on the inner and the outer web face, at the band underside (z = ZT1)
+        for yf, d in ((y_in, -sg), (y_out, sg)):
+            g = _poly(_pl_yz(t[0] + (li if d == -sg else 0.0)), [(yf, top), (yf + d * rc, top), (yf, top - rc)],
+                      t[1] - t[0] - (li if d == -sg else 0.0))
+            s = s.fuse(g)
+        out.append(s)
     return out
 
 
@@ -297,7 +320,7 @@ def build_part(layout, part_id='hood'):
     s = _shell(L)
     s = s.cut(*_housing_cuts(L))
     adds = [_rail(L), _guard(L), _box(RIB[0], RIB[1], RIB[2], RIB[3], RIB[4], L.ZT1 + EPS)]   # r5: no turret
-    adds += _hooks(L) + _edge_flange(L) + _roll_fin(L)                                    # r5: camera roll fin
+    adds += _hooks(L) + _edge_flange(L) + _tab_catch(L)                     # r7 C4: camera tab catch (was the roll fin)
     st = getattr(L, 'HOOD_STACK_STOP', None)       # FIXER r2 (M-V-MPS-4): far-side stack stop (post + fin from the roof)
     if st is not None:
         for b in (st['post'], st['fin']):

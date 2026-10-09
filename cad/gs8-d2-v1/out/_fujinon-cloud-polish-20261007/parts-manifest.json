@@ -1,5 +1,5 @@
 {
- "revision": "GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, minor findings)",
+ "revision": "GS8 D2 r7-20261009 (r6-20261008 + blocker review 2026-10-08 fixes)",
  "parts": [
   {
    "id": "pi5",
@@ -275,18 +275,18 @@
    "id": "xt30_pair",
    "kind": "cots",
    "stub": false,
-   "name": "XT30 pair (pigtail female + pack male) + 180 mm 18 AWG pigtail with its inline 15 A fuse",
+   "name": "XT30 pair (pigtail female + pack male) + fused 18 AWG pigtail (cut length L_cut, PIGTAIL) with its inline 15 A fuse",
    "pn": "XT30U; fuse Littelfuse 0251015.MXL",
    "src": "estimate; fuse body: Littelfuse 251 datasheet rev VL",
    "step": 10,
-   "mass_g": 11.6,
+   "mass_g": 12.0,
    "bbox": [
-    -63.0,
-    -37.0,
-    -5.1,
-    5.1,
-    -26.0,
-    -14.8
+    -60.25,
+    -34.25,
+    -7.8,
+    7.6,
+    -36.4,
+    -30.0
    ]
   },
   {
@@ -589,7 +589,7 @@
    "pn": null,
    "src": null,
    "step": 3,
-   "mass_g": 96.6,
+   "mass_g": 96.5,
    "bbox": [
     -154.02,
     -2.68,
@@ -607,13 +607,13 @@
    "pn": null,
    "src": null,
    "step": 5,
-   "mass_g": 51.7,
+   "mass_g": 52.4,
    "bbox": [
-    -170.23,
+    -170.22,
     1.0,
-    -32.36,
-    35.03,
-    0.29,
+    -32.35,
+    35.02,
+    0.3,
     100.0
    ]
   },
@@ -629,9 +629,9 @@
    "bbox": [
     -152.67,
     -4.03,
-    -30.42,
+    -30.41,
     35.03,
-    2.58,
+    2.59,
     97.0
    ]
   },
@@ -649,7 +649,7 @@
     -0.5,
     -35.2,
     35.2,
-    -110.04,
+    -110.03,
     0.0
    ]
   },
@@ -696,7 +696,7 @@
    "name": "printed_small.py",
    "pn": null,
    "src": null,
-   "step": 9,
+   "step": 8,
    "mass_g": 5.1,
    "bbox": [
     -77.0,
@@ -714,13 +714,13 @@
    "name": "printed_small.py",
    "pn": null,
    "src": null,
-   "step": 9,
+   "step": 8,
    "mass_g": 1.3,
    "bbox": [
     -133.0,
     -113.0,
-    35.16,
-    42.23,
+    35.18,
+    42.22,
     47.0,
     67.0
    ]
@@ -753,12 +753,12 @@
    "step": 9,
    "mass_g": 1.2,
    "bbox": [
-    -154.02,
+    -154.01,
     -138.0,
-    -16.77,
-    6.17,
-    17.88,
-    30.92
+    -16.76,
+    6.16,
+    17.89,
+    30.91
    ]
   },
   {
@@ -776,7 +776,7 @@
     -23.0,
     31.9,
     7.7,
-    15.61
+    15.6
    ]
   },
   {

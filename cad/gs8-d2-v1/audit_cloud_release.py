@@ -26,6 +26,11 @@ EXPECTED_CATEGORIES = {
     'lens_support', 'lens_clamp', 'sweeps', 'removals', 'service_driver', 'release_access',
     'stack_retention', 'layout_self_check', 'mass_com',
 }
+EXPECTED_CATEGORIES.add('mate_paths')   # r7 C1 (SPEC-C1 4.2); each r7 cluster adds its own line
+EXPECTED_CATEGORIES.update(('mate_reach', 'cable_stow', 'header_housings'))   # r7 C2 (SPEC-C2 3.3)
+EXPECTED_CATEGORIES.add('handling')     # r7 C5 (SPEC-C5 3.2)
+EXPECTED_CATEGORIES.add('lead_access')  # r7 C3 (SPEC-C3 3.2)
+EXPECTED_CATEGORIES.add('roll_catch')   # r7 C4 (SPEC-C4 4.1)
 # r6 (audit 2026-10-06 L9): report-only categories; their summary status is 'info', never 'pass'.
 INFO_CATEGORIES = {'mass_com'}
 
@@ -34,6 +39,7 @@ EXPECTED_SOURCES = set(['FASTENER-POLICY.md', 'SPEC.md', 'build_d2.py', 'checks.
 FONT_SOURCES = set(['run_locked.py', 'fonts/DejaVuSans-Bold.ttf', 'fonts/LICENSE-DejaVu.txt'])
 EXPECTED_GATE_DOCS = set(['cad/gs8-d2-v1/MEASURED-PARTS.md', 'cad/gs8-d2-v1/SPEC.md', 'electronics/gs8-d2-v1/WIRING.md', 'electronics/gs8-evf-v1/EVF-SELECTION.md'])
 EXPECTED_GATE_IDS = set(['EVF-G1', 'EVF-G2', 'EVF-G3', 'EVF-G4', 'EVF-G4b', 'EVF-G5', 'EVF-G6', 'EVF-G7', 'EVF-G8', 'EVF-G9', 'G-CAM-1', 'G-CAM-2', 'G-CAP-1', 'G-COL-1', 'G-COMB-1', 'G-ENC-1', 'G-EVF-1', 'G-EVF-2', 'G-FPC-1', 'G-HDMI', 'G-J4-1', 'G-KEEP-1', 'G-KEEP-1/whole', 'G-KNOB-1', 'G-LENS', 'G-MP-ENC', 'G-MP-EVF', 'G-MP-FPC', 'G-MP-PACK', 'G-MP-STICK', 'G-MP-SW', 'G-MP-X1203', 'G-PANEL-1', 'G-PANEL-1/whole', 'G-PI-1', 'G-PLG-1', 'G-PT-1', 'G-RUN-1', 'G-SKIRT-1', 'G-SNAP-1', 'G-SNAP-2', 'G-SNAP-2/whole', 'G-W1', 'G-W10', 'G-W11', 'G-W12', 'G-W13', 'G-W2', 'G-W3', 'G-W4', 'G-W5', 'G-W6', 'G-W7', 'G-W8', 'G-W9'])
+EXPECTED_GATE_IDS.update(('G-EVF-3', 'G-QT-1', 'G-HDR-1'))   # r7 new gates: C1 G-EVF-3 (SPEC-C1), C2 G-QT-1 / G-HDR-1 (SPEC-C2); open, no record
 EXPECTED_PARTS = set(['base_grip', 'cap', 'eyecup', 'hood', 'knob_exp', 'knob_fps', 'lens_collar', 'panel', 'pi_keeper', 'plunger', 'stick_sleeve', 'tub'])
 EXPECTED_BASE_OUTPUTS = set(['checks.json', 'parts-manifest.json', 'print-manifest.json', 'renders/section-base-edge-x91.png', 'renders/section-evf-board-x137.png', 'renders/section-evf-board-z78.png', 'renders/section-j7-y0.png', 'renders/section-j7-z90.png', 'renders/section-pi-keeper-x80.png', 'renders/section-pi-keeper-y-20.png', 'renders/section-pi-keeper-y12.png', 'stl/base_grip.stl', 'stl/cap.stl', 'stl/eyecup.stl', 'stl/hood.stl', 'stl/knob_exp.stl', 'stl/knob_fps.stl', 'stl/lens_collar.stl', 'stl/modifiers/base_grip__mod_s_b1.stl', 'stl/modifiers/base_grip__mod_s_b2.stl', 'stl/modifiers/base_grip__mod_s_j.stl', 'stl/modifiers/base_grip__mod_tripod_nut.stl', 'stl/modifiers/panel__mod_s_b1.stl', 'stl/modifiers/panel__mod_s_b2.stl', 'stl/modifiers/panel__mod_s_r1.stl', 'stl/modifiers/panel__mod_s_r2.stl', 'stl/modifiers/tub__mod_s_b1.stl', 'stl/modifiers/tub__mod_s_b2.stl', 'stl/modifiers/tub__mod_s_c1.stl', 'stl/modifiers/tub__mod_s_c2.stl', 'stl/modifiers/tub__mod_s_c3.stl', 'stl/modifiers/tub__mod_s_j.stl', 'stl/modifiers/tub__mod_s_k1.stl', 'stl/modifiers/tub__mod_s_k2.stl', 'stl/modifiers/tub__mod_s_r1.stl', 'stl/modifiers/tub__mod_s_r2.stl', 'stl/panel.stl', 'stl/pi_keeper.stl', 'stl/plunger.stl', 'stl/stick_sleeve.stl', 'stl/tub.stl',
                             'stl/tools/collar_gauge.stl'])      # r6 (X2): the collar centring gauge
@@ -41,6 +47,7 @@ EXPECTED_COUPON_OUTPUTS = set(['stl/coupons/base_edge_base.stl', 'stl/coupons/ba
 EXPECTED_PINS = {'PyYAML': '6.0.3', 'aiohappyeyeballs': '2.7.1', 'aiohttp': '3.14.3', 'aiosignal': '1.4.0', 'attrs': '26.1.0', 'cadquery': '2.6.1', 'cadquery-ocp': '7.8.1.1.post1', 'casadi': '3.8.1', 'charset-normalizer': '3.5.1', 'contourpy': '1.4.0', 'cycler': '0.12.1', 'ezdxf': '1.4.4', 'fonttools': '4.65.0', 'frozenlist': '1.8.0', 'idna': '3.20', 'kiwisolver': '1.5.1', 'manifold3d': '3.5.4', 'matplotlib': '3.11.2', 'more-itertools': '11.1.0', 'msgpack': '1.2.2', 'multidict': '6.9.0', 'multimethod': '1.12', 'nlopt': '2.11.0', 'numpy': '2.5.3', 'packaging': '26.3', 'path': '17.1.1', 'pillow': '12.3.0', 'propcache': '0.5.4', 'pymupdf': '1.28.2', 'pyparsing': '3.3.2', 'python-dateutil': '2.9.0.post0', 'reportlab': '5.0.1', 'six': '1.17.0', 'trame': '4.0.0', 'trame-client': '4.1.0', 'trame-common': '1.2.7', 'trame-server': '4.0.0', 'trame-vtk': '2.8.13', 'typing_extensions': '4.16.0', 'typish': '1.9.3', 'vtk': '9.3.1', 'wslink': '2.5.7', 'yarl': '1.25.1'}
 EXPECTED_COMMON_HELPERS = set(['box_solid', 'cyl_solid(tube)', 'pt_boss', 'counterbore', 'snap_hook(hood hk1)', 'snap_strain', 'keyhole_tongue', 'keyhole_slot', 'dovetail(rail)', 'dovetail(groove)', 'vent_slots(out_band)', 'vent_slots(inlet_roof)', 'engrave(all items)', 'teardrop', 'bed_chamfer', 'safe_fillet(bad r falls back)', 'safe_fillet(ok)', 'to_print_pose(-Y)'])
 EXPECTED_STATES = dict(slicer_review=12, coupon_validation=10, measured_fit=17, assembly_operation=26)
+EXPECTED_STATES['assembly_operation'] += 3   # r7: the new assembly gates G-EVF-3, G-QT-1, G-HDR-1 (evidence/assembly/)
 RECEIPT_KEYS = {'revision', 'sources', 'files', 'hardware_gates', 'status_states', 'summary', 'stubs', 'cad_release_candidate', 'blocking', 'unclassified_thin_spots', 'argv', 'carried_files'}
 
 
@@ -180,7 +187,8 @@ def _audit(project, out, require_step=False, final_release=False, alternate_out=
         if not condition:
             failures.append(message)
 
-    cloud = 'r5-cloud-polish-20261007' in receipt['revision']
+    # r7: the release label names its parent; r6-20261008 descends from r5-cloud-polish-20261007 (same font sources)
+    cloud = any(tag in receipt['revision'] for tag in ('r5-cloud-polish-20261007', 'r6-20261008'))
     exact_coverage(receipt['sources'], EXPECTED_SOURCES | (FONT_SOURCES if cloud else set()), 'source set', failures)
     exact_coverage(receipt['hardware_gates']['source_docs'], EXPECTED_GATE_DOCS, 'gate-document set', failures)
     exact_coverage(receipt['hardware_gates']['gates'], EXPECTED_GATE_IDS, 'physical-gate ID set', failures)
@@ -250,7 +258,7 @@ def _audit(project, out, require_step=False, final_release=False, alternate_out=
     gates = receipt['hardware_gates']['gates']
     gate_counts = dict(total=len(gates), open=sum(v.startswith('open') for v in gates.values()),
                        withdrawn=sum(v.startswith('withdrawn') for v in gates.values()))
-    require(gate_counts == dict(total=55, open=53, withdrawn=2), 'Physical gate count/state unexpectedly changed')
+    require(gate_counts == dict(total=55 + 3, open=53 + 3, withdrawn=2), 'Physical gate count/state unexpectedly changed')   # r7: + G-EVF-3, G-QT-1, G-HDR-1
     require({key for key, value in gates.items() if value.startswith('withdrawn')} == {'G-SKIRT-1', 'G-SNAP-1'},
             'Unexpected withdrawn physical gate')
     for name, state in receipt['status_states'].items():

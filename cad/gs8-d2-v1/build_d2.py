@@ -1169,6 +1169,14 @@ def apply_gate_outcomes(hg, status_states):
 # ------------------------------------------------------------------------------------------- main
 ROW_STATUSES = ('pass', 'fail', 'stub', 'info')
 INFO_CATEGORIES = ('mass_com',)   # r6 (L9): report-only summary categories (status 'info', never 'pass')
+# r7 (PLAN X-18): new r7 categories are info_neutral (their 'info' rows neither pass nor block; >= 1 pass row needed).
+#     Each cluster adds its own line below.
+INFO_NEUTRAL_R7 = set()
+INFO_NEUTRAL_R7.add('mate_paths')   # r7 C1 (SPEC-C1 4.2)
+INFO_NEUTRAL_R7.update(('mate_reach', 'cable_stow', 'header_housings'))   # r7 C2 (SPEC-C2 3.3): info rows like cable_routes
+INFO_NEUTRAL_R7.add('handling')     # r7 C5 (SPEC-C5 3.2, P5-4): its rest_forbidden rows are 'info'
+INFO_NEUTRAL_R7.add('roll_catch')   # r7 C4 (SPEC-C4 4.1, P4-6): its timing row is 'info'
+INFO_NEUTRAL_R7.add('lead_access')  # r7 C3 (SPEC-C3 P3-5): side-gap info fields
 
 
 def summarize(name, rows, info_neutral=False):
@@ -1536,6 +1544,12 @@ def run_full(args):
     R['keepouts'] = CK.check_keepouts(L, rows)
     lap('keepouts', t0)
     R['cable_routes'] = CK.check_cable_routes(L)       # r4: route continuity, end reach, length estimate
+    R['lead_access'] = CK.check_lead_access(L, rows)   # r7 C3 (BX-3, BX-11, BX-16): pigtail reach/store, lanes, window
+    t0 = time.time()                                   # r7 C2 (BX-2, BX-10): mating poses, lead stow, header housings
+    R['mate_reach'] = CK.check_mate_reach(L, rows)
+    R['cable_stow'] = CK.check_cable_stow(L)
+    R['header_housings'] = CK.check_header_housings(L, rows)
+    lap('mate reach + cable stow + header housings', t0)
     t0 = time.time()
     R['thin_wall'] = []
     for pid, r in prow.items():
@@ -1572,8 +1586,15 @@ def run_full(args):
     R['sweeps'] = [] if args.no_sweeps else CK.check_sweeps(L, rows, args.sweep_step)
     lap('sweeps', t0)
     t0 = time.time()
+    R['mate_paths'] = CK.check_mate_paths(L, rows, sweep_rows=None if args.no_sweeps else R['sweeps'])   # r7 C1
+    lap('mate paths', t0)
+    t0 = time.time()
+    R['handling'] = CK.check_handling(L, rows)   # r7 C5 (BX-5, BX-13): press fits and rest poses
+    lap('handling', t0)
+    t0 = time.time()
     collars = lens_collars(rows)     # r5: each built lens's own collar (mass_com, lens_support, lens_clamp)
     R['j7_float'] = CK.check_j7_float(L, rows)                          # r6 (L2): s_range every 0.25 + s_nom
+    R['roll_catch'] = CK.check_roll_catch(L, rows)                      # r7 C4 (BX-4): lens thread on the tab catch
     R['lens_support'] = CK.check_lens_support(L, rows, collars=collars,
                                               measured={'G-LENS': g_lens['outcome'] == 'pass'},    # r6 (L6)
                                               require_collars=set(L.LENSES))                         # r6 (L3)
@@ -1617,8 +1638,13 @@ def run_full(args):
              'driver', 'engrave_groove', 'boss_geometry', 'inserts', 'j7_float', 'lens_support', 'lens_clamp',
              'sweeps', 'removals', 'service_driver', 'release_access', 'stack_retention', 'layout_self_check']
     # r5: lens_support / lens_clamp WARNs are 'info' rows (neither pass nor block; the category needs >= 1 pass)
+    order.insert(order.index('sweeps') + 1, 'mate_paths')   # r7 C1 (SPEC-C1 4.2)
+    order[order.index('cable_routes') + 1:order.index('cable_routes') + 1] = ['mate_reach', 'cable_stow', 'header_housings']   # r7 C2
+    order.insert(order.index('sweeps') + 1, 'handling')     # r7 C5 (SPEC-C5 3.2): after sweeps
+    order.insert(order.index('j7_float') + 1, 'roll_catch')   # r7 C4 (SPEC-C4 4.1)
+    order.insert(order.index('cable_routes') + 1, 'lead_access')   # r7 C3 (SPEC-C3 3.2)
     summ = [summarize(k, R[k], info_neutral=k in ('critical_features', 'removals', 'cable_routes', 'lens_support',
-                                                 'lens_clamp')) for k in order]
+                                                 'lens_clamp') or k in INFO_NEUTRAL_R7) for k in order]
     warnings = []
     for k in ('lens_support', 'lens_clamp'):
         w = [x['warn'] for x in R[k] if x.get('warn')]

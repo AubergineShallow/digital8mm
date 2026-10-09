@@ -35,7 +35,9 @@ PRINT = {
                     notes='ASA black (the hood spool), 100 % infill, no top pattern on the finger face. Paint-fill '
                           'the power symbol white.'),
     'knob_exp': dict(face_down=_FD['knob_exp'], supports='none (top face on the bed, knurl vertical, recess open up)',
-                     notes='ASA black, 100 %. Press onto the D shaft; the shaft end sits 0.2 below the top face.'),
+                     notes='ASA black, 100 %. Press onto the D shaft; the shaft end sits 0.2 below the top face. '
+                           'Pressed on at bench step 2 with the encoder board backed by a thumb (ASSEMBLY step 2); '
+                           'never pressed on in the closed body.'),   # r7 C5 (BX-5): text only, STL unchanged
     'knob_fps': dict(face_down=_FD['knob_fps'], supports='none (top face on the bed, knurl vertical, recess open up)',
                      notes='ASA black, 100 %. Paint-fill the index. The index is on the D-flat side.'),
     'eyecup': dict(face_down=_FD['eyecup'], supports='none (sleeve end on the bed; 15 deg flare, 45 deg inner lip)',

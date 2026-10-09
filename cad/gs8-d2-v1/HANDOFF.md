@@ -1,6 +1,105 @@
+# GS8 D2 handoff, r7 (2026-10-09): blocker review 2026-10-08 rectified in CAD (BX-1 BLOCKER and the four MAJORs)
+
+Read this section first; the r6 entry below it and everything after are history. The user asked: "Rectify these
+blockers. Cease work by 0730H tmr." The review is `guide/BLOCKERS-2026-10-08.md` (BX-1..BX-17); its r7 status lines
+are at its end. The fix specs are `r7-blockers/SPEC-C1.md`..`SPEC-C6.md` (each has a fix-up correction note at the
+top), the integration plan is `r7-blockers/PLAN.md` and the work log with every real number is
+`r7-blockers/IMPL-LOG.md`. Revision label: `GS8 D2 r7-20261009 (r6-20261008 + blocker review 2026-10-08 fixes)`.
+Working copy: the `digital8mm` repository; nothing committed or pushed. As before, nothing was printed, sliced, bought,
+measured, assembled or powered.
+
+**Release state:** Kowa receipt `out/build-receipt.json`, built **2026-10-09 05:56:23 +0800** (`--skip-renders --sweep-step 1.0`, 338.9 s): **35 categories = 34 pass + `mass_com` report-only (info); 990 rows = 960 pass + 30 info + 0 fail**, no stubs, `cad_release_candidate` true; checks.json `2d6f68b2...`. Fujinon `out/_fujinon-cloud-polish-20261007/` (05:50:40, 348.8 s): 35 categories, 987 rows = 957 pass + 30 info + 0 fail, candidate true; its checks are carried as `out/checks-fujinon-sweep1mm.json` and match the release sources (`carried_checks`). `audit_cloud_release.py --final-release`: pass, sources 20/20, outputs 86/86, gate docs 4/4, 35 categories, 58 gates (56 open, 2 withdrawn) (`validation/rebuilt-cad-integrity.json`). `make_tables --check`: stale none, lint 0. New categories (7): `mate_paths`, `mate_reach`, `cable_stow`, `header_housings`, `lead_access`, `handling`, `roll_catch`. STLs changed against r6: tub (C3 floor hole), hood (C4 tab catch) and the coupon cut from the tub (`coupon-pi-keeper-tub`); every other STL is byte-identical, including base_grip, panel, knobs, plunger and the collar gauge. Balance: Kowa 896.2 g, +1.55 mm; Fujinon 782.8 g, -9.65 mm. Printed set 298.1 g / 16.0 h (estimates). Every part's `print_release` is still blocked: no bench record exists yet.
+
+**Release run (05:01-05:56 MPST):** the part-done BX-15 hunks (never landed; one failing test case) were rolled back first, per PLAN s5 S7. Attempt 1 failed only `make_tables --check`: the count lint read the Pi model number in the generated step-1 phrase "dry-fit the Pi ... on the standoffs" as a standoff count; STEPS[1] now drops the model number (text only). Attempt 2 failed only the audit's registrations: the three new gates G-EVF-3, G-QT-1 and G-HDR-1 (and their assembly-evidence items, 26 -> 29) were not registered, and its lineage test looked for `r5-cloud-polish-20261007` in the label. `audit_cloud_release.py` now registers them and accepts the `r6-20261008` parent tag; no rule was removed. Attempt 3 (Fujinon, Kowa, tables, check, audit) passed.
+
+**Tests (after the release build, 05:56-06:09, all through `run_locked.py`; `validation/README.md`):**
+`test_r3_regressions.py` 82/82; the focused unittest list 73 OK (4 POSIX-only skips); `test_collar.py` both lenses
+PASS (118.8 s); r7 suites 94/94: `test_r7_c1` 14, `test_r7_c2_mate_reach` 13, `test_r7_c4` 11 (cases 1-10 and 13),
+`test_r7_c5_handling` 19, `test_r7_lead_access` 21, `test_r7_fixup` 9, `test_r7_integration` 7 (the category-count
+case now runs against the r7 checks.json); `test_hood_panel.py` hood + panel PASS.
+
+**What r7 changed (each item: what was wrong, the fix, the computed proof, the physical gate):**
+- **BX-1 BLOCKER, C-16, BX-7, BX-9 (C1, EVF slot).** The r6 order mated the EVF HDMI outside and then slid the pair
+  in, so the plug crossed the tub (60-66 mm3). Now the pair slides in unplugged (foam pad stuck to the OLED back, BX-7),
+  the 5 V PH junction is mated 60 mm out and tucked with tweezers (BX-9), and the HDMI is plugged in place: push from
+  the stick-guide top or straight up from the open well (no lever; tool 10 is only an upright push stick). Service
+  (C-16) unplugs the HDMI in place first with smooth-jaw pliers (tool 15) coming up from the well. New shared
+  machinery: PLUGS (20) with carried-box sweeps/removals, ACCESS corridors (9), new category `mate_paths`
+  (plug_in, access, coverage incl. the MATE_POSES rule); `evf_restraint` support_span rows. Gate G-EVF-3.
+- **BX-5, BX-13, BX-14 (C5, knobs and handling).** Knobs are pressed on at bench step 2 with a thumb behind the board on
+  a 0.2 mm paper shim and ride in with the panel; the 18/24 shaft is cut off the panel (P - 6.9, final 6.7-7.1).
+  Panel screws are driven with the camera on its hood roof at the bench edge (overhang -Y 20 mm); rests are only the
+  hood roof at the bench edge (step 8 and service) or the right side (right_down_8/10); base-down is hand-held and
+  the camera never stands on its grip end (tips at about 6 deg). New category `handling` (press_cover, press_fit, snap_basis, rest_pose with a
+  driver-plane rule and a static-stability rule >= 10 deg, rest_cover). Gates G-KNOB-1, G-ENC-1, G-MP-ENC, G-MP-SW.
+- **BX-2, BX-10 (C2, encoder lead and header housings).** The QT lead is 250 mm (240-270; Adafruit 4397 spliced to
+  Pololu 5521, splice window 91-115 mm in the straight cross run) and is plugged with the panel 60 mm off: a helper
+  holds the body, the panel is propped on a block about 110 mm tall, the PH junction is mated first with both hands,
+  then the QT by a fingernail push; the spare folds into `ko_lead_stow` at +30 mm. Single 1-pin header housings
+  (1x2 only on 33/34, 37/39), seated with open tweezer tips. New categories `mate_reach` (hand and tail envelopes per
+  MATE_POSES row), `cable_stow`, `header_housings` (gaps cooler 0.68, kit 0.75, tub 1.13, hood 2.27; completeness
+  rows); `cable_routes` plug-point rule. Gates MP-QT (filed as the QT lead line of MP-ENC), G-QT-1, G-HDR-1.
+- **BX-3, BX-11, BX-16 (C3, battery pigtail and run lead).** The pigtail is cut to L_cut = 200 mm + the G-W2
+  pads-to-W length (stop if pads-to-W > 25 mm: G-W5 drop 0.15 V), formed into a U at the W mark, taped under the
+  X1203 and strain-relieved with neutral-cure RTV (no standoff tie); the XT30 comes 28.4 mm out of the mouth (>= 15).
+  The junction is re-posed flat on the pack top under the run button, female end to the rear, fuse beside it (exits
+  8.0/8.0 mm vs 7.2 needed). Step 10: camera on its right side, pack in the palm. The run lead is threaded up the base
+  passage and the rear of the floor hole (now x -41.5..-28, window 3.5 >= 3.2) before the button and the tub. New
+  category `lead_access` (mouth, range, store with exits, lanes, separation, run window, wrap clearance,
+  pigtail_drop); tub floor hole changed (base_grip byte-identical). Gates G-W2 (d_board, stop branch), G-MP-PACK
+  (rigid exit <= 0.8 mm, fold), MP-RUN.
+- **BX-4 (C4 core, lens torque).** The hood roll fin is replaced by a two-tine tab catch, so the camera's metal lock
+  tab takes the lens-thread torque and nobody holds the camera. Step 8 turns the camera back off the tine before s_c4
+  (lint), and the step-10 level check is done every time. New category `roll_catch` (first contact 3.258 deg centred,
+  1.758..4.773; PCB/cover >= 10.258, margin >= 5.485; window 0.679/0.129; axial 1.40; tine 6.8 MPa est; lens_hold +
+  text lints over STEPS, ASSEMBLY and the guide sources). Gates G-CAM-1 (lock-screw head side), G-CAM-2.
+- **Verification and fix-up.** Five read-only verifiers (one per cluster) planted the r6 faults back and found 10 major
+  physical-procedure defects, all closed by the fix-up slot (see SPEC-Cn correction notes and IMPL-LOG 03:34-04:47).
+- **Documents:** ASSEMBLY (tools 15-17, checks rows, handling, service items), MEASURED-PARTS, SPEC gate list, WIRING
+  (W-QT, pigtail, notes), make_tables/make_bom data, guide_steps (pages, GATES, TIPS; ISSUES now empty), BLOCKERS
+  status lines. Generated blocks were regenerated by the release (make_tables, make_bom).
+
+**Not fixed this round (open, spec ready):**
+- C6: BX-6 (plunger capture, SPEC-C6 6a), BX-12 (driver family, 6b), BX-17 (hood release comb, 6c). Interim guide tips
+  stay (pages 3b, 5a, B0).
+- BX-15 (SPEC-C4 5b, collar-gauge thumb dimple + held-hand driver envelopes): a part-done version was in the tree,
+  never landed (its test case failed); the release rolled it back, so the collar gauge is the r6 part. Interim tip on
+  page 7a.
+- BX-8 (SPEC-C4 5c, FPC fold card): not started. Interim tip on page 7b.
+- Computed minors left open by the fix-up: roll_catch lens-out lateral offset should come from the counterbore play;
+  no rule ties a recorded G-CAM-1 pass to `HOOD['tab_catch']` head_side; `cable_stow` reports 'info' (not fail) for a
+  spare with no sized home on cables without a stow; no C-16 `unplug=[]` regression plant.
+- G-MP-PACK: the rigid solder-cup/heat-shrink length beyond each XT30 housing must be measured (allowance 0.8 mm);
+  if longer, re-pose and rerun lead_access.
+- G-W2/G-W5: if the X1203 pads are more than 25 mm of string from W, do not cut the pigtail (decision needed).
+- Hand-written SPEC.md s5 "Assembly order" table still shows pre-r7 wording (HDMI mated outside, knobs at step 9,
+  level check only if off); layout.STEPS and the generated ASSEMBLY step blocks are correct.
+- M1 (collar clamp spring/thermal term) from r6, every physical gate, G-W12 power, the airflow study, plan B.
+- Guide: re-rendered after the tests (`guide/build_guide.py --remesh`, 06:12, 43 pages, 103.6 s; footer GS8 D2
+  r7-20261009) into the local `guide/out/` only; the published guide artifact was not republished and still shows r6
+  (r6 outputs kept in the release scratch folder). Stale text left in the guide's picture code (presentation only,
+  not changed after the freeze): `guide/diagrams.py` lines 82-84 (page 1b picture still says "tie to a standoff",
+  which contradicts the page's own caution and the BX-3 fix) and lines 212-225 (page 6 EVF-mate note "All three
+  outside the body"); `guide/build_guide.py` line 832 service label "EVF out (BX-1)"; page 1b item 3 still marks W
+  by edge measurement, while STEPS[1] now finds the edge by dry-fitting the Pi. Fix these strings and re-render.
+
+**User decisions (PLAN s10; defaults applied, nothing bought):**
+1. U-1 (C1): smooth-jaw long-nose pliers are tool 15 (hand tool, no BOM row). Default: included.
+2. U-2 (C2): QT lead = Adafruit 4397 spliced to Pololu #5521 (about USD 2 extra; BOM D2-24/D2-24B). Option: an
+   unverified one-piece JST-SH to 4 x Dupont lead, 240-270 mm, after the MP-QT buy-check.
+3. U-3 (C4): keep the 200 mm 22-to-15 FPC (BX-8 open; G-MP-FPC confirms). Option: a 100-150 mm FPC.
+4. U-4 (C6): only if G-SNAP-2/whole fails, approve a hood strain stop behind hk1/hk2. Nothing to decide now.
+5. U-5 (C1): bench-mating the EVF HDMI (tub cut, panel heel, right-wall-down rule) is not recommended; reconsider only
+   if G-EVF-3 fails on the first print.
+6. U-6: C6 (BX-6, BX-12, BX-17), BX-8 and BX-15 stay open with interim wording and ready specs; or allow more time.
+
+**What the user must do first (bench, in this order):** as r6 (coupons; PRINT-GUIDE s7 order 2 measurements starting
+with B0/MP-CAM, now including the G-CAM-1 lock-screw head side and the MP-QT/MP-HDMI/MP-PACK/MP-X1203 additions; update
+`layout.py`; rerun the release sequence), then fix M1 before the collar prints. Before cutting the pigtail: G-W2 pads-to-W.
+
 # GS8 D2 handoff, r6 (2026-10-08): print order and orientation settled, audit 2026-10-06 minor findings fixed
 
-Read this section first; the sections below it are history (cloud polish, then r5 and earlier). The user asked:
+Superseded by the r7 entry above; kept as history. The sections below it are older history (cloud polish, then r5 and earlier). The user asked:
 "Settle the print order and orientation. Fix the minor findings as well." The point-by-point answer to the audit is
 `audit/d2-readiness-2026-10-06/RESPONSE.md`. Revision label: `GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + ...)`.
 Working copy: the `digital8mm` repository. As before, nothing was printed, sliced, bought, measured, assembled or

@@ -35,30 +35,30 @@
    "model": "three bolted feet only, LR inactive; simultaneous axial and all-direction bending; factor 2.0 is a conservative screening assumption, not measured capacity"
   }
  },
- "revision": "GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, minor findings)",
+ "revision": "GS8 D2 r7-20261009 (r6-20261008 + blocker review 2026-10-08 fixes)",
  "variant": null,
- "built_at": "2026-10-08 16:05:33 +0800",
+ "built_at": "2026-10-09 05:56:23 +0800",
  "argv": [
   "--skip-renders",
   "--sweep-step",
   "1.0"
  ],
  "sources": {
-  "layout.py": "3a64c39944b959010a81046a942731a6c3813005e32091e4676a43e46a796f4e",
+  "layout.py": "9dc6d1ef88065f2bdcd7f73ecad1ebed53089f86f8a1c02559876881ff9b089b",
   "d2_common.py": "69727dbd58cf0c0fbce48a0b44083a7ba4ba386b025a1dc132b1d4d431cf4a8e",
-  "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
-  "checks.py": "3dcda60e6a0303a88290b224634203b4511f8e4cda846b7a01ad2a3ca74725bf",
-  "build_d2.py": "bfb40ffe76253305e7d40a82b84ad3b197d792fd0897e1ffe09869bc59e43203",
+  "cots.py": "28e5d0b1141cf957930d28042230422da6936ba4ef49238562a244e3a0c49b50",
+  "checks.py": "04fb59b338bf755fbd820e0788b9c04b8e640d2e60fc140332cea13952b1cfbb",
+  "build_d2.py": "dcc4e9f58045aa160e75d65aac1cfd2e18ae945d2d8f08573d997284a2a5bb56",
   "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
-  "make_tables.py": "9b4b075e5395ffc8b692ffd69651aa909314cd592da3bbb61bd4590f4580bd1b",
-  "SPEC.md": "1e4f643e062c81263ffde801e05e2be877a7c1273608ae3a4160583ce7acd369",
+  "make_tables.py": "69be676b422b7ce658e7d632a1b925d1fd7923a092622452dfd3840dfaa1d48c",
+  "SPEC.md": "bc0466a341741fc37145f0c9cf64053334e4e0de7395ffc413fad09676fe1eb2",
   "FASTENER-POLICY.md": "407d67703fd2c7305b5e742d5ad844cce406e73e3382d0955572eb3e1db96163",
   "printed_collar.py": "fbb8a356db82cd10a496b4864baa95930374ffc519578e373f38e4019af7afe0",
-  "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
-  "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+  "printed_grip.py": "83ae0974d1a31c71ddfc6b782bf19f3baa2c4a6b5c8636099f5b774dea59ddfe",
+  "printed_hood.py": "4964680f210418fdc19b08ae2a8f90e99013c335c5cd5344e69b15634ed9463d",
   "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
   "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
-  "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+  "printed_small.py": "0a00bd199a2e9955c76992edff427500180f7122ab91388f7fcb62b448df69e3",
   "printed_tub.py": "c14268a803dbc5463f841cfd0e5df928ee844bc4f7a1b5e90590247da305963e",
   "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
   "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
@@ -73,16 +73,23 @@
   "test_common.py": "7ec7df2f34de0a9699374d4abe252cdc338d64744c5fe974d7e0b3c912f3a333",
   "test_datum_inputs.py": "09f056f60c3f7085d9eaa260427f2844c3f823b0c03e61f266a9e0abac8009dd",
   "test_grip_small.py": "7e078d5c68bd873a52300875cdcd3cbf01d1e09aa48c69fa1add7322db883ca6",
-  "test_hood_panel.py": "6159a79c5c1d6321536238b8e4603133fc584779dfd8104800853a01ba75d6b8",
+  "test_hood_panel.py": "6068824fa77c05719454ab4b04793b284ff31ad4ef0a01231951d8741ec58c44",
   "test_keeper.py": "e76b02790c3d219183e92783ddf2d62ec411bdc4b7f1e208571f48a1addceeab",
   "test_mechanical_refinements.py": "3cb18f5e74d86770c11a2d2cd2b241ba29b19d991a37cacf258ba3bc8b6a19e8",
   "test_panel_refinements.py": "ae9f61e97fdff79f641a26f17d3a2dadcf68dedcde70edebfe628910df3fcca5",
   "test_print_stock_exports.py": "568f179e2c4cf3750f20b135229305ac09e0ad05a7ac5da3f6070e014e5f973e",
   "test_r3_regressions.py": "0f48bc4b9cb54eb7a7811f673734e7d4fc3743c2bec9839a5ce024585a93535d",
+  "test_r7_c1.py": "cf0ec5fd6ffb12f8d9211162f329919ffc88ec3c20feec37192a732ae375efa0",
+  "test_r7_c2_mate_reach.py": "8e413e115d9474ff21fcb74263d56f9dfb87c25ee8ae1e755eef37b7bebac178",
+  "test_r7_c4.py": "05e9267850551e6aa3db9fe0d74778b0a76eec3593d2086378ce38e8e2dfcfb3",
+  "test_r7_c5_handling.py": "59258fd8b1c5ae46ed57f15d4a9945f080a542f62586a101ce2638d9aa1245c2",
+  "test_r7_fixup.py": "d24eddecf29ecd098abae758d623eb97395f652cf7587a1e649da227495b3ee7",
+  "test_r7_integration.py": "f3496e8f0856247bc6ca9f729f1bd5f16cf6b836668a3c912dc92c0b0640775d",
+  "test_r7_lead_access.py": "a5b53b29081e952860b8adb77c322a72f6136babd4e134700ba7c7e7dcf02b57",
   "test_release_gates.py": "986679f603c3f1d0c93d0cb469437d234bf6c677bb122693db18271645919c3d",
   "test_run_locked.py": "e3c527ea842ad31e6c90c09b4de86ed870b73910122822c974ad78903b75ba12",
   "test_tub.py": "250957c3c4e643074be5e63eeb488ba981452f99b0975c2ba65016f4a333edec",
-  "audit_cloud_release.py": "9c3452a1575bfde65c088a01c8ef6ca236069abd59b64f639c98711fafa7cca2",
+  "audit_cloud_release.py": "6fe4bd768cb61dde8983ee7c73b19104d280ec28bb0a1dbfef7c9e268f671b50",
   "evidence/README.md": "2abff3edd6120773d2925b842d15b77b1ffbfd6c02a6cfcb3c467ad785790591"
  },
  "modules": {
@@ -91,21 +98,21 @@
    "parts": [
     "tub"
    ],
-   "seconds": 2.68
+   "seconds": 1.5
   },
   "printed_hood.py": {
    "status": "built",
    "parts": [
     "hood"
    ],
-   "seconds": 2.92
+   "seconds": 1.25
   },
   "printed_panel.py": {
    "status": "built",
    "parts": [
     "panel"
    ],
-   "seconds": 119.38
+   "seconds": 62.03
   },
   "printed_grip.py": {
    "status": "built",
@@ -113,7 +120,7 @@
     "base_grip",
     "cap"
    ],
-   "seconds": 2.62
+   "seconds": 1.1
   },
   "printed_small.py": {
    "status": "built",
@@ -124,21 +131,21 @@
     "eyecup",
     "stick_sleeve"
    ],
-   "seconds": 2.3
+   "seconds": 1.01
   },
   "printed_keeper.py": {
    "status": "built",
    "parts": [
     "pi_keeper"
    ],
-   "seconds": 0.23
+   "seconds": 0.11
   },
   "printed_collar.py": {
    "status": "built",
    "parts": [
     "lens_collar"
    ],
-   "seconds": 1.1
+   "seconds": 0.37
   }
  },
  "stubs": [],
@@ -190,8 +197,8 @@
   },
   {
    "check": "keepouts",
-   "n": 97,
-   "passed": 97,
+   "n": 109,
+   "passed": 109,
    "failed": 0,
    "stub": 0,
    "info": 0,
@@ -204,6 +211,42 @@
    "failed": 0,
    "stub": 0,
    "info": 2,
+   "status": "pass"
+  },
+  {
+   "check": "lead_access",
+   "n": 9,
+   "passed": 9,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "mate_reach",
+   "n": 6,
+   "passed": 5,
+   "failed": 0,
+   "stub": 0,
+   "info": 1,
+   "status": "pass"
+  },
+  {
+   "check": "cable_stow",
+   "n": 7,
+   "passed": 1,
+   "failed": 0,
+   "stub": 0,
+   "info": 6,
+   "status": "pass"
+  },
+  {
+   "check": "header_housings",
+   "n": 10,
+   "passed": 10,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
    "status": "pass"
   },
   {
@@ -254,8 +297,8 @@
   },
   {
    "check": "critical_features",
-   "n": 140,
-   "passed": 130,
+   "n": 141,
+   "passed": 131,
    "failed": 0,
    "stub": 0,
    "info": 10,
@@ -263,8 +306,8 @@
   },
   {
    "check": "evf_restraint",
-   "n": 6,
-   "passed": 6,
+   "n": 8,
+   "passed": 8,
    "failed": 0,
    "stub": 0,
    "info": 0,
@@ -308,11 +351,20 @@
   },
   {
    "check": "j7_float",
-   "n": 49,
-   "passed": 49,
+   "n": 50,
+   "passed": 50,
    "failed": 0,
    "stub": 0,
    "info": 0,
+   "status": "pass"
+  },
+  {
+   "check": "roll_catch",
+   "n": 59,
+   "passed": 58,
+   "failed": 0,
+   "stub": 0,
+   "info": 1,
    "status": "pass"
   },
   {
@@ -353,9 +405,27 @@
    "status": "pass"
   },
   {
+   "check": "handling",
+   "n": 17,
+   "passed": 14,
+   "failed": 0,
+   "stub": 0,
+   "info": 3,
+   "status": "pass"
+  },
+  {
+   "check": "mate_paths",
+   "n": 13,
+   "passed": 13,
+   "failed": 0,
+   "stub": 0,
+   "info": 0,
+   "status": "pass"
+  },
+  {
    "check": "removals",
-   "n": 12,
-   "passed": 12,
+   "n": 13,
+   "passed": 13,
    "failed": 0,
    "stub": 0,
    "info": 0,
@@ -406,13 +476,13 @@
  "status_states": {
   "cad_checks": {
    "status": "computed: pass",
-   "checks_passed": 27,
+   "checks_passed": 34,
    "checks_not_passed": 0,
    "checks_info": 1,
    "failed": [],
-   "rows_passed": 833,
+   "rows_passed": 960,
    "rows_failed": 0,
-   "checks_json_sha256": "c215f4c7b1bb3735bf046e6459caee04106aeda5b32e284a2473945f08fcd489",
+   "checks_json_sha256": "2d6f68b24619f4e4db39e22a4c72f4a15f322188e7dbefe643c2c9657e7b7c8b",
    "note": "CAD geometry checks on built solids and purchased-part proxies only"
   },
   "slicer_review": {
@@ -532,7 +602,7 @@
   "assembly_operation": {
    "evidence_dir": "evidence/assembly/",
    "needed": "dry assembly, non-destructive service cycles and a powered recording test (ASSEMBLY.md, WIRING.md bench gates)",
-   "items_required": 26,
+   "items_required": 29,
    "items_complete": 0,
    "items_pass": 0,
    "outcomes": {
@@ -541,7 +611,7 @@
     "conflict": 0,
     "rejected": 0,
     "stale": 0,
-    "not run": 26
+    "not run": 29
    },
    "failed": [],
    "conflict": [],
@@ -557,9 +627,12 @@
     "EVF-G9",
     "G-CAM-2",
     "G-EVF-1",
+    "G-EVF-3",
     "G-FPC-1",
+    "G-HDR-1",
     "G-KEEP-1/whole",
     "G-PANEL-1/whole",
+    "G-QT-1",
     "G-SNAP-2/whole",
     "G-W1",
     "G-W10",
@@ -796,7 +869,7 @@
  },
  "carried_checks": {
   "checks-fujinon-sweep1mm.json": {
-   "sha256": "af45262a1fb416e23a98ec0cc3c3217e5b844667db182c6a2047933cf7591839",
+   "sha256": "e9545a1bbec53c0fee550325a18b077c0ed10ea4deee6c1585194631c79f26a3",
    "lens": "fujinon_hf6xa",
    "sources_recorded": true,
    "sources_match": true
@@ -810,29 +883,29 @@
    "M3": 4,
    "PT": 7
   },
-  "printed_mass_est_g": 297.5,
+  "printed_mass_est_g": 298.1,
   "print_time_est_h": 16.0,
   "estimates_note": "mass = solid volume x density x infill factor; print time = volume / 6.0 mm3/s x 1.15 + 0.1 h per part. Estimates, NOT slicer results (slicer_review: see status_states).",
   "mass_com": {
    "kowa_lm6hc": {
-    "total_g": 895.3,
+    "total_g": 896.2,
     "com": [
-     -45.51,
+     -45.45,
      0.84,
-     26.92
+     26.77
     ],
-    "ahead_of_grip_axis": 1.49,
-    "above_grip_top": 34.92
+    "ahead_of_grip_axis": 1.55,
+    "above_grip_top": 34.77
    },
    "fujinon_hf6xa": {
-    "total_g": 781.9,
+    "total_g": 782.8,
     "com": [
-     -56.74,
+     -56.65,
      0.97,
-     22.13
+     21.96
     ],
-    "ahead_of_grip_axis": -9.74,
-    "above_grip_top": 30.13
+    "ahead_of_grip_axis": -9.65,
+    "above_grip_top": 29.96
    }
   }
  },
@@ -847,7 +920,7 @@
  "j7_float_min": {
   "body@0.0": {
    "min_overall": 0.4,
-   "min_lateral": 0.8,
+   "min_lateral": 1.2,
    "min_axial": 0.4
   },
   "bfar@0.0": {
@@ -857,7 +930,7 @@
   },
   "body@0.25": {
    "min_overall": 0.65,
-   "min_lateral": 0.8,
+   "min_lateral": 1.2,
    "min_axial": 0.65
   },
   "bfar@0.25": {
@@ -866,8 +939,8 @@
    "min_axial": 0.5
   },
   "body@0.5": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 0.9,
+   "min_lateral": 1.2,
    "min_axial": 0.9
   },
   "bfar@0.5": {
@@ -876,8 +949,8 @@
    "min_axial": 0.5
   },
   "body@0.75": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.15,
+   "min_lateral": 1.2,
    "min_axial": 1.15
   },
   "bfar@0.75": {
@@ -886,8 +959,8 @@
    "min_axial": 0.5
   },
   "body@1.0": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.2,
+   "min_lateral": 1.2,
    "min_axial": 1.4
   },
   "bfar@1.0": {
@@ -896,8 +969,8 @@
    "min_axial": 0.5
   },
   "body@1.25": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.2,
+   "min_lateral": 1.2,
    "min_axial": 1.65
   },
   "bfar@1.25": {
@@ -906,8 +979,8 @@
    "min_axial": 0.5
   },
   "body@1.5": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.2,
+   "min_lateral": 1.2,
    "min_axial": 1.9
   },
   "bfar@1.5": {
@@ -916,8 +989,8 @@
    "min_axial": 0.5
   },
   "body@1.75": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.2,
+   "min_lateral": 1.2,
    "min_axial": 1.75
   },
   "bfar@1.75": {
@@ -926,8 +999,8 @@
    "min_axial": 0.5
   },
   "body@2.0": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.2,
+   "min_lateral": 1.2,
    "min_axial": 1.5
   },
   "bfar@2.0": {
@@ -936,8 +1009,8 @@
    "min_axial": 0.5
   },
   "body@2.25": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.2,
+   "min_lateral": 1.2,
    "min_axial": 1.25
   },
   "bfar@2.25": {
@@ -946,8 +1019,8 @@
    "min_axial": 0.5
   },
   "body@2.5": {
-   "min_overall": 0.8,
-   "min_lateral": 0.8,
+   "min_overall": 1.0,
+   "min_lateral": 1.2,
    "min_axial": 1.0
   },
   "bfar@2.5": {
@@ -957,7 +1030,7 @@
   },
   "body@2.75": {
    "min_overall": 0.75,
-   "min_lateral": 0.8,
+   "min_lateral": 1.2,
    "min_axial": 0.75
   },
   "bfar@2.75": {
@@ -967,7 +1040,7 @@
   },
   "body@3.0": {
    "min_overall": 0.5,
-   "min_lateral": 0.8,
+   "min_lateral": 1.2,
    "min_axial": 0.5
   },
   "bfar@3.0": {
@@ -982,33 +1055,33 @@
   }
  },
  "files": {
-  "step/gs8-d2-assembly.step": "15fd45886dab8a266b0a1f43ebfd6778472dbbd04f759653819f43ddfb0ee22a",
-  "step/parts/base_grip.step": "6ef0606c002d7cc72cc8e80fef94f31c39ba7a4653a9d9c82750592626cb6ae0",
-  "step/parts/cap.step": "55df2c65e46655dc1878bdd0c2d9f30bcce8a8f890af30c2c5af556ed95f7399",
-  "step/parts/eyecup.step": "420469742eaf2299ef7b0b6d0dbf6d1495da07e3d808841498075a0325d324c6",
-  "step/parts/hood.step": "ad0f5af2e304c80a61b677c4c7b49e7d2af8d4a6fd2c731fc05b8c33d5009301",
-  "step/parts/knob_exp.step": "149b88f6554f9cecb27c4a097995522843b3e70c7c5f44fc803b36e0f794fe00",
-  "step/parts/knob_fps.step": "0c5762136b83926a9175fc0b6aa6e858239038c048b2a59b8e6d4bca230f33b9",
-  "step/parts/lens_collar.step": "4fc1b812793925ce64aaca636b047f7ed747232580e469136816989943aedf2e",
-  "step/parts/panel.step": "4a66393c8f7a018b8e1d3749044883bfcce9d0018cc3b60c9b3bca70f4c63e57",
-  "step/parts/pi_keeper.step": "b1c1dbcda8f7e35f2e466d67ff215ba7000deeeaccc6612b949d2bd02692382f",
-  "step/parts/plunger.step": "4441ace70310cfd812c725a229c64a14c7913e663d5373b279b25ada073b43f6",
-  "step/parts/stick_sleeve.step": "72c193fc529842fa55c3f0cf3c14a01b5482aa88e98e9e3fca128e46268866ff",
-  "step/parts/tub.step": "320d89d67c9ab8962170164e27cb23a47b0832c592d4f7028fbb72626c2c7203",
-  "renders/section-evf-board-z78.png": "5b5fe2096600fb9c775ab70bbae6f867e4fef5cdd25ef997d6bb98aae8c783bd",
-  "renders/section-evf-board-x137.png": "d7ce0b4859144119ca3c5c92ecd6d8371f04e2af53befe8c6ac01d4c6dfa5aa7",
+  "step/gs8-d2-assembly.step": "5c620ee26b94b652c0cf4100f57304f754e9ccac6ea4eda8658b7ffbd3c987f2",
+  "step/parts/base_grip.step": "356810ac53ace909bafe2f7ea62844806cb2ab933798e181b3d9606d8165af12",
+  "step/parts/cap.step": "dc75c7027be89a8b0bec0f0120376a294b2c566b4dd313544603770801ec76d0",
+  "step/parts/eyecup.step": "aa0c283dfe978a99e1e47f95ac5897cbebfc8fe150d8cc39fcccd10ea5c11d8d",
+  "step/parts/hood.step": "3c4510fd8a0ed335350f59b8623e4c4518bd5976d7d20c78e8c9c4e9337a940f",
+  "step/parts/knob_exp.step": "23958a6d57a1137e76693bdb2c002eb181cc5302106bf834351f55a9d1bb2560",
+  "step/parts/knob_fps.step": "fa0264e3c04f412dcac6be15f1d28e19d7a0485071b70f7968ca7ea7af310686",
+  "step/parts/lens_collar.step": "2576ef3842f0252d9a0cb14625817ac84c829bab4967100f6cf8e77cf557133b",
+  "step/parts/panel.step": "7f97ad8b3d67879e5f9fbfa3ba89f6e5d3ddc19e597df9592950139d52d22705",
+  "step/parts/pi_keeper.step": "4c5c10019f27505077b521a779b7e792d899e4682d58b480f0e1a0803f61a2ec",
+  "step/parts/plunger.step": "93e4c1f79c706c80f493315058c86cf902cae4a82c44309362565b0fe5f4fcf8",
+  "step/parts/stick_sleeve.step": "73733d671dc416d25cd1c918202c63fc569c9b904f35dac6920ac7f5f731f461",
+  "step/parts/tub.step": "cd08800241ce970ae1397c46203c627f7825747de8605ba5a8890b014f15a4d7",
+  "renders/section-evf-board-z78.png": "ab98ed10629601d90e4b00c6e4ee772a957988065f9bf9ff3b1397bb0ea1754c",
+  "renders/section-evf-board-x137.png": "2995b22feb247d7ce5cf3c133eadf2a894ccca90dde8320743502b812057bbc8",
   "renders/section-pi-keeper-y-20.png": "c7447a947b52fbd846aaf8bbeb359e7a6067b6f19a307f64b6f7a50fa2f25dd7",
   "renders/section-pi-keeper-x80.png": "10b92067bc40a6b7b129a90ae72def75f6738ebfc86f1ee61d3864b61ae00212",
   "renders/section-pi-keeper-y12.png": "0b31358c31908d9efd7eea1f62dbf3ec2df8d20288abb392f8194e0a784fbbfc",
   "renders/section-base-edge-x91.png": "d3a6a8aa7afce1922e216dedb0d7211bd9206d081ecbba8e20a63351dce3c4d0",
   "renders/section-j7-y0.png": "0cc4880b54d1aeaa3f503fc55d5ad02e37c8672ab5b87740d6d4de4f86fee813",
-  "renders/section-j7-z90.png": "18b0df1b564384fb7cb8bc880bc118337d1699bb5f093f38e876759a8612f3a4",
-  "checks.json": "c215f4c7b1bb3735bf046e6459caee04106aeda5b32e284a2473945f08fcd489",
-  "print-manifest.json": "bc51ca95ac61d318c14b985b9d8ae9b23658fc823d34032cc86c551705b8514d",
-  "parts-manifest.json": "71161c38bbf16dfacdf370377c7f7c9e6f155dbcceca5c6c564dc636031b5429",
-  "coupons-manifest.json": "e0d4dd866d7df7e29d77f074557b4a957f9820f4f2c1691cf5a5cf346a249ef0",
-  "coupons-r1-manifest.json": "f19a3020ead71dfc5418360ae853b07fb8b77e0bf161826c16e8a7a5a536b2dd",
-  "checks-fujinon-sweep1mm.json": "af45262a1fb416e23a98ec0cc3c3217e5b844667db182c6a2047933cf7591839",
+  "renders/section-j7-z90.png": "97ed5069e4080d7d8775eb4d0336392cd69c59c0fc70154865f52e0ba569faef",
+  "checks.json": "2d6f68b24619f4e4db39e22a4c72f4a15f322188e7dbefe643c2c9657e7b7c8b",
+  "print-manifest.json": "2c559ca1490a39e8048ced2a6123bcd9a40011bd06860892dcc2f8ea9fb2f11b",
+  "parts-manifest.json": "6bb65631747c84974fa245a3a97e98f855e828c893e99c1b9234fc6b2fd26dd4",
+  "coupons-manifest.json": "4b39029dc3444565ffe3311443c2e5ff8d228788bdb4c4ef91214c14967858b7",
+  "coupons-r1-manifest.json": "e9d7794cb1457a2bee6af00d113145d322ca9ce28462d738a398964f3874761d",
+  "checks-fujinon-sweep1mm.json": "e9545a1bbec53c0fee550325a18b077c0ed10ea4deee6c1585194631c79f26a3",
   "stl/coupons/base_edge_base.stl": "097c1a8307ce52fafdd991a0aeed91f0727bbfd8b002a44ebb68c33c43818a6e",
   "stl/coupons/base_edge_panel.stl": "981d5ee76f0ff26676490610a1446f3b5fc66e1b6a7877cf7237c1620590133e",
   "stl/coupons/base_edge_tub.stl": "efa444108fb49d8aa4d1205a175f11062cde3baf36ee73931086dad1ad60250e",
@@ -1021,7 +1094,7 @@
   "stl/coupons/collar_tub_front.stl": "5697ee6556417d135c2100da492a37df1334922922ec96e5e9cc438e3f8d7e57",
   "stl/coupons/coupon-pi-keeper-part.stl": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
   "stl/coupons/coupon-pi-keeper-pi.stl": "6c305b33d3c7b0f03e9e71cf792582c1c068d160a88542330af02bbfcaacfc58",
-  "stl/coupons/coupon-pi-keeper-tub.stl": "e0325d05192edec1b6f01632fe4035f53917230519f87ea5c5927994176aee71",
+  "stl/coupons/coupon-pi-keeper-tub.stl": "8b9826d2066f9ae42a1c709ef9be5e6818cb8a2fef95499e0acdfae33a57ecfe",
   "stl/coupons/coupon-pi-keeper-x1203.stl": "ff7f256f58a46712e179d0584cd7d779c6870524fc90cda6e2e62c8e35e3ec56",
   "stl/coupons/encoder_cradle_hook.stl": "51b17b74d70d99d4b1e868a8612a466640a9ffa96837b693267c63a58b60a44d",
   "stl/coupons/evf_stop_panel.stl": "44fab08048b72c65614809f91931987a0a98cb14f7133cc85e7e12422d72c48e",
@@ -1037,7 +1110,7 @@
   "stl/coupons/pt_boss_post.stl": "f594701a1b769c56eccba06da0b06999ce00bc4f73bb17ef2107b40f3a5e3a4f",
   "stl/coupons/tongue.stl": "cabb905aed9be39bb6c2aaca77a7431c358891e1d3b0be18826efaabe522b631",
   "stl/tools/collar_gauge.stl": "2bd702e26fe7c63969010a0a57c02a465ed72c22edcad80809f2aeb34a143d32",
-  "stl/tub.stl": "786255e2840af4b129213dbc385b11dd34ce673ac381b4debd91e16c3f3ec8a8",
+  "stl/tub.stl": "66b12c2a16be3bcfca8aedf97bb8829a50594c8610ffe3bc91b5afe4ac35fa99",
   "stl/modifiers/tub__mod_s_b1.stl": "7ceec539a382153650df3d624537c89571cb868e0b97b6ae8283d0a4ae81e4b4",
   "stl/modifiers/tub__mod_s_b2.stl": "0c366e9921f34ef34937488d7bb76ffd032b9b2a4ae2b069306b03f7d4015ac7",
   "stl/modifiers/tub__mod_s_r1.stl": "f3168dcc8f8345e69764839ffcfd75cd2c45247dfabfeec9f86b4effb4faf6e6",
@@ -1048,7 +1121,7 @@
   "stl/modifiers/tub__mod_s_c1.stl": "c451773f1b8125a69e04b79172a7c41cde85488cff2622ec6cb8261ef85dc4fa",
   "stl/modifiers/tub__mod_s_c2.stl": "8ab89f69fc79600d5acacdb75926bb26b05c6829602bbc9f716649e8eed16891",
   "stl/modifiers/tub__mod_s_c3.stl": "f4f547991a1738adf6e53ffa571562f88abe6aa926a77fb997319b9824f885ba",
-  "stl/hood.stl": "25974f9df332df0f509a02693a0e57260c909f7516c93bdaf44cce6fa4f69bd4",
+  "stl/hood.stl": "2d7ec9d4171afc46763d0d001ac6abeacc8c1d908ef49f88c74ffa193911d718",
   "stl/panel.stl": "2898618f06109a2dbb24992cb145a95ad8ed326397bb39be778c59cd1b77e805",
   "stl/modifiers/panel__mod_s_b1.stl": "eb676371da9228427d67d2daabd5ffeebfaf8eb83dd8cb535ba91bfe3c4f40f9",
   "stl/modifiers/panel__mod_s_b2.stl": "1bf5778c64f7d629c6f3d924a44390f17ef41b76b36ebe5bb5db0d5392f49863",
@@ -1067,27 +1140,27 @@
   "stl/stick_sleeve.stl": "ce9c1e3029d9cfb72e78afde463514db11fcc8e9f6ec38b0172dab453638c126",
   "stl/pi_keeper.stl": "eada966ec121f349621c2fdddfe53c6f33d6b91462a2e2b93164dbbc4b35834b",
   "stl/lens_collar.stl": "0aa42112a4d4fa198b84e6a5e254b5e013ccc6359d8a7ce403f9db4393300d34",
-  "test_common.json": "262cf70f8697a10dca5cf1290def48792d23ce291eb24ddd61b169cbce8e2e4b"
+  "test_common.json": "d9144d8d90d6a869742bffa39a4752e5964bb9e49e30d0e94be90e8055ebc039"
  },
  "carried_files": {
   "test_common.json": {
    "written_by": "test_common.py (producer-recorded inputs; not inferred by this build)",
    "inputs": {
-    "layout.py": "3a64c39944b959010a81046a942731a6c3813005e32091e4676a43e46a796f4e",
+    "layout.py": "9dc6d1ef88065f2bdcd7f73ecad1ebed53089f86f8a1c02559876881ff9b089b",
     "d2_common.py": "69727dbd58cf0c0fbce48a0b44083a7ba4ba386b025a1dc132b1d4d431cf4a8e",
-    "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
-    "checks.py": "3dcda60e6a0303a88290b224634203b4511f8e4cda846b7a01ad2a3ca74725bf",
-    "build_d2.py": "bfb40ffe76253305e7d40a82b84ad3b197d792fd0897e1ffe09869bc59e43203",
+    "cots.py": "28e5d0b1141cf957930d28042230422da6936ba4ef49238562a244e3a0c49b50",
+    "checks.py": "04fb59b338bf755fbd820e0788b9c04b8e640d2e60fc140332cea13952b1cfbb",
+    "build_d2.py": "dcc4e9f58045aa160e75d65aac1cfd2e18ae945d2d8f08573d997284a2a5bb56",
     "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
-    "make_tables.py": "9b4b075e5395ffc8b692ffd69651aa909314cd592da3bbb61bd4590f4580bd1b",
-    "SPEC.md": "1e4f643e062c81263ffde801e05e2be877a7c1273608ae3a4160583ce7acd369",
+    "make_tables.py": "69be676b422b7ce658e7d632a1b925d1fd7923a092622452dfd3840dfaa1d48c",
+    "SPEC.md": "bc0466a341741fc37145f0c9cf64053334e4e0de7395ffc413fad09676fe1eb2",
     "FASTENER-POLICY.md": "407d67703fd2c7305b5e742d5ad844cce406e73e3382d0955572eb3e1db96163",
     "printed_collar.py": "fbb8a356db82cd10a496b4864baa95930374ffc519578e373f38e4019af7afe0",
-    "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
-    "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+    "printed_grip.py": "83ae0974d1a31c71ddfc6b782bf19f3baa2c4a6b5c8636099f5b774dea59ddfe",
+    "printed_hood.py": "4964680f210418fdc19b08ae2a8f90e99013c335c5cd5344e69b15634ed9463d",
     "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
     "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
-    "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+    "printed_small.py": "0a00bd199a2e9955c76992edff427500180f7122ab91388f7fcb62b448df69e3",
     "printed_tub.py": "c14268a803dbc5463f841cfd0e5df928ee844bc4f7a1b5e90590247da305963e",
     "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
     "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
@@ -1097,23 +1170,23 @@
    },
    "producer": {
     "script": "test_common.py",
-    "generated_at": 1791445307.9258466,
+    "generated_at": 1791494568.811166,
     "source_hashes": {
-     "layout.py": "3a64c39944b959010a81046a942731a6c3813005e32091e4676a43e46a796f4e",
+     "layout.py": "9dc6d1ef88065f2bdcd7f73ecad1ebed53089f86f8a1c02559876881ff9b089b",
      "d2_common.py": "69727dbd58cf0c0fbce48a0b44083a7ba4ba386b025a1dc132b1d4d431cf4a8e",
-     "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
-     "checks.py": "3dcda60e6a0303a88290b224634203b4511f8e4cda846b7a01ad2a3ca74725bf",
-     "build_d2.py": "bfb40ffe76253305e7d40a82b84ad3b197d792fd0897e1ffe09869bc59e43203",
+     "cots.py": "28e5d0b1141cf957930d28042230422da6936ba4ef49238562a244e3a0c49b50",
+     "checks.py": "04fb59b338bf755fbd820e0788b9c04b8e640d2e60fc140332cea13952b1cfbb",
+     "build_d2.py": "dcc4e9f58045aa160e75d65aac1cfd2e18ae945d2d8f08573d997284a2a5bb56",
      "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
-     "make_tables.py": "9b4b075e5395ffc8b692ffd69651aa909314cd592da3bbb61bd4590f4580bd1b",
-     "SPEC.md": "1e4f643e062c81263ffde801e05e2be877a7c1273608ae3a4160583ce7acd369",
+     "make_tables.py": "69be676b422b7ce658e7d632a1b925d1fd7923a092622452dfd3840dfaa1d48c",
+     "SPEC.md": "bc0466a341741fc37145f0c9cf64053334e4e0de7395ffc413fad09676fe1eb2",
      "FASTENER-POLICY.md": "407d67703fd2c7305b5e742d5ad844cce406e73e3382d0955572eb3e1db96163",
      "printed_collar.py": "fbb8a356db82cd10a496b4864baa95930374ffc519578e373f38e4019af7afe0",
-     "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
-     "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+     "printed_grip.py": "83ae0974d1a31c71ddfc6b782bf19f3baa2c4a6b5c8636099f5b774dea59ddfe",
+     "printed_hood.py": "4964680f210418fdc19b08ae2a8f90e99013c335c5cd5344e69b15634ed9463d",
      "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
      "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
-     "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+     "printed_small.py": "0a00bd199a2e9955c76992edff427500180f7122ab91388f7fcb62b448df69e3",
      "printed_tub.py": "c14268a803dbc5463f841cfd0e5df928ee844bc4f7a1b5e90590247da305963e",
      "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
      "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
@@ -1122,39 +1195,42 @@
      "test_common.py": "7ec7df2f34de0a9699374d4abe252cdc338d64744c5fe974d7e0b3c912f3a333"
     }
    },
-   "mtime": "2026-10-08 15:42:58 +0800"
+   "mtime": "2026-10-09 05:23:48 +0800"
   }
  },
  "timings_s": {
   "layout self-check": 0.0,
-  "printed modules": 131.24,
-  "cots": 2.53,
-  "contract": 3.07,
-  "interference": 24.34,
-  "clearance": 4.26,
-  "keepouts": 25.96,
-  "thin wall": 37.64,
-  "driver audit": 8.8,
-  "critical features": 23.15,
-  "evf restraint": 2.65,
-  "removals + service driver": 24.99,
-  "engrave + bosses + inserts": 114.44,
-  "sweeps": 16.7,
-  "r5 J7-R checks": 46.2,
-  "mass/CoM": 1.74,
-  "stl + bed fit": 30.68,
-  "step": 13.63,
-  "section renders": 9.78
+  "printed modules": 67.37,
+  "cots": 1.01,
+  "contract": 1.4,
+  "interference": 13.07,
+  "clearance": 2.41,
+  "keepouts": 15.94,
+  "mate reach + cable stow + header housings": 10.09,
+  "thin wall": 28.01,
+  "driver audit": 4.11,
+  "critical features": 11.28,
+  "evf restraint": 1.57,
+  "removals + service driver": 12.73,
+  "engrave + bosses + inserts": 63.35,
+  "sweeps": 12.53,
+  "mate paths": 1.18,
+  "handling": 6.16,
+  "r5 J7-R checks": 55.67,
+  "mass/CoM": 1.3,
+  "stl + bed fit": 15.94,
+  "step": 8.73,
+  "section renders": 4.35
  },
- "total_s": 522.6,
- "peak_mem_mb": 722.0,
+ "total_s": 338.9,
+ "peak_mem_mb": 727.3,
  "cad_release_candidate": true,
  "blocking": [],
  "open_evidence": [
   "slicer_review (not run: 12 item(s))",
   "coupon_validation (not run: 10 item(s))",
   "measured_fit (not run: 17 item(s))",
-  "assembly_operation (not run: 26 item(s))"
+  "assembly_operation (not run: 29 item(s))"
  ],
  "open_evidence_detail": {
   "slicer_review": {
@@ -1193,9 +1269,9 @@
    "stale": [],
    "rejected": [],
    "unmatched_records": [],
-   "not_run": 26,
+   "not_run": 29,
    "items_pass": 0,
-   "items_required": 26
+   "items_required": 29
   }
  },
  "evidence": {
@@ -1208,9 +1284,9 @@
  },
  "hardware_gates": {
   "source_docs": {
-   "cad/gs8-d2-v1/MEASURED-PARTS.md": "51a7b98e1caa70ddc51e022c805422ef82b5cc2f7731ab3f382e93e08dff405d",
-   "cad/gs8-d2-v1/SPEC.md": "1e4f643e062c81263ffde801e05e2be877a7c1273608ae3a4160583ce7acd369",
-   "electronics/gs8-d2-v1/WIRING.md": "2d55d95cc2f208b0c9556c94effc4eb653b413ad08d4b6de65a5a5c85ed025bb",
+   "cad/gs8-d2-v1/MEASURED-PARTS.md": "55dbf7c94df8292a531a65bef216cad691af3d2fab8cdce5f40f2643025c95ad",
+   "cad/gs8-d2-v1/SPEC.md": "bc0466a341741fc37145f0c9cf64053334e4e0de7395ffc413fad09676fe1eb2",
+   "electronics/gs8-d2-v1/WIRING.md": "234b40e4aef88161ce93f26b876ffad64a6e7e9883a95abb997518ab1afdc953",
    "electronics/gs8-evf-v1/EVF-SELECTION.md": "f0bda87ca849fb36924f2355d73b82a1a167bacd497d8c414d7dbbf5b3cfa390"
   },
   "gates": {
@@ -1232,8 +1308,10 @@
    "G-ENC-1": "open (no record)",
    "G-EVF-1": "open (no record)",
    "G-EVF-2": "open (no record)",
+   "G-EVF-3": "open (no record)",
    "G-FPC-1": "open (no record)",
    "G-HDMI": "open (no record)",
+   "G-HDR-1": "open (no record)",
    "G-J4-1": "open (no record)",
    "G-KEEP-1": "open (no record)",
    "G-KNOB-1": "open (no record)",
@@ -1249,6 +1327,7 @@
    "G-PI-1": "open (no record)",
    "G-PLG-1": "open (no record)",
    "G-PT-1": "open (no record)",
+   "G-QT-1": "open (no record)",
    "G-RUN-1": "open (no record)",
    "G-SKIRT-1": "withdrawn (feature deleted; see the gate doc)",
    "G-SNAP-1": "withdrawn (feature deleted; see the gate doc)",

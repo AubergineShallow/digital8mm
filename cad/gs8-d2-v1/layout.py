@@ -18,8 +18,7 @@ BOX convention: B(x0, x1, y0, y1, z0, z1) -> {'x': (x0, x1), 'y': (y0, y1), 'z':
 """
 import math
 
-REVISION = ('GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, '
-            'minor findings)')
+REVISION = 'GS8 D2 r7-20261009 (r6-20261008 + blocker review 2026-10-08 fixes)'
 SHIFT = -77.0                      # concept x -> D2 x
 
 
@@ -99,8 +98,18 @@ HOOD = dict(
     #     bore (truncated teardrop -Z) over x -2.8..+0.3 only: the C-CS adapter passes with 2.875 radial.
     bore_d=36.5, bore_x=(XT1 - 0.1, X_FRONT + 0.3),
     foot_holes=dict(d=8.6, ring_min=1.2),          # r5: 4 holes for the collar feet (COLLAR feet), teardrop apex -Z
-    roll_fin=B(-23.5, -19.5, -22.8, -20.55, 41.0, ZT1 + 0.5),   # r5: camera roll catch, 0.8 off the cover -Y face
-    roll_webs=[B(-23.5, -19.5, -27.6, -22.8, 44.5, 48.5), B(-23.5, -19.5, -27.6, -22.8, 75.0, 79.0)],  # to the stack fin
+    # r7 C4 (BX-4, SPEC-C4 3.1): the r5 roll fin + 2 webs are DELETED (thread torque reacted through the cover/PCB, j1 (c):
+    #     the cover met the fin at 0.70 deg at hood offset -0.55). Two tines hang from the band, one each side of the
+    #     camera's lock tab, `gap` off the lock-screw head envelopes: tab_catch_boxes(); checks.check_roll_catch.
+    tab_catch=dict(gap=1.2,                 # r7 C4: tine face to the lock-screw head envelope, each side
+                   head_side='both',        # 'both' until G-CAM-1; then '+Y' or '-Y' and bare_y is required
+                   bare_y=None,             # G-CAM-1: |y| of the bare side's outermost metal (tab face or screw tip)
+                   t=3.0,                   # web thickness in y (CRITICAL_FEATURES min 2.4)
+                   x=(-14.5, -8.2),         # judge: front -8.2 (0.60 to the TL/TR tub insert bosses; B had -7.9 = 0.30)
+                   z0=78.5, top=ZT1 + 0.5,  # bottom z; merges into the band
+                   flange=dict(dx=2.0, dy=12.0),   # rear flange x -14.5..-12.5, outward 12.0 from the tine face
+                   lead_in=1.0,             # 1.0 x 45 chamfer, rear inner vertical edge (tab entry at step 7)
+                   root_chamfer=2.0),       # 2 x 45 at the band where the fillet fails
     housing=B(-170.2, -154.2, -8.0, YL, 55.0, H),   # eyepiece housing, open at -x; CHANGED z0 56 -> 55, gap 0.1 -> 0.2
     housing_wall=1.6, housing_top_wall=1.5, housing_r=6.0,
     housing_window=dict(side='+y', x=(-170.2, -154.2), z=(66.0, 90.0)),  # diopter reach; barrel stands 0.25 past y 35
@@ -213,7 +222,7 @@ CAP_JOINT = dict(rail_z=(-108.6, -105.55),   # R2: top -106.25 -> -105.65 (FIXER
 #     39.5 sq x 6.49. The 39.5 square is the REAR cover (no front land), the pins ended ~7 short of the PCB.
 #     r5 (J7-R): the lens is held at its fixed band by the printed lens collar (COLLAR, printed_collar.py); the camera
 #     (housing, BFAR, adapter, PCB, cover) HANGS on the lens and touches no printed part in service. The tub lip, the
-#     hood roll fin and the panel keeper are CATCHES with gaps, never seats. Pins deleted; tripod block removed at the
+#     hood tab catch (r7 C4; was the r5 roll fin) and the panel keeper are CATCHES with gaps, never seats. Pins deleted; tripod block removed at the
 #     bench (step B0, 2 screws bagged, [unconfirmed]). s = BFAR screw-out (0..3, nominal 1.25 at Kowa infinity, B0).
 #     Every value tagged 'drawing' or 'unconfirmed' in CAM['status'] is MP-CAM (MEASURED-PARTS) before the CAD freeze.
 CAM = dict(
@@ -229,7 +238,8 @@ CAM = dict(
                 stack_tolerance_mm=0.10,
                 source='C-mount datum: r5 dossier_external s1/s8; sensor/filter offsets and direct stack: MP-CAM'),
     housing=dict(d=35.5, depth=10.35, throat_d=25.5, throat_depth=3.0),  # throat: lens rear clearance (r 12.75)
-    tab=dict(w=10.16, depth=5.02, top_r=22.1, slot=0.8, screw_dx=2.5, screw_z=79.4, head_d=4.0, head_h=2.0),
+    tab=dict(w=10.16, depth=5.02, top_r=22.1, slot=0.8, screw_dx=2.5, screw_z=79.4, head_d=4.0, head_h=2.0,
+             tip_h=None),      # r7 C4: screw tip protrusion on the bare side (G-CAM-1; None = unmeasured)
     #   lock screw transverse (Y) at (x_hf - 2.5, z 79.4); head envelope dia 4 x 2 modelled on BOTH sides until MP-CAM
     pcb=dict(sq=38.0, t=1.4), cover=dict(sq=39.5, t=6.49),
     holes=[(-15.0, 45.0), (15.0, 45.0), (-15.0, 75.0), (15.0, 75.0)], hole_d=2.5,   # PCB holes, 30 square (drawing)
@@ -238,7 +248,9 @@ CAM = dict(
     insert=dict(start_dx=-11.1, path='-Y through the open left side 2 mm high, down 2 at y 0, then +X 11.1 (the '
                                       'adapter passes the lip; the camera rests in its cage until the lens is in)'),
     status=dict(adapter='drawing', bfar='drawing', s_nom='unconfirmed geometric sample (B0)', s_range='unconfirmed', housing='drawing',
-                throat_d='unconfirmed', tab='drawing; lock-screw head side unconfirmed', pcb='drawing',
+                throat_d='unconfirmed',
+                tab='drawing; lock-screw head side, head dia/height and tip protrusion unconfirmed: G-CAM-1 sets '
+                    "HOOD['tab_catch'] head_side / bare_y", pcb='drawing',
                 cover='drawing', holes='drawing', fpc_socket='estimate',
                 tripod_block='drawing; removability unconfirmed (MP-CAM)',
                 sensor_plane='unconfirmed: sensor height and filter focus shift are unknown',
@@ -334,6 +346,30 @@ CAM['adapter_cyl'] = CYL('x', 0.0, 60.0, CAM['adapter']['d'] / 2, CS_FLANGE_X, C
                          r_in=CAM['adapter']['d_in'] / 2)            # r5: x -4.4..+0.6
 # r5: keeper = panel finger, now a REAR CATCH only: 0.5 behind the cover at s_max (2.25 at provisional nominal, 3.5 at s 0)
 CAM['keeper'] = B(cam_cover_rear(S_MAX) - 0.5 - 3.33, cam_cover_rear(S_MAX) - 0.5, 4.0, SPLIT, 66.0, 76.0)
+
+
+def tab_catch_boxes(L=None):
+    """r7 C4 (BX-4, SPEC-C4 3.1): the hood tab catch as 4 boxes [web +Y, flange +Y, web -Y, flange -Y] (B dicts,
+    each with 'side' +1 / -1 and 'kind'). Inner face |y| = tab w/2 + head_h + gap (8.28) on a side with a head
+    envelope; on the bare side (head_side set after G-CAM-1) bare_y + gap. Web x HOOD tab_catch x, |y| y_in..y_in + t;
+    flange x x0..x0 + dx, |y| y_in..y_in + dy; both z z0..top. ValueError if head_side is set without bare_y."""
+    g = (lambda k: getattr(L, k)) if L is not None else globals().__getitem__
+    tc, T, ly = g('HOOD').get('tab_catch'), g('CAM')['tab'], g('LENS_AXIS')[0]
+    if not tc:
+        return []
+    side = tc.get('head_side', 'both')
+    if side not in ('both', '+Y', '-Y'):
+        raise ValueError("HOOD['tab_catch'] head_side must be 'both', '+Y' or '-Y' (got %r)" % (side,))
+    if side != 'both' and tc.get('bare_y') is None:
+        raise ValueError("HOOD['tab_catch'] head_side %r needs bare_y (G-CAM-1: the bare side's outermost metal)" % side)
+    (x0, x1), z0, z1, t, fl = tc['x'], tc['z0'], tc['top'], tc['t'], tc['flange']
+    out = []
+    for sg, nm in ((1, '+Y'), (-1, '-Y')):
+        y_in = (T['w'] / 2 + T['head_h'] + tc['gap']) if side in ('both', nm) else (tc['bare_y'] + tc['gap'])
+        for kind, xa, xb, w in (('web', x0, x1, t), ('flange', x0, x0 + fl['dx'], fl['dy'])):
+            ya, yb = sorted((ly + sg * y_in, ly + sg * (y_in + w)))
+            out.append(dict(B(xa, xb, ya, yb, z0, z1), side=sg, kind=kind, y_in=round(y_in, 4)))
+    return out
 # r5 (J7-R): the lens collar (owner tub, printed_collar.py) clamps the lens on its fixed band (LENSES support) and sets
 # its axial position on a 45 deg cone seat; 3 M3 screws (s_c1..s_c3, washers) into heat-set inserts in 3 short tub
 # bosses (TUB_INSERT_BOSSES) + a compression foot (LR) on the tub outer face; pinch s_c4 (M3 x 16) on external lugs.
@@ -419,6 +455,8 @@ EVF = dict(
     board_slot=dict(groove_w=1.6 + 2 * SL, groove_depth=1.5, top_z=92.5, bottom_z=64.0, stop_y=0.7,
                     bottom_rail_gaps=[(4.0, 17.0)], open_side='+y',   # gap for the micro-HDMI plug
                     gap_clear=1.0, plug_x_clear=0.6, zif_relief=0.4),
+    # r7 C1: the HDMI plug is pushed up through the gap AFTER the slide. It cannot ride the slide: the y 18.9..28.5 slab
+    # is the board's -Z arrest. See SPEC-C1.
     # FIXER r2 (M-V-MPS-3): bottom rail cut back 1.0 round the receptacle/plug (y 3.0..18.0); in that gap the +X spine
     # stands 0.6 off the plug envelope's +X face below the groove (and grows 0.65 outward, 1.6 wide); the top rail's
     # -X groove wall is relieved 0.4 on its underside over the ZIF (y 6..21) so neither stops the board before the PCB
@@ -441,6 +479,8 @@ EYECUP = dict(box=B(-187.6, F_EVF - 20.3 + 3.0, 16.0 - 23.0, 16.0 + 23.0, 78.0 -
 PI = dict(x=(cx(-14.0), cx(71.0)), y=(-32.3, 23.7),                   # -91 (USB end) .. -6 (button end)
           x1203_z=(6.0, 7.6), pcb_z=(18.5, 20.1), cooler_top=36.3)
 PI['holes'] = [(x, y) for x in (PI['x'][1] - 3.5, PI['x'][1] - 61.5) for y in (PI['y'][0] + 3.5, PI['y'][1] - 3.5)]
+PI['header_rows_y'] = (PI['y'][0] + 3.5 - 1.27, PI['y'][0] + 3.5 + 1.27)   # r7 C2 (BX-10): even row (2, 4, ...), odd
+#   row (1, 3, ...); RP mechanical drawing: header centreline 3.5 from the board edge (recalled: re-read RP-008347, MP-QT)
 PI_BOSS = dict(od=9.0,   # INTEGRATOR T4: 7.0 left a 0.7 wall round the 5.6 head pocket; R1 r2: 8.8 -> 9.0 (wall 1.7)
                 z=(T, 6.0), head_pocket_d=5.6, head_pocket_depth=2.4)
 PI_HOOK = dict(t=1.6, w=6.0, root_z=1.2, form='45 deg leaning slab (tub owner); strain: snap_strains()',
@@ -480,8 +520,12 @@ PI_KEEPER = dict(
 # beam inner face = board edge + gap along -normal; tooth tip reaches 1.0 past the edge over the board.
 PI_BUTTON = dict(x_face=PI['x'][1] + 0.45, y=PI['y'][1] - 18.4, z=21.0, travel=0.45)    # -5.55, y 5.3 (z estimate)
 PI_LED = dict(y=PI['y'][1] - 13.3, z=20.8)
-FLOOR_HOLES = {'run_lead': B(-34.0, -28.0, 1.5, 9.0, 0.0, T),
+# r7 C3 (BX-16, SPEC-C3 3.1): the run-lead hole runs on in -X to x -41.5 (13.5 x 7.5; r6 x0 -34.0), so at the base_on
+#   start pose (base -10 in x) it overlaps the base passage (layout.base_run_passage(), unchanged) by 3.5 mm: the lead is
+#   threaded up before the tub goes down (checks lead_access run_lead_window >= RUN_WINDOW_MIN)
+FLOOR_HOLES = {'run_lead': B(-41.5, -28.0, 1.5, 9.0, 0.0, T),
                'pigtail': B(-45.0, -34.0, -13.0, -4.0, 0.0, T)}      # CHANGED 7 x 7 -> 11 x 9: the XT30 passes
+RUN_WINDOW_MIN = 3.2        # r7 C3: threading window, 2 x run-lead core od (est 1.6, MP-RUN)
 
 # --- J10 power plunger (black ASA; no light pipe: user decision 2026-10-05, no LED indicators) -> hood + tub. CHANGED: flange pocket in the hood plate, face 1.3
 #     behind the plate face (concept 2.5); axis y 9.0, z 20.5 to clear the SD slot and the exhaust band.
@@ -517,6 +561,19 @@ ENCODER = dict(c=(EXP_X, DIAL_Z), pcb=B(EXP_X - 12.65, EXP_X + 12.65, 24.1, 25.7
                          status='unconfirmed: MP-ENC and G-W9; push operation not commissioned'),
                cradle_hooks=dict(top=dict(z=DIAL_Z + 12.8, w=8.0), sides=dict(z=(45.0, 50.0), w=5.0), tooth=0.40,   # FIXER P2: reach 0.55 -> 0.40
                                  play=0.1, land=1.0, note='INTEGRATOR (hood_panel 5): no hook under the PCB (ko_hdmi_run); G-ENC-1'))
+# r7 C2 (BX-2, SPEC-C2 3.1): the QT sockets (cots.encoder() reads this; same geometry as r6) and the SH plug proxy
+ENCODER['qt_socket'] = dict(dx=(-9.5, 9.5), w=4.3, y0=19.6, h=6.0, entry=(1, 0, 0),   # entry: plug travel, -X socket
+                            note='proxy: side entry at the board edge assumed (MP-ENC photos, MP-QT)')
+PLUG = {'jst_sh_4': dict(len=4.5, len_max=5.5)}     # SH plug body behind the socket face (design <= 5.5, MP-QT)
+
+
+def qt_plug_point(i=0, E=None, P=None):   # wire exit W of the plug in socket i (0 = -X socket), final pose
+    e = ENCODER if E is None else E
+    q, pl = e['qt_socket'], (PLUG if P is None else P)['jst_sh_4']
+    return (e['c'][0] + q['dx'][i] - q['w'] / 2 - pl['len'], (q['y0'] + e['pcb']['y'][0]) / 2, e['c'][1])
+#   = (-79.15, 21.85, 57.0) today
+
+
 SWITCH_1824 = dict(c=(FPS_X, DIAL_Z), body=CYL('y', FPS_X, DIAL_Z, 12.5, 19.2, SPLIT),
                    bushing=CYL('y', FPS_X, DIAL_Z, 4.75, SPLIT, SPLIT + 6.0),
                    shaft=CYL('y', FPS_X, DIAL_Z, 3.175, SPLIT + 6.0, 42.0),   # INTEGRATOR: cut to y 42.0 at step 2
@@ -533,9 +590,41 @@ BASE_OPENING = B(-45.0, -25.5, -13.0, 9.0, -8.0, 0.0)      # switch drop-in, run
 # r4 (wiring maturity): inline fuse in the + conductor of the battery pigtail, within about 25 mm of the XT30 female, so
 # the whole pigtail and the X1203 input are fused (WIRING W-10). Littelfuse 0251015.MXL PICO II: 15 A, 32 V, very fast,
 # body dia 3.18 max x 7.11, cold 4.46 mohm, melting I2t 68.8 A2s, 300 A at 32 VDC interrupting (251 datasheet rev VL).
-# Spliced + sleeved (adhesive 3:1): about 20 mm rigid, OD 5.0 [est]; it lies along X under the XT30 pair in ko_xt30.
+# Spliced + sleeved (adhesive 3:1): about 20 mm rigid, OD 5.0 [est]. r7 fix-up (VERIFY-C3): it lies along X BESIDE the
+#   XT30 pair (+Y side), both flat on the pack top under the run button (was under the pair, whose +X end then faced the
+#   run button 2.0 mm away); beside=True tells cots.xt30_pair to put the pair housings beside the sleeve, not above it.
 PIGTAIL_FUSE = dict(pn='Littelfuse 0251015.MXL', rating_a=15.0, body_d=3.18, body_l=7.11, sleeve_od=5.0, rigid=20.0,
-                    x=(-61.0, -41.0), y=0.0, z=-23.5, cold_mohm=4.46, i2t=68.8)
+                    x=(-58.25, -38.25), y=5.1, z=-33.2, beside=True, cold_mohm=4.46, i2t=68.8)
+# r7 C3 (BX-3): pigtail length rule, tie point and mating pose. Pads: Q2, recorded at G-W2.
+PIGTAIL = dict(
+    base_len=200.0,                 # L0: cut length with the pads at W (d_board = 0)
+    wrap_entry=(-37.5, 23.7),       # W: X1203 port edge, top face (ko_pig_wrap centre x; review: was -38.0)
+    w_top_dy=1.4,                   # W_top = (Wx, Wy + 1.4, ko_pig_wrap z1): the r6 probe start point (SPEC-C3 3.2-1)
+    pad=dict(face='top', xy=(-37.5, 23.7), status='assumed (Q2); G-W2 records the real position'),
+    pad_range=dict(x=PI['x'], y=PI['y'], faces=('top', 'bottom'),   # credible range: anywhere on the X1203
+                   xh=(PI['x'][0] + 6.0, PI['y'][0] + 13.0)),         # cots.py x1203 XH header estimate centre (-85, -19.3)
+    od_range=(1.9, 2.4),            # 18 AWG silicone, per conductor [est, listing class]; MP-PACK measures
+    tie=dict(kind='moulded', what='neutral-cure silicone RTV bead over the pads + first 8-10 mm of the pair',
+             at='pad'),             # 'pad' or an (x, y, z) point; checks compute the detour (0 here)
+    face_out_min=15.0,              # XT30 face out of the grip mouth at the step-10 mating pose
+    housing_credit=0.0,             # XT30U female body length NOT credited (not measured)
+    cut_round=5.0,                  # L_cut rounded UP to 5 mm
+    stock_len=1000.0,               # D2-26 bulk wire, 1 m per colour: L_cut max must fit
+    store=dict(zone='ko_xt30', fill_max=0.20, bend_r_od=2.0, female_end='-x',   # fold above the pair; r7 fix-up: female -X [est]
+               shared=('pack_lead',)),   # review: other cables whose slack also lives in the zone (counted in full)
+    bend=dict(formed_r_min=0.8,     # review: static U on the board edge (inner r = half the 1.6 PCB), formed once
+              flex_r_od=2.0),       #   flexed fold: inner r >= 2 x OD (= store bend_r_od)
+    form_tol=1.0,                   # review: hand-forming tolerance of the lane in x (keeper / other lanes clearance)
+    # r7 fix-up (VERIFY-C3): the WIRING s4 drop estimate (same model as gate G-W5): 18 AWG copper both conductors over
+    #   L_cut + the pack lead, + the fuse (PIGTAIL_FUSE cold) + the XT30 pair, at the peak current; limit not relaxed
+    drop=dict(i_peak_a=8.6, mohm_per_m=21.0, xt30_mohm=1.0, limit_v=0.15, gate='G-W5 (G-W2 sets d_board)',
+              src='WIRING s4 [est]'),
+)
+
+
+def base_run_passage():             # r7 C3 (review): ONE source for the base run-lead passage (printed_grip + lead_access)
+    b = KEEPOUTS['ko_run_drop']
+    return dict(x=b['x'], y=b['y'])
 TRIPOD = dict(x=cx(-30.0), y=0.0, nut_af=11.1, nut_t=5.6, nut_z=(-5.7, -0.1), pocket_af=11.4, hole_d=6.6,
               bearing_wall=2.3)                            # CHANGED nut z (concept -7.2..-1.6): 2.3 bearing wall
 STRAP = dict(width=12.0, upper_slots=[B(x - 1.75, x + 1.75, -34.0, -21.0, -8.0, 0.0) for x in (-76.5, -82.0)],
@@ -759,7 +848,8 @@ COTS = {
                 box=B(PX0 - 3.0, PX1 + 0.45, PI['y'][0], PI['y'][1], 16.0, 36.1),
                 features=dict(pcb=B(PX0, PX1, PI['y'][0], PI['y'][1], 18.5, 20.1),
                               jacks=B(PX0 - 3.0, PX0 + 18.0, PI['y'][0], PI['y'][1], 20.2, 36.1),
-                              gpio=B(PX1 - 58.0, PX1 - 7.0, PI['y'][0], PI['y'][0] + 5.1, 20.2, 28.6),
+                              gpio=B(PX1 - 58.0, PX1 - 7.0, PI['y'][0] + 0.96, PI['y'][0] + 6.04, 20.2, 28.6),   # r7 C2:
+                              #   centred on PI['header_rows_y'] (was edge-based, 0.96 off; BX-10)
                               hdmi0=dict(x=PX1 - 25.8, y_edge=PI['y'][1]), cam1=dict(x=(PX1 - 54.0, PX1 - 44.0)),
                               usbc=dict(x=PX1 - 11.2), button=PI_BUTTON, led=PI_LED, holes=PI['holes'],
                               underside=B(PX0, PX1, PI['y'][0], PI['y'][1], 16.0, 18.5))),
@@ -815,9 +905,10 @@ COTS = {
     'pack': dict(name='1S2P 18650 pack, BMS, XT30 male lead, pull ribbon', pn='class', src='estimate', mass=105.0,
                  step=10, box=B(-64.5, -26.5, -10.0, 10.0, -108.8, -36.8)),
     # r4: the inline pigtail fuse (PIGTAIL_FUSE) rides with the junction, under the pair; the box grows down to hold it
-    'xt30_pair': dict(name='XT30 pair (pigtail female + pack male) + 180 mm 18 AWG pigtail with its inline 15 A fuse',
+    'xt30_pair': dict(name='XT30 pair (pigtail female + pack male) + fused 18 AWG pigtail (cut length L_cut, PIGTAIL) '
+                           'with its inline 15 A fuse',   # r7 C3 (BX-3): mass +2 x 20 mm at about 10 g/m [est]
                       pn='XT30U; fuse Littelfuse 0251015.MXL', src='estimate; fuse body: Littelfuse 251 datasheet rev VL',
-                      mass=11.6, step=10, box=B(-63.0, -37.0, -5.1, 5.1, -26.5, -14.8)),   # INTEGRATOR: inside ko_xt30
+                      mass=12.0, step=10, box=B(-60.25, -34.25, -7.8, 7.6, -36.4, -30.0)),   # r7 fix-up: flat on the pack top, under the run button, centred between the bay wall and the base_grip; female (pigtail) end -X
     'tripod_nut': dict(name='1/4-20 UNC hex nut, steel', pn='ISO 4032 class', src='standard', mass=4.0, step=3,
                        box=B(TRIPOD['x'] - 6.4, TRIPOD['x'] + 6.4, -6.4, 6.4, *TRIPOD['nut_z'])),
     'strap': dict(name='12 mm hand strap with buckle', pn='class', src='estimate', mass=15.0, step=3,
@@ -843,18 +934,26 @@ CABLES = [
     dict(id='oled_flex', name='OLED flex 50 mm (kit)', frm='HMX039', to='EVF board ZIF', via=[], length=50, steps=(6,)),
     # FIXER A-F1: header ends of qt, fps_lead and run_lead plug at step 4 (top open); the panel-side joints at step 8
     #   are the QT JST-SH at the encoder and a 2-pin JST PH inline junction on the 18/24 lead.
-    dict(id='qt', name='STEMMA QT to female sockets 150 mm (Adafruit 4397)', frm='encoder', to='GPIO 1/3/5/6',
-         via=['ko_qt_lead', 'ko_lead_wall', 'ko_lead_link', 'ko_lead_cross'], length=150, steps=(4, 8)),
+    # r7 C2 (BX-2, SPEC-C2 3.1): 250 mm (240-270) spliced lead; the route runs on to the plug (ko_qt_tail, ko_qt_plug);
+    #   the spare folds into ko_lead_stow at step 8 (cable_stow); od = bundle envelope, design value until MP-QT
+    dict(id='qt', name='QT lead 250 mm: Adafruit 4397 (sockets) spliced to Pololu 5521 (JST-SH)', frm='encoder',
+         to='GPIO 1/3/5/6', via=['ko_qt_lead', 'ko_lead_wall', 'ko_lead_link', 'ko_lead_cross', 'ko_qt_tail',
+                                 'ko_qt_plug'],
+         length=250, length_range=(240, 270), stow='ko_lead_stow', od=3.2, steps=(4, 8)),
     dict(id='run_lead', name='run button lead (pre-wired, Dupont)', frm='run button', to='GPIO26 + GND (pins 37/39)',
          via=['ko_run_drop', 'ko_run_floor', 'ko_run_rise', 'ko_run_link', 'ko_run_cross', 'ko_lead_wall',
               'ko_run_leads'], length=250,
-         steps=(3, 4)),
+         steps=(3, 4), od=1.6, cores=2, lanes=['ko_run_floor']),   # r7 C3 (BX-11): od per core [est, MP-RUN]; taped lane
     dict(id='fps_lead', name='2-way Dupont-to-JST PH lead 200 mm + 50 mm PH pigtail on the switch (2 joints)',
          frm='18/24 switch', to='GPIO13 + GND (pins 33/34)',
          via=['ko_run_leads', 'ko_lead_wall', 'ko_lead_link', 'ko_lead_cross', 'ko_hdmi_run', 'ko_panel_link',
-              'ko_fps_up'], length=200, steps=(1, 4, 8)),
-    dict(id='pigtail', name='XT30 pigtail 18 AWG 180 mm', frm='X1203 battery pads', to='XT30 junction in the grip',
-         via=['ko_pig_wrap', 'ko_pig_under', 'ko_pig_in', 'ko_pig_drop', 'ko_pig_link', 'ko_xt30'], length=180, steps=(1, 4)),
+              'ko_fps_up'], length=200, steps=(1, 4, 8),
+         pigtail=50.0, stow='ko_lead_stow', od=2.6, junction_mm3=576.0),   # r7 C2: PH inline pair 6 x 8 x 12 (MP-QT)
+    # r7 C3 (BX-3): cut length 200 mm + d_board (PIGTAIL rule; G-W2 sets the real L_cut); BX-11: leg taped in ko_pig_under
+    dict(id='pigtail', name='XT30 pigtail 18 AWG, cut length 200 mm + d_board (PIGTAIL, G-W2)', frm='X1203 battery pads',
+         to='XT30 junction in the grip',
+         via=['ko_pig_wrap', 'ko_pig_under', 'ko_pig_in', 'ko_pig_drop', 'ko_pig_link', 'ko_xt30'], length=200, steps=(1, 4),
+         od=2.4, cores=2, lanes=['ko_pig_under']),
     dict(id='fan', name='Active Cooler fan lead (native, JST-SH 4)', frm='Active Cooler', to='Pi 5 FAN header', via=[],
          length=60, steps=(1,)),   # INTEGRATOR (docs request): length estimate
     dict(id='pack_lead', name='pack lead 18 AWG', frm='1S2P BMS', to='XT30 male', via=['ko_xt30'], length=60, steps=(10,)),
@@ -867,12 +966,117 @@ for _c in CABLES:
     _c['ends'] = CABLE_ENDS[_c['id']]
 del _c
 
+
+def _plug(id, cable, end, box, rigid, mated, why, **kw):
+    return dict(id=id, cable=cable, end=end, box=box, rigid=rigid, mated=mated, why=why, **kw)
+
+
+# r7 C1 (BX-1, SPEC-C1 3.2-4 + Plan edits P1-1/P1-2): one entry per (cable, end) of CABLE_ENDS (20). box: a KEEPOUTS id
+#   (final pose) or None (connector inside the end part's own box, or a flexible tail only). mated: ('bench', step),
+#   ('before'|'after', insertion id). A rigid boxed plug mated before an insertion that moves its end is CARRIED by
+#   that insertion (checks.check_sweeps / check_removals); the rigid plug at the fixed end of a cable whose other end
+#   moves stays a hard obstacle. path/head/stroke: the plug's own in-situ mating move (checks.check_mate_paths).
+PLUGS = [
+    _plug('p_hdmi_evf', 'hdmi', 'evf_board', 'ko_hdmi_evf', True, ('after', 'evf_pair_in'),
+          'in situ through the bottom-rail gap AFTER the slide (BX-1): the y 18.9..28.5 slab is the board -Z arrest',
+          path=[(0, 30.0, -12.0), (0, 0, -12.0), (0, 0, 0)],
+          head=B(-144.8, -138.4, 4.0, 17.0, 63.8, 69.8), stroke=6.0),    # head/stroke estimate (MP-HDMI)
+    _plug('p_hdmi_pi', 'hdmi', 'pi5', 'ko_hdmi_pi', True, ('after', 'keeper_in'), '90 deg plug on HDMI0 (C-13)'),
+    _plug('p_fpc_pi', 'fpc', 'pi5', None, False, ('after', 'keeper_in'), 'latch on the Pi; the flex is the tail'),
+    _plug('p_fpc_cam', 'fpc', 'gs_camera', 'ko_fpc_stiff', True, ('before', 'camera_in'),
+          'stiffener about 3 mm behind the cover (estimate, MP-CAM)'),
+    _plug('p_usb_pi', 'usb_5v', 'pi5', 'ko_usb_evf', True, ('after', 'keeper_in'), 'USB-A in the upper USB 2 port'),
+    _plug('p_5v_board', 'usb_5v', 'evf_board', None, False, ('before', 'evf_pair_in'),
+          'board pigtail + PH junction: flexible tail (BX-9; MATE_POSES usb_5v_evf)'),
+    _plug('p_flex_oled', 'oled_flex', 'hmx039', None, False, ('bench', 6), 'both ends ride together'),
+    _plug('p_flex_board', 'oled_flex', 'evf_board', None, False, ('bench', 6), 'ZIF; both ends ride together'),
+    _plug('p_qt_enc', 'qt', 'encoder', 'ko_qt_plug', True, ('before', 'panel_on'), 'JST-SH at the encoder'),
+    _plug('p_qt_hdr', 'qt', 'pi5', 'ko_qt_lead', True, ('after', 'keeper_in'), 'header sockets 1/3/5/6'),
+    _plug('p_run_btn', 'run_lead', 'run_button', None, False, ('bench', 3), 'pre-wired inside the button box'),
+    _plug('p_run_hdr', 'run_lead', 'pi5', 'ko_run_leads', True, ('after', 'keeper_in'), 'header sockets 37/39'),
+    _plug('p_fps_sw', 'fps_lead', 'switch_1824', None, False, ('bench', 2),
+          'lugs inside the switch box; PH pigtail and junction flexible'),
+    _plug('p_fps_hdr', 'fps_lead', 'pi5', 'ko_run_leads', True, ('after', 'keeper_in'), 'header sockets 33/34'),
+    _plug('p_pig_pads', 'pigtail', 'x1203', None, False, ('bench', 1),
+          'solder pads + RTV bead inside the x1203 box (P1-2); the formed U and leg are pi_in riders (SPEC-C3)'),
+    _plug('p_pig_xt30', 'pigtail', 'xt30_pair', None, False, ('before', 'pack_in'),
+          'the xt30_pair box is itself a pack_in mover (BX-3 owns the mate pose)'),
+    _plug('p_pack', 'pack_lead', 'pack', None, False, ('bench', 10), 'the pack\'s own lead, inside ko_xt30 and the pack'),
+    _plug('p_pack_xt30', 'pack_lead', 'xt30_pair', None, False, ('before', 'pack_in'),
+          'the male XT30 half lies inside the xt30_pair box, a pack_in mover'),
+    _plug('p_fan_cooler', 'fan', 'cooler', None, False, ('bench', 1), 'both ends ride together in pi_in'),
+    _plug('p_fan_pi', 'fan', 'pi5', None, False, ('bench', 1), 'both ends ride together in pi_in'),
+]
+
+# r7 C1: ACCESS + FINGERTIP_MM (the hand and tool corridors) sit after REMOVALS/LATCH_FREE (they name REMOVALS ids).
+
+# r7 C2 (BX-10, SPEC-C2 3.1): header housings. Section 2.5-2.6 square (the gap checks use 2.6, the mutual-overlap check
+#   the class minimum 2.5: two housings on adjacent pins stand side by side only if the real section is <= the 2.54
+#   pitch), seat on the header plastic (PCB top + 2.5), length 14-15 (15 used): class values, gate MP-QT / G-HDR-1.
+#   Pin n: x = pin-1 x - 2.54 x ((n - 1) // 2) (pin 1 at the button end, gpio +X end - 1.27), odd row if n is odd.
+HDR_HOUSING = dict(pitch=2.54, sec=(2.5, 2.6), seat_z=PI['pcb_z'][1] + 2.5, length=(14.0, 15.0), min_gap=0.3)
+HDR_USED_PINS = {'qt': (1, 3, 5, 6), 'fps_lead': (33, 34), 'run_lead': (37, 39)}   # WIRING pin map
+HEADER_HOUSINGS = [   # (cable, housing type, pins); type in ('1', '1x2'); a 1x2 only on 2 used, adjacent pins
+    ('qt', '1', (1,)), ('qt', '1', (3,)), ('qt', '1', (5,)), ('qt', '1', (6,)),
+    ('fps_lead', '1x2', (33, 34)),        # D2-25 2-way end: across the rows (or 2 x '1')
+    ('run_lead', '1', (37,)), ('run_lead', '1', (39,)),   # or ('run_lead', '1x2', (37, 39)): C-3 floor hole passes 2.54 x 5.1
+]
+
+# r7 C2 (BX-2, SPEC-C2 3.1 + Plan edits P2-1/P2-4, P1-4): leads mated in a pose other than their final pose.
+#   hands: HAND_ENVELOPES are pinch boxes at the mating pose (a: length behind the plug rear along -axis, t: along
+#   `thick` = axis x row, r: along `row`); ACCESS + FINGERTIP_MM (below REMOVALS) are the explicit in-situ corridors.
+#   out_of = (signed axis, plane, margin): the whole hand box lies beyond plane + margin on that side (the hand works
+#   outside the body, not in the open tub). W / far as a symbolic tuple are resolved by checks._plug_point from L
+#   (('qt_socket', i): ENCODER / PLUG; ('switch_lugs',): SWITCH_1824). Each row names `plug` (a PLUGS id) or
+#   `inline_of` (a cable whose inline junction is mated). The margin is checks.reach_margin(L, length_min).
+MATE_MARGIN = 10.0      # plug body + strain-relief bend; never less than the cable_routes allowance (24 mm at 240 mm)
+HAND_ENVELOPES = {
+    'pinch_sh':   (30.0, 20.0, 24.0),   # JST-SH 1.0 pitch: index + thumb on the 6 mm sides, fingers' width along t
+    'pinch_ph':   (35.0, 22.0, 26.0),   # JST-PH 2.0 inline pair (box centred on the window midpoint, a along the lead)
+    'pinch_ph1':  (20.0, 22.0, 26.0),   # r7 fix-up (VERIFY-C2), estimate: one hand's pinch on ONE PH housing (`hand2`)
+    'pinch_xt30': (40.0, 30.0, 30.0),
+    'pinch_zif':  (25.0, 20.0, 30.0),   # FPC into a ZIF on a part held in the other hand
+}
+MATE_POSES = [
+    dict(id='qt_enc', cable='qt', plug='p_qt_enc', step=8, insertion='panel_on', disp=(0, 60.0, 0), end='encoder',
+         W=('qt_socket', 0), axis=ENCODER['qt_socket']['entry'], row=(0, 0, 1), anchor='ko_lead_cross',
+         hand='pinch_sh', out_of=('+y', YL, 0.0)),
+    dict(id='fps_ph', cable='fps_lead', inline_of='fps_lead', step=8, insertion='panel_on', disp=(0, 60.0, 0),
+         end='switch_1824', far=('switch_lugs',),     # = (SWITCH_1824 c x, body a0, c z) = (-123.0, 19.2, 57.0)
+         anchor='ko_fps_up', hand='pinch_ph', row=(0, 0, 1), junction_out=15.0, opening=('+y', SPLIT),
+         out_of=('+y', YL, 0.0), hand2='pinch_ph1'),   # r7 fix-up: two hands, one per housing (panel propped)
+    dict(id='fpc_cam', cable='fpc', plug='p_fpc_cam', step=7, insertion='camera_in', disp=(-11.1, 60.0, 2.0),
+         end='gs_camera', W=(cam_cover_rear(0.0) - 0.2, 0.0, 43.2), axis=(1, 0, 0), row=(0, 1, 0),
+         anchor='ko_fpc_link', hand='pinch_zif', out_of=('+y', YL, 0.0)),
+    dict(id='oled_flex', cable='oled_flex', plug='p_flex_board', step=6, insertion='evf_pair_in',
+         both_moving=True),   # info row: both ends ride in one moving set
+    # C1 (P1-4, PLAN X-5): the EVF 5 V PH junction is mated a hand's width out before the slide. Pigtail credit 0 (the
+    #   board's own pigtail is not modelled; MP-EVF records its length and exit point); far = board +X face, -Y end,
+    #   ko_5v_end z centre (the deepest credible pigtail root, estimate). Hand and out_of are 'info' until MP-EVF.
+    dict(id='usb_5v_evf', cable='usb_5v', inline_of='usb_5v', step=6, insertion='evf_pair_in', disp=(0, 60.0, 0),
+         end='evf_board', far=(-136.8, 1.0, 67.0), pigtail=0.0, anchor='ko_5v_up', hand='pinch_ph', row=(0, 0, 1),
+         junction_out=15.0, opening=('+y', SPLIT), out_of=('+y', YL, 0.0), info=('hand', 'out_of'), gate='MP-EVF',
+         hand2='pinch_ph1'),
+    # C3 (BX-3) owns the xt30 row (pigtail, pack_in; reach='pigtail'): REQUIRED by checks mate_paths coverage.
+    #   W = XT30 female wire entry (xt30_pair box top, +X end) at the final pose; disp puts it 15 mm below the grip mouth
+    #   (z -125, no housing credit). reach='pigtail': slack = checks._pigtail_face_out - face_out_min (the lead_access
+    #   model). axis = draw-out direction; the hand holds both housings beyond W along it; row = XT30 long side (x).
+    dict(id='xt30', cable='pigtail', plug='p_pig_xt30', step=10, insertion='pack_in', disp=(0, 0, -95.0),   # r7 fix-up: W z -30 -> -125
+         end='xt30_pair', W=(COTS['xt30_pair']['box']['x'][0], 0.0, COTS['xt30_pair']['box']['z'][1]), axis=(0, 0, -1),   # female end -X
+         row=(1, 0, 0), anchor='ko_pig_drop', hand='pinch_xt30', out_of=('-z', GRIP['bay']['z'][0], 15.0),
+         reach='pigtail',
+         hang=dict(part='pack', cable='pack_lead', lead_end='+x')),   # both hands on the housings; r7 fix-up: the pack is held in the palm at
+    #   this computed spot beyond the pinch (camera resting on its right side, REST_POSES right_down_10), not hanging
+
+]
+
 # =============================================================================== 7. cable and plug keep-outs
 # Concept keep-outs shifted to the D2 frame; y clipped to <= 32.0 (panel inner face 32.2). Printed parts stay out of
 # these (check: overlap volume with each printed solid; the cable's own COTS ends are exempt).
 KEEPOUTS = {
     'ko_qt_lead': B(-21.0, -11.0, -31.7, -25.8, 28.8, 40.0),        # QT sockets on GPIO 1/3/5/6
-    'ko_run_leads': B(-63.0, -50.0, -31.7, -25.8, 28.8, 40.0),      # run + 18/24 sockets on pins 33-39
+    'ko_run_leads': B(-64.5, -50.0, -31.7, -25.8, 28.8, 40.0),      # run + 18/24 sockets on pins 33-39 (r7 C2 BX-10: x0 was
+    #                                                                 -63.0; the pin-39 housing reaches x -63.83)
     'ko_usb_evf': B(-125.0, -94.0, -32.0, -16.5, 27.2, 37.0),       # USB-A plug of the EVF 5 V lead + bend
     'ko_5v_up': B(-131.0, -125.0, -32.0, -24.0, 27.2, 70.0),
     'ko_5v_end': B(-136.5, -130.0, -24.0, 1.5, 64.0, 70.0),         # INTEGRATOR: +1 x for the diode splice + PH junction
@@ -898,8 +1102,10 @@ KEEPOUTS = {
     'ko_lead_cross': B(-84.0, -74.0, -32.3, 20.0, 36.6, 44.0),       # across behind the blower inlet, over the jacks
     'ko_run_cross': B(-27.0, -21.0, -32.3, 24.1, 36.6, 39.8),        # run lead over the cooler shroud, under the camera
     'ko_fps_up': B(-128.0, -113.0, 14.0, 19.0, 44.0, 57.0),          # 18/24 lead up to the switch lugs (PH junction)
-    'ko_pig_wrap': B(-40.5, -35.5, 23.7, 26.5, 2.7, 10.0),           # pigtail round the X1203 port edge (pads: Q2)
-    'ko_pig_under': B(-40.5, -35.5, -5.0, 23.7, 2.7, 5.8),           # under the X1203 to ko_pig_in
+    # r7 C3 (BX-3/BX-11 review): x -40.5..-35.5 -> -40.0..-35.0 (1.0 forming tolerance to the keeper bar/kf4 end x -41.0
+    #   and to the run lanes x -34.0); wrap y1 26.5 -> 26.9 (U centreline r 2.0 about (23.7, 6.8) + OD 2.4 / 2)
+    'ko_pig_wrap': B(-40.0, -35.0, 23.7, 26.9, 2.7, 10.0),           # pigtail round the X1203 port edge (pads: Q2)
+    'ko_pig_under': B(-40.0, -35.0, -5.0, 23.7, 2.7, 5.8),           # under the X1203 to ko_pig_in (leg taped to the board)
     # r4 (cable_routes check): link boxes where consecutive route boxes left a gap (0.1-10 mm) or met only along an
     # edge (run lead: a 4 x 0.4 window). Each overlaps both neighbours by >= 1.0 in 2 axes, so every chain is one
     # continuous reserved passage that the keepouts check and the sweeps see. The gaps held no printed solid when they
@@ -914,6 +1120,33 @@ KEEPOUTS = {
 # r5 (J7-R, judge 3 s6.2): the default lens's thumb-screw sweeps (a full ring each; printed parts stay out). Boxes of
 # the LENS at import (the Kowa: x 13.1..16.9 and 31.7..35.5, r 24); a --lens run keeps them (conservative).
 KEEPOUTS.update(lens_thumb_keepouts())
+# r7 C1 (SPEC-C1 3.2-5): rigid connector bodies that ride with a moving part (PLUGS below; carried in sweeps/removals).
+#   ko_fpc_stiff: FPC stiffener in the camera socket, about 3 mm proud of the cover rear (estimate; MP-CAM); derived
+#   from cam_cover_rear() so it follows the J7-R s; it lies inside ko_fpc_cam.
+#   ko_qt_plug: JST-SH plug + wire bend on the used encoder socket (estimate, SHR-04V-S + bend; MP-ENC / MP-QT).
+#   PLAN X-1 / Plan edit P1-1: SPEC-C2's box (0.05 off the encoder box); SPEC-C2 (S3) adds it to the qt via.
+_fs = CAM['fpc_socket']
+_fz = LENS_AXIS[1] - CAM['cover']['sq'] / 2 + _fs['z_above_bottom']
+KEEPOUTS['ko_fpc_stiff'] = B(cam_cover_rear() - 3.0, cam_cover_rear(), -_fs['w'] / 2, _fs['w'] / 2, _fz, _fz + _fs['h'])
+KEEPOUTS['ko_qt_plug'] = B(-80.0, -75.7, 19.0, 24.6, 51.0, 61.0)
+del _fs, _fz
+# r7 C2 (BX-2, SPEC-C2 3.1): QT tail from the cross run up to the encoder's -X socket, and the spare-lead stow.
+KEEPOUTS['ko_qt_tail'] = B(-84.0, -78.3, 14.0, 23.0, 43.0, 61.0)    # x max 0.5 off the encoder side cradle hook
+#   (x -77.8..-75.6, z 45..50); ko_qt_plug z >= 51 clears the hook by 1.0
+KEEPOUTS['ko_lead_stow'] = B(-108.0, -78.3, 21.0, 31.7, 43.0, 75.0)   # QT + 18/24 spare and PH junction: on the HDMI
+#   run (1 mm overlap joins it to fps_lead's route), under the panel face (32.2), between the 18/24 switch (x <= -110.5)
+#   and the hook; above z 75 unprobed (MP-QT)
+# r7 C1 (SPEC-C1 3.2-6): contact class of a keep-out for the carried-body rule (checks.check_sweeps): 'plug' = a rigid
+#   connector body (hard for a carried box), every other keep-out = 'cable' (a flexible bundle a hand presses aside:
+#   soft up to checks.CARRY_SOFT_MM for a carried box). Part movers keep the hard rule against every keep-out.
+KEEPOUT_KIND = {k: 'plug' for k in ('ko_hdmi_pi', 'ko_hdmi_evf', 'ko_usb_evf', 'ko_qt_lead', 'ko_run_leads',
+                                    'ko_qt_plug', 'ko_fpc_stiff', 'ko_xt30')}
+
+
+def keepout_kind(k):
+    return KEEPOUT_KIND.get(k, 'cable')
+
+
 EXTERIOR_KEEPOUTS = {
     'ko_tripod_clamp': dict(box=B(TRIPOD['x'] - 25.0, TRIPOD['x'] + 25.0, -25.0, 25.0, -23.0, BASE['z'][0]),
                             ignore=['strap'], note='50 x 50 x 15 clamp; clears the grip by 11; the soft strap folds aside'),
@@ -972,47 +1205,120 @@ MATES = [
     ('pi5', 'usb_stick', 'press'), ('xt30_pair', 'pack', 'contact'),
 ]
 # every PT screw 'pierces' the parts it joins (thread-forming into a 2.5 pilot): exempt by id prefix 's_'.
+# r7 C5 (BX-5; SPEC-C5 3.1, Plan edits P5-4/P5-5): how every 'press' mate is reacted, and where it is made. Checked by
+#   checks.check_handling. retention: 'snap' (the target is held only by snap teeth: press at the bench, target backed
+#   by hand, pressed part carried with the target), 'rigid' (the target is backed by a part present at the press),
+#   'held' (holders with a contact mate back the target), 'hand' (two loose parts pressed in the hands at the bench).
+PRESS_FITS = [
+    dict(part='knob_exp', onto='encoder', axis=(0, -1, 0), step=2, where='bench', retention='snap',
+         backing='thumb flat on the encoder board back (panel off); 0.2 paper shim on the panel face is the stop',
+         backing_axis_d=20.0,                       # thumb column dia, along -axis from the target back face
+         snap_zones=['enc_tooth_top', 'enc_tooth_left', 'enc_tooth_right'], land_on='panel',
+         release_min_N=25.0, release_N=None,        # G-ENC-1: measured -Y pull-out of the cradle; None = not measured
+         contingency='DESIGN-C5-B enc_stop (r7-blockers/DESIGN-C5-B.md s3)'),
+    dict(part='knob_fps', onto='switch_1824', axis=(0, -1, 0), step=2, where='bench', retention='rigid',
+         backing='switch nut on the panel face', snap_zones=[]),
+    dict(part='tripod_nut', onto='base_grip', axis=(0, 0, -1), step=3, where='body', retention='rigid',   # pressed -Z
+         backing='pocket floor (slip fit, the flat bar seats it: BLOCKERS C-10)', snap_zones=[]),         # from the top
+    dict(part='stick_sleeve', onto='usb_stick', axis=None, step=9, where='bench', retention='hand',
+         backing='stick held in the hand before stick_in', snap_zones=[]),
+    dict(part='usb_stick', onto='pi5', axis=(1, 0, 0), step=9, where='body', retention='held',
+         holders=['x1203_kit'], backing='Pi 5 on the X1203 kit standoffs (MATES pi5/x1203_kit contact)', snap_zones=[]),
+]
+_hk, _pcb = ENCODER['cradle_hooks'], ENCODER['pcb']
+_hy = (_pcb['y'][0] - _hk['play'] - _hk['land'] - 0.05, SPLIT)
+SNAP_TOOTH_ZONES = {   # r7 C5: the 3 cradle hook ends (from ENCODER only; check_handling splits displaced overlap by these)
+    'enc_tooth_top': B(ENCODER['c'][0] - _hk['top']['w'] / 2, ENCODER['c'][0] + _hk['top']['w'] / 2, *_hy,
+                       _pcb['z'][1] - _hk['tooth'] - 0.05, _pcb['z'][1] + SL + 2.0),
+    'enc_tooth_left': B(_pcb['x'][0] - SL - 2.0, _pcb['x'][0] + _hk['tooth'] + 0.05, *_hy, *_hk['sides']['z']),
+    'enc_tooth_right': B(_pcb['x'][1] - _hk['tooth'] - 0.05, _pcb['x'][1] + SL + 2.0, *_hy, *_hk['sides']['z'])}
 
 # =============================================================================== 9. assembly steps
 # adds: ids that enter the assembly at this step (printed ids, COTS ids, screw ids). Bench steps (1, 2) build
 # sub-assemblies off the body; their parts enter the body at the step listed in brackets.
 STEPS = [
     dict(step=1, name='Bench: power stack', tool='soldering iron; multimeter; kit driver (PH1 or as supplied)',
-         action='Solder the 180 mm XT30 pigtail to the X1203 battery pads (2 joints). Solder the EVF 5 V lead (1N5817 '
+         # r7 C3 (BX-3, BX-11; SPEC-C3 3.1): cut-to-length pigtail, U formed and the leg taped before the RTV bead
+         action='Make the pigtail to L_cut = 200 mm + the G-W2 pads-to-W length (round up to 5 mm; 200 mm if the pads '
+                'are at W). If the pads-to-W length is more than 25 mm, stop: do not cut (computed `lead_access` '   # r7 fix-up (VERIFY-C3)
+                'pigtail_drop: the G-W5 drop estimate passes 0.15 V above L_cut 225 mm); route the pair under the '
+                'board straight to the hole, move W, or change to 16 AWG with a re-checked lane width, and re-run '
+                'the checks first. L_cut is the finished length from the pad joint to the XT30 rear, with the fuse splice '
+                'included. Solder it to the X1203 battery pads (2 joints) and heat-shrink them. On the bare X1203, lead '
+                'the pair on the top face to W (dry-fit the Pi on the standoffs to find the X1203 edge under its '   # r7 fix-up (VERIFY-C3 minor)
+                'USB/Ethernet ports; pen-mark W on that edge 31.5 mm from the end whose mounting holes are 3.5 mm '
+                'from the edge), coming '
+                'straight in from inside the board, not along the edge. Put one strip of Kapton over the board edge at '
+                'W, fold the pair round the edge, and tape the leg flat under the board with 2 strips of Kapton, '
+                'straight in from W for about 32 mm, to above the pigtail hole. Keep the pair within 1 mm of the mark. '
+                'The rest hangs free. (Pads on the underside: run the pair straight under the board to that point and '
+                'tape it, with no U.) Strain relief: a neutral-cure silicone RTV bead over both joints and the first '
+                '8-10 mm of the pair, bonded to the board (not acetoxy; keep it off the pogo pads and connectors; keep '
+                'it at least 1 mm inside the board edge and no more than 3.5 mm from W toward the USB end, where '
+                'the keeper finger lands). Stack '
+                'only when the bead is tack-free, and do not pull on the pigtail before the full cure the tube states. '
+                'Solder the EVF 5 V lead (1N5817 '
                 'in the + conductor + PH junction, 3 joints) and check it with a multimeter. Stack X1203 + Pi 5 with the kit '
-                '(4 standoffs, 8 M2.5 screws, 0.2 N m), fit the Active Cooler; tie the pigtail to a standoff (strain '
-                'relief). Bridge encoder A0 (1). Solder the 50 mm JST PH pigtail to the 18/24 switch (2). Flash the '
+                '(4 standoffs, 8 M2.5 screws, 0.2 N m), fit the Active Cooler. Bridge encoder A0 (1). Solder the 50 mm JST PH pigtail to the 18/24 switch (2). Flash the '
                 'microSD (G-W3), then take it OUT of the Pi for steps 3-4.', adds=[], bench=['x1203', 'x1203_kit', 'pi5', 'cooler'], in_body=False),
+    # r7 C5 (BX-5, BX-14; SPEC-C5 3.1/5.1): the switch shaft is cut off the panel; both knobs are pressed on here,
+    #     panel off, the encoder board backed by a thumb (PRESS_FITS, checks.check_handling); they ride with the panel
     dict(step=2, name='Bench: panel', tool='paint pen; 12.7 mm (1/2 in) socket or spanner for the switch nut; '
-         'junior hacksaw + file',
-         action='Paint-fill the engraving. Snap the encoder into its cradle. Fit the 18/24 switch (tab in its slot) '
-                'and its nut, finger-tight + 1/8 turn. Cut the switch shaft 7.0 mm above the panel face (to y 42.0) '
-                'and deburr.', adds=[], bench=['panel', 'encoder', 'switch_1824'], in_body=False),
+         'junior hacksaw + file; caliper with depth rod; vise with soft jaws (2 wood offcuts); printer paper, 2 strips '
+         '(about 0.2 mm together)',
+         action='Paint-fill the engraving. Switch shaft, off the panel: fit the 18/24 switch dry (tab in its slot, the '
+                'washer as supplied, nut finger-tight). Measure how far the shaft stands above the panel face (P, '
+                'caliper depth rod). Take the switch off. Clamp the end that will be cut off (at least about 8 mm in '   # r7 fix-up (VERIFY-C5 minor)
+                'the soft vise jaws) and saw P - 6.9 mm off the shaft end beside the jaws on the switch side, the '
+                'switch hanging free; if less than that comes off, file the shaft down instead. Never clamp the bushing thread; never saw '
+                'with the switch on the panel. Deburr. Refit the switch (tab in its slot), nut finger-tight + 1/8 '
+                'turn. Encoder: snap it into its cradle by pushing on the back of its board until all 3 hooks click. '
+                'Knobs: lay the 2 paper strips on the panel face round the encoder shaft. Hold the panel in one hand '
+                'with that thumb flat on the back of the encoder board. Press knob_exp onto its D shaft with the other '
+                'palm until it stops on the paper. Your thumb takes the push, not the hooks. Move the 2 strips round '
+                'the switch shaft and press knob_fps on until it stops on the paper, its D flat to the shaft flat '
+                '(the switch nut takes the push). Pull the paper out. From now '
+                'on the knobs ride with the panel: never press a knob while the panel is on the body.',
+         adds=[], bench=['panel', 'encoder', 'switch_1824', 'knob_exp', 'knob_fps'], in_body=False),
     dict(step=3, name='Base + grip', tool='tweezers (press the nut with a flat bar)',
          action='Press the tripod nut into its pocket from '
-                'the top. Drop the run button into its cradle through the base opening, then press its red cap on '
-                'through the grip-face hole. Thread the strap. Lower the tub onto the base with the base 10 mm '
-                'back, tongues through the windows, slide the base 10 mm forward (unlocked until step 8). Only now '
-                'fish the run lead up through the floor hole with tweezers from inside the open tub (the base opening '
-                'and the hole overlap only at the final pose).',
+                'the top. Before the run button goes in, pass the run-lead socket end (separate 1-pin housings) in '   # r7 fix-up (VERIFY-C3 minor)
+                'through the base opening and push it up through the base passage from below (nothing is under the '
+                'passage yet). Then drop the run button into its cradle through the base opening, drawing the slack '
+                'up through the passage, and press its red cap on through the grip-face hole. Thread the strap. '
+                # r7 C3 (BX-16, SPEC-C3 3.1): threaded before the tub goes down (lead_access run_lead_window)
+                'Hold the tub over the base with the base 10 mm back. Push the run-lead sockets on up through the '
+                'rear (-X) end of the floor run-lead hole into the tub. '
+                'Lower the tub, tongues through the windows, keeping the lead lightly pulled up so that it stays in the '
+                'rear end of the hole. Slide the base 10 mm forward (unlocked until step 8); the lead moves to the '
+                'front end of the hole by itself. Lay the run lead in its floor lane and tape it flat with Kapton; let '
+                'the socket end hang out over the open +Y side.',
          adds=['tub', 'base_grip', 'tripod_nut', 'run_button', 'strap']),   # R2: skirt_r removed
     # --- R1 step 4 (owner R1): keeper + s_k1/s_k2 replace the r1 floor hooks
     dict(step=4, name='Pi stack + keeper + header leads',
          tool='straight PH1 screwdriver as step 8 (keeper screws s_k1, s_k2); ESD strap; the microSD is out',
-         action='Lay the run lead in its floor channel. Feed the XT30 pigtail round the port edge and down through the '
-                'pigtail hole. Lower the '
+         action='Check that the run lead is still taped flat in its lane, with its socket end held out over the open '   # r7 C3
+                '+Y side. Feed the XT30 end (long side front to back) down through the pigtail hole; the taped leg comes '
+                'down with the stack. Hold the stack\'s port edge away from the U (more than 10 mm from the W mark). '
+                'Lower the '
                 'stack about 3 mm back from the front wall and 2 mm off the right wall; below the right-wall pads move '
                 'it to the right wall; just above the floor slide it 2.8 forward and set it down on its 4 bosses (the '
-                'kit screw heads drop into the boss pockets; nothing clicks). Keeper: hold it level from the open '
+                'kit screw heads drop into the boss pockets; nothing clicks). Push the XT30 and the free pigtail up into the empty grip bay so that nothing hangs below the grip mouth; it stays there until step 10. Keeper: hold it level from the open '
                 'left side, 0.5 above its 2 bosses and 1.2 behind its place, slide it in -Y under the stick-guide '
                 'rail until its port fingers are over the X1203 edge, push it 1.2 forward (the 2 USB fingers go '
                 'under the Pi), lower it onto its bosses and drive s_k1 and s_k2 straight down: 0.35-0.5 N m, stop '
                 'at head contact. Plug the HDMI (90 deg plug) on '
                 'HDMI0, the FPC on CAM1 (camera end loose), the EVF 5 V lead in the upper USB 2 port. With the top '
-                'open and the header in sight, plug the header ends: QT lead on pins 1/3/5/6 (red on pin 1, 3V3), the '
-                '18/24 lead on 33/34 and the run lead on 37/39 (count from pin 1; an off-by-one plug puts 5 V on the '
-                'QT 3V3 wire). Run the QT and 18/24 leads along the right wall and across behind the blower inlet '
-                '(ko_lead_wall, ko_lead_cross); park their free ends out of the open left side. The run lead crosses '
+                'open and the header in sight, plug the header ends, one housing at a time: QT lead (250 mm) on pins '
+                '1/3/5/6 (red on pin 1, 3V3), the 18/24 lead on 33/34 and the run lead on 37/39 (count from pin 1; a '
+                'housing one row over puts 5 V from pin 2 on the QT 3V3 wire). Seat each housing straight down with '
+                'open tweezer tips straddling the wire, pressing on both sides of the housing top, until it stops on '   # r7 fix-up (VERIFY-C2 minor)
+                'the header plastic. Fingers do not fit beside them. '
+                'Then tug each wire straight up gently: no housing may lift. Use single 1-pin housings (a 1x2 only on '
+                '33/34 or 37/39); never a 1x3 or 2x3 shell. Run the QT and 18/24 leads along the right wall and '
+                'across behind the blower inlet (ko_lead_wall, ko_lead_cross), with the QT splice sleeve in the '
+                'straight part of the cross run, not in a corner; park their free ends out of the open left side. '   # r7 C2
+                'The run lead crosses '
                 'over the cooler shroud (ko_run_cross).',
          adds=['x1203', 'x1203_kit', 'pi5', 'cooler', 'pi_keeper', 's_k1', 's_k2']),
     # --- R1 step 4 end
@@ -1020,12 +1326,29 @@ STEPS = [
          action='Hold the plunger in the front-wall hole (flange outside). Lower the hood straight down until the 4 hooks '
                 'click; the front plate traps the plunger. Push the microSD home through the front slot (both walls) '
                 'with tweezers, contacts up, until it latches.', adds=['plunger', 'hood', 'microsd']),
-    dict(step=6, name='EVF', tool='tweezers',
+    # r7 C1 (BX-1, BX-7, BX-9; SPEC-C1 3.2-1 + PLAN s4): pad stuck to the OLED, pair slid in with the HDMI unplugged,
+    #     PH junction tucked, then the HDMI plug pushed up through the rail gap in situ (PLUGS p_hdmi_evf, ACCESS)
+    dict(step=6, name='EVF', tool='tweezers (120 mm, tool 8); fingertip for the HDMI push (on the stick-guide top or '
+                                  'up from the open well; the steel rule, tool 10, held upright as a push stick if a '
+                                  'fingertip does not fit); smooth-jaw pliers (tool 15) optional to carry the plug',
          action='Push the eyepiece spigot +X into the rear-wall bore through the housing, flange on the rear face. '
-                'Outside the body: flex into the board ZIF (latch closed), HDMI plug into the board, 5 V PH junction '
-                'mated (pull the lead ends out of the open left side). Then slide the OLED and the board in together as '
-                'a tethered pair (OLED into its cell, foam pad behind it, board into its slot). Coil the HDMI slack '
-                'over the stick guide (ko_hdmi_coil); tuck the PH junction into ko_5v_end.',
+                'On the bench: stick the foam pad to the OLED back (adhesive side to the OLED, centred). Fit the flex '
+                'into the board ZIF and close the latch. Mate the 5 V PH junction with the pair held about 60 mm (a '
+                'hand\'s width) out of the open left side. Do NOT plug the HDMI yet. Slide the OLED and the board in '
+                'together as a tethered pair (OLED and pad into the cell, board into its slot) until the board stops. '
+                'Keep the PH junction riding above the bottom rail, beside the board\'s +X face. When the board is '
+                'home, push the junction -Y and down into ko_5v_end with the 120 mm tweezers. Then (only after gate '
+                'G-W7 passed) pinch the right-angle HDMI plug\'s +Y end top and bottom (thumb under it, over the open '
+                'well), or hold its +Y half in the smooth-jaw pliers (tool 15), cable leading -Y, and feed it in from '
+                'the open left side (plug top below z 52) under the bottom-rail end to below the board\'s receptacle, '
+                'keeping its bottom above the stick-guide top (z 36) until it is under the receptacle. Lift it to the '
+                'receptacle mouth, then push it straight up until it seats: a fingertip lies flat on the stick-guide '
+                'top (z 36, under the plug\'s -Y half) and lifts the plug; if it does not fit there, come up from the '
+                'open well below (tub floor, open from y 11 to the open side) and push straight up under the plug\'s '
+                '+Y half (fingertip, or the end of the steel rule, tool 10, held upright as a push stick), keeping the '
+                'plug square. Never lever against the board or the guide edge. Coil the HDMI slack over the stick guide (ko_hdmi_coil). '
+                'From now until the panel is on (step 8) keep the body level or nose-down: only the panel\'s EVF cap '
+                'stops the eyepiece moving rearward.',
          adds=['eyepiece', 'hmx039', 'foam_pad', 'evf_board']),
     # r5 (J7-R, R5-BRIEF choice 7, preferred order): camera + adapter, then the collar with the panel still off (step 7);
     #     the lens through the collar with a finger on the camera through the open left side, then s_c4, then the panel
@@ -1042,52 +1365,127 @@ STEPS = [
                 'rear cone seats in the tub lip and its front cone in the collar bore chamfer; hold it home with a '
                 'thumb and tighten s_c1, s_c2, s_c3 from the front, 0.15 N m provisional cap, stop at head contact; '
                 'pull the gauge out. Camera: plug the FPC into it, bring it in from the left, 11 mm behind its place, '
-                'then push it +X 11.1 until the adapter has passed the tub lip (path: in at 2 mm high, lower 2 mm, '
+                'then push it +X 11.1 until the adapter has passed the tub lip and the lock tab has gone in between '
+                'the two tab-catch tines under the hood (if the tab stops on a tine end, roll the camera level and '
+                'push again) (path: in at 2 mm high, lower 2 mm, '
                 'then +X 11.1); it rests in its cage (BFAR in the counterbore, tab near the wall) until the lens '
                 'carries it. Fold the FPC slack into its loop.',
          adds=['lens_collar', 's_c1', 's_c2', 's_c3', 'gs_camera', 'c_cs_adapter']),
     dict(step=8, name='Lens + panel + 5 screws', tool='PH1 screwdriver, 40 mm+ blade, dia <= 6.5 shank (hand only)',
-         action='Lens, panel still off: fit s_c4 loosely; pass the lens through the collar and screw it into the adapter '
-                'while finger and thumb through the open left side hold the camera by its metal lens mount (housing, '
-                'never the cover or the PCB) forward (+X) on the temporary lip catch, so the thread torque never '
-                'passes the housing-to-PCB joint; set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the '
-                'knurl seats on the collar cone; the camera now hangs on the lens (it touches neither the tub lip, '
-                'the counterbore nor the fin); snug s_c4 straight down from above, 0.2 N m. '
-                'Panel: hold it beside the body; plug the QT lead into the encoder (JST-SH) and mate the 18/24 PH '
-                'junction (header ends went on at step 4). Push the panel on along -Y (tongue into the hood groove, '
+         action='Lens, panel still off: fit s_c4 loosely. Lay the body on its right side on the folded cloth, open '   # r7 fix-up: REST_POSES right_down_8
+                'left side up. One fingertip on the centre of the camera cover, from above through the open left '
+                'side, presses the camera forward (+X) onto its lip catch: push only, never pinch or turn '
+                'the cover. Pass the lens through the collar. Screw it into the adapter with fingertips until it '
+                'stops, with no extra snug. The camera turns with it about 3 deg until its metal lock tab meets the '
+                'hood tab catch, which holds it through metal. '
+                'Set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the '
+                'knurl seats on the collar cone. Stand the camera upright on the bench, one hand on the grip from '
+                'now until s_c4 is snug (it tips at about 6 deg if let go). With s_c4 still loose, turn lens and '   # r7 fix-up (VERIFY-C4)
+                'camera together the other way until the lock tab stops on the other tine (about 6.5 deg of free '
+                'roll), then back about half way: a soft stop each way means the tab is free; leave it floating '
+                'between the tines. The camera now hangs on the lens (it touches neither the tub lip, the '
+                'counterbore nor the tab-catch tines); snug s_c4 straight down from above, 0.2 N m. '
+                'Panel (knobs on since step 2): a helper holds the body upright by the grip until the panel is home '   # r7 fix-up (VERIFY-C2/C5)
+                '(never leave it standing on its grip end). Prop the panel about a hand\'s width (60 mm) off the '
+                'body, inner face toward it, its bottom edge on a block or book stack as tall as the grip (about '
+                '110 mm, so the panel stands level with the body). Mate the 18/24 PH junction first, with both '
+                'hands, one on each housing. Then plug the QT: one hand steadies the panel, its thumb behind the '
+                'encoder\'s +X edge; the other holds the QT plug by its rear end and pushes it into the encoder\'s '
+                'rear-side socket (the one nearest the lead), finishing with a fingernail on its back face: it is '
+                'home when it stops (friction lock, no click). '
+                '(The header ends went on at step 4.) Move the panel toward the body along -Y, body upright. At about '
+                '30 mm off, reach down from above between the body and the panel and lay the spare QT lead as a flat '
+                'fold in the space between the encoder and the 18/24 switch, on top of the HDMI cable (push the loop '
+                'by the plug into the fold as the panel closes); lay the 18/24 spare and its PH junction in the same '
+                'space at the switch end; keep both away from the blower. Keep the body upright until the panel is '
+                'fully home. '   # r7 C2
+                'Push the panel on along -Y (tongue into the hood groove, '
                 'boss tabs into the lip notches, flush; the keeper finger is the camera\'s rear catch). '
-                'Drive s_b1, s_b2 up from below and s_r1, s_r2 from the right: 0.35-0.5 N m, stop at head contact.',
-         adds=['lens', 's_c4', 'panel', 'encoder', 'switch_1824', 's_b1', 's_b2', 's_r1', 's_r2']),   # R2: skirt_l removed
-    dict(step=9, name='Exterior', tool='none',
-         action='Push the knobs on (D shafts), the eyecup over the barrel. Fit the sleeve to the stick, push the stick '
-                'in from the rear. (r5: the adapter went in with the camera at step 7, the lens at step 8.)',
-         adds=['knob_exp', 'knob_fps', 'eyecup', 'usb_stick', 'stick_sleeve']),
+                'Hold the panel home and turn the camera over onto its hood roof on a folded cloth at the bench '   # r7 fix-up: REST_POSES overhang
+                'edge, grip up, right side toward you and its right face within about 20 mm of the edge, so the '
+                'driver handle and your hand are past the edge (the lead fold is now closed in by the panel, as in '
+                'use). Lay a flat block no taller than 25 mm (a closed paperback) on the cloth against the left '
+                'side, between the eyepiece and the lens, and stand it against a wall, a bench stop or a heavy '
+                'object so it cannot slide: it bears on the hood band and the panel strip between the knobs and the '
+                'cloth and keeps the panel home. Drive s_b1 and s_b2 first (now downward). Then drive s_r1 and s_r2 '
+                'level from the right, the block taking the push; hold the grip with your other hand. 0.35-0.5 N m, '
+                'stop at head contact. Turn the camera upright, keeping a hand on the grip. Set it down only on its '
+                'right side: never on its left side (the exposure knob would carry it) and never stand it on its '
+                'grip end (it tips at about 6 deg).',   # r7 C5 (BX-13): REST_POSES
+         adds=['lens', 's_c4', 'panel', 'encoder', 'switch_1824', 'knob_exp', 'knob_fps',   # r7 C5: knobs ride in
+               's_b1', 's_b2', 's_r1', 's_r2']),   # R2: skirt_l removed
+    dict(step=9, name='Exterior', tool='none',   # r7 C5 (BX-5): the knobs went on at bench step 2
+         action='Push the eyecup over the barrel. Fit the sleeve to the stick, push the stick in from the rear. (The '
+                'knobs went on at step 2; r5: the adapter went in at step 7, the lens at step 8.)',
+         adds=['eyecup', 'usb_stick', 'stick_sleeve']),
     dict(step=10, name='Power', tool='PH1 screwdriver (level check only)',
-         action='Plug the pack XT30 into the pigtail at the grip mouth, push the junction and the pack up, slide the '
-                'cap on (-X) until the detent clicks. Level check on live view: if the horizon is off, loosen s_c4 '
-                'half a turn, turn lens and camera together (window +-1.4 deg: the cover keeps >= 0.3 off the hood '
-                'roll fin), push the lens back onto the cone, re-snug s_c4 0.2 N m.', adds=['xt30_pair', 'pack', 'cap']),
+         action='Lay the camera on its right side on the folded cloth (REST_POSES right_down_10; never on its '   # r7 fix-up (VERIFY-C3)
+                'left side, and not on its hood roof now: the eyecup stands proud of it). Draw the pigtail XT30 out of the grip mouth until the whole XT30 housing and at '   # r7 C3
+                'least 15 mm of wire behind it are out (estimate: about 28 mm of wire or more). If it does not '
+                'reach, stop: never mate it inside the bay. Hold the pack in your palm, its XT30 in your fingers, and '
+                'plug it into the pigtail XT30, holding both housings. Push the junction and the folded pigtail into '
+                'the bay ahead of the pack, then push the pack in: the XT30 pair ends up lying flat on the pack top '   # r7 fix-up (VERIFY-C3): re-posed junction
+                'under the run button, the pigtail (female) end to the rear and the fuse sleeve beside it, with the '
+                'pigtail fold above it. Nothing may hang in the gaps beside the pack, and the pigtail must leave the '
+                'XT30 female straight, with no bend at its solder cups: if it does not, stop (gate G-MP-PACK). Slide '
+                'the cap on (-X) until the detent clicks. Turn the camera upright, one hand on the grip. Level the '   # r7 fix-up (VERIFY-C4): unconditional
+                'horizon on live view every time: loosen s_c4 half a turn, turn lens and camera together until the '
+                'horizon is level (window +-1.4 deg: the lock-screw heads keep >= 0.3 off the tab-catch tines; '
+                'computed `roll_catch` window; a soft stop at about 3 deg either way means the tab is on a tine: '
+                'come back toward the middle), push the lens back onto the cone, re-snug s_c4 0.2 N m.',
+         adds=['xt30_pair', 'pack', 'cap']),
 ]
+# r7 C5 (BX-13; SPEC-C5 3.1): how the body sits while screws are driven once a snap-target press part is on. down = the
+#   rest face (+Z = hood roof); stop = the block that takes the s_r1/s_r2 push (slab beyond the face plane, band_mm from
+#   the rest plane, over x). A 'removal' row uses the service state of that REMOVALS entry minus remove_first.
+# r7 fix-up (VERIFY-C5): support 'hand' = held by the grip (no driver-plane or stability rule; base-down tips at about
+#   6 deg); overhang = the body face that sits within edge_mm of the bench edge, so the driver handle of for_screws
+#   crosses the rest plane only beyond the edge (s_r1 axis is 14.5 above the hood-roof plane). right_down_8 and
+#   right_down_10 are the unattended rests of the step-8 lens fit / end of step 8 and of the step-10 pack mate
+#   (VERIFY-C3). No hood-roof rest at step 10: the eyecup (step 9) stands 0.76 proud of the roof and would carry it.
+REST_POSES = [
+    dict(id='hood_down', step=8, down='+Z', screws=['s_b1', 's_b2', 's_r1', 's_r2'], support='folded cloth',
+         overhang=dict(face='-Y', edge_mm=20.0, for_screws=['s_r1', 's_r2']),
+         stop=dict(face='+Y', band_mm=25.0, x=(-145.0, -5.0), for_screws=['s_r1', 's_r2'],
+                   note='flat block <= 25 mm tall against the hood band and the panel strip above the knobs')),
+    dict(id='base_down_8', step=8, down='-Z', screws=['s_c4'], support='hand', stop=None),
+    dict(id='base_down_10', step=10, down='-Z', screws=['s_c4'], support='hand', stop=None),   # level-check re-snug
+    dict(id='right_down_8', step=8, down='-Y', screws=[], support='folded cloth', stop=None),
+    dict(id='right_down_10', step=10, down='-Y', screws=[], support='folded cloth', stop=None),
+    dict(id='hood_down_s7', removal='panel_off', remove_first=['eyecup'], down='+Z',
+         screws=['s_b1', 's_b2', 's_r1', 's_r2'], support='folded cloth',
+         overhang=dict(face='-Y', edge_mm=20.0, for_screws=['s_r1', 's_r2']),
+         stop=dict(face='+Y', band_mm=25.0, x=(-145.0, -5.0), for_screws=['s_r1', 's_r2'], note='as hood_down')),
+]
+REST_FORBIDDEN = {'+Y': 'left side: knob_exp is the most proud point (y 44.2) from step 8 on; never a rest face'}
 INSERTIONS = [   # displacement waypoints of the moving set relative to its final position (last = (0, 0, 0))
     dict(id='base_on', step=3, moving=['base_grip', 'tripod_nut', 'run_button', 'strap'],   # R2: skirt_r removed
          path=[(-10.0, 0, -15.0), (-10.0, 0, 0), (0, 0, 0)]),
     dict(id='pi_in', step=4, moving=['x1203', 'x1203_kit', 'pi5', 'cooler'],   # INTEGRATOR T2 (tub sweep 0 mm3)
          path=[(-2.8, 2.1, 80.0), (-2.8, 2.1, 40.0), (-2.8, 0, 40.0), (-2.8, 0, 5.0), (0, 0, 5.0), (0, 0, 0)],
-         snaps=[]),                                                     # --- R1: no snaps (r1 pih1..4 deleted)
+         snaps=[],                                                      # --- R1: no snaps (r1 pih1..4 deleted)
+         riders=['ko_pig_wrap', 'ko_pig_under']),   # r7 C3 (BX-11): the pigtail leg taped under the X1203 comes down with it
     dict(id='keeper_in', step=4, moving=['pi_keeper'], path=PI_KEEPER['path']),   # --- R1: -Y slide, +X 1.2, down 0.5
     dict(id='hood_on', step=5, moving=['hood'], path=[(0, 0, 60.0), (0, 0, 0)], snaps=['hk1', 'hk2', 'hk3', 'hk4']),
     dict(id='eyepiece_in', step=6, moving=['eyepiece'], path=[(-30.0, 0, 0), (0, 0, 0)]),
     dict(id='sd_in', step=5, moving=['microsd'], path=[(30.0, 0, 0), (0, 0, 0)]),                      # FIXER A-F2
-    dict(id='evf_pair_in', step=6, moving=['hmx039', 'evf_board'], path=[(0, 45.0, 0), (0, 0, 0)]),   # FIXER A-F10
+    # r7 C1: pad stuck to the OLED (BX-7); HDMI plug mated after (PLUGS p_hdmi_evf); start waypoint 60 out: the 5 V PH
+    #     junction is mated a hand's width out of the open side (MATE_POSES usb_5v_evf, PLAN X-5), then the 45 mm slide
+    dict(id='evf_pair_in', step=6, moving=['hmx039', 'foam_pad', 'evf_board'],
+         path=[(0, 60.0, 0), (0, 45.0, 0), (0, 0, 0)]),   # FIXER A-F10
     # r6 (X2): collar_on before camera_in (the gauge centres the collar on the empty lip); the camera sweep sees the collar
     dict(id='collar_on', step=7, moving=['lens_collar'], path=[(30.0, 0, 0), (0, 0, 0)]),       # r5: feet -X through
     #                                                                                           the hood holes
     dict(id='camera_in', step=7, moving=['gs_camera', 'c_cs_adapter'],    # r5: the adapter rides with the camera
          path=[(-11.1, 60.0, 2.0), (-11.1, 0, 2.0), (-11.1, 0, 0), (0, 0, 0)], ignore=['ko_fpc_loop', 'ko_fpc_cam']),
-    dict(id='lens_in', step=8, moving=['lens'], path=[(40.0, 0, 0), (0, 0, 0)]),   # r5: before panel_on (same step)
-    dict(id='panel_on', step=8, moving=['panel', 'encoder', 'switch_1824'], path=[(0, 70.0, 0), (0, 0, 0)]),
+    dict(id='lens_in', step=8, moving=['lens'], path=[(40.0, 0, 0), (0, 0, 0)],    # r5: before panel_on (same step)
+         hold='hood_tab_catch'),   # r7 C4 (BX-4): the thread torque is reacted by the hood tab catch (check_roll_catch)
+    dict(id='panel_on', step=8, moving=['panel', 'encoder', 'switch_1824', 'knob_exp', 'knob_fps'],   # r7 C5: knobs
+         path=[(0, 70.0, 0), (0, 60.0, 0), (0, 30.0, 0), (0, 0, 0)],                           # on since step 2
+         stowed={'ko_lead_stow': 30.0}),   # r7 C2: QT mated at +60 (MATE_POSES qt_enc), spares laid at +30
     dict(id='stick_in', step=9, moving=['usb_stick', 'stick_sleeve'], path=[(-70.0, 0, 0), (0, 0, 0)]),
-    dict(id='pack_in', step=10, moving=['pack', 'xt30_pair'], path=[(0, 0, -80.0), (0, 0, 0)]),
+    # r7 C3 (BX-3, P3-1): first waypoint = the XT30 mating pose (MATE_POSES xt30: wire entry 15 mm out of the mouth)
+    dict(id='pack_in', step=10, moving=['pack', 'xt30_pair'], path=[(0, 0, -110.2), (0, 0, -80.0), (0, 0, 0)]),
     dict(id='cap_on', step=10, moving=['cap'], path=[(CAP['travel'], 0, 0), (0, 0, 0)]),
 ]
 
@@ -1273,12 +1671,13 @@ CRITICAL_JOINTS = [
     #     (the j7_float / lens_support / lens_clamp checks are r5 step 2, checks.py)
     dict(id='J7_camera', parts=['tub', 'panel', 'hood', 'lens_collar'],
          note='r5 J7-R float: lens collar on the lens fixed band (3 M3 + inserts, LR foot, pinch lugs); camera hangs on '
-              'the lens; tub lip, hood roll fin and panel keeper are catches with gaps',
+              'the lens; tub lip, hood tab catch (r7 C4) and panel keeper are catches with gaps',
          required=['tub_front_wall_seat', 'tub_front_wall_lr_foot', 'tub_lip', 'tub_insert_boss_tl',
                    'tub_insert_boss_tr', 'tub_insert_boss_ll',
                    'collar_foot_tl', 'collar_foot_tr', 'collar_foot_ll', 'collar_foot_lr', 'collar_lug_upper',
                    'collar_lug_lower', 'collar_wall_min', 'hood_foot_hole_tl', 'hood_foot_hole_tr',
-                   'hood_foot_hole_ll', 'hood_foot_hole_lr', 'hood_cam_roll_fin', 'panel_cam_keeper',
+                   'hood_foot_hole_ll', 'hood_foot_hole_lr', 'hood_tab_catch_p', 'hood_tab_catch_n',
+                   'panel_cam_keeper',
                    'tub_rib_l_tip'],    # r3 USER (2026-10-05): rib_l tip land 0.3 -> 1.2
          # r5 step 2 (judge 3 s6.7 "+ the new j7_float check"): whole checks the joint needs besides its probes
          #     (checks.check_joint_checks: each must have rows, no fail / stub, >= 1 pass; rows in critical_features)
@@ -1373,6 +1772,7 @@ REMOVALS += [
               'knob_fps', 's_b1', 's_b2', 's_r1', 's_r2', 'panel', 'encoder', 'switch_1824', 'gs_camera', 'eyepiece',
               'hmx039', 'foam_pad', 'evf_board', 'microsd', 'hood', 'plunger', 'pi_keeper', 's_k1', 's_k2'],
          unscrew=[], release=[], keepouts=[], tool='none (ESD strap)',
+         unplug=['p_hdmi_pi', 'p_usb_pi', 'p_qt_hdr', 'p_run_hdr', 'p_fps_hdr'],   # r7 C1: parted before the lift (s7 10a)
          note='after keeper_out: lift 5, -X 2.8, up 35, +Y 2.1, up 40 (reverse of pi_in); no latch, nothing breaks'),
 ]
 SECTIONS += [dict(id='pi-keeper-x80', axis='x', at=-80.0, window=(-36.0, 36.0, -2.0, 40.0),
@@ -1475,7 +1875,8 @@ NONSTRUCTURAL_EXCEPTIONS += [
 REMOVALS += [
     dict(id='panel_off', moving=['panel', 'encoder', 'switch_1824', 'knob_exp', 'knob_fps'], reverse_of='panel_on',
          off=['s_b1', 's_b2', 's_r1', 's_r2'], unscrew=['s_b1', 's_b2', 's_r1', 's_r2'], release=[], keepouts=[],
-         tool='PH1 straight driver only (s_b1, s_b2 from below; s_r1, s_r2 from the right)',
+         tool='PH1 straight driver only (s_b1, s_b2 through the base counterbores, from above in the hood-down pose; '   # r7 fix-up (VERIFY-C5 minor)
+              's_r1, s_r2 from the right, the driver handle past the bench edge)',
          note='finding 3: no skirt, no barb, no blade; strap, cap, pack, lens, stick and eyecup stay fitted; the '
               'knobs ride out on their shafts. A tripod plate must come off first (it covers s_b1/s_b2).'),
 ]
@@ -1550,7 +1951,8 @@ PART_RATIONALE = {
     'stick_sleeve': 'slider cover over the USB stick (THIN_OK 0.8): the stick pull-out load goes stick -> its own USB '
                     'socket; the sleeve carries finger friction only. Physical check: G-STICK (MEASURED-PARTS MP-STICK).',
     'knob_exp': 'D-bore knob on the encoder shaft: finger torque < 0.05 N m and an encoder push (< 5 N, compression). '
-                'Bore fit and torque: the knob-bore coupons (PRINT-GUIDE s6), not run.',
+                'Bore fit and torque: the knob-bore coupons (PRINT-GUIDE s6), not run. Pressed on at bench step 2 with '
+                'the board backed by a thumb; never pressed in the body (PRESS_FITS, check handling).',   # r7 C5
     'knob_fps': 'D-bore knob on the 18/24 switch shaft: as knob_exp. Knob-bore coupons, not run.',
     'plunger': 'button plunger: compression < 5 N only.', 'eyecup': 'TPU push-on sleeve: no structural load.'}
 # Pin hold-open release (M-V-MPS-2). checks.check_release_access: a straight pin from outside along the hole axis must
@@ -1573,29 +1975,91 @@ REMOVALS += [
     dict(id='camera_out', moving=['gs_camera', 'c_cs_adapter'], reverse_of='camera_in',   # r5: adapter rides along
          off=_SVC_PANEL + ['lens'], unscrew=[], release=[], keepouts=[],
          tool='none (hands; FPC unplugged at the Pi, ESD strap)',
-         note='r5: panel off, s_c4 loosened one turn, lens unscrewed (hold the camera through the open left side); the '
+         note='r5: panel off, s_c4 loosened one turn, lens unscrewed (r7 C4: the hood tab catch holds the camera; '
+              'record lens_off); the '
               'collar may stay. Camera + adapter -X 11.1 back through the lip, up 2, out through the open left side'),
+    # r7 C4 (BX-4, SPEC-C4 3.1, from design A): the panel-on lens swap and s7 6a. Nobody holds the camera: the thread
+    #     torque is reacted by the hood tab catch (check_roll_catch lens_hold); the panel stays on.
+    dict(id='lens_off', moving=['lens'], reverse_of='lens_in', off=['s_c4'], unscrew=[], release=[], keepouts=[],
+         hold='hood_tab_catch', tool='straight PH1 (s_c4 one turn); fingertips on the lens',
+         note='r7 C4: s_c4 loosened one turn, body nose-down, lens unscrewed with fingertips (the camera turns about '
+              '3 deg until its metal lock tab meets the hood tab catch), lens out +X 40; panel on'),
     dict(id='eyepiece_out', moving=['eyepiece'], reverse_of='eyepiece_in',
          off=_SVC_PANEL + ['eyecup'], unscrew=[], release=[], keepouts=[], tool='none (hands)',
          note='panel off (its cap is the spigot clamp), eyecup off; eyepiece -X 30 out of the housing'),
-    dict(id='evf_out', moving=['hmx039', 'evf_board'], reverse_of='evf_pair_in',
-         off=_SVC_PANEL + ['eyecup', 'eyepiece', 'foam_pad'], unscrew=[], release=[], keepouts=[],
-         tool='none (hands; HDMI and 5 V leads unplugged)', note='panel off; board + OLED pair +Y 45 out of the grooves'),
+    # r7 C1 (C-16, BX-7; SPEC-C1 3.2-8): the pad rides with the pair; the HDMI is parted in place first (unplug), so it
+    #     is not carried; the eyepiece stays (the pair comes out before it): a stricter row, same passing geometry
+    dict(id='evf_out', moving=['hmx039', 'foam_pad', 'evf_board'], reverse_of='evf_pair_in',
+         off=_SVC_PANEL + ['eyecup'], unscrew=[], release=[], keepouts=[], unplug=['p_hdmi_evf'],
+         tool='smooth-jaw long-nose pliers (tool 15) on the HDMI overmold, -Y half, pulled straight down through the '
+              'rail gap first with a fingertip from +X under the slab free end (the pliers come up from the open well '
+              'below the slot, inclined, so they stay below z 51 at y > 20: ACCESS acc_hdmi_evf_pliers_svc); tweezers (tool 8) lift the PH junction '
+              'out of ko_5v_end',
+         note='panel off; HDMI out first; pair + pad +Y 45 out of the grooves'),
 ]
 # Every non-screw id named in a REMOVALS 'off' list needs its own REMOVALS entry or a latch-free reason here.
 LATCH_FREE = {
     'cap': 'battery door: slides +X 52 on its dovetail keys over a 0.35 detent, by hand (G-CAP-1)',
     'pack': 'drops out of the bay once the cap is off; no latch', 'xt30_pair': 'friction connector, unplugged by hand',
     'usb_stick': 'slides -X out of its socket and channel; no latch', 'stick_sleeve': 'slides off with the stick',
-    'lens': 'r5: loosen s_c4 one turn (straight PH1 from above), unscrew the lens by hand (the camera turns with it '
-            'until its cover meets the hood roll fin; with the panel off, hold the cover)',
+    'lens': 'r7: loosen s_c4 one turn (straight PH1 from above), tip the body nose-down, unscrew the lens with '
+            'fingertips: the camera turns about 3 deg until its metal lock tab meets the hood tab catch, which holds '
+            'it (nobody holds the camera)',
     'c_cs_adapter': 'r5: rides with the camera (camera_out); C-CS thread unscrewed by hand off the body',
-    'eyecup': 'TPU push-on sleeve, pulled off by hand', 'foam_pad': 'loose foam pad, lifted out',
+    'eyecup': 'TPU push-on sleeve, pulled off by hand',
+    'foam_pad': 'stuck to the OLED back (PSA); comes out with the pair (r7 C1)',
     'microsd': 'friction slot, pulled with tweezers (tool 8)', 'plunger': 'loose in the hood pocket, lifted out',
-    'encoder': 'rides with the panel', 'switch_1824': 'rides with the panel', 'knob_exp': 'rides with the panel',
-    'knob_fps': 'rides with the panel', 'gs_camera': 'see camera_out', 'eyepiece': 'see eyepiece_out',
+    'encoder': 'rides with the panel', 'switch_1824': 'rides with the panel',
+    'knob_exp': 'rides with the panel. Pull straight off (+Y) only (the panel backs the encoder for a pull). Press on '
+                'only at the bench, panel off, board backed (PRESS_FITS)',            # r7 C5 (BX-5)
+    'knob_fps': 'rides with the panel; pull or press (the switch nut backs it)', 'gs_camera': 'see camera_out', 'eyepiece': 'see eyepiece_out',
     'hmx039': 'see evf_out', 'evf_board': 'see evf_out'}
 SERVICE_REQUIRED_EXTRA = [('hood (Pi service path)', 'hood')]
+# r7 C1 (SPEC-C1 3.2-7/3.2-10, Plan edit P1-9): hand and tool corridors that must be empty at a moment. after=<insertion>
+#   (its movers in their final pose, the parts present at its step) or state='service:<REMOVALS id>' (service state,
+#   moving set still in place: the unplug comes first). ignore: keep-outs the corridor may cross, each with a sequence
+#   reason (checks.check_mate_paths 'coverage' asserts it: the cable is laid after the mate / unplugged before the
+#   move, or the keep-out is the tuck's dest). push_of: the box top follows the plug stroke (z1 = plug z0 - stroke).
+FINGERTIP_MM = 9.0      # estimate: room under a plug for a pushing fingertip; below it the push row says 'push_stick'
+_HDMI_SEQ = 'the HDMI coil is laid after the in-situ mate (step 6) and uncoiled first in service (s7 item 7)'
+# r7 fix-up (VERIFY-C1): the tub top at z 36 under the plug is only the stick-guide block (y 0..10.8); from y 11 to
+#   26 the slot is open down to the tub floor (z 2.5), rising to z 8 at the opening (y 32). No floor-edge lever exists;
+#   the push comes from the guide top (acc_hdmi_evf_push) or straight up from the open well (acc_hdmi_evf_push_well).
+ACCESS = [
+    dict(id='acc_hdmi_evf_hand', step=6, after='evf_pair_in', box=B(-149.4, -131.6, 4.0, SPLIT, 36.0, 58.5),
+         tool='hand', ignore=['ko_hdmi_coil', 'ko_hdmi_evf'], ignore_why=_HDMI_SEQ,
+         why='Hand and plug travel under the bottom-rail end, above the stick-guide top (z 36.0, y < 10.8) and over '
+             'the open well beyond it (tub floor z 2.5 at y 11..26).'),
+    dict(id='acc_hdmi_evf_push', step=6, after='evf_pair_in', box=B(-146.0, -132.0, 4.0, 17.0, 36.0, 46.0),
+         push_of='p_hdmi_evf', tool='fingertip flat on the stick-guide top',
+         ignore=['ko_hdmi_coil', 'ko_hdmi_evf'], ignore_why=_HDMI_SEQ,
+         why='Fingertip on the stick-guide top (z 36) under the plug -Y half for the mating stroke.'),
+    dict(id='acc_hdmi_evf_push_well', step=6, after='evf_pair_in', box=B(-146.0, -132.0, 11.0, 26.0, 3.0, 46.0),
+         push_of='p_hdmi_evf', tool='fingertip, or the steel rule (tool 10) upright as a straight push stick',
+         ignore=['ko_hdmi_coil', 'ko_hdmi_evf'], ignore_why=_HDMI_SEQ,
+         why='Fallback: straight up from the open well (tub floor z 2.5) under the plug +Y half (VERIFY-C1).'),
+    dict(id='acc_5v_tuck', step=6, after='evf_pair_in', box=B(-136.4, -130.1, -24.0, SPLIT, 65.6, 76.0),
+         tool='tweezers 120 mm (tool 8)', ignore=['ko_5v_end'], dest='ko_5v_end',
+         why='The PH junction is pushed -Y over the bottom-rail spine (top z 65.25) beside the board, then into '
+             'ko_5v_end (BX-9).'),
+    dict(id='acc_hdmi_evf_jaws', state='service:evf_out',
+         boxes=[B(-147.0, -144.8, 4.0, 12.0, 52.0, 61.4), B(-136.8, -134.6, 4.0, 12.0, 52.0, 61.4)],
+         tool='smooth-jaw long-nose pliers (tool 15), tips <= 2.0 thick', ignore=['ko_hdmi_coil', 'ko_hdmi_evf'],
+         ignore_why=_HDMI_SEQ,
+         why='Smooth-jaw long-nose pliers grip the overmold -Y half (tip <= 2.0 thick; -X gap 6.6 mm).'),
+    dict(id='acc_evf_slab_back', state='service:evf_out', box=B(-140.0, -128.0, 23.0, 28.5, 51.0, 61.4),
+         tool='fingertip', why='Fingertip from the +X side under the slab free end while the plug is pulled.'),
+    dict(id='acc_hdmi_evf_hand_svc', state='service:evf_out', box=B(-149.4, -131.6, 4.0, SPLIT, 36.0, 58.5),
+         tool='hand', ignore=['ko_hdmi_coil', 'ko_hdmi_evf'], ignore_why=_HDMI_SEQ,
+         why='Hand and pliers under the bottom-rail end (service).'),
+    # r7 fix-up (VERIFY-C1 minor): the pliers shank from the jaws (y 4..12) out through the open well, kept below z 50
+    #   at y > 12 so that it never shares the slab-backing fingertip box (acc_evf_slab_back, z >= 51): disjoint by
+    #   construction, asserted in test_r7_fixup
+    dict(id='acc_hdmi_evf_pliers_svc', state='service:evf_out', box=B(-147.0, -134.6, 12.0, SPLIT, 20.0, 50.0),
+         tool='smooth-jaw long-nose pliers (tool 15) shank, inclined up from the well',
+         ignore=['ko_hdmi_coil', 'ko_hdmi_evf'], ignore_why=_HDMI_SEQ,
+         why='Pliers shank from the jaws out through the open well, below the slab-backing fingertip (service).'),
+]
 # J4 base lock independent of the panel screws (verifier M-V-MPS-5). r2 made s_b1/s_b2 both the panel screws and the
 # only J4 lock, so panel service left the body free to slide 10 mm off the base. s_j: one more PT 3.0 x 12 PH1, up
 # through a base counterbore into a tub floor boss at (-111, -20), driven at step 3 (base on), never removed for panel
@@ -1769,13 +2233,16 @@ CRITICAL_FEATURES += [
                     ('LL', dict(origin=(-1.2, 33.65, 36.0), direction=(0, 1, 0), note='r5: plate +Y of the LL hole')),
                     ('LR', dict(origin=(-1.2, -14.84, 47.5), direction=(0, -0.7649, -0.6441),
                                 note='r5: plate between the lens bore and the LR hole')))],
-    dict(id='hood_cam_roll_fin', part='hood', origin=(-21.5, -21.675, 60.0), direction=(0, 1, 0), min_mm=1.6,
-         structural=True, note='r5: camera roll catch (0.8 off the cover -Y face; contact only while a lens is fitted)'),
+    # r7 C4 (BX-4): hood_cam_roll_fin deleted with the fin; the two tab-catch tines (web 3.0 in y, min 2.4)
+    *[dict(id='hood_tab_catch_%s' % k, part='hood', origin=(-11.35, sg * 9.78, 88.0), direction=(0, 1, 0), min_mm=2.4,
+           structural=True, note='r7 C4: camera tab catch, 1.2 off the lock-screw heads; contact only while a lens is '
+                                 'turned')
+      for k, sg in (('p', 1), ('n', -1))],
 ]
 FEATURE_CLASS_RULES += [(r'^tub_front_wall_lr_foot$', 'wall'),
                         (r'^tub_lip$', 'land'), (r'^tub_insert_boss_', 'boss'), (r'^collar_foot_', 'pin'),
                         (r'^collar_lug_', 'lug'), (r'^collar_wall_min$', 'wall'), (r'^hood_foot_hole_', 'land'),
-                        (r'^hood_cam_roll_fin$', 'wing')]
+                        (r'^hood_tab_catch_[pn]$', 'wing')]   # r7 C4 (was ^hood_cam_roll_fin$)
 _COLLAR_SET = ['lens_collar', 's_c1', 's_c2', 's_c3', 's_c4']
 for _r in REMOVALS:     # r5: the collar feet pass the hood plate: every path that lifts the hood takes the collar off first
     if ('hood' in _r['off'] or _r['id'] == 'hood_off') and 'lens_collar' not in _r['off']:
@@ -1834,8 +2301,9 @@ PRINT_PREREQ_WHY = {
     'G-COMB-1': 'LOCATE / SLIDE / SEAM confirmed on this printer and ASA profile (clearance comb)',
     'G-KNOB-1': 'KNOB_BORE_OFFSET chosen on the D-bore ladders, then the knobs rebuilt',
     'G-COL-1': 'collar coupons: fit, centring gauge, pinch, slip, pull-out and creep',
-    'G-CAM-1': 'MP-CAM: camera stack, back focus s, tripod-block removal (tub lip and counterbore, hood roll fin, panel '
-               'keeper, collar C-flange datum)',
+    'G-CAM-1': 'MP-CAM: camera stack, back focus s, tripod-block removal (tub lip and counterbore, hood tab catch '
+               '(lock-screw head side, head dia/height, tip protrusion, tab width/top), panel keeper, collar C-flange '
+               'datum)',
     'G-LENS': 'MP-CAM lens line: band OD, edge, position, rings and CoM (collar bore and cone; lens rows of j7_float)',
     'G-MP-PACK': 'pack envelope and lead exit (grip bay, cap)', 'G-RUN-1': 'run button and cap (grip cradle and hole)',
     'G-PI-1': 'X1203 edge parts and standoffs (keeper fingers, Pi bosses)',
@@ -1907,8 +2375,24 @@ PRINT_SUPPORT_ZONES = {
 }
 del _tw, _hw, _k2, _ll, _ASA_PROFILE, _EVF_FREEZE, _CAMERA
 # r6 (audit 2026-10-06 X2): lateral location of the hood on the tub (right-wall LOCATE 0.15 + 0.1 print error); the
-#     hood roll fin's gap to the camera cover carries it on top of the collar centring stack (checks._centring_rows)
+#     hood tab catch's gap to the camera metal (r7 C4; was the roll fin) carries it on top of the collar centring stack
+#     (checks._centring_rows)
 HOOD_TO_TUB_LATERAL = 0.25
+# r7 C4 (BX-4, SPEC-C4 3.1 / 4.1): checks.check_roll_catch. The lateral case offset (COLLAR gauge centring_worst_mm +
+#     HOOD_TO_TUB_LATERAL) and the lens-out sag ((CAM cb_d - BFAR d) / 2) are derived in the check, never typed here.
+#     step_deg 0.5 = PLAN P4-5 coarse scan (then bisection to tol); the spec's 0.25 would double the scan time.
+ROLL_CATCH = dict(design_torque_Nm=0.5, window_deg=1.4, window_gap=0.3, scan_deg=14.0, step_deg=0.5, tol=0.01,
+                  margin_deg=1.0,              # declared geometry: PCB/cover first contact >= metal + 1.0 deg
+                  margin_unconfirmed_deg=0.2,  # one-head variants while head_side == 'both' (pre-G-CAM-1 only)
+                  tine_sigma_max_MPa=10.0, tine_defl_max=0.1, E_MPa=2000.0, axial_min=1.0)
+# r7 C4 (from design A): the lens_hold text lint (STEPS, LATCH_FREE, ASSEMBLY.md hand-written text), case-insensitive
+LENS_HOLD_FORBIDDEN = ('cover meets', 'roll fin, which then holds', 'roll fin beside',
+                       'hold the camera by its metal lens mount', 'hold the cover',
+                       # r7 fix-up (VERIFY-C4): the published guide's r6 wordings (guide sources now linted too)
+                       'hold the metal mount', 'against the roll fin', 'nor the roll fin', 'by its metal lens mount')
+# r7 fix-up (VERIFY-C4): the turn-back sentence every lens step with a tab-catch hold carries before s_c4 is snugged
+#   (checks.lens_turn_back_lint): the camera stops on a tine while the thread runs, so it is turned back to float.
+LENS_TURN_BACK = 'turn lens and camera together the other way'
 # r6 (audit 2026-10-06 B-11): service-state driver audits for screws that are turned without a REMOVALS move. s_c4 is
 #     loosened and re-snugged in the CLOSED body at every lens swap and level check; s_j comes out at service item 11.
 SERVICE_DRIVER = [

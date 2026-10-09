@@ -92,8 +92,15 @@ if 'hood' in shapes:
     solids.update({'%s_s%s' % (k, s): cam[s][k] for s in sv for k in ('bfar', 'body')})
     r5['proxies_vs_hood_mm3'] = {k: round(ovl(h, v), 4) for k, v in solids.items()}
     r5['proxies_ok'] = not any(r5['proxies_vs_hood_mm3'].values())
-    r5['roll_fin_to_cover'] = {str(s): round(h.distance(cam[s]['body']), 3) for s in sv}
-    r5['roll_fin_ok'] = min(r5['roll_fin_to_cover'].values()) >= 0.6
+    # r7 C4 (BX-4): the r5 roll fin is gone; the tab-catch tines (hood cut to tab_catch_boxes + 0.1) keep the HOOD
+    #     tab_catch gap to the camera metal (housing + tab + heads) and >= 0.9 to the PCB/cover at every s
+    tc_zone = [dc.box_solid(L.B(b['x'][0] - 0.1, b['x'][1] + 0.1, b['y'][0] - 0.1, b['y'][1] + 0.1, b['z'][0] - 0.1,
+                                b['z'][1])) for b in L.tab_catch_boxes(L)]
+    tines = dc.fuse_all([h.intersect(z) for z in tc_zone])
+    r5['tab_catch_to_metal'] = {str(s): round(tines.distance(cam[s]['metal']), 3) for s in sv}
+    r5['tab_catch_to_pcb_axial'] = {str(s): round(tines.distance(cam[s]['pcb_cover']), 3) for s in sv}
+    r5['tab_catch_ok'] = (min(r5['tab_catch_to_metal'].values()) >= L.HOOD['tab_catch']['gap'] - 0.01 and
+                          min(r5['tab_catch_to_pcb_axial'].values()) >= 0.9)
     # foot-hole rings: point-in-solid rays in the plate (x -0.1 and -2.4), 36 directions, 0.05 steps; ring >= 1.2
     hr = L.HOOD['foot_holes']['d'] / 2
     rings = {}
@@ -129,11 +136,11 @@ for pid in which:
     if pid in shapes and len(sys.argv) > 2:
         cq.exporters.export(cq.Workplane().add(dc.to_print_pose(shapes[pid], res[pid]['face_down'])),
                             os.path.join(HERE, 'out', 'owner_%s.stl' % pid))
-# r5: exit 1 if an r5 row fails (hood: no turret, proxies 0 mm3, fin >= 0.6, rings >= 1.2; panel: keeper >= 0.5) or a
-# part failed to build
+# r5: exit 1 if an r5 row fails (hood: no turret, proxies 0 mm3, r7 C4 tab catch >= gap to metal and >= 0.9 to the
+# PCB/cover, rings >= 1.2; panel: keeper >= 0.5) or a part failed to build
 _r5h = res.get('r5_hood')
 _bad = [pid for pid in which if 'error' in res.get(pid, {})]
-if _r5h is not None and not (_r5h['no_turret']['ok'] and _r5h['proxies_ok'] and _r5h['roll_fin_ok'] and
+if _r5h is not None and not (_r5h['no_turret']['ok'] and _r5h['proxies_ok'] and _r5h['tab_catch_ok'] and
                              _r5h['foot_hole_rings_ok']):
     _bad.append('r5_hood')
 if 'r5_panel' in res and not res['r5_panel']['ok']:

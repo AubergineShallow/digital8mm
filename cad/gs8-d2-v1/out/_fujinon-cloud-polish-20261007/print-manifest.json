@@ -1,5 +1,5 @@
 {
- "revision": "GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, minor findings)",
+ "revision": "GS8 D2 r7-20261009 (r6-20261008 + blocker review 2026-10-08 fixes)",
  "beds": {
   "250x210x220 (Prusa MK4/Core One class)": [
    250,
@@ -188,13 +188,13 @@
    "notes": "Right wall on the bed; 4 perimeters, 25 % gyroid; 40 % infill modifier meshes (r4: load all 7, r5: 10 with s_c1..s_c3 round the insert bosses; out/stl/modifiers/tub__mod_*.stl at their exported position: 8 mm round every PT pilot, including the 2 s_r counterbore pads where the screw heads bear). Brim 5 mm (ASA warp on a 151 x 101 footprint). Bridges: window/slot tops <= 20 mm, the \u00d87 counterbore shoulders, the cell -Y wall (13.9), the scoop roof (20). Teardrop bores 29.3, r5 lip 32.4 and BFAR counterbore 37.5 open toward +Y (print up). r5: 3 M3 heat-set inserts (bench, before step 3) flush -0.1 from the front face; 3 insert bosses grow -X from the front wall with 45 deg undersides (LL: a 3.3 x 2.4 flat chin, supported since r6). R1 r2: the 2 Pi-keeper bosses are teardrop prisms with the chin down (s_k2: the chin cut 0.25 off the X1203 edge leaves a 2.9 wide flat, supported since r6); their 40 % modifiers are tub__mod_s_k1/s_k2.",
    "infill_class": "shell",
    "print_preparation": null,
-   "finished_volume_mm3": 106227.676,
+   "finished_volume_mm3": 106087.051,
    "infill_factor": 0.85,
-   "volume_mm3": 106227.7,
-   "mass_100pct_g": 113.7,
-   "mass_est_g": 96.6,
-   "filament_g_est": 101.4,
-   "print_time_est_h": 4.91,
+   "volume_mm3": 106087.1,
+   "mass_100pct_g": 113.5,
+   "mass_est_g": 96.5,
+   "filament_g_est": 101.3,
+   "print_time_est_h": 4.9,
    "print_bbox_mm": [
     151.34,
     100.96,
@@ -205,7 +205,7 @@
     "256x256x256 (Bambu X1/P1 class)": true
    },
    "stl": "stl/tub.stl",
-   "stl_sha256": "786255e2840af4b129213dbc385b11dd34ce673ac381b4debd91e16c3f3ec8a8",
+   "stl_sha256": "66b12c2a16be3bcfca8aedf97bb8829a50594c8610ffe3bc91b5afe4ac35fa99",
    "stub": false,
    "thin_wall": {
     "status": "pass",
@@ -217,7 +217,7 @@
    "print_overhang": {
     "status": "pass",
     "longest_bridge_mm": 20.7,
-    "bridge_regions": 11,
+    "bridge_regions": 9,
     "hole_edge_bridges": 0,
     "supports": [
      "eyepiece_window_sill"
@@ -243,17 +243,17 @@
    "material": "ASA",
    "colour": "black",
    "face_down": "+Z",
-   "supports": "tree supports from the bed at 1 place only (r5: the lens turret is deleted): the +Y lower strip of the eyepiece housing under its window (the window runs the full housing length, so the strip starts mid-air; support from outside, y > 35). Everything else is self-supporting: housing interior = 45 deg flanks + 15.2 mm bridge; J2 groove lip = 21 mm bridges between 6 piers; all holes in the plate are bridged <= 14.2 mm; the lens bore is a truncated teardrop (13.1 mm flat); r5: the 4 collar foot holes (dia 8.6) are teardrops (apex -Z = print up); the camera roll fin + 2 webs hang from the band (webs bridge 4.8 to the stack fin).",
+   "supports": "tree supports from the bed at 1 place only (r5: the lens turret is deleted): the +Y lower strip of the eyepiece housing under its window (the window runs the full housing length, so the strip starts mid-air; support from outside, y > 35). Everything else is self-supporting: housing interior = 45 deg flanks + 15.2 mm bridge; J2 groove lip = 21 mm bridges between 6 piers; all holes in the plate are bridged <= 14.2 mm; the lens bore is a truncated teardrop (13.1 mm flat); r5: the 4 collar foot holes (dia 8.6) are teardrops (apex -Z = print up); r7: the camera tab catch (2 tines) hangs from the band and grows straight up.",
    "notes": "ASA black, 0.4 nozzle / 0.2 layer, 4 walls, 25 % gyroid. Roof on the bed (0.6 x 45 deg bed chamfer, 3.0 x 45 deg front-top chamfer). Hooks, rail block and rib grow upward. Remove the tree support (r5: 1, was 2); deburr the hook teeth and the groove mouth. Footprint 171.2 x 67.3 (r5: no turret), height 99.7. 5 mm brim on the roof (ASA, long flat first layer); enclosure closed, no part-cooling fan above 20 %.",
    "infill_class": "shell",
    "print_preparation": null,
-   "finished_volume_mm3": 56878.036,
+   "finished_volume_mm3": 57604.338,
    "infill_factor": 0.85,
-   "volume_mm3": 56878.0,
-   "mass_100pct_g": 60.9,
-   "mass_est_g": 51.7,
-   "filament_g_est": 54.3,
-   "print_time_est_h": 2.67,
+   "volume_mm3": 57604.3,
+   "mass_100pct_g": 61.6,
+   "mass_est_g": 52.4,
+   "filament_g_est": 55.0,
+   "print_time_est_h": 2.71,
    "print_bbox_mm": [
     171.22,
     67.38,
@@ -264,12 +264,12 @@
     "256x256x256 (Bambu X1/P1 class)": true
    },
    "stl": "stl/hood.stl",
-   "stl_sha256": "25974f9df332df0f509a02693a0e57260c909f7516c93bdaf44cce6fa4f69bd4",
+   "stl_sha256": "2d7ec9d4171afc46763d0d001ac6abeacc8c1d908ef49f88c74ffa193911d718",
    "stub": false,
    "thin_wall": {
     "status": "pass",
     "p1": 1.499,
-    "min": 1.165
+    "min": 1.299
    }
   },
   {
@@ -594,7 +594,7 @@
    "colour": "black",
    "face_down": "+Y",
    "supports": "none (top face on the bed, knurl vertical, recess open up)",
-   "notes": "ASA black, 100 %. Press onto the D shaft; the shaft end sits 0.2 below the top face.",
+   "notes": "ASA black, 100 %. Press onto the D shaft; the shaft end sits 0.2 below the top face. Pressed on at bench step 2 with the encoder board backed by a thumb (ASSEMBLY step 2); never pressed on in the closed body.",
    "infill_class": "small",
    "print_preparation": null,
    "finished_volume_mm3": 4792.977,
@@ -618,8 +618,8 @@
    "stub": false,
    "thin_wall": {
     "status": "pass",
-    "p1": 4.719,
-    "min": 4.337
+    "p1": 4.706,
+    "min": 4.282
    }
   },
   {
@@ -669,7 +669,7 @@
    "stub": false,
    "thin_wall": {
     "status": "pass",
-    "p1": 1.415,
+    "p1": 1.403,
     "min": 0.994
    }
   },
@@ -718,8 +718,8 @@
    "stub": false,
    "thin_wall": {
     "status": "pass",
-    "p1": 1.595,
-    "min": 1.595
+    "p1": 1.597,
+    "min": 1.597
    }
   },
   {
@@ -820,7 +820,7 @@
    "thin_wall": {
     "status": "pass",
     "p1": 2.749,
-    "min": 1.954
+    "min": 1.976
    }
   },
   {
@@ -878,8 +878,8 @@
    "stub": false,
    "thin_wall": {
     "status": "pass",
-    "p1": 1.856,
-    "min": 1.778
+    "p1": 1.848,
+    "min": 1.701
    }
   }
  ],
@@ -1019,8 +1019,8 @@
   "note": "a part is sliced and printed only after every listed gate has a current recorded pass; the build receipt print_release says which parts that releases now"
  },
  "totals": {
-  "mass_est_g": 299.1,
-  "mass_100pct_g": 372.7,
+  "mass_est_g": 299.7,
+  "mass_100pct_g": 373.2,
   "print_time_est_h": 16.1
  }
 }

@@ -1,30 +1,30 @@
 {
- "revision": "GS8 D2 r6-20261008 (r5-cloud-polish-20261007 + audit 2026-10-06: settled print order and orientation, minor findings)",
+ "revision": "GS8 D2 r7-20261009 (r6-20261008 + blocker review 2026-10-08 fixes)",
  "producer": {
   "script": "coupons_r1.py",
   "source_hashes": {
-   "layout.py": "3a64c39944b959010a81046a942731a6c3813005e32091e4676a43e46a796f4e",
+   "layout.py": "9dc6d1ef88065f2bdcd7f73ecad1ebed53089f86f8a1c02559876881ff9b089b",
    "d2_common.py": "69727dbd58cf0c0fbce48a0b44083a7ba4ba386b025a1dc132b1d4d431cf4a8e",
-   "cots.py": "23ef3f0ceffbedbc143876366b48ab74d9cf20d63b57bce56833778fe614eb3f",
-   "checks.py": "3dcda60e6a0303a88290b224634203b4511f8e4cda846b7a01ad2a3ca74725bf",
-   "build_d2.py": "bfb40ffe76253305e7d40a82b84ad3b197d792fd0897e1ffe09869bc59e43203",
+   "cots.py": "28e5d0b1141cf957930d28042230422da6936ba4ef49238562a244e3a0c49b50",
+   "checks.py": "04fb59b338bf755fbd820e0788b9c04b8e640d2e60fc140332cea13952b1cfbb",
+   "build_d2.py": "dcc4e9f58045aa160e75d65aac1cfd2e18ae945d2d8f08573d997284a2a5bb56",
    "make_coupons.py": "aeb1fecbdb0b219a26e8a068af873ee43e94bcd3457101c58a4b6e2aa0789bb3",
-   "make_tables.py": "9b4b075e5395ffc8b692ffd69651aa909314cd592da3bbb61bd4590f4580bd1b",
-   "SPEC.md": "1e4f643e062c81263ffde801e05e2be877a7c1273608ae3a4160583ce7acd369",
+   "make_tables.py": "69be676b422b7ce658e7d632a1b925d1fd7923a092622452dfd3840dfaa1d48c",
+   "SPEC.md": "bc0466a341741fc37145f0c9cf64053334e4e0de7395ffc413fad09676fe1eb2",
    "FASTENER-POLICY.md": "407d67703fd2c7305b5e742d5ad844cce406e73e3382d0955572eb3e1db96163",
    "printed_collar.py": "fbb8a356db82cd10a496b4864baa95930374ffc519578e373f38e4019af7afe0",
-   "printed_grip.py": "ceb73d92b88bd4cfa126b71b031c03afc54b0b7e200ab9f6df6ccfc65a2da79f",
-   "printed_hood.py": "cc8c28ca18d90599c46bdbe5f007879da0313e332f71befd659404cc84bf8f63",
+   "printed_grip.py": "83ae0974d1a31c71ddfc6b782bf19f3baa2c4a6b5c8636099f5b774dea59ddfe",
+   "printed_hood.py": "4964680f210418fdc19b08ae2a8f90e99013c335c5cd5344e69b15634ed9463d",
    "printed_keeper.py": "52a7922d9f071be2b91b8bb2381385d611633670971912a10bb37932656e9857",
    "printed_panel.py": "9901e47e02704bca4705e47acd22b680d9d35d29b5c6c86a9656dfcc350b4321",
-   "printed_small.py": "d277613ce7022e32c79863bd7fe3941ee51a8199f6f633fa46bcfe4cb869c809",
+   "printed_small.py": "0a00bd199a2e9955c76992edff427500180f7122ab91388f7fcb62b448df69e3",
    "printed_tub.py": "c14268a803dbc5463f841cfd0e5df928ee844bc4f7a1b5e90590247da305963e",
    "coupons_r1.py": "456121837dbb1d303ce40432114abbc739d8e0b8ca7345fde31007c9a74028cb",
    "run_locked.py": "1b665e3836d56550787b26f83de0b457b76b94b31a57e78f1febe5755dfd4d7b",
    "fonts/DejaVuSans-Bold.ttf": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890",
    "fonts/LICENSE-DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
   },
-  "generated_at": 1791445479.6840258
+  "generated_at": 1791494706.4647553
  },
  "gate": "G-KEEP-1 (whole keeper): 5 full service cycles, each: keeper in along the stated path (-Y 60 at +0.5, +X 1.2 under the Pi lip, down 0.5) by hand with the plate seated, s_k1 and s_k2 driven to head contact at 0.35-0.5 N m, then both out and the keeper out by the exact reverse. Pass: no spin-out or boss crack at either boss; feeler gap between each of the 4 finger undersides and the plate 0.05-0.3; plate lifted at its middle with 20 N for 60 s: no crack or whitening at any finger root, permanent set <= 0.2; kf1/kf2 pass under the Pi lip without contact. Proposed criteria; not run.",
  "note": "cut from the built parts; nothing printed or measured",
@@ -41,10 +41,10 @@
     10.0,
     70.0
    ],
-   "volume_mm3": 22828.8,
-   "mass_g": 24.4,
+   "volume_mm3": 22688.1,
+   "mass_g": 24.3,
    "stl": "stl/coupons/coupon-pi-keeper-tub.stl",
-   "stl_sha256": "e0325d05192edec1b6f01632fe4035f53917230519f87ea5c5927994176aee71"
+   "stl_sha256": "8b9826d2066f9ae42a1c709ef9be5e6818cb8a2fef95499e0acdfae33a57ecfe"
   },
   {
    "id": "coupon-pi-keeper-part",

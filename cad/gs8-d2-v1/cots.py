@@ -145,11 +145,14 @@ def x1203_kit(L, c):
 
 
 # ------------------------------------------------------------------------------------------- camera + lens
-def gs_camera_parts(L, s=None):
+def gs_camera_parts(L, s=None, head_side='both'):
     """r5 (J7-R, judge 3 s6.8): the real GS stack at BFAR screw-out s (default CAM s_nom) as tagged sub-solids
     {'body': housing (front throat for the lens rear) + split lock tab + lock-screw head envelopes on BOTH sides +
     PCB (4 holes) + rear cover (FPC socket recess), 'bfar': BFAR head + its exposed fine thread (s > 0)}.
-    The adapter is the separate COTS c_cs_adapter; the tripod block is removed at bench B0 (not modelled)."""
+    The adapter is the separate COTS c_cs_adapter; the tripod block is removed at bench B0 (not modelled).
+    r7 C4 (BX-4): also 'metal' (housing + tab + heads) and 'pcb_cover' (PCB + cover) for check_roll_catch; 'body' is
+    still built as their union in the same order (j7_float and every caller see the same solid). head_side '+Y' /
+    '-Y' builds the lock-screw head envelope on that side only (pre-G-CAM-1 variants); default 'both'."""
     cam = L.CAM
     ly, lz = L.LENS_AXIS
     s = cam['s_nom'] if s is None else s
@@ -162,9 +165,12 @@ def gs_camera_parts(L, s=None):
     tab = _box(hf - T['depth'], hf, ly - T['w'] / 2, ly + T['w'] / 2, lz + rt - 1.0, lz + T['top_r']).cut(
         _box(hf - T['depth'] - 0.1, hf + 0.1, ly - T['slot'] / 2, ly + T['slot'] / 2, lz + rt, lz + T['top_r'] + 0.1))
     xs = hf - T['screw_dx']
+    if head_side not in ('both', '+Y', '-Y'):
+        raise ValueError('gs_camera_parts head_side must be both, +Y or -Y (got %r)' % (head_side,))
     heads = [_cyl('y', xs, T['screw_z'], T['head_d'] / 2, a, b)
-             for a, b in ((ly + T['w'] / 2 - 0.01, ly + T['w'] / 2 + T['head_h']),
-                          (ly - T['w'] / 2 - T['head_h'], ly - T['w'] / 2 + 0.01))]
+             for nm, (a, b) in (('+Y', (ly + T['w'] / 2 - 0.01, ly + T['w'] / 2 + T['head_h'])),
+                                ('-Y', (ly - T['w'] / 2 - T['head_h'], ly - T['w'] / 2 + 0.01)))
+             if head_side in ('both', nm)]
     hp, hc = P['sq'] / 2, Cv['sq'] / 2
     pcb = _box(hx0 - P['t'], hx0, ly - hp, ly + hp, lz - hp, lz + hp)
     for hy, hz in cam['holes']:
@@ -178,7 +184,8 @@ def gs_camera_parts(L, s=None):
     head = _tube('x', ly, lz, B['d'] / 2, B['d_in'] / 2, L.BFAR_FACE_X - B['t'], L.BFAR_FACE_X)
     bfar = head if s < 0.01 else _fuse(head, _tube('x', ly, lz, B['thread_d'] / 2, B['d_in'] / 2, hf,
                                                    L.BFAR_FACE_X - B['t'] + 0.01))
-    return dict(body=body, bfar=bfar, s=s, hf_x=hf, cover_rear_x=rear)
+    return dict(body=body, bfar=bfar, s=s, hf_x=hf, cover_rear_x=rear,
+                metal=_fuse(housing, tab, *heads), pcb_cover=_fuse(pcb, cover), head_side=head_side)  # r7 C4
 
 
 def gs_camera(L, c):
@@ -268,7 +275,9 @@ def encoder(L, c):
     body = dc.box_solid(e['body'])
     bush = dc.cyl_solid(e['bushing'])
     shaft = _d_shaft_y(ex, ez, e['shaft']['r'], e['shaft_flat'], *e['shaft']['a'])
-    qts = [_box(ex + sx - 2.15, ex + sx + 2.15, 19.6, e['pcb']['y'][0], ez - 3.0, ez + 3.0) for sx in (-9.5, 9.5)]
+    q = e['qt_socket']   # r7 C2: one source with checks._plug_point (same geometry as r6: dx +-9.5, w 4.3, y0 19.6, h 6)
+    qts = [_box(ex + sx - q['w'] / 2, ex + sx + q['w'] / 2, q['y0'], e['pcb']['y'][0], ez - q['h'] / 2, ez + q['h'] / 2)
+           for sx in q['dx']]
     back = _box(ex - 6.0, ex + 6.0, 22.6, e['pcb']['y'][0], ez - 6.0, ez + 6.0)
     return _fuse(pcb, body, bush, shaft, back, *qts)
 
@@ -316,6 +325,10 @@ def xt30_pair(L, c):
     xm = (x0 + x1) / 2
     f = getattr(L, 'PIGTAIL_FUSE', None)
     zt = z0 if f is None else f['z'] + f['sleeve_od'] / 2 + 1.0     # r4: the pair sits above the fuse sleeve
+    if f is not None and f.get('beside'):    # r7 fix-up (VERIFY-C3): the sleeve lies beside the pair, both flat
+        zt = z0
+        r_ = f['sleeve_od'] / 2 + 0.2
+        y0, y1 = (y0, f['y'] - r_) if f['y'] > (y0 + y1) / 2 else (f['y'] + r_, y1)
     pair = _fuse(_box(x0, xm, y0 + 0.3, y1 - 0.3, zt + 0.2, z1 - 0.2), _box(xm, x1, y0, y1, zt, z1))
     if f is None:
         return pair

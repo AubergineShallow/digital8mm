@@ -20,22 +20,26 @@ floor underside. "Travels +Z" means the screw moves upward (driven from below).
 | Driver | **One PH1 screwdriver, straight**, shank dia 6.5 or less, blade 40 mm or longer, handle dia 28-30 (`layout.DRIVER`). It is the only tool for the **enclosure closure** (the PT screws) and (r5) for the 4 lens-collar M3 screws; the whole build needs the toolset of s1.1. No L-keys, hex keys, angled or ball-end drivers (user rule). The X1203 kit M2.5 screws take the same PH1 if they are cross-recess; if the kit ships hex screws, use M2.5 x 5 ISO 7045 PH1 instead (FASTENER-POLICY F) |
 | PT torque | **0.35-0.5 N m, stop at head contact** (FASTENER-POLICY C, provisional until G-PT-1). r6 (audit B-6): set it on the torque screwdriver (tool 13, BOM D2-77); a firm hand on a plain PH1 already gives 0.4-0.6 N m. No threadlocker on ASA. Do not re-torque later |
 | M3 torque (r5) | lens collar: s_c1, s_c2, s_c3 **0.15 N m provisional maximum**, the pinch s_c4 **0.2 N m**, stop at head contact (FASTENER-POLICY I). r6 (audit B-6, X5): **always with the torque screwdriver** (tool 13, BOM D2-77). By hand these become 2-3 times the value and can pull a short insert or crush the washer seat. Machine thread into brass heat-set inserts: no drive tally, no threadlocker |
-| Lens rule (r5, r6) | **never thread the lens into an unsupported camera.** r6 (audit B-7): never react the thread torque through the cover or the PCB. Those are joined to the lens mount only by the compliant housing-to-PCB joint (2 M2 screws, nylon washers, gasket). At step 8 (panel off) finger and thumb hold the camera's **metal lens mount (housing)** through the open left side. With the panel on (lens swap, s7) the camera rests in its cage (tub lip ahead, panel keeper behind, hood roll fin beside it): one hand carries the lens, and the thread is turned with **fingertips only**, so the roll fin never becomes a wrench. **Check the adapter mark at every lens change** (B0, item 3). s_c4 is always the last operation on the lens |
+| Lens rule (r5, r6) | **never thread the lens into an unsupported camera.** r6 (audit B-7): never react the thread torque through the cover or the PCB. Those are joined to the lens mount only by the compliant housing-to-PCB joint (2 M2 screws, nylon washers, gasket). r7 (BX-4): nobody holds the camera. Thread torque turns it about 3 deg until its metal lock tab meets the hood tab catch (two tines, one each side of the tab). The reaction goes housing -> tab -> hood, never through the cover or the PCB (computed: `roll_catch`). Panel off (step 8): one fingertip on the cover centre keeps the camera forward on its lip catch, push only. Panel on (lens swap): tip the body nose-down so the camera comes forward onto its lip catch. Turn the lens with fingertips only. **Check the adapter mark at every lens change** (B0, item 3). s_c4 is always the last operation on the lens |
 | Re-assembly | 5 or fewer drives per boss; tally them on the build sheet. Then the M3 insert fallback (FASTENER-POLICY D-E) |
 | Kit screws | X1203 kit M2.5: 0.2 N m, metal to PCB only, at the bench (step 1) |
 | Switch nut | finger-tight + 1/8 turn (about 0.3 N m) on a 1/2 in socket; the anti-rotation tab carries the switching torque |
 | Snaps | the hood (4 hooks) goes **straight down** until every hook clicks; never rock it in. The Pi stack has **no snap** (r2): it sets down on its 4 bosses and a printed keeper on 2 PT screws (s_k1, s_k2) holds it (step 4); r1's floor-hook strain below is the r1 record only. Strains are recorded once in `layout.snap_strains()`: hood hooks 0.87 % nominal (1.31 % with the root Kt), encoder cradle 1.12 % (1.68 %); r1 only: Pi floor hooks 2.61 % nominal, one-time class with no release access (G-SNAP-1, withdrawn with the hooks in r2) |
 | Power last | **the pack is plugged in only at step 10, after the body is closed**: every internal lead of steps 1-9 is made with the pack out of the camera. Never mate or part any internal lead (EVF 5 V junction, HDMI, FPC, flex, QT, 18/24, header leads) with the pack connected. For service the same rule runs in reverse: section 7, prerequisite P1-P4 (shut down, cap off, pack out, XT30 parted) comes first on every route |
 | ESD | grounded mat + wrist strap for steps 1, 4, 6 and 7 and bench step B0 (bare boards, OLED flex, camera) |
-| Header leads | the QT (1/3/5/6), 18/24 (33/34) and run (37/39) leads go on the Pi header at **step 4**, while the top is open and the header is in sight. Step 8 only makes the panel-side joints (QT JST-SH at the encoder, 18/24 JST PH junction) |
+| Header leads | the QT (1/3/5/6), 18/24 (33/34) and run (37/39) leads go on the Pi header at **step 4**, while the top is open and the header is in sight. r7 (BX-10): single 1-pin housings (a 1x2 only on 33/34 or 37/39), each seated straight down with open tweezer tips straddling the wire (pressing both sides of the housing top) and tug-tested. Step 8 only makes the panel-side joints (QT JST-SH at the encoder, 18/24 JST PH junction); r7 (BX-2): with the panel propped 60 mm off on a block about 110 mm tall and a helper holding the body, PH junction first, on a 250 mm QT lead (WIRING W-QT) |
 | microSD | out of the Pi from the bench flash (step 1) until step 5; pushed home through the front slot after the hood is on |
 | Small tools | see s1.1 (the full toolset) |
-| Gates before assembly | WIRING G-W1 to G-W7 (pack, X1203 identity, Pi on the bench PSU, the stack on the bench with a supply for the pack (G-W4) and under load (G-W5), the EVF feed before the EVF carrier is frozen (G-W6), HDMI pin 19 (G-W7)) and G-W13 on receipt of the regulator carrier if EVF-feed option C (WIRING s4.8) is adopted, SPEC G-CAM-1 and G-LENS (r5: MEASURED-PARTS MP-CAM with its lens line, before any lens collar is printed) and the collar coupons G-COL-1, the print coupons (PRINT-GUIDE s6) and the measured-part records of `MEASURED-PARTS.md` (MP-PACK, MP-X1203, MP-CAM, MP-HDMI and the MP-EVF bench assembly before the EVF carrier is frozen). Before any powered full-build claim: WIRING G-W12 (workload power) |
+| Gates before assembly | WIRING G-W1 to G-W7 (pack, X1203 identity, Pi on the bench PSU, the stack on the bench with a supply for the pack (G-W4) and under load (G-W5), the EVF feed before the EVF carrier is frozen (G-W6), HDMI pin 19 (G-W7)) and G-W13 on receipt of the regulator carrier if EVF-feed option C (WIRING s4.8) is adopted, SPEC G-CAM-1 and G-LENS (r5: MEASURED-PARTS MP-CAM with its lens line, before any lens collar is printed) and the collar coupons G-COL-1, the print coupons (PRINT-GUIDE s6) and the measured-part records of `MEASURED-PARTS.md` (MP-PACK, MP-X1203, MP-CAM, MP-HDMI and the MP-EVF bench assembly before the EVF carrier is frozen). Before any powered full-build claim: WIRING G-W12 (workload power). At the first assembly (r7): G-HDR-1 at step 4 and G-QT-1 at step 8 (MEASURED-PARTS MP-ENC, QT lead line) |
 
 ### 1.1 Full toolset (r2, audit finding 7)
 
-"One PH1" is true of the enclosure closure only. Building the whole camera takes the 14 tools below (r6: + the torque
-screwdriver and the collar centring gauge, audit 2026-10-06 B-6 and X2). The column
+"One PH1" is true of the enclosure closure only. Building the whole camera takes the 17 tools below (r6 added the torque
+screwdriver and the collar centring gauge, audit 2026-10-06 B-6 and X2). r7 (blocker review 2026-10-08) adds tool 15
+(pliers for the EVF HDMI unplug), tool 16 (2 paper strips: the knob stop shim) and the optional tool 17 (inspection
+mirror), and tool 7 gains a caliper and a soft-jaw vise. Number 18 is kept for another r7 cluster, so the numbers stay
+fixed (PLAN X-9). A folded cloth and a closed paperback (step 8), a block or book stack about 110 mm tall (the step-8
+panel prop) and a helper's hands (step 8) are named in the step text, not as rows. The column
 "Removed by" shows which optional simplification of `OPTIONS.md` would remove a tool: (a) 18/24 moved into the
 encoder menu (declined by the user 2026-10-05: the 18/24 stays a switch, so tools 6 and 7 stay), (b) a 150 mm camera
 FPC (open). Neither option is applied.
@@ -48,14 +52,17 @@ FPC (open). Neither option is applied.
 | 4 | Heat gun | adhesive heat-shrink (1) | D2-68 | - |
 | 5 | Multimeter | polarity and no-short checks before any power (1, 10); gates | D2-64 | - |
 | 6 | 12.7 mm (1/2 in) socket or spanner | 18/24 switch nut, finger-tight + 1/8 turn (2) | D2-61 | **(a)** |
-| 7 | Junior hacksaw + small flat file | cut the 18/24 shaft to y 42.0 and deburr (2) | D2-69 | **(a)** |
-| 8 | Fine tweezers, 120 mm | run lead through the floor hole (3); microSD (5); OLED, flex and EVF leads (6) | D2-62 | - ((b) keeps them: the loop is still laid by hand) |
+| 7 | Junior hacksaw + small flat file + caliper with depth rod + a vise with soft jaws (2 wood offcuts) (r7, BX-14) | measure the switch shaft in place (P), then cut it off the panel and deburr (2) | D2-69 | **(a)** |
+| 8 | Fine tweezers, 120 mm | run-lead sockets up through the base passage and the floor hole before the tub goes down (3, r7); r7: header housings seated with open tips straddling the wire (4); microSD (5); OLED, flex and EVF leads (6); r7: PH junction tuck into `ko_5v_end` (6), PH junction lift (s7 item 7) | D2-62 | - ((b) keeps them: the loop is still laid by hand) |
 | 9 | 2 hood release pins: dia 1.5 steel, 16 mm+ (ISO 8734 dowel class, or the shanks of 2 x 1.5 mm drills) (r2 fixer: replaces the 3 mm release blade) | hood removal: one pin per right-wall release hole holds hk1 / hk2 open (s7 item 9) | D2-71 | - |
-| 10 | Flat bar (any steel rule) | press the tripod nut into its pocket (3) | - | - |
+| 10 | Flat bar (any steel rule) | press the tripod nut into its pocket (3); r7: held upright as a straight HDMI push stick up from the open well (6), only if a fingertip does not fit (no floor-edge lever: the tub top at z 36 is only the stick-guide block, y < 10.8) | - | - |
 | 11 | Paint pen | engraving fill (2) | D2-44 | - |
 | 12 | ESD mat + wrist strap | steps 1, 4, 6, 7; B0 | D2-70 | - |
 | 13 | Adjustable torque screwdriver 0.1-0.6 N m, straight, PH1 bit (shank <= 6.5 over >= 40, handle dia <= 30: the driver audit envelope) (r6) | every M3 lens-collar screw (s_c1..s_c3 0.15, s_c4 0.2 N m) and every PT screw (0.35-0.5 N m) (3, 4, 7, 8, 10, service) | D2-77 | - |
 | 14 | Collar centring gauge, printed, one per lens (`stl/tools/collar_gauge.stl`) (r6) | centre the collar on the tub lip while s_c1..s_c3 are tightened (7; every collar refit, s7 item 6c) | printed (PRINT-GUIDE s3) | - |
+| 15 | Smooth-jaw long-nose pliers, jaws >= 35 long, tips <= 2.0 thick (r7, BX-1/C-16) | HDMI unplug at the EVF board: grip the plug body on its left and right faces at its deep half, pull straight down through the rail gap (s7 item 7); the pliers come up from the open well below the slot, inclined, so the shank stays below z 51 at y > 20 (clear of the slab-backing fingertip); optional at step 6 to carry the plug by its +Y half | - | - |
+| 16 | Printer paper, 2 strips (about 0.2 mm together) (r7, BX-5) | knob stop shim: each knob is pressed on until it stops on the paper (2; knob change, s7 item 4a) | - | - |
+| 17 | Inspection mirror, head <= 15 mm (optional) (r7, BX-1) | see that the EVF HDMI plug is fully home in the board (6) | - | - |
 
 Not counted above:
 - **Bench and gate equipment**: bench DC supply with current limit (>= 10 A), official 27 W PSU, inline USB-C power
@@ -67,7 +74,7 @@ Not counted above:
 - **Camera tripod block (r5, B0, once, off the body):** whatever driver the camera's own 2 block screws need (drive
   unconfirmed: MP-CAM). If it is a hex key, it is the one bench exception to the straight-driver toolset
   (FASTENER-POLICY F).
-- **Consumables**: cable ties, heat-shrink, Kapton tape, IPA.
+- **Consumables**: cable ties, heat-shrink, Kapton tape, IPA; r7 (BX-3): neutral-cure silicone RTV (not acetoxy, BOM D2-46R) for the pigtail strain relief at the X1203 pads.
 
 ## 2. Steps
 
@@ -85,6 +92,8 @@ Not counted above:
      and its rear (C - 6.7) can reach the camera's filter. **At every lens change the mark must still line up.** If it
      does not, unscrew the adapter from the lens, take the camera out (s7 item 6b) and refit the adapter here before
      any lens goes in. Then fit the selected lens.
+     r7 (BX-4): paint a second mark across BFAR and housing (the first is across adapter and BFAR). Check both marks
+     at every lens change: the tab catch reacts the thread through the BFAR thread, like any hold on the housing would.
   4. For live view use the bench Pi/camera setup: connect the correct FPC to CAM1 only while power is off; use the
      official Pi supply and the already-verified preview route (an external monitor is sufficient). The pack and
      X1203 are not needed for this optical measurement. Shut down and remove bench power before moving the FPC.
@@ -111,7 +120,7 @@ Not counted above:
 <!-- BEGIN:steps -->
 ### Step 1. Bench: power stack (bench)
 
-Solder the 180 mm XT30 pigtail to the X1203 battery pads (2 joints). Solder the EVF 5 V lead (1N5817 in the + conductor + PH junction, 3 joints) and check it with a multimeter. Stack X1203 + Pi 5 with the kit (4 standoffs, 8 M2.5 screws, 0.2 N m), fit the Active Cooler; tie the pigtail to a standoff (strain relief). Bridge encoder A0 (1). Solder the 50 mm JST PH pigtail to the 18/24 switch (2). Flash the microSD (G-W3), then take it OUT of the Pi for steps 3-4.
+Make the pigtail to L_cut = 200 mm + the G-W2 pads-to-W length (round up to 5 mm; 200 mm if the pads are at W). If the pads-to-W length is more than 25 mm, stop: do not cut (computed `lead_access` pigtail_drop: the G-W5 drop estimate passes 0.15 V above L_cut 225 mm); route the pair under the board straight to the hole, move W, or change to 16 AWG with a re-checked lane width, and re-run the checks first. L_cut is the finished length from the pad joint to the XT30 rear, with the fuse splice included. Solder it to the X1203 battery pads (2 joints) and heat-shrink them. On the bare X1203, lead the pair on the top face to W (dry-fit the Pi on the standoffs to find the X1203 edge under its USB/Ethernet ports; pen-mark W on that edge 31.5 mm from the end whose mounting holes are 3.5 mm from the edge), coming straight in from inside the board, not along the edge. Put one strip of Kapton over the board edge at W, fold the pair round the edge, and tape the leg flat under the board with 2 strips of Kapton, straight in from W for about 32 mm, to above the pigtail hole. Keep the pair within 1 mm of the mark. The rest hangs free. (Pads on the underside: run the pair straight under the board to that point and tape it, with no U.) Strain relief: a neutral-cure silicone RTV bead over both joints and the first 8-10 mm of the pair, bonded to the board (not acetoxy; keep it off the pogo pads and connectors; keep it at least 1 mm inside the board edge and no more than 3.5 mm from W toward the USB end, where the keeper finger lands). Stack only when the bead is tack-free, and do not pull on the pigtail before the full cure the tube states. Solder the EVF 5 V lead (1N5817 in the + conductor + PH junction, 3 joints) and check it with a multimeter. Stack X1203 + Pi 5 with the kit (4 standoffs, 8 M2.5 screws, 0.2 N m), fit the Active Cooler. Bridge encoder A0 (1). Solder the 50 mm JST PH pigtail to the 18/24 switch (2). Flash the microSD (G-W3), then take it OUT of the Pi for steps 3-4.
 
 | Item | Detail |
 |---|---|
@@ -119,23 +128,23 @@ Solder the 180 mm XT30 pigtail to the X1203 battery pads (2 joints). Solder the 
 | Parts added to the body | none (bench step) |
 | Fasteners | none |
 | Tool | soldering iron; multimeter; kit driver (PH1 or as supplied) |
-| Harness (WIRING s7) | pigtail fuse (r4): splice the 15 A fuse (Littelfuse 0251015.MXL) into the red conductor about 20-25 mm from the XT30 female: trim each fuse lead to 6.5 mm (a 1.5 mm stub at the body + a 5 mm lap joint on the stripped conductor), adhesive 3:1 heat-shrink over the whole splice (about 28 mm) (**hand-solder at 350 C for 5 s max per lead (datasheet); never re-solder the XT30 female with the fuse fitted; meter the red path end to end (< 0.1 ohm)**); pigtail -> X1203 battery pads: solder red to +, black to -; adhesive heat-shrink over both joints; strain-relief tie to a standoff (**pack never connected at the bench; meter + to - for no short before anything else**); Active Cooler lead -> Pi FAN: plug the JST-SH 4 (**route it as the cooler ships**); encoder A0: 1 solder blob on the A0 jumper (**address 0x37**); 18/24 switch pigtail: solder the 50 mm JST PH 2-pin pigtail to the common and position-2 lugs; heat-shrink; microSD: flash it (gate G-W3), then take it out of the Pi (**the card must be out for steps 3-4 (it hits the front wall on the stack path)**); EVF 5 V lead: solder the 1N5817 into the + conductor (band toward the board), the PH plug on the free end; adhesive heat-shrink (**polarity: meter USB-A VBUS -> PH pin 1 through the diode (forward), GND -> pin 2**); EVF board pigtail (Rev I): solder the PH 2-pin pigtail to the traced EXT+ / GND pads; heat-shrink strain relief (**photograph both board sides first (EVF gate G1)**) |
+| Harness (WIRING s7) | pigtail fuse (r4): splice the 15 A fuse (Littelfuse 0251015.MXL) into the red conductor about 20-25 mm from the XT30 female: trim each fuse lead to 6.5 mm (a 1.5 mm stub at the body + a 5 mm lap joint on the stripped conductor), adhesive 3:1 heat-shrink over the whole splice (about 28 mm) (**hand-solder at 350 C for 5 s max per lead (datasheet); never re-solder the XT30 female with the fuse fitted; meter the red path end to end (< 0.1 ohm)**); pigtail -> X1203 battery pads: cut to L_cut (`PIGTAIL`); solder red to +, black to -; adhesive heat-shrink over both joints; on the bare X1203 lead the pair to the W mark, Kapton over the edge, form the U and tape the leg flat under the X1203 to the hole point; then RTV strain relief at the pads (neutral cure) over the joints and 8-10 mm of the pair (before the Pi covers top-face pads); stack when tack-free, full cure before step 4 (**pack never connected at the bench; meter + to - for no short before anything else; r7 (BX-3): no tie to a standoff**); Active Cooler lead -> Pi FAN: plug the JST-SH 4 (**route it as the cooler ships**); encoder A0: 1 solder blob on the A0 jumper (**address 0x37**); QT lead splice (W-QT, r7): join Adafruit 4397 to Pololu 5521 by SH pin number: joints 91-115 mm from the socket tip, 8 mm apart, one thin sleeve each, one adhesive 3:1 sleeve about 35 mm over all; finished 250 +/- 10 mm (**map continuity first; never join by colour alone; meter end to end, no short**); 18/24 switch pigtail: solder the 50 mm JST PH 2-pin pigtail to the common and position-2 lugs; heat-shrink; microSD: flash it (gate G-W3), then take it out of the Pi (**the card must be out for steps 3-4 (it hits the front wall on the stack path)**); EVF 5 V lead: solder the 1N5817 into the + conductor (band toward the board), the PH plug on the free end; adhesive heat-shrink (**polarity: meter USB-A VBUS -> PH pin 1 through the diode (forward), GND -> pin 2**); EVF board pigtail (Rev I): solder the PH 2-pin pigtail to the traced EXT+ / GND pads; heat-shrink strain relief (**photograph both board sides first (EVF gate G1)**) |
 | Cables | `fps_lead` 18/24 switch -> GPIO13 + GND (pins 33/34); `pigtail` X1203 battery pads -> XT30 junction in the grip; `fan` Active Cooler -> Pi 5 FAN header |
 
 ### Step 2. Bench: panel (bench)
 
-Paint-fill the engraving. Snap the encoder into its cradle. Fit the 18/24 switch (tab in its slot) and its nut, finger-tight + 1/8 turn. Cut the switch shaft 7.0 mm above the panel face (to y 42.0) and deburr.
+Paint-fill the engraving. Switch shaft, off the panel: fit the 18/24 switch dry (tab in its slot, the washer as supplied, nut finger-tight). Measure how far the shaft stands above the panel face (P, caliper depth rod). Take the switch off. Clamp the end that will be cut off (at least about 8 mm in the soft vise jaws) and saw P - 6.9 mm off the shaft end beside the jaws on the switch side, the switch hanging free; if less than that comes off, file the shaft down instead. Never clamp the bushing thread; never saw with the switch on the panel. Deburr. Refit the switch (tab in its slot), nut finger-tight + 1/8 turn. Encoder: snap it into its cradle by pushing on the back of its board until all 3 hooks click. Knobs: lay the 2 paper strips on the panel face round the encoder shaft. Hold the panel in one hand with that thumb flat on the back of the encoder board. Press knob_exp onto its D shaft with the other palm until it stops on the paper. Your thumb takes the push, not the hooks. Move the 2 strips round the switch shaft and press knob_fps on until it stops on the paper, its D flat to the shaft flat (the switch nut takes the push). Pull the paper out. From now on the knobs ride with the panel: never press a knob while the panel is on the body.
 
 | Item | Detail |
 |---|---|
-| Bench sub-assembly | `panel` (printed, ASA satin silver); `encoder` (Adafruit 5880 I2C QT rotary encoder (A0 bridged, 0x37)); `switch_1824` (mini 2-position rotary switch + nut + washer) |
+| Bench sub-assembly | `panel` (printed, ASA satin silver); `encoder` (Adafruit 5880 I2C QT rotary encoder (A0 bridged, 0x37)); `switch_1824` (mini 2-position rotary switch + nut + washer); `knob_exp` (printed, ASA black); `knob_fps` (printed, ASA black) |
 | Parts added to the body | none (bench step) |
 | Fasteners | none |
-| Tool | paint pen; 12.7 mm (1/2 in) socket or spanner for the switch nut; junior hacksaw + file |
+| Tool | paint pen; 12.7 mm (1/2 in) socket or spanner for the switch nut; junior hacksaw + file; caliper with depth rod; vise with soft jaws (2 wood offcuts); printer paper, 2 strips (about 0.2 mm together) |
 
 ### Step 3. Base + grip
 
-Press the tripod nut into its pocket from the top. Drop the run button into its cradle through the base opening, then press its red cap on through the grip-face hole. Thread the strap. Lower the tub onto the base with the base 10 mm back, tongues through the windows, slide the base 10 mm forward, then drive s_j up through the base counterbore at (-111, -20) into the tub floor boss: 0.35-0.5 N m, stop at head contact (the J4 lock; the panel screws no longer lock the base). Only now fish the run lead up through the floor hole with tweezers from inside the open tub (the base opening and the hole overlap only at the final pose).
+Press the tripod nut into its pocket from the top. Before the run button goes in, pass the run-lead socket end (separate 1-pin housings) in through the base opening and push it up through the base passage from below (nothing is under the passage yet). Then drop the run button into its cradle through the base opening, drawing the slack up through the passage, and press its red cap on through the grip-face hole. Thread the strap. Hold the tub over the base with the base 10 mm back. Push the run-lead sockets on up through the rear (-X) end of the floor run-lead hole into the tub. Lower the tub, tongues through the windows, keeping the lead lightly pulled up so that it stays in the rear end of the hole. Slide the base 10 mm forward (unlocked until step 8); the lead moves to the front end of the hole by itself. Lay the run lead in its floor lane and tape it flat with Kapton; let the socket end hang out over the open +Y side.
 
 | Item | Detail |
 |---|---|
@@ -145,13 +154,13 @@ Press the tripod nut into its pocket from the top. Drop the run button into its 
 | Torque | 0.35-0.5 N m by hand, stop at head contact (FASTENER-POLICY C; provisional until G-PT-1); no threadlocker |
 | Tool | tweezers (press the nut with a flat bar); the straight PH1 screwdriver (s_j) |
 | Motion | `base_on` (base_grip, tripod_nut, run_button, strap): start at offset (-10, 0, -15), then +Z 15, then +X 10 |
-| Harness (WIRING s7) | run lead: after the base slide, fish its socket end up through the floor run-lead hole (x -34..-28, y 1.5..9) with tweezers (**not before the slide: the base opening and the hole only overlap at the final pose**) |
+| Harness (WIRING s7) | run lead: before the tub is lowered, push its sockets up through the base passage and the rear (-X) end of the floor run-lead hole (x -41.5..-28, y 1.5..9); lower the tub, slide the base; tape the lead flat in its floor lane (`ko_run_floor`) (**r7 (BX-16): threaded before the tub goes down (`lead_access` run_lead_window)**) |
 | Cables | `run_lead` run button -> GPIO26 + GND (pins 37/39) |
 | In the body after this step | 6 ids (`layout.present_at(3)`) |
 
 ### Step 4. Pi stack + keeper + header leads
 
-Lay the run lead in its floor channel. Feed the XT30 pigtail round the port edge and down through the pigtail hole. Lower the stack about 3 mm back from the front wall and 2 mm off the right wall; below the right-wall pads move it to the right wall; just above the floor slide it 2.8 forward and set it down on its 4 bosses (the kit screw heads drop into the boss pockets; nothing clicks). Keeper: hold it level from the open left side, 0.5 above its 2 bosses and 1.2 behind its place, slide it in -Y under the stick-guide rail until its port fingers are over the X1203 edge, push it 1.2 forward (the 2 USB fingers go under the Pi), lower it onto its bosses and drive s_k1 and s_k2 straight down: 0.35-0.5 N m, stop at head contact. Plug the HDMI (90 deg plug) on HDMI0, the FPC on CAM1 (camera end loose), the EVF 5 V lead in the upper USB 2 port. With the top open and the header in sight, plug the header ends: QT lead on pins 1/3/5/6 (red on pin 1, 3V3), the 18/24 lead on 33/34 and the run lead on 37/39 (count from pin 1; an off-by-one plug puts 5 V on the QT 3V3 wire). Run the QT and 18/24 leads along the right wall and across behind the blower inlet (ko_lead_wall, ko_lead_cross); park their free ends out of the open left side. The run lead crosses over the cooler shroud (ko_run_cross).
+Check that the run lead is still taped flat in its lane, with its socket end held out over the open +Y side. Feed the XT30 end (long side front to back) down through the pigtail hole; the taped leg comes down with the stack. Hold the stack's port edge away from the U (more than 10 mm from the W mark). Lower the stack about 3 mm back from the front wall and 2 mm off the right wall; below the right-wall pads move it to the right wall; just above the floor slide it 2.8 forward and set it down on its 4 bosses (the kit screw heads drop into the boss pockets; nothing clicks). Push the XT30 and the free pigtail up into the empty grip bay so that nothing hangs below the grip mouth; it stays there until step 10. Keeper: hold it level from the open left side, 0.5 above its 2 bosses and 1.2 behind its place, slide it in -Y under the stick-guide rail until its port fingers are over the X1203 edge, push it 1.2 forward (the 2 USB fingers go under the Pi), lower it onto its bosses and drive s_k1 and s_k2 straight down: 0.35-0.5 N m, stop at head contact. Plug the HDMI (90 deg plug) on HDMI0, the FPC on CAM1 (camera end loose), the EVF 5 V lead in the upper USB 2 port. With the top open and the header in sight, plug the header ends, one housing at a time: QT lead (250 mm) on pins 1/3/5/6 (red on pin 1, 3V3), the 18/24 lead on 33/34 and the run lead on 37/39 (count from pin 1; a housing one row over puts 5 V from pin 2 on the QT 3V3 wire). Seat each housing straight down with open tweezer tips straddling the wire, pressing on both sides of the housing top, until it stops on the header plastic. Fingers do not fit beside them. Then tug each wire straight up gently: no housing may lift. Use single 1-pin housings (a 1x2 only on 33/34 or 37/39); never a 1x3 or 2x3 shell. Run the QT and 18/24 leads along the right wall and across behind the blower inlet (ko_lead_wall, ko_lead_cross), with the QT splice sleeve in the straight part of the cross run, not in a corner; park their free ends out of the open left side. The run lead crosses over the cooler shroud (ko_run_cross).
 
 | Item | Detail |
 |---|---|
@@ -161,7 +170,7 @@ Lay the run lead in its floor channel. Feed the XT30 pigtail round the port edge
 | Torque | 0.35-0.5 N m by hand, stop at head contact (FASTENER-POLICY C; provisional until G-PT-1); no threadlocker |
 | Tool | straight PH1 screwdriver as step 8 (keeper screws s_k1, s_k2); ESD strap; the microSD is out |
 | Motion | `pi_in` (x1203, x1203_kit, pi5, cooler): start at offset (-2.8, 2.1, 80), then -Z 40, then -Y 2.1, then -Z 35, then +X 2.8, then -Z 5; `keeper_in` (pi_keeper): start at offset (-1.2, 60, 0.5), then -Y 60, then +X 1.2, then -Z 0.5 |
-| Harness (WIRING s7) | run lead: lay it in its floor channel before the stack goes down (`ko_run_floor`); pigtail: feed the XT30 end down through the pigtail hole (x -45..-34, y -13..-4) into the grip (**before the stack goes down**); micro-HDMI -> Pi HDMI0: 90 deg plug, cable leaves upward (**the EVF end stays loose**); FPC -> Pi CAM/DISP 1: contacts as printed on the cable; latch closed (**camera end loose**); EVF 5 V lead -> Pi upper USB 2 port: USB-A (**PH end loose**); QT lead -> pins 1/3/5/6: red 1, blue 3, yellow 5, black 6; top open, header in sight (**count from pin 1: an off-by-one plug puts 5 V (pin 2/4) on the 3V3 wire**); 18/24 lead -> pins 33/34: GPIO13 on 33, GND on 34; PH end parked out of the left side; run lead -> pins 37/39: GPIO26 on 37, GND on 39 (**route over the cooler shroud (`ko_run_cross`)**) |
+| Harness (WIRING s7) | run lead: check it is still taped flat in its floor lane (`ko_run_floor`), socket end out over the open +Y side (**before the stack goes down**); pigtail: feed the XT30 end down through the pigtail hole (x -45..-34, y -13..-4) into the grip, long side front to back; the taped leg comes down with the stack (**before the stack goes down; port edge > 10 mm from the W mark**); micro-HDMI -> Pi HDMI0: 90 deg plug, cable leaves upward (**the EVF end stays loose**); FPC -> Pi CAM/DISP 1: contacts as printed on the cable; latch closed (**camera end loose**); EVF 5 V lead -> Pi upper USB 2 port: USB-A (**PH end loose**); QT lead -> pins 1/3/5/6: red 1, blue 3, yellow 5, black 6; top open, header in sight; one 1-pin housing at a time, seated straight down with open tweezer tips straddling the wire, each wire tugged; splice sleeve in the straight cross run (**count from pin 1: an off-by-one plug puts 5 V (pin 2/4) on the 3V3 wire; never a 1x3 or 2x3 shell**); 18/24 lead -> pins 33/34: GPIO13 on 33, GND on 34 (1x2 or two 1-pin housings; seat with tweezer tips, tug-test); PH end parked out of the left side; run lead -> pins 37/39: GPIO26 on 37, GND on 39 (1-pin housings, or one 1x2; seat with tweezer tips, tug-test) (**route over the cooler shroud (`ko_run_cross`)**) |
 | Cables | `fpc` Pi 5 CAM/DISP 1 (port edge) -> GS camera (lower rear); `hdmi` Pi 5 HDMI0 -> EVF board lower edge; `usb_5v` Pi 5 upper USB 2 port -> EVF board 5 V; `qt` encoder -> GPIO 1/3/5/6; `run_lead` run button -> GPIO26 + GND (pins 37/39); `fps_lead` 18/24 switch -> GPIO13 + GND (pins 33/34); `pigtail` X1203 battery pads -> XT30 junction in the grip |
 | In the body after this step | 13 ids (`layout.present_at(4)`) |
 
@@ -180,21 +189,21 @@ Hold the plunger in the front-wall hole (flange outside). Lower the hood straigh
 
 ### Step 6. EVF
 
-Push the eyepiece spigot +X into the rear-wall bore through the housing, flange on the rear face. Outside the body: flex into the board ZIF (latch closed), HDMI plug into the board, 5 V PH junction mated (pull the lead ends out of the open left side). Then slide the OLED and the board in together as a tethered pair (OLED into its cell, foam pad behind it, board into its slot). Coil the HDMI slack over the stick guide (ko_hdmi_coil); tuck the PH junction into ko_5v_end.
+Push the eyepiece spigot +X into the rear-wall bore through the housing, flange on the rear face. On the bench: stick the foam pad to the OLED back (adhesive side to the OLED, centred). Fit the flex into the board ZIF and close the latch. Mate the 5 V PH junction with the pair held about 60 mm (a hand's width) out of the open left side. Do NOT plug the HDMI yet. Slide the OLED and the board in together as a tethered pair (OLED and pad into the cell, board into its slot) until the board stops. Keep the PH junction riding above the bottom rail, beside the board's +X face. When the board is home, push the junction -Y and down into ko_5v_end with the 120 mm tweezers. Then (only after gate G-W7 passed) pinch the right-angle HDMI plug's +Y end top and bottom (thumb under it, over the open well), or hold its +Y half in the smooth-jaw pliers (tool 15), cable leading -Y, and feed it in from the open left side (plug top below z 52) under the bottom-rail end to below the board's receptacle, keeping its bottom above the stick-guide top (z 36) until it is under the receptacle. Lift it to the receptacle mouth, then push it straight up until it seats: a fingertip lies flat on the stick-guide top (z 36, under the plug's -Y half) and lifts the plug; if it does not fit there, come up from the open well below (tub floor, open from y 11 to the open side) and push straight up under the plug's +Y half (fingertip, or the end of the steel rule, tool 10, held upright as a push stick), keeping the plug square. Never lever against the board or the guide edge. Coil the HDMI slack over the stick guide (ko_hdmi_coil). From now until the panel is on (step 8) keep the body level or nose-down: only the panel's EVF cap stops the eyepiece moving rearward.
 
 | Item | Detail |
 |---|---|
 | Parts added to the body | `eyepiece` (Display Components 0PE039-16X glass eyepiece); `hmx039` (Hicenda HMX039-V1 micro-OLED + 50 mm flex); `foam_pad` (closed-cell foam 16 x 14 x 1.0 (OLED pad)); `evf_board` (Hicenda HDMI driver board Rev I) |
 | Fasteners | none |
-| Tool | tweezers |
-| Motion | `eyepiece_in` (eyepiece): start at offset (-30, 0, 0), then +X 30; `evf_pair_in` (hmx039, evf_board): start at offset (0, 45, 0), then -Y 45 |
-| Harness (WIRING s7) | flex -> EVF board ZIF: outside the body, contacts per the kit (**ESD: grounded mat**); micro-HDMI -> EVF board: outside the body; right-angle plug, cable leaves -Y (**only after gate G-W7 passed**); EVF 5 V lead PH -> board pigtail PH: outside the body, then the OLED + board pair slides in (**never mate live (pack unplugged)**) |
+| Tool | tweezers (120 mm, tool 8); fingertip for the HDMI push (on the stick-guide top or up from the open well; the steel rule, tool 10, held upright as a push stick if a fingertip does not fit); smooth-jaw pliers (tool 15) optional to carry the plug |
+| Motion | `eyepiece_in` (eyepiece): start at offset (-30, 0, 0), then +X 30; `evf_pair_in` (hmx039, foam_pad, evf_board): start at offset (0, 60, 0), then -Y 15, then -Y 45 |
+| Harness (WIRING s7) | flex -> EVF board ZIF: on the bench, contacts per the kit; foam pad stuck to the OLED back first (**ESD: grounded mat**); EVF 5 V lead PH -> board pigtail PH: outside the body, with the pair held about 60 mm out of the open left side, before the slide; the junction rides in above the bottom rail and is pushed into ko_5v_end with the tweezers once the board is home (**never mate live (pack unplugged)**); micro-HDMI -> EVF board: in the body, AFTER the pair is home: plug fed in low under the rail end, lifted to the receptacle, pushed up (+Z) through the bottom-rail gap with a fingertip (guide top, or up from the open well); right-angle plug, cable leaves -Y (**only after gate G-W7 passed**) |
 | Cables | `hdmi` Pi 5 HDMI0 -> EVF board lower edge; `usb_5v` Pi 5 upper USB 2 port -> EVF board 5 V; `oled_flex` HMX039 -> EVF board ZIF |
 | In the body after this step | 20 ids (`layout.present_at(6)`) |
 
 ### Step 7. Lens collar (centred) + camera + adapter
 
-Bench B0 done: tripod block off (2 screws bagged), C-CS adapter seated and marked across adapter and BFAR, back focus set with the Kowa at infinity and the lock screw tight (s recorded), lens off again. Lens collar first, camera still out: feet through the 4 hood holes onto the tub face; start s_c1, s_c2, s_c3 with washers 2 turns. Push the centring gauge for this lens through the collar until its rear cone seats in the tub lip and its front cone in the collar bore chamfer; hold it home with a thumb and tighten s_c1, s_c2, s_c3 from the front, 0.15 N m provisional cap, stop at head contact; pull the gauge out. Camera: plug the FPC into it, bring it in from the left, 11 mm behind its place, then push it +X 11.1 until the adapter has passed the tub lip (path: in at 2 mm high, lower 2 mm, then +X 11.1); it rests in its cage (BFAR in the counterbore, tab near the wall) until the lens carries it. Fold the FPC slack into its loop.
+Bench B0 done: tripod block off (2 screws bagged), C-CS adapter seated and marked across adapter and BFAR, back focus set with the Kowa at infinity and the lock screw tight (s recorded), lens off again. Lens collar first, camera still out: feet through the 4 hood holes onto the tub face; start s_c1, s_c2, s_c3 with washers 2 turns. Push the centring gauge for this lens through the collar until its rear cone seats in the tub lip and its front cone in the collar bore chamfer; hold it home with a thumb and tighten s_c1, s_c2, s_c3 from the front, 0.15 N m provisional cap, stop at head contact; pull the gauge out. Camera: plug the FPC into it, bring it in from the left, 11 mm behind its place, then push it +X 11.1 until the adapter has passed the tub lip and the lock tab has gone in between the two tab-catch tines under the hood (if the tab stops on a tine end, roll the camera level and push again) (path: in at 2 mm high, lower 2 mm, then +X 11.1); it rests in its cage (BFAR in the counterbore, tab near the wall) until the lens carries it. Fold the FPC slack into its loop.
 
 | Item | Detail |
 |---|---|
@@ -210,27 +219,27 @@ Bench B0 done: tripod block off (2 screws bagged), C-CS adapter seated and marke
 
 ### Step 8. Lens + panel + 5 screws
 
-Lens, panel still off: fit s_c4 loosely; pass the lens through the collar and screw it into the adapter while finger and thumb through the open left side hold the camera by its metal lens mount (housing, never the cover or the PCB) forward (+X) on the temporary lip catch, so the thread torque never passes the housing-to-PCB joint; set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the knurl seats on the collar cone; the camera now hangs on the lens (it touches neither the tub lip, the counterbore nor the fin); snug s_c4 straight down from above, 0.2 N m. Panel: hold it beside the body; plug the QT lead into the encoder (JST-SH) and mate the 18/24 PH junction (header ends went on at step 4). Push the panel on along -Y (tongue into the hood groove, boss tabs into the lip notches, flush; the keeper finger is the camera's rear catch). Drive s_b1, s_b2 up from below and s_r1, s_r2 from the right: 0.35-0.5 N m, stop at head contact.
+Lens, panel still off: fit s_c4 loosely. Lay the body on its right side on the folded cloth, open left side up. One fingertip on the centre of the camera cover, from above through the open left side, presses the camera forward (+X) onto its lip catch: push only, never pinch or turn the cover. Pass the lens through the collar. Screw it into the adapter with fingertips until it stops, with no extra snug. The camera turns with it about 3 deg until its metal lock tab meets the hood tab catch, which holds it through metal. Set iris and focus, tighten the 2 thumb screws; push the lens gently rearward until the knurl seats on the collar cone. Stand the camera upright on the bench, one hand on the grip from now until s_c4 is snug (it tips at about 6 deg if let go). With s_c4 still loose, turn lens and camera together the other way until the lock tab stops on the other tine (about 6.5 deg of free roll), then back about half way: a soft stop each way means the tab is free; leave it floating between the tines. The camera now hangs on the lens (it touches neither the tub lip, the counterbore nor the tab-catch tines); snug s_c4 straight down from above, 0.2 N m. Panel (knobs on since step 2): a helper holds the body upright by the grip until the panel is home (never leave it standing on its grip end). Prop the panel about a hand's width (60 mm) off the body, inner face toward it, its bottom edge on a block or book stack as tall as the grip (about 110 mm, so the panel stands level with the body). Mate the 18/24 PH junction first, with both hands, one on each housing. Then plug the QT: one hand steadies the panel, its thumb behind the encoder's +X edge; the other holds the QT plug by its rear end and pushes it into the encoder's rear-side socket (the one nearest the lead), finishing with a fingernail on its back face: it is home when it stops (friction lock, no click). (The header ends went on at step 4.) Move the panel toward the body along -Y, body upright. At about 30 mm off, reach down from above between the body and the panel and lay the spare QT lead as a flat fold in the space between the encoder and the 18/24 switch, on top of the HDMI cable (push the loop by the plug into the fold as the panel closes); lay the 18/24 spare and its PH junction in the same space at the switch end; keep both away from the blower. Keep the body upright until the panel is fully home. Push the panel on along -Y (tongue into the hood groove, boss tabs into the lip notches, flush; the keeper finger is the camera's rear catch). Hold the panel home and turn the camera over onto its hood roof on a folded cloth at the bench edge, grip up, right side toward you and its right face within about 20 mm of the edge, so the driver handle and your hand are past the edge (the lead fold is now closed in by the panel, as in use). Lay a flat block no taller than 25 mm (a closed paperback) on the cloth against the left side, between the eyepiece and the lens, and stand it against a wall, a bench stop or a heavy object so it cannot slide: it bears on the hood band and the panel strip between the knobs and the cloth and keeps the panel home. Drive s_b1 and s_b2 first (now downward). Then drive s_r1 and s_r2 level from the right, the block taking the push; hold the grip with your other hand. 0.35-0.5 N m, stop at head contact. Turn the camera upright, keeping a hand on the grip. Set it down only on its right side: never on its left side (the exposure knob would carry it) and never stand it on its grip end (it tips at about 6 deg).
 
 | Item | Detail |
 |---|---|
-| Parts added to the body | `lens` (C-mount lens (LENS parameter)); `panel` (printed, ASA satin silver); `encoder` (Adafruit 5880 I2C QT rotary encoder (A0 bridged, 0x37)); `switch_1824` (mini 2-position rotary switch + nut + washer) |
+| Parts added to the body | `lens` (C-mount lens (LENS parameter)); `panel` (printed, ASA satin silver); `encoder` (Adafruit 5880 I2C QT rotary encoder (A0 bridged, 0x37)); `switch_1824` (mini 2-position rotary switch + nut + washer); `knob_exp` (printed, ASA black); `knob_fps` (printed, ASA black) |
 | Fasteners | 4 x PT 3.0 x 12 thread-forming screw for plastics, pan head, PH1 (EJOT PT K30x12 WN 1411 class / Delta PT 30x12 class; confirm the head on receipt); `s_c4` M3 x 16 PH1 + washer |
 | Driving | `s_b1` travels +Z (up, from below), 7.4 mm engagement into panel boss_b1; `s_b2` travels +Z (up, from below), 7.4 mm engagement into panel boss_b2; `s_r1` travels +Y (toward the panel, from the right side), 10 mm engagement into panel post_f; `s_r2` travels +Y (toward the panel, from the right side), 10 mm engagement into panel post_r; `s_c4` travels -Z (down, from above), 5.3 mm engagement into lens_collar lug insert |
 | Torque | 0.35-0.5 N m by hand, stop at head contact (FASTENER-POLICY C; provisional until G-PT-1); `s_c4` 0.2 N m (FASTENER-POLICY I, M3 into a heat-set insert); no threadlocker |
 | Tool | PH1 screwdriver, 40 mm+ blade, dia <= 6.5 shank (hand only) |
-| Motion | `lens_in` (lens): start at offset (40, 0, 0), then -X 40; `panel_on` (panel, encoder, switch_1824): start at offset (0, 70, 0), then -Y 70 |
-| Harness (WIRING s7) | QT lead -> encoder JST-SH: panel held beside the body (**header end went on at step 4**); 18/24 PH junction: mate the 2-pin PH pair (**header end went on at step 4**) |
+| Motion | `lens_in` (lens): start at offset (40, 0, 0), then -X 40; `panel_on` (panel, encoder, switch_1824, knob_exp, knob_fps): start at offset (0, 70, 0), then -Y 10, then -Y 30, then -Y 30 |
+| Harness (WIRING s7) | 18/24 PH junction: first: a helper holds the body upright, the panel stands 60 mm off on a block about 110 mm tall; mate the 2-pin PH pair with both hands, one on each housing (mating pose `fps_ph`) (**header end went on at step 4**); QT lead -> encoder JST-SH: then: hold the plug by its rear end and push it into the rear-side (-X) socket, finishing with a fingernail on its back face, thumb behind the encoder +X edge (mating pose `qt_enc`); home when it stops (friction lock, no click) (**header end went on at step 4**); QT spare, 18/24 spare, PH junction -> `ko_lead_stow`: at about 30 mm off: flat fold between encoder and switch on the HDMI run; body upright until the panel is home (**nothing over the blower inlet**) |
 | Cables | `qt` encoder -> GPIO 1/3/5/6; `fps_lead` 18/24 switch -> GPIO13 + GND (pins 33/34) |
-| In the body after this step | 35 ids (`layout.present_at(8)`) |
+| In the body after this step | 37 ids (`layout.present_at(8)`) |
 
 ### Step 9. Exterior
 
-Push the knobs on (D shafts), the eyecup over the barrel. Fit the sleeve to the stick, push the stick in from the rear. (r5: the adapter went in with the camera at step 7, the lens at step 8.)
+Push the eyecup over the barrel. Fit the sleeve to the stick, push the stick in from the rear. (The knobs went on at step 2; r5: the adapter went in at step 7, the lens at step 8.)
 
 | Item | Detail |
 |---|---|
-| Parts added to the body | `knob_exp` (printed, ASA black); `knob_fps` (printed, ASA black); `eyecup` (printed, TPU 95A black); `usb_stick` (SanDisk Extreme PRO USB 3.2 SSD stick); `stick_sleeve` (printed, ASA satin silver) |
+| Parts added to the body | `eyecup` (printed, TPU 95A black); `usb_stick` (SanDisk Extreme PRO USB 3.2 SSD stick); `stick_sleeve` (printed, ASA satin silver) |
 | Fasteners | none |
 | Tool | none |
 | Motion | `stick_in` (usb_stick, stick_sleeve): start at offset (-70, 0, 0), then +X 70 |
@@ -239,15 +248,15 @@ Push the knobs on (D shafts), the eyecup over the barrel. Fit the sleeve to the 
 
 ### Step 10. Power
 
-Plug the pack XT30 into the pigtail at the grip mouth, push the junction and the pack up, slide the cap on (-X) until the detent clicks. Level check on live view: if the horizon is off, loosen s_c4 half a turn, turn lens and camera together (window +-1.4 deg: the cover keeps >= 0.3 off the hood roll fin), push the lens back onto the cone, re-snug s_c4 0.2 N m.
+Lay the camera on its right side on the folded cloth (REST_POSES right_down_10; never on its left side, and not on its hood roof now: the eyecup stands proud of it). Draw the pigtail XT30 out of the grip mouth until the whole XT30 housing and at least 15 mm of wire behind it are out (estimate: about 28 mm of wire or more). If it does not reach, stop: never mate it inside the bay. Hold the pack in your palm, its XT30 in your fingers, and plug it into the pigtail XT30, holding both housings. Push the junction and the folded pigtail into the bay ahead of the pack, then push the pack in: the XT30 pair ends up lying flat on the pack top under the run button, the pigtail (female) end to the rear and the fuse sleeve beside it, with the pigtail fold above it. Nothing may hang in the gaps beside the pack, and the pigtail must leave the XT30 female straight, with no bend at its solder cups: if it does not, stop (gate G-MP-PACK). Slide the cap on (-X) until the detent clicks. Turn the camera upright, one hand on the grip. Level the horizon on live view every time: loosen s_c4 half a turn, turn lens and camera together until the horizon is level (window +-1.4 deg: the lock-screw heads keep >= 0.3 off the tab-catch tines; computed `roll_catch` window; a soft stop at about 3 deg either way means the tab is on a tine: come back toward the middle), push the lens back onto the cone, re-snug s_c4 0.2 N m.
 
 | Item | Detail |
 |---|---|
-| Parts added to the body | `xt30_pair` (XT30 pair (pigtail female + pack male) + 180 mm 18 AWG pigtail with its inline 15 A fuse); `pack` (1S2P 18650 pack, BMS, XT30 male lead, pull ribbon); `cap` (printed, ASA black) |
+| Parts added to the body | `xt30_pair` (XT30 pair (pigtail female + pack male) + fused 18 AWG pigtail (cut length L_cut, PIGTAIL) with its inline 15 A fuse); `pack` (1S2P 18650 pack, BMS, XT30 male lead, pull ribbon); `cap` (printed, ASA black) |
 | Fasteners | none |
 | Tool | PH1 screwdriver (level check only) |
-| Motion | `pack_in` (pack, xt30_pair): start at offset (0, 0, -80), then +Z 80; `cap_on` (cap): start at offset (52, 0, 0), then -X 52 |
-| Harness (WIRING s7) | pack XT30 -> pigtail XT30: at the grip mouth; push the junction and pack up (**this powers the camera: the X1203 may start the Pi**) |
+| Motion | `pack_in` (pack, xt30_pair): start at offset (0, 0, -110.2), then +Z 30.2, then +Z 80; `cap_on` (cap): start at offset (52, 0, 0), then -X 52 |
+| Harness (WIRING s7) | pack XT30 -> pigtail XT30: camera on its right side, pack held in the palm; at the grip mouth, the whole pigtail XT30 housing + 15 mm of wire out (estimate about 28 mm), never mated inside the bay; push the junction and the folded pigtail in ahead of the pack, then the pack; the pair ends flat on the pack top, female end to the rear (G-MP-PACK) (**this powers the camera: the X1203 may start the Pi**) |
 | Cables | `pack_lead` 1S2P BMS -> XT30 male |
 | In the body after this step | 43 ids (`layout.present_at(10)`) |
 <!-- END:steps -->
@@ -256,16 +265,16 @@ Plug the pack XT30 into the pigtail at the grip mouth, push the junction and the
 
 | Step | Check |
 |---|---|
-| 1 | Pigtail joints insulated; meter + to - on the pigtail: no short. Stack square, cooler pins seated, fan lead plugged. A0 bridged. Switch lead heat-shrunk. EVF lead: diode band toward the board, polarity metered (WIRING s7) |
-| 2 | Encoder PCB under both cradle hooks; shaft square to the panel. Switch tab in its slot; the knob flat lines up with the "18"/"24" ticks at the two stops |
-| 3 | Nut seated flush in its pocket. Run cap 2.5 mm proud of the pad. Base slid the full 10 mm: the tongues sit under the lips and the base no longer lifts off. Run lead fished up through the floor hole after the slide, not pinched between base and floor |
-| 4 | Run lead in its channel, pigtail round the port edge and down its hole, nothing under the stack. Stack flat on its 4 bosses (no rock); keeper fingers over the X1203 at all 4 stations (look under the Pi at the USB end), keeper flat on its 2 bosses, s_k1 and s_k2 at head contact (tally 1 drive each). HDMI, FPC and 5 V lead plugged at the Pi. **Header: QT red on pin 1 (3V3, the corner pin by the cooler end), 18/24 on 33/34, run on 37/39; count the pins, photograph the header.** QT and 18/24 leads along the right wall and across behind the blower inlet; run lead over the cooler shroud, below z 40 |
+| 1 | Pigtail joints insulated; meter + to - on the pigtail: no short. Stack square, cooler pins seated, fan lead plugged. A0 bridged. Switch lead heat-shrunk. EVF lead: diode band toward the board, polarity metered (WIRING s7). (r7, BX-3) Pigtail cut to L_cut (200 mm + d_board, G-W2), only if d_board is 25 mm or less (else stopped before the cut: G-W5 drop); U at the W mark (within 1 mm), leg taped flat under the X1203; RTV bead over both joints and 8-10 mm of the pair, tack-free before stacking; no tie to a standoff |
+| 2 | Encoder PCB under both cradle hooks; shaft square to the panel. Switch tab in its slot; the knob flat lines up with the "18"/"24" ticks at the two stops. (r7) Switch shaft cut off the panel: 6.7-7.1 above the panel face. Knobs on: a paper strip slides under each knob skirt with light drag (0.2 gap); the shaft ends sit at or below the knob tops |
+| 3 | Nut seated flush in its pocket. Run cap 2.5 mm proud of the pad. Base slid the full 10 mm: the tongues sit under the lips and the base no longer lifts off. (r7, BX-16) Run lead threaded up through the floor hole before the tub was lowered, taped flat in its lane, not pinched. It runs up through the -X end of the floor hole, not over the base top; the base slides without catching it |
+| 4 | (r7, BX-11) Before the keeper: the run lead still taped in its lane; the pigtail leg still taped flat under the X1203 and the U at the port edge inside the gap to the lip gusset; the U lies at the W mark, not under the keeper finger kf4 or the bar (x -41 and beyond). XT30 down its hole, nothing under the stack. Stack flat on its 4 bosses (no rock); keeper fingers over the X1203 at all 4 stations (look under the Pi at the USB end), keeper flat on its 2 bosses, s_k1 and s_k2 at head contact (tally 1 drive each). HDMI, FPC and 5 V lead plugged at the Pi. **Header: QT red on pin 1 (3V3, the corner pin by the cooler end), 18/24 on 33/34, run on 37/39; count the pins, photograph the header.** (r7, BX-10) Header: 8 contacts on pins 1, 3, 5, 6, 33, 34, 37, 39; single housings (or 1x2 on 33/34, 37/39); all housing tops level; each wire tugged. QT and 18/24 leads along the right wall and across behind the blower inlet; the QT splice sleeve in the straight part of the cross run; run lead over the cooler shroud, below z 40 |
 | 5 | Hood level on the wall tops all round; 4 hooks clicked; plate 0.2 off the front wall. Plunger moves in and returns on the Pi button spring (0.6 travel, presses 0.35). microSD latched (tip about 2.5 mm proud of the Pi edge, inside the slot) |
-| 6 | Spigot flange flat on the rear face. OLED in its cell, foam behind it, board fully home in its slot; flex in the ZIF, latch closed (mated outside, pair slid in together). HDMI coil over the stick guide (`ko_hdmi_coil`), clear of the cooler inlet; PH junction tucked in `ko_5v_end` |
+| 6 | Spigot flange flat on the rear face. OLED in its cell with the foam pad stuck to its back; board fully home in its slot; flex in the ZIF, latch closed (mated outside, pair slid in together). PH junction in `ko_5v_end`, clear of the bottom rail. HDMI plug pushed fully up into the board through the rail gap (no gap between the plug and the board edge: seen from the open left side with a small mirror (tool 17), or felt with a fingertip). HDMI coil over the stick guide (`ko_hdmi_coil`), clear of the cooler inlet. (r7) From here until the panel is on (step 8), keep the body level or nose-down |
 | 7 | (r6) Collar first: 4 feet flat on the tub face through the hood holes; the centring gauge seated on both cones (no rock) while s_c1..s_c3 went to head contact at 0.15 N m on the torque screwdriver; washers under every head; gauge out. (r5) Then the camera in its cage: the adapter past the tub lip, the BFAR in the counterbore, the camera resting, not wedged (it lifts and turns slightly by hand); the adapter mark lines up. FPC folded into the loop space, not touching the blower inlet |
-| 8 | (r5) Lens: thumb screws set; the knurl seated on the collar cone (push it gently rearward: no axial play); the camera hangs on the lens: look through the open left side, it touches neither the lip, the counterbore nor the roll fin; s_c4 at 0.2 N m. Panel flush with the hood band and the tub. 4 screws at head contact, none stripped. The dials turn; nothing rubs inside |
-| 9 | Knobs fully on; the eyecup sleeve over the eye-end body. Stick in, sleeve flush with the rear face (r5: the lens was checked at step 8) |
-| 10 | Cap detent clicked. Power on with the plunger; (r5) level check on live view: if the horizon is off, s_c4 half a turn, turn lens and camera together (window +-1.4 deg), push the lens back onto the cone, s_c4 0.2 N m; the EVF shows the boot screen (there are no LED indicators: user decision 2026-10-05). Then WIRING G-W8 to G-W12 in the closed body (G-W12: full-workload power test). G-W4 to G-W7 and G-W13 (option C) are bench gates that ran before assembly (s1 Gates before assembly) |
+| 8 | (r5) Lens: thumb screws set; the knurl seated on the collar cone (push it gently rearward: no axial play); the camera hangs on the lens: look through the open left side, it touches neither the lip, the counterbore nor the tab-catch tines; check by feel (r7 fix-up: the hood roof hides the tines): with s_c4 loose, turn lens and camera gently both ways: a soft stop each way at about 3 deg means the tab is free between the tines; it was left mid-way before s_c4 was snugged; s_c4 at 0.2 N m. (r7, BX-2) QT plug fully seated at the encoder (fingernail push on its back face) with the panel propped 60 mm off and the 18/24 PH junction mated first (both hands); the body held upright by a helper. Before the last 30 mm of panel travel the QT fold, the 18/24 spare and the PH junction lie between encoder and switch on the HDMI run; nothing over the blower inlet; the panel closes without pressure. Panel flush with the hood band and the tub. 4 screws at head contact, none stripped. (r7) Panel screws driven in the hood-down pose at the bench edge (driver handle past the edge), block against the left side and stopped from sliding; the camera was never on its left side and never left standing on its grip end. The dials turn; nothing rubs inside |
+| 9 | The eyecup sleeve over the eye-end body (r7: the knobs went on at step 2). Stick in, sleeve flush with the rear face (r5: the lens was checked at step 8) |
+| 10 | (r7, BX-3) Camera on its right side, pack held in the palm. The whole XT30 housing and 15 mm or more of wire out of the grip mouth before mating (estimate about 28 mm), else stop: never mated inside the bay; no loop beside the pack. The XT30 pair lies flat on the pack top under the run button, female end to the rear, fuse sleeve beside it; the pigtail leaves the female straight, no bend at the solder cups (else stop, G-MP-PACK). Cap detent clicked. Power on with the plunger; (r5) level check on live view every time (r7 fix-up): s_c4 half a turn, turn lens and camera together until the horizon is level (window +-1.4 deg; r7: the lock-screw heads keep >= 0.3 off the tab-catch tines, computed `roll_catch` window), push the lens back onto the cone, s_c4 0.2 N m; the EVF shows the boot screen (there are no LED indicators: user decision 2026-10-05). Then WIRING G-W8 to G-W12 in the closed body (G-W12: full-workload power test). G-W4 to G-W7 and G-W13 (option C) are bench gates that ran before assembly (s1 Gates before assembly) |
 
 ## 4. Screws (the 4 enclosure screws at step 8; the 2 Pi-keeper screws at step 4; the J4 lock s_j at step 3; r5: the lens-collar M3 screws s_c1..s_c3 at step 7 and s_c4 at step 8)
 
@@ -301,13 +310,24 @@ Kowa front barrel); s_c4 is driven straight down from above and is the last oper
 - **Charge out of the camera.** The pack has no charge port in the body (WIRING W-7). Charge it on a 1S Li-ion
   charger with an XT30 lead (BOM D2-67) at 2 A or less, to 4.20 V; never unattended; on a non-flammable
   surface.
-- **Fit.** Slide the cap off forward (+X, 52 mm). Plug the pack XT30 into the pigtail XT30 at the grip mouth, red to
-  red. Push the junction up into the bay, then the pack, ribbon last. Slide the cap on rearward until the detent clicks.
+- **Fit.** Lay the camera on its right side on a folded cloth (r7 fix-up). Slide the cap off forward (+X, 52 mm).
+  r7 (BX-3): draw the pigtail XT30 out until the whole housing and at least 15 mm of wire behind it are out of the
+  grip mouth (estimate: about 28 mm or more). If it does not reach, stop and do not mate inside the
+  bay; re-check the cut length (G-W2). Hold the pack in your palm and plug its XT30 into the pigtail XT30 at the grip
+  mouth, red to red, holding both housings. Feed the folded pigtail and the junction in ahead of the pack, then the
+  pack, ribbon last. The pair ends flat on the pack top under the run button, female end to the rear, fuse sleeve
+  beside it; the pigtail leaves the female straight (else stop, G-MP-PACK). Look up the mouth
+  before the cap: no loop beside the pack. Slide the cap on rearward until the detent clicks.
   The X1203 may start the Pi as soon as the XT30 meets.
 - **Remove.** Shut down first (section 7 P1: hold the plunger 2 s; the EVF shows the shutdown screen, then goes dark;
   wait 5 s more). Slide the cap forward, pull the pack
   by its ribbon; the XT30 junction follows; unplug it by the housings, never by the wires.
 - **Runtime.** About 1 h at the 18 W planning load (WIRING s4, unmeasured). The EVF overlay shows the gauge reading.
+- **Handling (r7, BX-13; fix-up VERIFY-C5).** Set the camera down on its right side; never on its left side, and never
+  stand it on its grip end (it tips at about 6 deg: computed `handling` rest_pose stability; hold it by the grip when
+  upright). Never on its left side: the exposure
+  knob is the highest point there, and resting on it presses the encoder push switch (computed: `handling`
+  `rest_pose` rows).
 - **Storage.** Out of the camera at about 3.7-3.8 V per cell for anything longer than a few days. With the pack in
   and the Pi halted, the X1203 still draws a standby current (G-W8 records it).
 
@@ -338,7 +358,9 @@ XT30. No switch is added for this; none is needed.
   hold (a G-W4 / G-W8 finding). Either way EVF dark is not isolation: P3-P4 are.
 - **P2.** Slide the cap +X 52 off the grip.
 - **P3.** Pull the pack out of the bay by its ribbon; the XT30 junction follows it to the grip mouth (the junction sits
-  above the pack in the bay and cannot be reached with the pack in place; r3 fix-baseline, verifier VBD-7).
+  above the pack in the bay and cannot be reached with the pack in place; r3 fix-baseline, verifier VBD-7). r7 (BX-3):
+  the pigtail is long enough for the whole XT30 housing and at least 15 mm of wire (estimate about 28 mm) to come out
+  of the mouth. Lay the camera on its right side for this (r7 fix-up).
 - **P4.** Unplug the pack XT30 from the pigtail XT30 by the housings, never by the wires. Set the pack aside: it stays
   out until the body is closed again.
 
@@ -347,21 +369,27 @@ then the pack in and the XT30 mated last (section 2 step 10), as in the initial 
 
 1. Prerequisite P1-P4 above (pack out of the camera).
 2. Full service (hood or Pi stack, items 8-11): pull the USB stick and sleeve out rearward (-X 70), pull the eyecup
-   off the barrel and the two knobs off their shafts (reverse step 9). **r5 removal order for the hood or the Pi
+   off the barrel (reverse step 9; r7: the knobs stay on: they ride with the panel). **r5 removal order for the hood or the Pi
    stack:** panel (items 3-5), then the lens (item 6a), then the camera with its adapter (item 6b), then the lens
    collar (item 6c), then the EVF, microSD and hood (items 7-9). The collar's feet pass through the hood plate, so the
    hood never lifts with the collar on (CAD: `hood_off`, `keeper_out` and `pi_out` list the collar and s_c1..s_c4 as
    off). **Panel-only service** (items 3-7) may leave the lens, the collar, the eyecup, the stick and the strap
    fitted: the panel clears them (CAD record `panel_off` below). The pack is already out (item 1).
-3. Panel screws (tool 1 only), **after item 1**: remove s_r1, s_r2 (from the right) and s_b1, s_b2 (from below, up
-   through the 2 base counterbores) with the straight PH1 driver. Each screw has used one of its 5 drives (tally).
+3. Panel screws (tool 1 only), **after item 1**. r7 (BX-13): pull the eyecup off first (the panel still clamps the
+   eyepiece): it is the highest point when the camera lies on its hood roof. Use the step-8 pose (hood roof down on a
+   folded cloth at the bench edge, right side toward you and its right face within about 20 mm of the edge so the
+   driver handle and your hand are past the edge; a block no taller than 25 mm against the left side for s_r1/s_r2,
+   stood against a wall or a heavy object so it cannot slide; CAD record `REST_POSES` `hood_down_s7`, driver-plane
+   rule), then turn the camera upright, a hand on the grip, before item 4. Remove s_r1, s_r2 (from the right) and s_b1, s_b2
+   (from below, up through the 2 base counterbores) with the straight PH1 driver. Each screw has used one of its 5 drives (tally).
    Take a tripod plate off first (it covers s_b1/s_b2); the strap does not reach the s_b1/s_b2 driver line (y 27.85).
    **Base (r2 fixer, verifier M-V-MPS-5):** in r2, s_b1 and s_b2 were also the only lock of the base slide (J4), so
    panel service could free the body to slide 10 mm off the base and drag the run lead and the XT30 pigtail across the
    floor-hole and base-window edges. The base now has its own lock screw s_j (step 3, at (-111, -20) from below),
-   which stays in for panel and Pi service. Still keep the body base-down on the bench while the panel is off.
-4. Panel: pull it straight off along +Y 70 by hand (the 2 boss tabs leave the lip notches, the tongue leaves the hood
-   groove, the knobs ride out on their shafts). There is no skirt, barb or latch any more (r2, finding 3): there is no
+   which stays in for panel and Pi service. While the panel is off, keep the body on its right side on the bench (never standing on its grip end: it tips).
+4. Panel: pull it straight out along +Y about 60 mm by hand (the 2 boss tabs leave the lip notches, the tongue leaves
+   the hood groove, the knobs ride out on their shafts; r7: the QT fold, the 18/24 spare and the PH junction come out
+   with it, and the QT lead is still plugged at the encoder). There is no skirt, barb or latch any more (r2, finding 3): there is no
    flexing latch; the number of openings is limited by the PT boss tally (FASTENER-POLICY C, provisional until G-PT-1)
    and is checked physically by G-PANEL-1 (not run). CAD record: `layout.REMOVALS`
    `panel_off`, swept with the strap, cap, pack, lens and stick in place. That sweep is **geometry evidence only** (the
@@ -369,13 +397,20 @@ then the pack in and the XT30 mated last (section 2 step 10), as in the initial 
    to open the panel or part a lead with the pack connected. The pack is out (item 1) before this item. Physical gate
    G-PANEL-1 (coupons base_edge_*). The panel's EVF cap releases the spigot clamp: the eyepiece stays in its bore and half-collar, but do
    not pull the eyecup while the panel is off.
-5. Leads (pack already out, item 1): unplug the QT JST-SH at the encoder and part the 18/24 PH junction as the panel
-   comes away (the header ends stay on). To close: reverse step 8 (panel on along -Y, boss tabs into the notches, 4
-   screws at 0.35-0.5 N m); only then the pack and cap (step 10).
+   **4a. Knob change (r7, BX-5):** pull the old knob straight off (+Y): the panel backs the encoder for a pull. To fit
+   a knob, take the panel off first (items 3-5) and press it on at the bench as in step 2, thumb behind the encoder
+   board, on the 2 paper strips (tool 16). Never press a knob on with the panel on the body.
+5. Leads (pack already out, item 1): with the panel about 60 mm off, propped on the step-8 block, hold the QT plug
+   by its rear end (not the wire) and pull it straight out of the encoder, then part the 18/24 PH junction (the
+   header ends stay on). To close: reverse step 8 in the step-8 pose (r7 fix-up: a helper holds the body upright, the
+   panel propped 60 mm off on a block about 110 mm tall; the PH junction mated first with both hands, then the QT
+   plug pushed home with a fingernail; the spares folded into `ko_lead_stow` at about 30 mm; panel on along -Y, boss tabs
+   into the notches; hood roof down, block against the left side; 4 screws at 0.35-0.5 N m); only then the pack and
+   cap (step 10).
 6. Camera, lens and collar (r5; pack out, item 1; panel off, items 3-4):
-   a. Lens: loosen s_c4 one turn (straight PH1 from above). Hold the camera by its metal lens mount (housing)
-      with finger and thumb through the open left side, never by the cover (r6, audit B-7), and unscrew the lens by
-      hand; lift it out forward (+X 40). The camera now rests in its cage. Check the adapter mark (B0 item 3).
+   a. Lens: loosen s_c4 one turn (straight PH1 from above). Unscrew the lens with fingertips: the tab catch holds the
+      camera, and no hand touches it. Lift the lens out forward (+X 40). Check both paint marks (B0). (CAD record
+      `lens_off`.)
    b. Camera (reverse `camera_in`, CAD record `camera_out`): unfold the FPC, pull the camera and its adapter -X 11.1
       back through the tub lip, lift 2, take it out along +Y 60; unplug the FPC at the camera. The collar may stay.
    c. Collar (CAD record `collar_off`; only for a collar swap or the hood / Pi routes): s_c1, s_c2, s_c3 out from the
@@ -383,10 +418,18 @@ then the pack in and the XT30 mated last (section 2 step 10), as in the initial 
       tub; no drive tally (machine thread in brass). r6 (audit X2): a collar always goes back on with the camera
       out (item b) and the centring gauge of that collar's lens, as step 7.
    To close: step 7 (collar with the centring gauge, s_c1..s_c3 0.15 N m on the torque screwdriver (provisional cap;
-   G-COL-1), gauge out, then the camera), step 8 (the lens through the collar with the camera held by its metal
-   mount, s_c4 0.2 N m, then the panel), and the step 10 level check.
-7. EVF (reverse `evf_pair_in`, `eyepiece_in`; pack out, item 1): slide the OLED and the board out together along +Y 45; outside the body
-   part the PH junction, the HDMI and the flex. Pull the eyepiece out -X 30 through the housing.
+   G-COL-1), gauge out, then the camera), step 8 (the lens as step 8 (body on its right side, fingertip push on the cover centre, tab catch
+   holds; then upright, hand on the grip: with s_c4 still loose, turn lens and camera together the other way until
+   the lock tab stops on the other tine (about 6.5 deg of free roll), then back about half way, so the tab floats
+   between the tines), s_c4 0.2 N m, then the panel), and the step 10 level check.
+7. EVF (r7, C-16; reverse `evf_pair_in`, `eyepiece_in`; pack out, item 1; CAD record `evf_out`): uncoil the HDMI.
+   Lift the 5 V PH junction out of `ko_5v_end` with tweezers (tool 8). Unplug the HDMI straight down through the
+   bottom-rail gap: one fingertip, coming from the right of the board (+X), pushes up under the free end of the
+   bottom-rail slab (y 23-28) while the pliers (tool 15) grip the plug body on its left and right faces at its deep
+   half and pull it straight down. Never pull the cable, never rock the plug. Then slide the OLED, the pad and the
+   board out together along +Y 45 (the pad is stuck to the OLED and comes out with it). Outside the body, part the PH
+   junction and the flex. Pull the eyepiece out -X 30 through the housing. To close: step 6 (HDMI plugged last, in
+   the body).
 8. microSD (pack out, item 1): pull it out through the front slot with tweezers (it must be out before the stack moves).
 9. Hood (r2 fixer, verifier M-V-MPS-2; CAD records `layout.REMOVALS` `hood_off` and `RELEASE_ACCESS`): with the panel,
    lens, camera, lens collar (r5), eyepiece and EVF pair out (items 4-7) and the microSD out (item 8), push one release pin (tool 9) straight
@@ -408,7 +451,9 @@ then the pack in and the XT30 mated last (section 2 step 10), as in the initial 
        1.2 rearward (-X: the 2 USB fingers leave the underside of the Pi), then slide it out along +Y 60 through the
        open left side. It is rigid: nothing flexes, nothing breaks.
     d. Stack (reverse `pi_in`, `REMOVALS` `pi_out`): lift 5, -X 2.8, up 35, +Y 2.1, up 40. Nothing latches it, so it
-       lifts off its 4 bosses freely; keep the XT30 pigtail feeding up through its floor hole as it rises.
+       lifts off its 4 bosses freely; keep the XT30 pigtail feeding up through its floor hole as it rises. r7 (BX-11):
+       the taped leg and the RTV stay on the X1203; lift the stack straight up with the pigtail following through
+       the hole (XT30 long side front to back).
     To refit: section 2 step 4 (stack down on its bosses, keeper in, s_k1 and s_k2 at 0.35-0.5 N m, stop at head
     contact). Physical gate G-KEEP-1 (coupons `coupon-pi-keeper-*`: the whole keeper, a tub floor coupon with both
     keeper bosses and the 4 Pi bosses, and 2 flat stand-in boards on the real X1203 kit): 5 full keeper cycles on
@@ -423,13 +468,12 @@ then the pack in and the XT30 mated last (section 2 step 10), as in the initial 
     tongues (no skirts to remove: r2, finding 3).
 
 **Lens swap (r5; no isolation needed, nothing electrical is touched).** With the panel on, the camera rests in its
-cage: the tub lip ahead, the panel keeper behind, the hood roll fin beside the cover. Loosen s_c4 one turn (straight
-PH1 from above); carry the lens with one hand and unscrew it **with fingertips only**: the camera turns with it until
-its cover meets the roll fin, which then holds it. r6 (audit B-7): that reaction passes through the housing-to-PCB
-joint, so a stuck thread is never forced against the fin. Take the panel off instead (s7 items 1-4) and hold the
-metal mount. G-CAM-2 repeats its corner check after 5 swaps. Then check the adapter mark (B0 item 3; audit B-2):
+cage: the tub lip ahead, the panel keeper behind, the hood tab catch either side of its lock tab. Loosen s_c4 one turn (straight
+PH1 from above). Tip the body nose-down. Carry the lens with one hand and unscrew it with fingertips only: the camera turns
+with it about 3 deg until its lock tab meets the tab catch, which holds it through the metal housing. A stuck
+thread: stop, never more than fingertip torque. G-CAM-2 repeats its corner check after 5 swaps. Then check both paint marks (B0 item 3; audit B-2):
 if the adapter came out with the lens, refit it before anything else. Fit the new lens the same way, carrying its
-weight so that the camera only sees the thread torque. Tip the isolated body nose-down so the camera comes forward onto its lip catch before starting the thread; never force a thread that will not start. Push the lens rearward until its band seats on the collar cone; s_c4 0.2 N m; then the step 10 level check. A lens
+weight so that the camera only sees the thread torque. Tip the isolated body nose-down so the camera comes forward onto its lip catch before starting the thread; never force a thread that will not start. Push the lens rearward until its band seats on the collar cone. Body upright, one hand on the grip: with s_c4 still loose, turn lens and camera together the other way until the lock tab stops on the other tine (about 6.5 deg of free roll), then back about half way, so the tab floats between the tines (r7 fix-up, VERIFY-C4). s_c4 0.2 N m; then the step 10 level check (always: set the horizon level, window +-1.4 deg). A lens
 with a different band needs its own collar (a Fujinon collar for the Fujinon): panel off, items 6a-6c (camera out),
 then step 7 with that collar's centring gauge, then step 8. The back focus was set for the Kowa at B0: check infinity on live view with the new lens and, if
 it is off, reset s with the camera out (B0) and record it.

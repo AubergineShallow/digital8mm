@@ -156,6 +156,17 @@ straight-driver audit applies to every kind.
 
 ## 5. Assembly order (layout `STEPS`; parts present = the cumulative `adds`, `present_at(step)`)
 
+**r7 (2026-10-09):** the table below is the r6 summary. The authoritative step texts are `layout.STEPS` and the
+generated ASSEMBLY s2 blocks. r7 changes: step 1 adds the W-QT splice, the pigtail cut to L_cut (stop if pads-to-W is
+over 25 mm), the U at W, Kapton and neutral-cure RTV; step 2 presses both knobs on at the bench and cuts the 18/24 shaft
+off the panel; step 3 threads the run lead up the base passage before the button and up the floor hole before the tub
+is lowered; step 4 seats single header housings with open tweezer tips and tucks the XT30 into the grip bay; step 6
+slides the EVF pair in with the HDMI unplugged, then plugs the HDMI in place (fingertip from the stick-guide top or up
+from the open well); step 7 puts the lock tab between the tab-catch tines; step 8 rests the camera on its hood roof at
+the bench edge, turns the camera back off the tine before s_c4, and mates the panel leads with the panel propped 60 mm
+off and a helper holding the body (PH junction first, then the QT); step 9 no longer fits the knobs; step 10 rests the
+camera on its right side with the pack in the palm, and the level check is done every time.
+
 | # | Step | Adds to the body | Tool | Motion / check |
 |---|---|---|---|---|
 | 1 | Bench: solder the XT30 pigtail (2 joints); stack the X1203 + Pi 5 with the kit (0.2 N m); fit the cooler; bridge encoder A0; solder the 18/24 lead (2) | (sub-assemblies) | iron; kit driver | |
@@ -477,6 +488,9 @@ The 2 exterior keep-outs are the tripod clamp and the driver model.
   entry), or CAM updated and rebuilt. Sensor height above PCB and filter focus shift stay unknown unless independently
   measured/sourced. The 1.25 nominal is an unconfirmed geometry sample; known optical inputs derive the nominal and
   known direct-stack measurements must agree within the declared 0.10 mm diagnostic tolerance. (r4's G-CAM-1 measured the hole diameter for the 2 pins; the pins are deleted.)
+  r7 (SPEC-C4, BX-4): also the lock-screw head dia and height, the tip protrusion on the other side, and the tab width
+  and top radius. Set `HOOD['tab_catch']` head_side / bare_y (and `CAM['tab']`), rebuild; `roll_catch` and `j7_float`
+  must pass again before the hood is printed (MEASURED-PARTS MP-CAM).
 - **G-COL-1 (r5, coupons `collar_tub_front`, `collar_hood_plate`, `collar_part`; cloud-polish refinement).**
   Record the exact short/lug insert part and measured OD/length, filament, print orientation/settings and torque tool.
   Clear the collar's three print-only 0.2 mm membranes to 3.4 mm by hand; washer seat planes must remain flat.
@@ -503,11 +517,17 @@ The 2 exterior keep-outs are the tripod clamp and the driver model.
   camera carries no lens load. r6 (audit B-7): repeat the centre/corner record after 5 lens swaps, made as ASSEMBLY s7
   (fingertip thread torque, the panel on). Every swap reacts its torque through the roll fin and the housing-to-PCB
   joint, so the swaps must not creep sensor tilt in: change <= 4 um.
+  r7 (SPEC-C4, BX-4; supersedes the roll-fin sentence): every swap now reacts its torque housing -> lock tab -> hood
+  tab catch, never through the cover or the PCB (computed: `roll_catch`). G-CAM-2 adds: lens off, panel off, roll the
+  camera by hand both ways: the tab meets a tine at about 3 deg and the cover touches nothing. Lens on and seated: a
+  0.5 mm feeler passes between each tine and the tab/heads. After 5 swaps: no whitening at the tine roots, both paint
+  marks (B0) unmoved.
 - **Plan B (r5, documented only, not built).** If G-LENS shows that the Kowa band moves, judge 2's housing clamp is
   used instead (`research/r5-lens-support/design_2.md`, `judge_2.md` s2.2): a printed cradle in the tripod-block seat
   and a clip over the lock tab, 3 PT screws from the front, clamp the camera housing to the tub. It bypasses the
   housing-to-PCB joint but leaves the lens moment on the camera's own adapter and BFAR threads.
-- **G-EVF-1.** Spigot pull-out at least 20 N with the cap clamp; the diopter turns freely; focus range with the foam pad.
+- **G-EVF-1.** Spigot pull-out at least 20 N with the cap clamp; the diopter turns freely; focus range with the foam pad
+  (r7, BX-7: the pad is stuck to the OLED back and goes in and out with the EVF pair; record its real thickness).
 - **G-PI-1.** X1203 edge parts clear of the 4 keeper finger zones (same 4 stations, 0.65 over the edge, z 7.7-9.3).
   Kit standoff length (10.9 assumed). Kit screw head at most dia 5.0 x 2.0.
 - **G-PLG-1.** Pi button height (z 21.0 assumed) and travel. The plunger presses 0.35 of 0.45.
@@ -536,9 +556,47 @@ The 2 exterior keep-outs are the tripod clamp and the driver model.
   laminate, not on the HDMI receptacle or the OLED flex. With the real micro-HDMI plug fitted, push the board -Y, +X
   and +Z by hand: the PCB edge must stop first (r2 fixer: in CAD the rails stand >= 0.6 off the plug envelope and
   0.75 off the ZIF; the r2 -Y contact share on the receptacle is gone).
+- **G-EVF-3 (r7, BX-1; assembly operation, first print).** The EVF-end HDMI is plugged in the body after the EVF pair
+  is home (ASSEMBLY step 6), upward through the bottom-rail gap. Five mate/unmate cycles through the gap: mate by
+  fingertip on the stick-guide top or straight up from the open well (record which; tool 10 upright as a push stick only
+  if a fingertip does not fit; r7 fix-up: there is no floor-edge lever), unmate with the smooth-jaw pliers (tool 15)
+  on the -Y half while a fingertip from +X backs the slab free end. Pass: the plug seats with fingertip force, square,
+  never levered against the board or the guide edge; the board stays on its groove floor (feeler <= 0.6 at the +Y lower corner); no whitening
+  or crack at the slab root (y 18.9) or the spine root (y 3.0); the 5 V PH junction goes into `ko_5v_end` with the
+  tweezers (tool 8) in one attempt. Computed side: `sweeps` (`evf_pair_in` moves the OLED, the pad and the board;
+  the HDMI plug is not carried), `mate_paths` (`plug_in`, `access`, `coverage`) and `evf_restraint`
+  (`support_span_final`, `support_span_prepanel`). Bound to every production STL (`build_d2.STATE_GATES`
+  assembly_operation catch-all). Also recorded in MEASURED-PARTS MP-EVF and MP-HDMI.
+- **G-QT-1 (r7, BX-2; bench, panel coupon or first print).** Dry-fit the finished 250 mm QT lead (WIRING W-QT) at
+  step 4, splice sleeve wholly in the straight cross run. With the panel propped 60 mm off (r7 fix-up: block under its
+  bottom edge, body held by a helper; PH junction mated first with both hands), plug and unplug the QT 5 times by
+  fingernail push on the plug's back face (one hand steadies the panel). Fold both spares and the PH junction into `ko_lead_stow` and close the panel 3 times; the closed
+  panel must not pull on the plug (it still sits fully latched). Computed side: `mate_reach` (qt_enc, fps_ph),
+  `cable_stow`, `cable_routes` (plug-point rule) and `sweeps` (`panel_on` carries the QT plug; the stow is an
+  obstacle from +30). Text in MEASURED-PARTS MP-ENC, QT lead line.
+- **G-HDR-1 (r7, BX-10; first assembly).** All 8 header housings (pins 1, 3, 5, 6, 33, 34, 37, 39) seat level with
+  daylight to the cooler shroud and the wall (>= 0.3 feeler, or a visible gap); tug test; continuity map of the QT
+  splice; `i2cdetect` sees 0x37 at the configured bus speed and the encoder reads clean for 10 min (joins WIRING
+  G-W9). Computed side: `header_housings` (1-pin housings, a 1x2 only on 33/34 or 37/39; gap >= 0.3; top inside the
+  header-end keep-out). Text in MEASURED-PARTS MP-ENC, QT lead line.
 - **G-SKIRT-1.** Withdrawn in r2 (no skirts).
 - **G-RUN-1, G-ENC-1** (DESIGN s9) and the purchased-part gates G-MP-PACK, G-MP-X1203, G-MP-EVF, G-MP-ENC, G-MP-SW,
   G-MP-STICK (`MEASURED-PARTS.md`); electronics G-W1 to G-W13 (WIRING s9; G-W12 = the full-workload power test; G-W13 = the EVF feed regulator bench qualification, r3).
+  r7 (SPEC-C5, BX-5/BX-14): G-ENC-1 adds the encoder cradle pull-out along -Y (>= 25 N, recorded in `PRESS_FITS`
+  `knob_exp` `release_N`; below it the `handling` check fails); G-KNOB-1 adds the knob press-on and pull-off force
+  with the board backed; G-MP-ENC adds the push stroke; G-MP-SW records the off-panel shaft cut (P, washer, final
+  6.7-7.1 above the face). Texts in MEASURED-PARTS MP-ENC and MP-SW.
+  r7 (SPEC-C3, BX-3/BX-11/BX-16): G-W2 adds d_board (the pads-to-W string length) and the U-forming check on the real
+  board edge; the pigtail is cut to L_cut = 200 + d_board, rounded up to 5 mm (`lead_access` `pigtail_range`;
+  `PIGTAIL['pad']` and `CABLES['pigtail']['length']` updated, then rebuilt). G-MP-X1203 adds the RTV area and the
+  underside parts in the pigtail lane (x -40..-35, y -5..23.7, height 3.1). G-MP-PACK adds the 10-cycle fold check
+  (about 140 mm of pigtail + the pack lead; no loop beside the pack). MP-RUN records the lead core OD (design 1.6).
+  r7 fix-up (VERIFY-C3): d_board over 25 mm stops step 1 before the cut (`lead_access` `pigtail_drop`: the G-W5 drop
+  estimate reaches 0.15 V at L_cut 225). The XT30 junction is re-posed flat on the pack top under the run button,
+  female end -X; G-MP-PACK records the rigid solder-cup / heat-shrink length at each XT30 end: the computed exits
+  leave 0.8 mm for it (8.0 mm room against 7.2 needed at OD 2.4); longer means a new pose and a rebuild.
+  Computed side: `lead_access`, `mate_reach` (xt30) and `cable_routes` (pigtail). Texts in MEASURED-PARTS MP-X1203,
+  MP-PACK, MP-RUN and WIRING G-W2.
 - **G-HDMI.** The 90 deg plug stands at most 8.5 mm off the board (Q2). Also the encoder shaft length and the
   rotary-switch bushing and tab (estimates).
 - **Mock-ups.** Nose at the 33.6 mm cup, strap length, warm exhaust on the left palm (concept Q4).

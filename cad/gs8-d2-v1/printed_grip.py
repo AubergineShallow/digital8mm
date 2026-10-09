@@ -200,9 +200,10 @@ def _base_cuts(L):
                                       V(T['x'], T['y'], BS['z'][0] - 0.1)))
     cuts.append(cq.Solid.makeCone(T['hole_d'] / 2 + 0.8, T['hole_d'] / 2, 0.8, V(T['x'], T['y'], BS['z'][0] - 0.1)))
     O, FH = L.BASE_OPENING, L.FLOOR_HOLES   # opening shaped to the switch drop, run-lead and pigtail passages
+    RP = L.base_run_passage()   # r7 C3 (SPEC-C3 3.3): base run-lead passage decoupled from the longer floor hole (r6 size)
     bx0, (by0, by1) = RB['body']['x'][0], RB['body']['y']
     rects = [(bx0 - SL, gx1 - G['wall'] - CRADLE['pad_boss_t'], by0 - SL, by1 + SL),   # r2 R2: stop at the pad boss
-             (FH['run_lead']['x'][0], FH['run_lead']['x'][1], FH['run_lead']['y'][0], FH['run_lead']['y'][1]),
+             (RP['x'][0], RP['x'][1], RP['y'][0], RP['y'][1]),
              (FH['pigtail']['x'][0], FH['pigtail']['x'][1], FH['pigtail']['y'][0], FH['pigtail']['y'][1])]
     for xa, xb_, ya, yb in rects:
         xa, xb_ = max(xa, O['x'][0]), min(xb_, O['x'][1])

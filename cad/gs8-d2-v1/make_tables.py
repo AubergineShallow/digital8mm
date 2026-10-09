@@ -40,18 +40,25 @@ CABLE_INFO = {
              'board, Q2), board end right-angle with the cable leaving -Y (EVF-SELECTION A3)',
              'up from HDMI0, back along the panel side under the dials (z 39.6-44), slack coil over the stick guide '
              '(ko_hdmi_coil, x -139..-113.5), '
-             'down to the board lower edge through the slot gap y 4-17'),
+             'down to the board lower edge through the slot gap y 4-17; r7 (BX-1): the board end is plugged in the '
+             'body after the pair is home, upward (+Z) through the bottom-rail gap from the open left side'),
     'usb_5v': ('USB-A male to 2-wire lead (24-26 AWG, 200 mm class) + 1N5817 in the + conductor + JST PH 2-pin '
                'wire-to-wire junction at the board end',
                'from the upper USB 2 port up the right-rear corner (y < -24) to z 64-70, across to the board 5 V '
-               'pigtail; diode and splice under adhesive heat-shrink'),
+               'pigtail; diode and splice under adhesive heat-shrink; r7 (BX-9): PH junction mated outside (pair '
+               'held about 60 mm out), rides in above the bottom rail beside the board, pushed into ko_5v_end once '
+               'the board is home'),
     'oled_flex': ('Hicenda kit flex FM04112-MF1-A, 50 mm (with the panel)',
-                  'from the OLED cell (open +Y) straight back to the board ZIF; mated outside the body, then the OLED '
-                  'and the board go in together as a tethered pair (step 6); no fold beyond the kit form'),
-    'qt': ('Adafruit 4397 STEMMA QT (JST SH 4) to female sockets, 150 mm',
-           'header end plugged at step 4 on pins 1/3/5/6 (ko_qt_lead), up the right wall (ko_lead_wall, z 36.6-44), '
-           'across behind the blower inlet (ko_lead_cross, x -84..-74) to the encoder lower edge; the JST-SH end '
-           'plugs into the encoder at step 8'),
+                  'from the OLED cell (open +Y) straight back to the board ZIF; mated outside the body (foam pad stuck '
+                  'to the OLED back first, r7 BX-7), then the OLED and the board go in together as a tethered pair '
+                  '(step 6); no fold beyond the kit form'),
+    'qt': ('QT lead 250 mm (240-270): Adafruit 4397 STEMMA QT female sockets (D2-24) spliced to Pololu 5521 JST-SH '
+           '4-pin (D2-24B), splice W-QT; or a one-piece 240-270 mm lead of the same ends (MP-QT buy-check)',
+           'header end plugged at step 4 on pins 1/3/5/6 (ko_qt_lead; single 1-pin housings, seated with tweezer '
+           'tips), up the right wall (ko_lead_wall, z 36.6-44), across behind the blower inlet (ko_lead_cross, x '
+           '-84..-74; splice in its straight run, y -29..17, joints 91-115 mm from the socket tip), up the tail '
+           '(ko_qt_tail) to the plug at the encoder -X socket (ko_qt_plug); r7 (BX-2): the JST-SH end is plugged at '
+           'step 8 with the panel held 60 mm off (mating pose qt_enc); the spare folds into ko_lead_stow at +30 mm'),
     'run_lead': ('pre-wired momentary button lead with female sockets (Squid Button class)',
                  'up from the grip cradle through the base opening and the floor run-lead hole, along the floor '
                  'channel under the X1203, up the port-side rise (ko_run_rise), over the cooler shroud under the camera '
@@ -61,43 +68,68 @@ CABLE_INFO = {
                  'switch lugs (2 joints); the PH pair is the step-8 inline junction',
                  'header end plugged at step 4 on pins 33/34, up the right wall (ko_lead_wall), across behind the '
                  'blower inlet (ko_lead_cross), back along the panel-side channel (ko_hdmi_run), up to the switch lugs '
-                 '(ko_fps_up); PH junction mated at step 8'),
-    'pigtail': ('18 AWG silicone pair, 180 mm, XT30U female; soldered to the X1203 battery pads (2 joints); r4: inline '
-                '15 A fuse (Littelfuse 0251015.MXL) in the + conductor within about 25 mm of the XT30 female (2 joints)',
-                'from the X1203 pads round the port edge (ko_pig_wrap; pad position Q2), under the board (ko_pig_under, '
-                'ko_pig_in), down the pigtail hole into the grip to the junction; the sleeved fuse (about 20 x dia 5) '
-                'lies along X under the XT30 pair (ko_xt30)'),
+                 '(ko_fps_up); PH junction mated first at step 8, both hands, with the panel propped 60 mm off '
+                 '(mating pose fps_ph); r7 (BX-2): the spare and the PH junction fold into ko_lead_stow at +30 mm'),
+    # r7 C3 (BX-3, BX-11): cut-to-length pigtail, U at W, RTV at the pads, taped leg (layout PIGTAIL, lead_access)
+    'pigtail': ('18 AWG silicone pair, cut to L_cut = 200 mm + d_board (set at G-W2; 200-225 mm: d_board over 25 mm '
+                'stops step 1, G-W5 drop, `lead_access` pigtail_drop), XT30U female; '
+                'soldered to the X1203 battery pads (2 joints), RTV strain relief at the pads (neutral cure, not '
+                'acetoxy; no standoff tie); r4: inline 15 A fuse (Littelfuse 0251015.MXL) in the + conductor within '
+                'about 25 mm of the XT30 female (2 joints, inside L_cut)',
+                'from the X1203 pads on the top face, straight in from inside the board (y < 23), to the W mark on the '
+                'port edge (x -37.5, 31.5 mm from the button-end edge; pad position Q2); round the edge in a U over '
+                'Kapton (ko_pig_wrap), the leg taped flat under the board (ko_pig_under, ko_pig_in), down the pigtail '
+                'hole into the grip to the junction; 136-141 mm stored folded above the pack with the pack lead '
+                '(ko_xt30); the sleeved fuse (about 20 x dia 5) lies along X beside the XT30 pair, both flat on the pack top under the run button (r7 fix-up); '
+                'L_cut = 200 + d_board, rounded up to 5 mm'),
     'pack_lead': ('18 AWG silicone pair, 60 mm, XT30U male (part of the pack)',
                   'from the pack BMS to the junction above the pack at the grip mouth'),
 }
 
 PLUG_ORDER = [   # (step, connector, action, caution): WIRING s7 and the "Harness" row of each ASSEMBLY step
     (1, 'pigtail fuse (r4)', 'splice the 15 A fuse (Littelfuse 0251015.MXL) into the red conductor about 20-25 mm from the XT30 female: trim each fuse lead to 6.5 mm (a 1.5 mm stub at the body + a 5 mm lap joint on the stripped conductor), adhesive 3:1 heat-shrink over the whole splice (about 28 mm)', 'hand-solder at 350 C for 5 s max per lead (datasheet); never re-solder the XT30 female with the fuse fitted; meter the red path end to end (< 0.1 ohm)'),
-    (1, 'pigtail -> X1203 battery pads', 'solder red to +, black to -; adhesive heat-shrink over both joints; strain-relief tie to a standoff', '**pack never connected** at the bench; meter + to - for no short before anything else'),
+    (1, 'pigtail -> X1203 battery pads', 'cut to L_cut (`PIGTAIL`); solder red to +, black to -; adhesive heat-shrink over both joints; on the bare X1203 lead the pair to the W mark, Kapton over the edge, form the U and tape the leg flat under the X1203 to the hole point; then RTV strain relief at the pads (neutral cure) over the joints and 8-10 mm of the pair (before the Pi covers top-face pads); stack when tack-free, full cure before step 4', '**pack never connected** at the bench; meter + to - for no short before anything else; r7 (BX-3): no tie to a standoff'),
     (1, 'Active Cooler lead -> Pi FAN', 'plug the JST-SH 4', 'route it as the cooler ships'),
     (1, 'encoder A0', '1 solder blob on the A0 jumper', 'address 0x37'),
+    (1, 'QT lead splice (W-QT, r7)', 'join Adafruit 4397 to Pololu 5521 by SH pin number: joints 91-115 mm from the '
+     'socket tip, 8 mm apart, one thin sleeve each, one adhesive 3:1 sleeve about 35 mm over all; finished 250 +/- 10 '
+     'mm', 'map continuity first; never join by colour alone; meter end to end, no short'),
     (1, '18/24 switch pigtail', 'solder the 50 mm JST PH 2-pin pigtail to the common and position-2 lugs; heat-shrink', ''),
     (1, 'microSD', 'flash it (gate G-W3), then take it out of the Pi', 'the card must be out for steps 3-4 (it hits the front wall on the stack path)'),
     (1, 'EVF 5 V lead', 'solder the 1N5817 into the + conductor (band toward the board), the PH plug on the free end; adhesive heat-shrink', 'polarity: meter USB-A VBUS -> PH pin 1 through the diode (forward), GND -> pin 2'),
     (1, 'EVF board pigtail (Rev I)', 'solder the PH 2-pin pigtail to the traced EXT+ / GND pads; heat-shrink strain relief', 'photograph both board sides first (EVF gate G1)'),
-    (3, 'run lead', 'after the base slide, fish its socket end up through the floor run-lead hole (x -34..-28, y 1.5..9) with tweezers', 'not before the slide: the base opening and the hole only overlap at the final pose'),
-    (4, 'run lead', 'lay it in its floor channel before the stack goes down (`ko_run_floor`)', ''),
-    (4, 'pigtail', 'feed the XT30 end down through the pigtail hole (x -45..-34, y -13..-4) into the grip', 'before the stack goes down'),
+    (3, 'run lead', 'before the tub is lowered, push its sockets up through the base passage and the rear (-X) end of the floor run-lead hole (x -41.5..-28, y 1.5..9); lower the tub, slide the base; tape the lead flat in its floor lane (`ko_run_floor`)', 'r7 (BX-16): threaded before the tub goes down (`lead_access` run_lead_window)'),
+    (4, 'run lead', 'check it is still taped flat in its floor lane (`ko_run_floor`), socket end out over the open +Y side', 'before the stack goes down'),
+    (4, 'pigtail', 'feed the XT30 end down through the pigtail hole (x -45..-34, y -13..-4) into the grip, long side front to back; the taped leg comes down with the stack', 'before the stack goes down; port edge > 10 mm from the W mark'),
     (4, 'micro-HDMI -> Pi HDMI0', '90 deg plug, cable leaves upward', 'the EVF end stays loose'),
     (4, 'FPC -> Pi CAM/DISP 1', 'contacts as printed on the cable; latch closed', 'camera end loose'),
     (4, 'EVF 5 V lead -> Pi upper USB 2 port', 'USB-A', 'PH end loose'),
-    (4, 'QT lead -> pins 1/3/5/6', 'red 1, blue 3, yellow 5, black 6; top open, header in sight', 'count from pin 1: an off-by-one plug puts 5 V (pin 2/4) on the 3V3 wire'),
-    (4, '18/24 lead -> pins 33/34', 'GPIO13 on 33, GND on 34; PH end parked out of the left side', ''),
-    (4, 'run lead -> pins 37/39', 'GPIO26 on 37, GND on 39', 'route over the cooler shroud (`ko_run_cross`)'),
+    (4, 'QT lead -> pins 1/3/5/6', 'red 1, blue 3, yellow 5, black 6; top open, header in sight; one 1-pin housing at a time, seated straight down with open tweezer tips straddling the wire, each wire tugged; splice sleeve in the straight cross run', 'count from pin 1: an off-by-one plug puts 5 V (pin 2/4) on the 3V3 wire; never a 1x3 or 2x3 shell'),
+    (4, '18/24 lead -> pins 33/34', 'GPIO13 on 33, GND on 34 (1x2 or two 1-pin housings; seat with tweezer tips, tug-test); PH end parked out of the left side', ''),
+    (4, 'run lead -> pins 37/39', 'GPIO26 on 37, GND on 39 (1-pin housings, or one 1x2; seat with tweezer tips, tug-test)', 'route over the cooler shroud (`ko_run_cross`)'),
     (5, 'microSD -> Pi slot', 'push home through the front slot (hood plate + tub wall) with tweezers, contacts up', 'after the hood is on'),
-    (6, 'flex -> EVF board ZIF', 'outside the body, contacts per the kit', 'ESD: grounded mat'),
-    (6, 'micro-HDMI -> EVF board', 'outside the body; right-angle plug, cable leaves -Y', '**only after gate G-W7 passed**'),
-    (6, 'EVF 5 V lead PH -> board pigtail PH', 'outside the body, then the OLED + board pair slides in', '**never mate live** (pack unplugged)'),
+    # r7 C1 (BX-1, BX-7, BX-9; SPEC-C1 3.3 + P1-4): pad on the OLED first, PH junction outside, HDMI in situ last
+    (6, 'flex -> EVF board ZIF', 'on the bench, contacts per the kit; foam pad stuck to the OLED back first',
+     'ESD: grounded mat'),
+    (6, 'EVF 5 V lead PH -> board pigtail PH', 'outside the body, with the pair held about 60 mm out of the open left '
+     'side, before the slide; the junction rides in above the bottom rail and is pushed into ko_5v_end with the '
+     'tweezers once the board is home', '**never mate live** (pack unplugged)'),
+    (6, 'micro-HDMI -> EVF board', 'in the body, AFTER the pair is home: plug fed in low under the rail end, lifted to '
+     'the receptacle, pushed up (+Z) through the bottom-rail gap with a fingertip (guide top, or up from the open well); right-angle '
+     'plug, cable leaves -Y', '**only after gate G-W7 passed**'),
     (7, 'FPC -> GS camera', '15-pin end, latch closed', 'fold the slack into `ko_fpc_loop`'),
-    (8, 'QT lead -> encoder JST-SH', 'panel held beside the body', 'header end went on at step 4'),
-    (8, '18/24 PH junction', 'mate the 2-pin PH pair', 'header end went on at step 4'),
+    # r7 C2 (BX-2; SPEC-C2 s5): mated with the panel 60 mm off, spares folded into ko_lead_stow before the last 30 mm
+    # r7 fix-up (VERIFY-C2): helper holds the body, panel propped on a ~110 mm block; PH first with both hands, then QT
+    (8, '18/24 PH junction', 'first: a helper holds the body upright, the panel stands 60 mm off on a block about '
+     '110 mm tall; mate the 2-pin PH pair with both hands, one on each housing (mating pose `fps_ph`)',
+     'header end went on at step 4'),
+    (8, 'QT lead -> encoder JST-SH', 'then: hold the plug by its rear end and push it into the rear-side (-X) socket, '
+     'finishing with a fingernail on its back face, thumb behind the encoder +X edge (mating pose `qt_enc`); home '
+     'when it stops (friction lock, no click)', 'header end went on at step 4'),
+    (8, 'QT spare, 18/24 spare, PH junction -> `ko_lead_stow`', 'at about 30 mm off: flat fold between encoder and '
+     'switch on the HDMI run; body upright until the panel is home', 'nothing over the blower inlet'),
     (9, 'USB stick -> Pi lower USB 3 port', 'from the rear scoop, sleeve fitted', ''),
-    (10, 'pack XT30 -> pigtail XT30', 'at the grip mouth; push the junction and pack up', '**this powers the camera**: the X1203 may start the Pi'),
+    (10, 'pack XT30 -> pigtail XT30', 'camera on its right side, pack held in the palm; at the grip mouth, the whole pigtail XT30 housing + 15 mm of wire out (estimate about 28 mm), never mated inside the bay; push the junction and the folded pigtail in ahead of the pack, then the pack; the pair ends flat on the pack top, female end to the rear (G-MP-PACK)', '**this powers the camera**: the X1203 may start the Pi'),
 ]
 
 HEADER = [   # Pi 5 J8 pins used by D2: (pin, signal, connected to, cable id, bias / logic) -> WIRING s5, pi5-header.csv
@@ -309,7 +341,7 @@ SVG_BOXES = {   # block diagram: id -> (x, y, w, h, label lines)
     'run': (660, 370, 180, 44, ['run button (grip)']),
 }
 SVG_LINKS = [   # (from box, to box, label)
-    ('pack', 'xt30', 'pack_lead 18 AWG 60'), ('xt30', 'x1203', 'pigtail 18 AWG 180'),
+    ('pack', 'xt30', 'pack_lead 18 AWG 60'), ('xt30', 'x1203', 'pigtail 18 AWG L_cut'),
     ('x1203', 'pi5', 'pogo: 5V, GND, I2C'), ('plunger', 'pi5', 'button (mech.)'), ('cooler', 'pi5', 'FAN JST-SH'),
     ('pi5', 'camera', 'fpc 200: CAM/DISP 1'), ('pi5', 'evf', 'hdmi 200 + usb_5v (1N5817)'),
     ('evf', 'oled', 'flex 50'), ('pi5', 'stick', 'USB 3 lower'), ('pi5', 'encoder', 'qt 150: pins 1/3/5/6'),
